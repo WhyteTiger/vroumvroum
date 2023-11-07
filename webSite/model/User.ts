@@ -1,8 +1,11 @@
+import {Kart} from "./Kart";
+import {List} from "./List";
+
+
 class User {
-    userId       : number;
-    userName     : string;
-    userPassWord : string;
-    userCoins    : number;
-    isBanned     : boolean;
+    userId   : number;
+    kartUsed : Kart;
+    kartList : List<Kart>;
+    isBanned : boolean;
 
 }

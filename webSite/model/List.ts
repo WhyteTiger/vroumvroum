@@ -1,4 +1,4 @@
-class List<T> {
+export class List<T> {
     private items: Array<T>;
 
     constructor() {
