@@ -2,21 +2,23 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="img/logo.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="../assets/logo.png">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script type="text/typescript" src="templates/header.ts"></script>
+    <script type="text/typescript" src="templates/footer.ts" defer></script>
     <title>VroumVroum</title>
 </head>
 <body>
 
 
-<header>
-    <img id="logo-header" src="img/logoLong.png" alt="VroumVroum">
+<!-- <header> -->
+<!--    <img id="logo-header" src="../assets/logoLong.png" alt="VroumVroum"> -->
 
-    <button type="submit" id="connexion">Connexion</button>
-    <button type="submit" id="inscription">S'inscrire</button>
+<!--    <button formaction="test.html" type="submit" id="connexion">Connexion</button> -->
+<!--    <button type="submit" id="inscription">S'inscrire</button> -->
 
-    <script src="templates/header.js" defer></script>
-</header>
+<!--    <script src="templates/header.ts" defer></script> -->
+<!-- </header> -->
 
 <main>
     <button type="submit" id="creer" class="menuJeu">CRÉER</button>
@@ -24,7 +26,11 @@
     <button type="submit" id="personnaliser" class="menuJeu">PERSONNALISER</button>
 </main>
 
-<footer> <script src="templates/footer.js" defer></script> </footer>
+<footer> <script type="text/typescript" src="templates/footer.ts" defer></script> </footer>
+
+
+<script type="text/javascript" src="typescript.min.js"></script>
+<script type="text/javascript" src="typescript.compile.min.js"></script>
 
 </body>
 </html>

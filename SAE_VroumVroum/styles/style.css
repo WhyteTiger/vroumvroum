@@ -67,7 +67,7 @@ main{
     justify-content: space-between;
     align-items: center;
 
-    background-image: url("../img/fond_pagePrincipale.png");
+    background-image: url("../assets/fond_pagePrincipale.png");
     background-repeat: no-repeat;
     background-size: auto 100%;
     background-position: center;
