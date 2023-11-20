@@ -1,0 +1,47 @@
+/* cette partie est utile sinon bordure blanche autour de la page */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* style de la page principale */
+main {
+    height: 90vh;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#accueil {
+    background: url("../assets/fondCircuit.jpg") no-repeat fixed top left;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    font-size: 100px;
+}
+
+/* style des button */
+button {
+    border-radius: 50px;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0.4em 0.8em;
+}
+
+.menuJeu {
+    background: linear-gradient(90deg, #5DE0E6, #004AAD);
+    border: none;
+}
+
+#jouer {
+    background: linear-gradient(90deg, #CDFFD8, #94B9FF);
+    border-width: 5px;
+    grid-area: 2/2/3/3;
+}
+
+.menuJeu, #jouer {
+    width: 10em;
+    align-self: center;
+    justify-self: center;
+}
