@@ -1,5 +1,5 @@
 import {Kart} from "./Kart";
-import {List} from "./List";
+import {List} from "../List";
 
 export class User {
     static currentUserId : number = 0;

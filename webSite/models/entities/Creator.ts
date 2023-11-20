@@ -1,5 +1,5 @@
 import {User} from "./User";
-import {List} from "./List";
+import {List} from "../List";
 import {Kart} from "./Kart";
 
 export class Creator extends User{
