@@ -1,0 +1,40 @@
+/* cette partie est utile et définit le header pour toutes les pages, et le footer */
+header, footer {
+    text-align: center;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-around;
+    height: 12%;
+    background: linear-gradient(90deg, #8C52FF, #00BF63);
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+}
+
+header img {
+    display: flex;
+    justify-content: left;
+    width: 50%;
+}
+
+#inscription{
+    grid-area: 1/3/2/4;
+}
+
+#connexion {
+    grid-area: 1/4/2/5;
+}
+
+#connexion, #inscription {
+    background-color: #919191;
+    border: none;
+}
+
+header button {
+    margin: 1em;
+}
