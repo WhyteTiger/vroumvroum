@@ -12,7 +12,7 @@ export class User {
     constructor(kartUsed: Kart, kartList: List<Kart>) {
         this.kartUsed = kartUsed;
         this.kartList = kartList;
-        this.isBanned = null;
+        this.isBanned = false;
 
         User.currentUserId += 1;
         this.userId = User.currentUserId;
