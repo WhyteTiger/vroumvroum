@@ -1,19 +1,19 @@
 export class List<T> {
-    private items: Array<T>;
-
+    private items;
+    
     constructor() {
         this.items = [];
     }
-
-    size(): number {
+    
+    size(){
         return this.items.length;
     }
-
-    add(value: T): void {
+    
+    add(value){
         this.items.push(value);
     }
-
-    get(index: number): T {
+    
+    get(index){
         return this.items[index];
     }
 }
