@@ -4,15 +4,14 @@
         <meta charset="UTF-8">
         <link rel="icon" href="../assets/logo.png">
         <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/formStyle.css">
-        <title>VroumVroum - Connexion</title>
+        <title>VroumVroum - Votre compte</title>
     </head>
 
     <body>
 
     <?php require_once('templates/header.php'); ?>
 
-    <main id="mainForm">
+    <main>
 
         <section id="toutForm">
             <h1>Connexion au site</h1>
@@ -30,11 +29,14 @@
 
                 <button type="submit" id="validFormInscription">Se connecter</button>
             </form>
-
-            <h2>Vous n'avez pas de compte ? <a href="registration.php">Créer un compte</a></h2>
         </section>
 
+
+
+
     </main>
+
+    <?php require_once('templates/footer.php'); ?>
 
     </body>
 </html>

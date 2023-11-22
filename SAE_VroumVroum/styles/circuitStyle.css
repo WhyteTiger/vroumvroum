@@ -1,0 +1,56 @@
+#mainCircuit {
+    display: grid;
+    grid-template: auto / 6fr 1fr;
+}
+
+#mark p {
+    display: inline;
+}
+
+#mark {
+    display: inline;
+    margin-bottom: 2em;
+}
+
+#stars {
+    display: flex;
+    align-self: center;
+}
+
+#leaderboard {
+    border: 2px ridge red;
+}
+
+#leaderboardTitle {
+    color: red;
+    font-size: 45px;
+    text-align: center;
+}
+
+canvas {
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.chooser {
+    display: flex;
+    border: 1px solid green;
+    text-align: center;
+
+}
+
+#items {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+}
+
+#choosers {
+    grid-area : 2 / 3 / 1 / 2;
+    max-width: 70em;
+    margin: 10px 5em;
+}
+
+#choosers button {
+    border-radius: 50% 50% 0 0;
+}

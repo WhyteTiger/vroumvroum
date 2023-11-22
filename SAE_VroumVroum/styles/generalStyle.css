@@ -6,27 +6,45 @@ body {
 
 /* style de la page principale */
 main {
-    height: 90vh;
     justify-content: space-between;
     align-items: center;
 }
 
-#accueil {
+#welcome {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+
+    justify-content: space-between;
+    align-items: center;
     background: url("../assets/fondCircuit.jpg") no-repeat fixed top left;
     background-size: cover;
+    height: 100%;
+
+}
+
+h1, h2, h3 {
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    font-size: 100px;
+    font-size: 70px;
 }
 
-/* style des button */
+/*
+    STYLE DES BOUTONS
+ */
 button {
+    border: 10px solid blue;
     border-radius: 50px;
     font-size: 2em;
     font-weight: bold;
     padding: 0.4em 0.8em;
+    color: blue;
+}
+
+button:hover {
+    border-color: red;
+    color: red;
 }
 
 .menuJeu {

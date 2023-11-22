@@ -1,19 +1,12 @@
 /* cette partie est utile et définit le header pour toutes les pages, et le footer */
-header, footer {
+header {
     text-align: center;
     display: flex;
+    background: linear-gradient(90deg, #8C52FF, #00BF63);
     flex: 1;
     align-items: center;
-    justify-content: space-around;
-    height: 12%;
-    background: linear-gradient(90deg, #8C52FF, #00BF63);
-    padding-left: 50px;
-    padding-right: 50px;
-}
 
-footer {
-    position: relative;
-    bottom: 0;
+    justify-content: space-around;
 }
 
 header img {

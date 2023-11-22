@@ -1,10 +1,10 @@
 <?php ?>
-    <link rel="stylesheet" href="../styles/hfStyle.css">
+    <link rel="stylesheet" href="../styles/headerStyle.css">
 
     <header>
         <a href="index.php"><img id="logo-header" src="../assets/logoLong.png" alt="Logo long VroumVroum"></a>
 
-        <button type="submit" id="connexion">Connexion</button>
-        <button type="submit" id="inscription">S'inscrire</button>
+        <a href="connection.php"><button id="connexion">Connexion</button></a>
+        <button type="submit" id="inscription">Inscription</button>
     </header>
 <?php ?>

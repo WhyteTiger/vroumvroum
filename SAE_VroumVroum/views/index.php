@@ -11,13 +11,15 @@
 
     <?php require_once('templates/header.php'); ?>
 
-    <main id="accueil">
-        <button type="submit" id="creer" class="menuJeu">CRÉER</button>
-        <button type="submit" id="jouer">JOUER</button>
-        <button type="submit" id="personnaliser" class="menuJeu">PERSONNALISER</button>
-    </main>
+    <main id="welcome">
+        <img src="../assets/logoLong.png">
 
-    <?php require_once('templates/footer.php'); ?>
+        <section>
+            <button type="submit" id="creer" class="menuJeu">CRÉER</button>
+            <button type="submit" id="jouer">JOUER</button>
+            <button type="submit" id="personnaliser" class="menuJeu">PERSONNALISER</button>
+        </section>
+    </main>
 
     </body>
 </html>
