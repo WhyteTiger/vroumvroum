@@ -1,6 +1,4 @@
 import {User} from "./User";
-import {List} from "../List";
-import {Kart} from "./Kart";
 
 export class Creator extends User{
     pseudo;
@@ -16,7 +14,7 @@ export class Creator extends User{
         this.passWord   = passWord;
         
         if (follows == null) {
-            this.follows = new List<Creator>();
+            this.follows = [];
         } else {
             this.follows = follows;
         }

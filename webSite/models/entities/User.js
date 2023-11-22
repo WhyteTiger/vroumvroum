@@ -1,6 +1,3 @@
-import {Kart} from "./Kart";
-import {List} from "../List";
-
 export class User {
     static currentUserId = 0;
     userId;
