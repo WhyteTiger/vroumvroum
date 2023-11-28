@@ -2,8 +2,8 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
         <title>VroumVroum - Accueil</title>
     </head>
 
@@ -12,7 +12,7 @@
     <?php require_once('templates/header.php'); ?>
 
     <main id="welcome">
-        <img src="../assets/logoLong.png">
+        <img src="../../assets/logoLong.png">
 
         <section>
             <button type="submit" id="creer" class="menuJeu">CRÉER</button>
