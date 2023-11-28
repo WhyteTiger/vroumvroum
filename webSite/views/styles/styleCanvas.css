@@ -1,0 +1,39 @@
+#canvas{
+    border: 1px solid black;
+    width: 100%;
+}
+
+body{
+    background-color: #00be63;
+}
+
+
+/*pour mettre une scrollbar sur le canvas*/
+div{
+    overflow-x: scroll;
+    max-width: 80%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background: #8f9ea0;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border: solid 0 transparent;
+    background-color: #54585b;
+    border-radius: 10px;
+}
+
+#buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Ajoutez un espacement entre le canvas et les boutons si nécessaire */
+}
+
+#buttonsContainer button {
+    display: none;
+    margin: 20px 35px;
+}
