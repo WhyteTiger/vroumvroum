@@ -2,9 +2,9 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/formStyle.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
         <title>VroumVroum - Inscription</title>
     </head>
 
@@ -38,7 +38,7 @@
                     <input type="password" name="pwd" id="pwd" required>
                 </div>
 
-                <button type="submit" id="validFormInscription">Se connecter</button>
+                <button type="submit" id="validFormRegistration">Se connecter</button>
             </form>
 
             <h2>Vous avez déjà un compte ? <a href="connection.php">Se connecter</a></h2>

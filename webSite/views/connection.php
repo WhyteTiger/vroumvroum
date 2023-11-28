@@ -2,9 +2,10 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/formStyle.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
+        <script type="module" src="../controllers/controllerConnection.js"></script>
         <title>VroumVroum - Connexion</title>
     </head>
 
@@ -28,7 +29,7 @@
                     <input type="password" name="pwd" id="pwd" required>
                 </div>
 
-                <button type="submit" id="validFormInscription">Se connecter</button>
+                <button type="submit" id="validFormConnection">Se connecter</button>
             </form>
 
             <h2>Vous n'avez pas de compte ? <a href="registration.php">Créer un compte</a></h2>
