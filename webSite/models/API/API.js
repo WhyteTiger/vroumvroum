@@ -1,28 +1,12 @@
-export function isAlreadyRegister(pseudo) {
+export class API {
    
-   var result;
+   static server = 'localhost:8080';
    
-   const url = 'http://localhost:8080/connection/isAlreadyRegister';
-   
-   let data = {
-      pseudo: pseudo
+   static getURLTryToConnect() {
+      return 'http://'+API.server+'/connection/isAlreadyRegister';
    }
-   
-   const request = new Request(url, {
-      method: 'POST',
-      body: data,
-   });
-   
-   fetch(request)
-      .then(function(response) {
-         console.log(response);
-         result = response;
-      })
-   
-   return result
 }
-/*
-let resultat = foo();
-console.log("res : " + resultat);
+   
 
- */
+   
+
