@@ -1,18 +1,20 @@
 import {API} from "/webSite/models/API";
 
 const validateButton = document.getElementById("validFormConnection");
-validateButton.addEventListener('click', tryToConnect);
-
-export function tryToConnect() {
+validateButton.addEventListener('click', () => {
+	console.log("validateButton is clicked\n");
 	
 	const username = document.getElementById("username").value;
 	const pwd 	   = document.getElementById("pwd").value;
 	
+	console.log(username+pwd);
+	
 	const url = API.getURLTryToConnect();
 	let data = {
-		pseudo :  username,
+		pseudo  : username,
 		password: pwd
 	}
+	console.log(data);
 	const params = {
 		method: "POST",
 		headers: {
@@ -40,4 +42,4 @@ export function tryToConnect() {
 		.catch(() => {
 			console.log("Fetch error");
 		})
-}
+});
