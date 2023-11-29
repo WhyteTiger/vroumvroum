@@ -1,4 +1,4 @@
-var map = new Map("prCircuit");
+var map = new Map("circuit");
 
 window.onload = function(){
     var canvas = document.getElementById('canvas');
