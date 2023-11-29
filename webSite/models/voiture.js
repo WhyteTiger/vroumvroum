@@ -12,7 +12,8 @@ window.onload = function(){
     var buttonsContainer = document.getElementById('buttonsContainer');
     for (let i = 0; i < map.getLargeur(); i++) {
         var button = document.createElement('button');
-        button.innerHTML = 'Sélectionner ' + i;
+        button.id='buttonCar';
+        button.innerHTML = 'Choisir';
         button.onclick = function() {
             // Ajoutez ici le code de gestion de la sélection en fonction de l'index
             console.log('Image sélectionnée : ' + i);

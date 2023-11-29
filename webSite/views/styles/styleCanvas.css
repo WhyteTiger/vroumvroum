@@ -35,5 +35,11 @@ div{
 
 #buttonsContainer button {
     display: none;
-    margin: 20px 35px;
+    margin: 20px 42px;
+}
+
+#buttonCar{
+    background:linear-gradient(145deg, #5de0e6, #004aad);
+    font-size: 15px;
+    border: none;
 }

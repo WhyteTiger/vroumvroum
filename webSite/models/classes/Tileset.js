@@ -1,35 +1,3 @@
-// version exemple site
-
-/*function Tileset(url){
-    var tileset = this;
-    // chargement image
-    this.image = new Image();
-    this.image.referenceDuTileset = tileset ;
-    this.image.onload = function(){
-        // Largeur du tileset en tiles
-        this.referenceDuTileset.largeur = this.width/32; // le 32 sera à remplacer par la taille de nos tiles soit 160
-        if(!this.complete)
-            throw new Error("Erreur de chargement du tileset nommé\"" + url + "\".");
-    }
-    this.image.src = "../../tilesets/" + url;
-}
-
-Tileset.prototype.dessinerTile = function (numero, context, xDestination, yDestination){
-    let xSourceEnTiles = numero % this.largeur;
-    if (xSourceEnTiles === 0){
-        xSourceEnTiles = this.largeur;
-    }
-    var ySourceEnTiles = Math.ceil(numero / this.largeur);
-
-    var xSource = (xSourceEnTiles - 1) * 32;
-    var ySource = (ySourceEnTiles - 1) * 32;
-
-    context.drawImage(this.image, xSource, ySource, 32, 32, xDestination, yDestination, 32, 32);
-}*/
-
-
-// version premier circuit
-
 function Tileset(url){
     var tileset = this;
     // chargement image
@@ -41,7 +9,7 @@ function Tileset(url){
         if(!this.complete)
             throw new Error("Erreur de chargement du tileset nommé\"" + url + "\".");
     }
-    this.image.src = "../../tilesets/" + url;
+    this.image.src = "../../assets/tilesets/" + url;
 }
 
 function degToRad(degrees){
