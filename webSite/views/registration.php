@@ -29,7 +29,7 @@
 
                 <div class="field">
                     <label for="pwd">Confirmation mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" required>
+                    <input type="password" name="pwd" id="confpwd" required>
                 </div>
 
                 <button type="submit" id="validFormRegistration">Se connecter</button>

@@ -1,21 +1,16 @@
 import {API} from "../models/API.js";
 
-const buttonToRegistrate = document.getElementById("validFormRegistration");
+window.localStorage.setItem("isConnected", false);
+window.localStorage.setItem("username", 	 "");
 
-buttonToRegistrate.addEventListener("click", () => {
+async function whantToRegistrate(nickname, password) {
 	
-	console.log("buttonToRegistrate is clicked")
-	
-	const nickname = document.getElementById("nickname").value;
-	const password = document.getElementById("pwd").value;
-	
-	console.log(username+passWord);
-	
-	const url = API.urlTryToConnect();
-	let data = {
-		pseudo   : username,
-		password : password
+	const url = API.getURLWhantToRegistrate();
+	const data = {
+		nicknameIn: nickname,
+		passwordIn: password
 	}
+	console.log(data);
 	const params = {
 		method: "POST",
 		headers: {
@@ -24,30 +19,41 @@ buttonToRegistrate.addEventListener("click", () => {
 		body: JSON.stringify(data)
 	}
 	
-	console.log(url, params);
+	console.log(params);
 	
-	fetch(url, params)
+	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			window.localStorage.setItem("success", 			 data.success);
-			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegister);
-			window.localStorage.setItem("wrongPassword", 	 data.wrongPassWord);
 			
-			console.log(window.localStorage);
-			console.log(window.localStorage.success);
-			console.log(window.localStorage.isAlreadyRegister);
-			console.log(window.localStorage.wrongPassword);
-			
-			let isConnected = data.success && data.isAlreadyRegister && !data.wrongPassWord;
-			
-			if (isConnected) {
-				window.localStorage.setItem("pseudo", username);
+			if (data.alreadyRegister === "true") {
+				window.localStorage.isConnected = true;
+				window.localStorage.username    = data.username;
+				
 				document.location.href="../views/index.php";
+			} else {
+				console.log("nickname is already used")
 			}
-			
 		})
 		.catch(() => {
-			console.log("Fetch error");
+			console.log("Fetch failed");
 		})
-})
+}
+
+const form = document.getElementById("form");
+form.addEventListener('submit', (event) => {
+	event.preventDefault();
+	console.log("form submit\n");
+	
+	const nickname   		 = document.getElementById("nickname").value;
+	const password 		 = document.getElementById("pwd").value;
+	const confirmPassword = document.getElementById("confpwd").value;
+	
+	if (password === confirmPassword) {
+		console.log(nickname+" "+password);
+		
+		whantToRegistrate(nickname, password);
+	} else {
+		console.log("confpwd is not equal to password");
+	}
+});
