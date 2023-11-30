@@ -23,7 +23,6 @@ async function whantToRegistrate(nickname, password) {
 		.then((response) => response.json())
 		.then((data) => {
 			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
-			console.log(window.localStorage.alreadyRegister);
 			
 			if (window.localStorage.alreadyRegister === "false") {
 				window.localStorage.isConnected = true;
