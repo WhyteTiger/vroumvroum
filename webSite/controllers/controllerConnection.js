@@ -2,6 +2,11 @@ import {API} from "../models/API.js";
 
 console.log("Hello\n");
 
+window.localStorage.setItem("success", 		  false);
+window.localStorage.setItem("alreadyRegister", false);
+window.localStorage.setItem("rightPassword",   false);
+window.localStorage.setItem("username", 	 	  "");
+
 async function tryToConnect(username, password) {
 	
 	const url = API.getURLTryToConnect();
@@ -35,10 +40,11 @@ async function tryToConnect(username, password) {
 			console.log("isRightPassword ? "   + window.localStorage.rightPassword);
 			console.log("pseudo "				  + window.localStorage.username);
 			
-			const isConnected = window.localStorage.alreadyRegister && window.localStorage.rightPassword;
-			
-			if (isConnected) {
+			if (window.localStorage.alreadyRegister === true && window.localStorage.rightPassword === true) {
+				console.log("is connected");
 				document.location.href="../views/index.php";
+			} else {
+				console.log("is not connected");
 			}
 		})
 		.catch(() => {
