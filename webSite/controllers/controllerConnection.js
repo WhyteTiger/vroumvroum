@@ -2,12 +2,12 @@ import {API} from "../models/API.js";
 
 console.log("Hello\n");
 
-async function tryToConnect(username, pwd) {
+async function tryToConnect(username, password) {
 	//const url = API.getURLTryToConnect();
 	const url = 'http://localhost:8080/connection/tryToConnect';
-	let data = {
-		username: username,
-		password: pwd
+	const data = {
+		usernameIn: username,
+		passwordIn: password
 	}
 	console.log(data);
 	const params = {
@@ -24,16 +24,16 @@ async function tryToConnect(username, pwd) {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			window.localStorage.setItem("success", 			 data.success);
-			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegister);
-			window.localStorage.setItem("rightPassword", 	 data.rightPassWord);
-			window.localStorage.setItem("pseudo", 	 			 data.pseudo);
+			window.localStorage.setItem("success", 			 data.successOut);
+			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegisterOut);
+			window.localStorage.setItem("rightPassword", 	 data.rightPassWordOut);
+			window.localStorage.setItem("username", 	 		 data.usernameOut);
 			
 			console.log(window.localStorage);
 			console.log(window.localStorage.success);
 			console.log(window.localStorage.isAlreadyRegister);
 			console.log(window.localStorage.rightPassword);
-			console.log(window.localStorage.pseudo);
+			console.log(window.localStorage.username);
 			
 		})
 		.catch(() => {
@@ -47,9 +47,9 @@ form.addEventListener('submit', (event) => {
 	console.log("form submit\n");
 	
 	const username = document.getElementById("username").value;
-	const pwd 	   = document.getElementById("pwd").value;
+	const password = document.getElementById("pwd").value;
 	
-	console.log(username+" "+pwd);
+	console.log(username+" "+password);
 	
-	tryToConnect(username, pwd);
+	tryToConnect(username, password);
 });
