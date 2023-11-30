@@ -16,7 +16,7 @@
         <section id="toutForm">
             <h1>Inscription au site</h1>
 
-            <form action="" method="post">
+            <form id="form" action="" method="post">
                 <div class="field">
                     <label for="nickname">Pseudo souhaité</label>
                     <input type="text" name="nickname" id="nickname" required>

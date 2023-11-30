@@ -1,4 +1,5 @@
 import {API} from "../models/API.js";
+import {User} from "../models/entities/User.js";
 
 window.localStorage.setItem("isConnected", false);
 window.localStorage.setItem("username", 	 "");
@@ -26,14 +27,16 @@ async function whantToRegistrate(nickname, password) {
 		.then((data) => {
 			console.log(data);
 			
-			if (data.alreadyRegister === "true") {
+			if (!data.alreadyRegisterOut) {
 				window.localStorage.isConnected = true;
-				window.localStorage.username    = data.username;
+				window.localStorage.username    = data.usernameOut;
+				console.log(window.localStorage.username);
 				
 				document.location.href="../views/index.php";
-			} else {
-				console.log("nickname is already used")
+				return;
 			}
+			
+			console.log("nickname is already used");
 		})
 		.catch(() => {
 			console.log("Fetch failed");
@@ -50,9 +53,8 @@ form.addEventListener('submit', (event) => {
 	const confirmPassword = document.getElementById("confpwd").value;
 	
 	if (password === confirmPassword) {
-		console.log(nickname+" "+password);
-		
 		whantToRegistrate(nickname, password);
+		
 	} else {
 		console.log("confpwd is not equal to password");
 	}

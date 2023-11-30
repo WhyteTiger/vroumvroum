@@ -6,12 +6,14 @@ export class User {
     isBanned;
     
     
-    constructor(kartUsed, kartList) {
+    constructor(userId, kartUsed, kartList) {
+        this.userId   = userId;
         this.kartUsed = kartUsed;
         this.kartList = kartList;
         this.isBanned = false;
-        
-        User.currentUserId += 1;
-        this.userId = User.currentUserId;
+    }
+    
+    static nextUserId() {
+        return ++this.currentUserId;
     }
 }
