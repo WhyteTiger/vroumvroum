@@ -5,13 +5,12 @@
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
+        <script type="module" src="../controllers/controllerRegistration.js"></script>
         <title>VroumVroum - Inscription</title>
     </head>
 
     <body>
-
     <?php require_once('templates/header.php'); ?>
-
     <main id="mainForm">
 
         <section id="toutForm">
@@ -21,11 +20,6 @@
                 <div class="field">
                     <label for="nickname">Pseudo souhaité</label>
                     <input type="text" name="nickname" id="nickname" required>
-                </div>
-
-                <div class="field">
-                    <label for="username">Adresse mail</label>
-                    <input type="text" name="username" id="username" required>
                 </div>
 
                 <div class="field">
@@ -43,11 +37,6 @@
 
             <h2>Vous avez déjà un compte ? <a href="connection.php">Se connecter</a></h2>
         </section>
-
-
-
-
     </main>
-
     </body>
 </html>
