@@ -5,7 +5,7 @@
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
-        <script type="text/javascript/module" src="../controllers/controllerConnection.js"></script>
+        <script type="module" src="../controllers/controllerConnection.js" defer></script>
         <title>VroumVroum - Connexion</title>
     </head>
 
@@ -18,7 +18,7 @@
         <section id="toutForm">
             <h1>Connexion au site</h1>
 
-            <form action="" method="post">
+            <form id="form" method="post">
                 <div class="field">
                     <label for="username">Nom d'utilisateur ou adresse mail</label>
                     <input type="text" name="username" id="username" required>

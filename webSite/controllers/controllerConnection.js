@@ -1,17 +1,12 @@
-import {API} from "/webSite/models/API";
+import {API} from "../models/API.js";
 
-const validateButton = document.getElementById("validFormConnection");
-validateButton.addEventListener('click', () => {
-	console.log("validateButton is clicked\n");
-	
-	const username = document.getElementById("username").value;
-	const pwd 	   = document.getElementById("pwd").value;
-	
-	console.log(username+pwd);
-	
-	const url = API.getURLTryToConnect();
+console.log("Hello\n");
+
+async function tryToConnect(username, pwd) {
+	//const url = API.getURLTryToConnect();
+	const url = 'http://localhost:8080/connection/tryToConnect';
 	let data = {
-		pseudo  : username,
+		username: username,
 		password: pwd
 	}
 	console.log(data);
@@ -25,21 +20,36 @@ validateButton.addEventListener('click', () => {
 	
 	console.log(params);
 	
-	fetch(url, params)
+	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
 			window.localStorage.setItem("success", 			 data.success);
 			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegister);
-			window.localStorage.setItem("wrongPassword", 	 data.wrongPassWord);
+			window.localStorage.setItem("rightPassword", 	 data.rightPassWord);
+			window.localStorage.setItem("pseudo", 	 			 data.pseudo);
 			
 			console.log(window.localStorage);
 			console.log(window.localStorage.success);
 			console.log(window.localStorage.isAlreadyRegister);
-			console.log(window.localStorage.wrongPassword);
+			console.log(window.localStorage.rightPassword);
+			console.log(window.localStorage.pseudo);
 			
 		})
 		.catch(() => {
 			console.log("Fetch error");
 		})
+}
+
+const form = document.getElementById("form");
+form.addEventListener('submit', (event) => {
+	event.preventDefault();
+	console.log("form submit\n");
+	
+	const username = document.getElementById("username").value;
+	const pwd 	   = document.getElementById("pwd").value;
+	
+	console.log(username+" "+pwd);
+	
+	tryToConnect(username, pwd);
 });

@@ -5,6 +5,5 @@ export class API {
    static getURLTryToConnect() {
       return 'http://'+API.server+'/connection/tryToConnect';
    }
-   
 }
 
