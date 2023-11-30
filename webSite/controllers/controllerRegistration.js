@@ -1,8 +1,8 @@
 import {API} from "../models/API.js";
-import {User} from "../models/entities/User.js";
 
 window.localStorage.setItem("isConnected", false);
 window.localStorage.setItem("username", 	 "");
+window.localStorage.setItem("alreadyRegister", 	 "");
 
 async function whantToRegistrate(nickname, password) {
 	
@@ -11,7 +11,6 @@ async function whantToRegistrate(nickname, password) {
 		nicknameIn: nickname,
 		passwordIn: password
 	}
-	console.log(data);
 	const params = {
 		method: "POST",
 		headers: {
@@ -20,22 +19,19 @@ async function whantToRegistrate(nickname, password) {
 		body: JSON.stringify(data)
 	}
 	
-	console.log(params);
-	
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
+			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
+			console.log(window.localStorage.alreadyRegister);
 			
-			if (!data.alreadyRegisterOut) {
+			if (window.localStorage.alreadyRegister === "false") {
 				window.localStorage.isConnected = true;
 				window.localStorage.username    = data.usernameOut;
-				console.log(window.localStorage.username);
 				
 				document.location.href="../views/index.php";
 				return;
 			}
-			
 			console.log("nickname is already used");
 		})
 		.catch(() => {
@@ -52,7 +48,7 @@ form.addEventListener('submit', (event) => {
 	const password 		 = document.getElementById("pwd").value;
 	const confirmPassword = document.getElementById("confpwd").value;
 	
-	if (password === confirmPassword) {
+	if (password === confirmPassword && password !== "") {
 		whantToRegistrate(nickname, password);
 		
 	} else {
