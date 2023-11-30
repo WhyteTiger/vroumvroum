@@ -19,17 +19,17 @@
             <form id="form" action="" method="post">
                 <div class="field">
                     <label for="nickname">Pseudo souhaité</label>
-                    <input type="text" name="nickname" id="nickname" required>
+                    <input type="text" name="nickname" id="nickname" minlength="2" maxlength="32" required>
                 </div>
 
                 <div class="field">
                     <label for="pwd">Mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" required>
+                    <input type="password" name="pwd" id="pwd" minlength="12" maxlength="32" required>
                 </div>
 
                 <div class="field">
                     <label for="pwd">Confirmation mot de passe</label>
-                    <input type="password" name="pwd" id="confpwd" required>
+                    <input type="password" name="pwd" id="confpwd" minlength="12" maxlength="32" required>
                 </div>
 
                 <button type="submit" id="validFormRegistration">Se connecter</button>
