@@ -3,8 +3,8 @@ import {API} from "../models/API.js";
 console.log("Hello\n");
 
 async function tryToConnect(username, password) {
-	//const url = API.getURLTryToConnect();
-	const url = 'http://localhost:8080/connection/tryToConnect';
+	
+	const url = API.getURLTryToConnect();
 	const data = {
 		usernameIn: username,
 		passwordIn: password
@@ -24,17 +24,22 @@ async function tryToConnect(username, password) {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			window.localStorage.setItem("success", 			 data.successOut);
-			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegisterOut);
-			window.localStorage.setItem("rightPassword", 	 data.rightPassWordOut);
-			window.localStorage.setItem("username", 	 		 data.usernameOut);
+			window.localStorage.setItem("success", 		  data.successOut);
+			window.localStorage.setItem("alreadyRegister", data.alreadyRegisterOut);
+			window.localStorage.setItem("rightPassword",   data.rightPasswordOut);
+			window.localStorage.setItem("username", 	 	  data.usernameOut);
 			
 			console.log(window.localStorage);
-			console.log(window.localStorage.success);
-			console.log(window.localStorage.isAlreadyRegister);
-			console.log(window.localStorage.rightPassword);
-			console.log(window.localStorage.username);
+			console.log("isSuccess ? " 		  + window.localStorage.success);
+			console.log("isAlreadyRegister ? " + window.localStorage.alreadyRegister);
+			console.log("isRightPassword ? "   + window.localStorage.rightPassword);
+			console.log("pseudo "				  + window.localStorage.username);
 			
+			const isConnected = window.localStorage.alreadyRegister && window.localStorage.rightPassword;
+			
+			if (isConnected) {
+				document.location.href="../views/index.php";
+			}
 		})
 		.catch(() => {
 			console.log("Fetch error");
