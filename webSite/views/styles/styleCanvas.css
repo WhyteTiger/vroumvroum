@@ -8,18 +8,18 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Ajuste la hauteur minimale à 100% de la hauteur visible du viewport */
-    margin: 0; /* Supprime la marge par défaut du corps */
+    min-height: 100vh;
+    margin: 0;
 }
 
-
 /*pour mettre une scrollbar sur le canvas*/
-#divCanvas{
+div{
     overflow-x: scroll;
     max-width: 80%;
     border: 1px solid black;
     border-radius: 10px;
 
+    margin: 10% auto; /* Ajustez la valeur de la marge pour centrer verticalement */
     display: flex;
     align-items: center;
     justify-content: center;
