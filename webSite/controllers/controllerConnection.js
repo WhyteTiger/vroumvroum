@@ -1,21 +1,20 @@
 import {API} from "../models/API.js";
 
-const buttonToConnect = document.getElementById("validFormConnection");
+console.log("Hello\n");
 
-buttonToConnect.addEventListener("click", () => {
+window.localStorage.setItem("alreadyRegister", false);
+window.localStorage.setItem("rightPassword",   false);
+window.localStorage.setItem("isConnected",     false);
+window.localStorage.setItem("username", 	 	  "");
+
+async function tryToConnect(username, password) {
 	
-	console.log("buttonToConnect is clicked")
-	
-	const username = document.getElementById("username").value;
-	const passWord = document.getElementById("pwd").value;
-	
-	console.log(username+passWord);
-		
-	const url = API.urlTryToConnect();
-	let data = {
-		pseudo   : username,
-		password : passWord
+	const url = API.getURLTryToConnect();
+	const data = {
+		usernameIn: username,
+		passwordIn: password
 	}
+	console.log(data);
 	const params = {
 		method: "POST",
 		headers: {
@@ -24,30 +23,44 @@ buttonToConnect.addEventListener("click", () => {
 		body: JSON.stringify(data)
 	}
 	
-	console.log(url, params);
+	console.log(params);
 	
-	fetch(url, params)
+	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			window.localStorage.setItem("success", 			 data.success);
-			window.localStorage.setItem("isAlreadyRegister", data.isAlreadyRegister);
-			window.localStorage.setItem("wrongPassword", 	 data.wrongPassWord);
+			window.localStorage.setItem("alreadyRegister", data.alreadyRegisterOut);
+			window.localStorage.setItem("rightPassword",   data.rightPasswordOut);
+			window.localStorage.setItem("username", 	 	  data.usernameOut);
 			
-			console.log(window.localStorage);
-			console.log(window.localStorage.success);
-			console.log(window.localStorage.isAlreadyRegister);
-			console.log(window.localStorage.wrongPassword);
+			console.log("isAlreadyRegister ? " + window.localStorage.alreadyRegister);
+			console.log("isRightPassword ? "   + window.localStorage.rightPassword);
+			console.log("pseudo : \'"			  + window.localStorage.username + "\'");
 			
-			let isConnected = data.success && data.isAlreadyRegister && !data.wrongPassWord;
-			
-			if (isConnected) {
-				window.localStorage.setItem("pseudo", username);
+			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {
+				window.localStorage.isConnected = true;
+				
+				console.log("is connected ? "+window.localStorage.isConnected);
+				
 				document.location.href="../views/index.php";
+			} else {
+				console.log("Connection failed");
 			}
-			
 		})
 		.catch(() => {
-			console.log("Fetch error");
+			console.log("Fetch failed");
 		})
-})
+}
+
+const form = document.getElementById("form");
+form.addEventListener('submit', (event) => {
+	event.preventDefault();
+	console.log("form submit\n");
+	
+	const username = document.getElementById("username").value;
+	const password = document.getElementById("pwd").value;
+	
+	console.log(username+" "+password);
+	
+	tryToConnect(username, password);
+});
