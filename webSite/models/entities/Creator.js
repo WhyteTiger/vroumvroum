@@ -7,9 +7,8 @@ export class Creator extends User{
     follows;
     isAdministrator;
     
-    
-    constructor(kartUsed, kartList, pseudo, passWord, follows, isAdministrator) {
-        super(kartUsed, kartList);
+    constructor(userId, kartUsed, kartList, pseudo, passWord, follows, isAdministrator) {
+        super(userId, kartUsed, kartList);
         this.pseudo     = pseudo;
         this.passWord   = passWord;
         
