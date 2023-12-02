@@ -1,4 +1,5 @@
 import {API} from "../API.js";
+import {Tileset} from "./Tileset.js";
 
 export class Map {
     
@@ -11,7 +12,7 @@ export class Map {
         const url = API.getURLgetCircuitTileById();
         const data = {
             circuitIdIn: circuitId
-        }
+        };
         console.log(data);
         const params = {
             method: "POST",
@@ -19,7 +20,7 @@ export class Map {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data)
-        }
+        };
         
         console.log(params);
         
@@ -37,7 +38,7 @@ export class Map {
            .catch(() => {
                console.log("Fetch failed");
            });
-    }
+    };
 
     getHauteur () {
         return this.terrain.length;

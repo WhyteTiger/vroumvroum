@@ -1,8 +1,7 @@
 import {Map} from "./classes/Map.js";
 
-const map = new Map(1);
-
 window.onload = function(){
+    const map = new Map(1);
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
