@@ -5,7 +5,7 @@
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
-        <script type="module" src="../controllers/controllerConnection.js" defer></script>
+        <script type="module" src="../controllers/account/controllerConnection.js" defer></script>
         <title>VroumVroum - Connexion</title>
     </head>
 
