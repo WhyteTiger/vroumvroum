@@ -6,8 +6,8 @@ export class ControllerDirection {
 	directionY = 0;
 	
 	constructor(ctx){
-		this.speed = 5;
-		this.rotation = 0;
+		this.speed      = 5;
+		this.rotation   = 0;
 		this.directionX = map.getXDepart() * 160;
 		this.directionY = (map.getYDepart() + 1) * 60 + 100 * map.getYDepart();
 		const self = this;
