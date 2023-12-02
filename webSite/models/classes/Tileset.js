@@ -1,18 +1,24 @@
 export class Tileset {
     
+    image   = null;
+    largeur = null;
+    
     constructor(tilesetName){
-        const tileset = this;
-        // chargement image
+        
+        console.log("hello 1");
         this.image = new Image();
-        this.image.referenceDuTileset = tileset ;
+        this.image.referenceDuTileset = this;
+        console.log("hello 2");
+        
         this.image.onload = function(){
-            // Largeur du tileset en tiles
+            console.log("hello 3");
+            
             this.referenceDuTileset.largeur = this.width/160;
+            console.log("12 : "+this.referenceDuTileset.largeur);
             if(!this.complete)
                 throw new Error("Erreur de chargement du tileset nommé\"" + tilesetName + "\".");
         }
         this.image.src = "../../assets/tilesets/" + tilesetName;
-        console.log(this.image);
     }
     
     degToRad(degrees){
@@ -20,6 +26,9 @@ export class Tileset {
     }
     
     dessinerTile(numero, context, xDestination, yDestination, degrees){
+        
+        console.log("hello 4");
+        console.log("22 dessinerTile largeur : "+this.largeur);
         
         let xSourceEnTiles = numero % this.largeur;
         if (xSourceEnTiles === 0){
