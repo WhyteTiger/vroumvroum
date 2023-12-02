@@ -39,7 +39,4 @@ window.onload = function () {
        .catch(() => {
            console.log("Fetch failed");
        });
-    
-    
-    //TODO faire que ça wait map avant de faire la suite
 }
