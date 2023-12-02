@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
-    <link rel="stylesheet" href="styles/styleCanvas.css">
+    <link rel="stylesheet" href="styles/canvasStyle.css">
     <script type="module" src="../models/rpg.js"></script>
-    <title>Vroumvroum - choix voiture</title>
+    <title>Vroumvroum - gameplay</title>
 </head>
 <body>
     <?php require_once('templates/header.php'); ?>

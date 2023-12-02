@@ -24,10 +24,9 @@ window.onload = function () {
     fetch(url, params)
        .then((response) => response.json())
        .then((data) => {
-           console.log("data from fetch "+data);
            console.log("data.tileset : " + data.tileSet + "\ndta.circuit : " + data.tileSet.circuit + "\ndata.rotation : " + data.tileSet.rotation);
            
-           const map = new Map(new Tileset(data.tileset), data.tileSet.circuit, data.tileSet.rotation);
+           const map = new Map(new Tileset("circuit.png"), data.tileSet.circuit, data.tileSet.rotation);
            
            const canvas = document.getElementById('canvas');
            const ctx = canvas.getContext('2d');
