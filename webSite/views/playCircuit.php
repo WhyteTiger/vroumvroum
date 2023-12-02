@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/canvasStyle.css">
-    <script type="module" src="../models/rpg.js"></script>
+    <script type="module" src="../models/gameplay.js"></script>
     <title>Vroumvroum - gameplay</title>
 </head>
 <body>

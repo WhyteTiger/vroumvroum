@@ -1,4 +1,4 @@
-import {API} from "../models/API.js";
+import {API} from "../../models/API.js";
 
 window.localStorage.setItem("isConnected", false);
 window.localStorage.setItem("username", 	 "");
@@ -28,7 +28,7 @@ async function whantToRegistrate(nickname, password) {
 				window.localStorage.isConnected = true;
 				window.localStorage.username    = data.usernameOut;
 				
-				document.location.href="../views/index.php";
+				document.location.href="../../views/index.php";
 				return;
 			}
 			console.log("nickname is already used");

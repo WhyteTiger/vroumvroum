@@ -1,9 +1,9 @@
-import {Map} from "./classes/Map.js";
-import {API} from "./API.js";
-import {Tileset} from "./classes/Tileset.js";
-import {Chargement} from "./classes/Chargement.js";
-import {Maths} from "./classes/Maths.js";
-import {ControllerDirection} from "../controllers/controllerDirection.js";
+import {Map} from "./Map.js";
+import {API} from "../API.js";
+import {Tileset} from "./Tileset.js";
+import {Chargement} from "./Chargement.js";
+import {Maths} from "./Maths.js";
+import {ControllerDirection} from "../../controllers/gameplay/controllerDirection.js";
 
 window.onload = function () {
     

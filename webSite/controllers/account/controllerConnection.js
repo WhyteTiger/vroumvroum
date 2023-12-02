@@ -1,4 +1,4 @@
-import {API} from "../models/API.js";
+import {API} from "../../models/API.js";
 
 window.localStorage.setItem("alreadyRegister", false);
 window.localStorage.setItem("rightPassword",   false);
@@ -33,7 +33,7 @@ async function tryToConnect(username, password) {
 			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {
 				window.localStorage.isConnected = true;
 				
-				document.location.href="../views/index.php";
+				document.location.href="../../views/index.php";
 			} else {
 				console.log("Connection failed");
 			}
