@@ -5,7 +5,7 @@ export class ControllerDirection {
 	directionX = 0;
 	directionY = 0;
 	
-	constructor(ctx){
+	constructor(map){
 		this.speed      = 5;
 		this.rotation   = 0;
 		this.directionX = map.getXDepart() * 160;
