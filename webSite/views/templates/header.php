@@ -1,5 +1,5 @@
 <?php ?>
-    <script type="module" src="../controllers/controllerHeader.js" defer></script>
+    <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
     <link rel="stylesheet" href="styles/headerStyle.css">
 
     <header>

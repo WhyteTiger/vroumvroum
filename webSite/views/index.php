@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
-        <script src="../controllers/controllerIndex.js" defer></script>
+        <script src="../controllers/redirection/controllerIndex.js" defer></script>
         <title>VroumVroum - Accueil</title>
     </head>
 

@@ -5,7 +5,7 @@
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/canvasStyle.css">
-    <script type="module" src="../models/gameplay.js"></script>
+    <script type="module" src="../models/gameplay/gameplay.js"></script>
     <title>Vroumvroum - gameplay</title>
 </head>
 <body>

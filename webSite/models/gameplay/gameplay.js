@@ -13,7 +13,6 @@ window.onload = function () {
     const data = {
         circuitIdIn: circuitId
     };
-    console.log(data);
     const params = {
         method: "POST",
         headers: {
@@ -27,17 +26,15 @@ window.onload = function () {
     fetch(url, params)
        .then((response) => response.json())
        .then((data) => {
-           console.log("data.tileset : " + data.tileSet + "\ndta.circuit : " + data.tileSet.circuit + "\ndata.rotation : " + data.tileSet.rotation);
            
            const tileset = new Tileset("circuit.png");
-           console.log(tileset);
-           const map = new Map(tileset, data.tileSet.circuit, data.tileSet.rotation);
+           const map       = new Map(tileset, data.tileSet.circuit, data.tileSet.rotation);
            const car = new Chargement(tileset, 3, 8, 0);
            
            const canvas = document.getElementById('canvas');
            const ctx = canvas.getContext('2d');
            
-           canvas.width = map.getLargeur() * 160;
+           canvas.width  = map.getLargeur() * 160;
            canvas.height = map.getHauteur() * 160;
           
           // Création d'une image pour le tileset
@@ -50,10 +47,10 @@ window.onload = function () {
           circuitTileset.onload = function () {
              
              function updateCar() {
-                const carTileX = car.getColone(); // L'indice de la colonne de la voiture (commence à 0)
-                const carTileY = car.getLigne(); // La voiture est à la quatrième ligne (commence à 0)
+                const carTileX             = car.getColone(); // L'indice de la colonne de la voiture (commence à 0)
+                const carTileY             = car.getLigne(); // La voiture est à la quatrième ligne (commence à 0)
                 const carTileSize = 160; // Taille de chaque tile en pixels
-                const angleDegrees = car.getRotate();
+                const angleDegrees   = car.getRotate();
                 
                 const carTilePixelX = carTileX * carTileSize;
                 const carTilePixelY = carTileY * carTileSize;
