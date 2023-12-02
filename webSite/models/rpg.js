@@ -3,6 +3,7 @@ import {API} from "./API.js";
 import {Tileset} from "./classes/Tileset.js";
 import {Chargement} from "./classes/Chargement.js";
 import {Maths} from "./classes/Maths.js";
+import {ControllerDirection} from "../controllers/controllerDirection.js";
 
 window.onload = function () {
     
@@ -75,7 +76,7 @@ window.onload = function () {
                 
                 // Dessine la voiture
                 ctx.save();
-                const controller = new controllerDirection();
+                const controller = new ControllerDirection();
                 ctx.translate(controller.directionX + carTileSize / 4, controller.directionY + carTileSize / 4);
                 ctx.rotate(angleRadians);
                 ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);

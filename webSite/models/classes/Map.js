@@ -17,7 +17,6 @@ export class Map {
     getLargeur () {
         return this.terrain[0].length;
     }
-    
 
     dessinerMap (context) {
         let i = 0, l = this.terrain.length;
@@ -32,10 +31,31 @@ export class Map {
             }
         }
     }
-    
 
     isImagePresent (index) {
         // Remplacez 'carte' par le nom correct de votre propriété dans le fichier JSON
         return this.terrain[0][index] !== undefined;
-    };
+    }
+    
+    getYDepart(){
+        for(let i = 0; i<this.getHauteur(); i++ ){
+            for (let j = 0; j<this.getLargeur(); j++){
+                if (this.terrain[i][j] === 7){
+                    console.log(i);
+                    return i;
+                }
+            }
+        }
+    }
+    
+    getXDepart(){
+        for(let i = 0; i<this.getHauteur(); i++ ){
+            for (let j = 0; j<this.getLargeur(); j++){
+                if (this.terrain[i][j] === 7){
+                    console.log(j);
+                    return j;
+                }
+            }
+        }
+    }
 }
