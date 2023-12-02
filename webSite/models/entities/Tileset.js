@@ -1,4 +1,4 @@
-import {Maths} from "./Maths.js";
+import {Maths} from "../gameplay/Maths.js";
 
 export class Tileset {
     
