@@ -3,10 +3,10 @@ const isConnected = window.localStorage.isConnected;
 const header = document.body.getElementsByTagName("header")[0];
 
 if (isConnected === "false") {
-	const connectionA = document.createElement("a");
+	const connectionA      = document.createElement("a");
 	const connectionButton = document.createElement("button");
 	
-	const registrationA = document.createElement("a");
+	const registrationA      = document.createElement("a");
 	const registrationButton = document.createElement("button");
 	
 	connectionButton.id 			= "connection";
@@ -16,7 +16,7 @@ if (isConnected === "false") {
 	
 	registrationButton.id 		  = "register";
 	registrationButton.innerText = "Inscription";
-	registrationA.setAttribute("href", "register.php");
+	registrationA.setAttribute("href", "registration.php");
 	registrationA.appendChild(registrationButton);
 	
 	header.appendChild(connectionA);
