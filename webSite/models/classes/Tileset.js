@@ -1,6 +1,6 @@
 export class Tileset {
     
-    constructor(url){
+    constructor(tilesetName){
         const tileset = this;
         // chargement image
         this.image = new Image();
@@ -9,9 +9,9 @@ export class Tileset {
             // Largeur du tileset en tiles
             this.referenceDuTileset.largeur = this.width/160;
             if(!this.complete)
-                throw new Error("Erreur de chargement du tileset nommé\"" + url + "\".");
+                throw new Error("Erreur de chargement du tileset nommé\"" + tilesetName + "\".");
         }
-        this.image.src = "../../assets/tilesets/" + url;
+        this.image.src = "../../assets/tilesets/" + tilesetName;
         console.log(this.image);
     }
     
