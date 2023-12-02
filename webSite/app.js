@@ -1,9 +1,10 @@
 console.log("Welcome to VroumVroum !");
 
-window.localStorage.setItem("isConnected",     false);
-window.localStorage.setItem("rightPassword",   false);
+window.localStorage.setItem("isConnected",     "false");
+window.localStorage.setItem("rightPassword",   "false");
 window.localStorage.setItem("username", 		  "");
 window.localStorage.setItem("alreadyRegister", "");
+window.localStorage.setItem("circuitId",       "1");
 
 document.location.href="/SAE/webSite/views/index.php";
 

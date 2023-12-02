@@ -7,41 +7,10 @@ export class Map {
     terrain = null;
     rotate  = null;
     
-    constructor(circuitId) {
-        
-        const url = API.getURLgetCircuitTileById();
-        const data = {
-            circuitIdIn: circuitId
-        };
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        };
-        
-        console.log(params);
-        
-        fetch(url, params)
-           .then((response) => response.json())
-           .then((data) => {
-               
-               console.log(data);
-               
-               const mapJsonData = data.tileSet;
-               
-               const mapData = JSON.parse(mapJsonData);
-               
-               console.log("mapData.tileset : " + mapData.tileset + "\nmapData.circuit : " + mapData.circuit + "\nmapData.rotation : " + mapData.rotation);
-               
-               this.tileset = new Tileset(mapData.tileset);
-               this.terrain = mapData.circuit;
-               this.rotate = mapData.rotation;
-           })
-           .catch(() => {
-               console.log("Fetch failed");
-           });
+    constructor(tileset, terrain, rotate) {
+        this.tileset = tileset;
+        this.terrain = terrain;
+        this.rotate  = rotate;
     };
 
     getHauteur () {
