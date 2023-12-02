@@ -3,9 +3,9 @@ import {Tileset} from "./Tileset.js";
 
 export class Map {
     
-    tileset;
-    terrain;
-    rotate;
+    tileset = null;
+    terrain = null;
+    rotate  = null;
     
     constructor(circuitId) {
         
@@ -13,7 +13,6 @@ export class Map {
         const data = {
             circuitIdIn: circuitId
         };
-        console.log(data);
         const params = {
             method: "POST",
             headers: {
@@ -27,9 +26,14 @@ export class Map {
         fetch(url, params)
            .then((response) => response.json())
            .then((data) => {
+               
+               console.log(data);
+               
                const mapJsonData = data.tileSet;
                
                const mapData = JSON.parse(mapJsonData);
+               
+               console.log("mapData.tileset : " + mapData.tileset + "\nmapData.circuit : " + mapData.circuit + "\nmapData.rotation : " + mapData.rotation);
                
                this.tileset = new Tileset(mapData.tileset);
                this.terrain = mapData.circuit;
@@ -41,15 +45,18 @@ export class Map {
     };
 
     getHauteur () {
+        console.log("getHauteur "+this.terrain);
         return this.terrain.length;
     }
 
     getLargeur () {
+        console.log("getLargeur "+this.terrain);
         return this.terrain[0].length;
     }
     
 
     dessinerMap (context) {
+        console.log("dessin map "+this.terrain);
         let i = 0, l = this.terrain.length;
         for (; i < l; i++) {
             const ligne = this.terrain[i];
@@ -63,6 +70,7 @@ export class Map {
     
 
     isImagePresent (index) {
+        console.log("isImagePresent "+this.terrain);
         // Remplacez 'carte' par le nom correct de votre propriété dans le fichier JSON
         return this.terrain[0][index] !== undefined;
     };

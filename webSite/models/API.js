@@ -5,17 +5,17 @@ export class API {
    static getURLTryToConnect() {
       
       return 'http://'+API.server+'/connection/tryToConnect';
-   };
+   }
    
    static getURLWhantToRegistrate() {
       
       return 'http://'+API.server+'/connection/whantToRegistrate';
-   };
+   }
    
    static getURLgetCircuitTileById() {
       
       return 'http://'+API.server+'/gameplay/getCircuitTileById';
-   };
+   }
    
 }
 

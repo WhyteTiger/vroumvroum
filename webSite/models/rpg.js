@@ -1,11 +1,12 @@
 import {Map} from "./classes/Map.js";
 
 window.onload = function(){
+    //TODO faire que ça wait map avant de faire la suite
     const map = new Map(1);
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = map.getLargeur()*160;
+    canvas.width  = map.getLargeur()*160;
     canvas.height = map.getHauteur()*160;
 
     map.dessinerMap(ctx);
