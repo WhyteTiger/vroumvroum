@@ -12,5 +12,10 @@ export class API {
       return 'http://'+API.server+'/connection/whantToRegistrate';
    }
    
+   static getURLgetCircuitTileById() {
+      
+      return 'http://'+API.server+'/gameplay/getCircuitTileById';
+   }
+   
 }
 

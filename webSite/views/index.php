@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
+        <script src="../controllers/controllerIndex.js" defer></script>
         <title>VroumVroum - Accueil</title>
     </head>
 
@@ -15,9 +16,9 @@
         <img src="../../assets/logoLong.png">
 
         <section>
-            <button type="submit" id="creer" class="menuJeu">CRÉER</button>
-            <button type="submit" id="jouer">JOUER</button>
-            <button type="submit" id="personnaliser" class="menuJeu">PERSONNALISER</button>
+            <button type="submit" id="create" class="menuJeu">CRÉER</button>
+            <button type="submit" id="play">JOUER</button>
+            <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
         </section>
     </main>
 

@@ -3,7 +3,7 @@
 /* Par Sébastien de la Marck (aka Thunderseb)                                         */
 /* ********************************************************************************** */
 
-function getXMLHttpRequest() {
+export function getXMLHttpRequest() {
     var xhr = null;
 
     if (window.XMLHttpRequest || window.ActiveXObject) {

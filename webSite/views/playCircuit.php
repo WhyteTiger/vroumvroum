@@ -13,9 +13,8 @@
         <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
 
         <script type="text/javascript" src="../models/classes/Tileset.js"></script>
-        <script type="text/javascript" src="../models/getXMLHttpRequest.js"></script>
-        <script type="text/javascript" src="../models/classes/Map.js"></script>
-        <script src="../models/rpg.js"></script>
+        <script type="module" src="../models/classes/Map.js"></script>
+        <script type="module" src="../models/rpg.js"></script>
     </main>
 </body>
 </html>

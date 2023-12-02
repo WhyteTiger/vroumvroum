@@ -1,10 +1,12 @@
-var map = new Map("circuit");
+import {Map} from "./classes/Map.js";
+
+const map = new Map(1);
 
 window.onload = function(){
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');   // le contexte
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-    canvas.width = map.getLargeur()*160; // ne pas oublier de remplacer le 32 par 160;
+    canvas.width = map.getLargeur()*160;
     canvas.height = map.getHauteur()*160;
 
     map.dessinerMap(ctx);

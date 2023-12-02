@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../styles/generalStyle.css">
         <link rel="stylesheet" href="../styles/circuitStyle.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <script src="../controllers/controllerChoiceCircuit.js" defer></script>
         <title>VroumVroum - Connexion</title>
     </head>
 
@@ -63,12 +64,6 @@
 
         </section>
 
-
-
-
-
     </main>
-
-
     </body>
 </html>
