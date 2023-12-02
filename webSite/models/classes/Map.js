@@ -1,6 +1,3 @@
-import {API} from "../API.js";
-import {Tileset} from "./Tileset.js";
-
 export class Map {
     
     tileset = null;
