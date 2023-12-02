@@ -1,5 +1,10 @@
 export class ControllerDirection {
 	
+	speed      = 0;
+	rotation   = 0;
+	directionX = 0;
+	directionY = 0;
+	
 	constructor(ctx){
 		this.speed = 5;
 		this.rotation = 0;
@@ -29,9 +34,21 @@ export class ControllerDirection {
 		}
 	}
 	
-	
 	moveUp() {
 		this.directionY -= this.speed;
 	}
+	
+	moveDown() {
+		this.directionY += this.speed;
+	}
+	
+	rotateLeft() {
+		this.directionX -= this.speed;
+	}
+	
+	rotateRight() {
+		this.directionX += this.speed
+	}
+	
 	
 }
