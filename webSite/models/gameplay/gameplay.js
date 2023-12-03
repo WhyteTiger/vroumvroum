@@ -6,7 +6,7 @@ import {Maths} from "./Maths.js";
 import {ControllerDirection} from "../../controllers/gameplay/controllerDirection.js";
 import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
-import {Color} from "../entities/Color";
+import {Color} from "../entities/Color.js";
 
 
 window.onload = function () {

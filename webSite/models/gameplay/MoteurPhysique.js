@@ -1,5 +1,5 @@
-import {Color} from "../entities/Color";
-import {Point} from "../entities/Point";
+import {Color} from "../entities/Color.js";
+import {Point} from "../entities/Point.js";
 export class MoteurPhysique {
     /**
      * donne si le joueur appuit sur avancer ou pas
