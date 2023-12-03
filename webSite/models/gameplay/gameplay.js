@@ -27,10 +27,8 @@ window.onload = function () {
        .then((response) => response.json())
        .then((data) => {
            
-           const map       = new Map(new Tileset("circuit.png"), data.tileSet.circuit, data.tileSet.rotation);
-           console.log("Hello 1");
-           const kart      = new Kart(3, 8, 0);
-           console.log("Hello 2");
+           const map  = new Map(new Tileset("circuit.png"), data.tileSet.circuit, data.tileSet.rotation);
+           const kart = new Kart(3, 8, 0);
            
            const canvas = document.getElementById('canvas');
            const ctx = canvas.getContext('2d');
@@ -50,8 +48,8 @@ window.onload = function () {
              function updateCar() {
                 const carTileX             = kart.getColone();
                 const carTileY             = kart.getLigne();
-                const carTileSize = 160; // Taille de chaque tile en pixels
-                const angleDegrees   = kart.getRotate();
+                const carTileSize = 160;
+                const angleDegrees         = kart.getRotate();
                 
                 const carTilePixelX = carTileX * carTileSize;
                 const carTilePixelY = carTileY * carTileSize;
