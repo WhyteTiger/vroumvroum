@@ -17,21 +17,25 @@ export class Map {
     getLargeur () {
         return this.terrain[0].length;
     }
-
-    dessinerMap (context) {
+    
+    dessinerMap(context){
         let i = 0, l = this.terrain.length;
-        for (; i < l; i++) {
+        for( ; i < l ; i++) {
             const ligne = this.terrain[i];
             const angle = this.rotate[i];
-            
             const y = i * 160;
             let j = 0, k = ligne.length;
-            for (; j < k; j++) {
-                this.tileset.dessinerTile(ligne[j], context, j * 160, y, angle[j]);
+            for(; j<k; j++){
+                this.tileset.dessinerTile(ligne[j], context, j*160, y, angle[j]);
+                // Dessine la voiture à la position spécifiée
+                if (this.isImagePresent(j)) {
+                    this.tileset.dessinerVoiture(context, j*160, y, angle[j]);
+                }
             }
         }
     }
-
+    
+    
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;
     }
