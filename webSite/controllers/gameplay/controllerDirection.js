@@ -1,52 +1,104 @@
 export class ControllerDirection {
 	
-	speed;
-	rotation;
-	directionX;
-	directionY;
+
+	up;
+	down;
+	left;
+	right;
 	
-	constructor(map){
-		this.speed      = 5;
-		this.rotation   = 0;
-		this.directionX = map.getXDepart() * 160;
-		this.directionY = (map.getYDepart() + 1) * 60 + 100 * map.getYDepart();
+	constructor(){
+
+		this._up = 0;
+		this._down = 0;
+		this._left = 0;
+		this._right = 0;
+
 		const self = this;
 		
 		window.addEventListener('keydown', function (event) {
 			self.handleKeyDown(event);
 		});
+		window.addEventListener('keyup',function (event){
+			self.handleKeyUp(event);
+		});
+
 	}
 	
 	handleKeyDown(event) {
 		switch (event.key) {
 			case 'ArrowUp':
-				this.moveUp();
+				this.up = 1
 				break;
 			case 'ArrowDown':
-				this.moveDown();
+				this.down = 1
 				break;
 			case 'ArrowLeft':
-				this.rotateLeft();
+				this.left = 1
 				break;
 			case 'ArrowRight':
-				this.rotateRight();
+				this.right = 1
+				break;
+			case 'z':
+				this.up = 1
+				break;
+			case 's':
+				this.down = 1
+				break;
+			case 'q':
+				this.left = 1
+				break;
+			case 'd':
+				this.right = 1
 				break;
 		}
 	}
-	
-	moveUp() {
-		this.directionY -= this.speed;
+
+	handleKeyUp(event) {
+		switch (event.key) {
+			case 'ArrowUp':
+				this.up = 0
+				break;
+			case 'ArrowDown':
+				this.down = 0
+				break;
+			case 'ArrowLeft':
+				this.left = 0
+				break;
+			case 'ArrowRight':
+				this.right = 0
+				break;
+			case 'z':
+				this.up = 0
+				break;
+			case 's':
+				this.down = 0
+				break;
+			case 'q':
+				this.left = 0
+				break;
+			case 'd':
+				this.right = 0
+				break;
+		}
 	}
-	
-	moveDown() {
-		this.directionY += this.speed;
+
+	get up() {
+		return this._up;
 	}
-	
-	rotateLeft() {
-		this.directionX -= this.speed;
+
+	get down() {
+		return this._down;
 	}
-	
-	rotateRight() {
-		this.directionX += this.speed;
+
+	get left() {
+		return this._left;
+	}
+
+	get right() {
+		return this._right;
+	}
+
+	getdirection(){
+		return this.right - this.left;
 	}
 }

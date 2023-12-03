@@ -4,6 +4,10 @@ import {Tileset} from "../entities/Tileset.js";
 import {Kart} from "../entities/Kart.js";
 import {Maths} from "./Maths.js";
 import {ControllerDirection} from "../../controllers/gameplay/controllerDirection.js";
+import {MoteurPhysique} from "./MoteurPhysique.js";
+import {Point} from "../entities/Point.js";
+import {Color} from "../entities/Color";
+
 
 window.onload = function () {
     
@@ -29,8 +33,8 @@ window.onload = function () {
            
            const map  = new Map(new Tileset("circuit.png"), data.tileSet.circuit, data.tileSet.rotation);
            const kart = new Kart(3, 8, 0);
-          const controller = new ControllerDirection(map);
-           
+           const controller = new ControllerDirection();
+
            const canvas = document.getElementById('canvas');
            const ctx = canvas.getContext('2d');
            
@@ -42,42 +46,44 @@ window.onload = function () {
           
           // Définition du chemin de l'image
           circuitTileset.src = '../../assets/tilesets/circuit.png';
-          
+          const engine = new MoteurPhysique(new Point(canvas.width/2,canvas.height/2),20,0);
+           const carTileX             = kart.getColone();
+           const carTileY             = kart.getLigne();
+           const carTileSize = 160;
+           const angleDegrees         = kart.getRotate();
+
+           const carTilePixelX = carTileX * carTileSize;
+           const carTilePixelY = carTileY * carTileSize;
           // Attendre que l'image soit complètement chargée
           circuitTileset.onload = function () {
-             
+
              function updateCar() {
-                const carTileX             = kart.getColone();
-                const carTileY             = kart.getLigne();
-                const carTileSize = 160;
-                const angleDegrees         = kart.getRotate();
-                
-                const carTilePixelX = carTileX * carTileSize;
-                const carTilePixelY = carTileY * carTileSize;
-                
+
+
                 const angleRadians = Maths.degToRad(angleDegrees);
                 ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
-                
-                // Dessine le circuit
-                let i = 0, l = map.getHauteur();
-                for (; i < l; i++) {
-                   const ligne = map.terrain[i];
-                   const angle = map.rotate[i];
-                   const y = i * 160;
-                   
-                   let j = 0, k = ligne.length;
-                   for (; j < k; j++) {
-                      map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
-                   }
-                }
-                
+
+                 //dessin Circuit
+                 let i = 0, l = map.getHauteur();
+                 for (; i < l; i++) {
+                     const ligne = map.terrain[i];
+                     const angle = map.rotate[i];
+                     const y = i * 160;
+
+                     let j = 0, k = ligne.length;
+                     for (; j < k; j++) {
+                         map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
+                     }
+                 }
+                engine.next(controller.up , controller.down, controller.getdirection(),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33));
+
                 // Dessine la voiture
                 ctx.save();
-                ctx.translate(controller.directionX + carTileSize / 4, controller.directionY + carTileSize / 4);
-                ctx.rotate(angleRadians);
+                ctx.translate(engine.centreVehicule.getX-carTileSize / 4, engine.centreVehicule.getY - carTileSize / 4);
+                ctx.rotate(Maths.degToRad(engine.orientationVehicule));
                 ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
                 ctx.restore();
-                
+
                 requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
              }
              

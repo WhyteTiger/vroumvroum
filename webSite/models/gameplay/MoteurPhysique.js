@@ -1,6 +1,6 @@
 import {Color} from "../entities/Color";
 import {Point} from "../entities/Point";
-class MoteurPhysique {
+export class MoteurPhysique {
     /**
      * donne si le joueur appuit sur avancer ou pas
      * @private
@@ -66,13 +66,13 @@ class MoteurPhysique {
     constructor(centreVehicule,tickRate,orientationVehicule ){
 
         this.tickRate = tickRate;
-        this.centreVehicule = centreVehicule
-        this.setup()
-        this.orientationVehicule = orientationVehicule
+        this.centreVehicule = centreVehicule;
+        this.setup();
+        this.orientationVehicule = orientationVehicule;
     }
     setup(){
-        this.inputAcceleration = false;
-        this.inputFrein = false;
+        this.inputAcceleration = 0;
+        this.inputFrein = 0;
         this.inputDirection = 0;
         this.vitesse = 0;
         this.roueArriereDroiteTypeRoute = new Color("545454",33,33,33);
@@ -83,8 +83,8 @@ class MoteurPhysique {
 
     /**
      * Update la positon du centre la voiture et sont orientation grace au inputs du joueur et grace à la couleur de la route en dessous de chaque route
-     * @param {un booléen qui dit si le bouton d'accélération est enfoncé ou pas} inputAcceleration
-     * @param {un booléen qui dit si le bouton de frein est enfoncé ou pas } inputFrein
+     * @param {un number qui dit si le bouton d'accélération est enfoncé ou pas} inputAcceleration
+     * @param {un number qui dit si le bouton de frein est enfoncé ou pas } inputFrein
      * @param {un number qui donne la direction vers laquelle le véhicule tourne} inputDirection
      * @param {la couleur de la route sous la roue Arrière gauche} roueArriereGaucheTypeRoute
      * @param {la couleur de la route sous la roue Arrière droite} roueArriereDroiteTypeRoute
@@ -98,13 +98,13 @@ class MoteurPhysique {
         this.roueArriereGaucheTypeRoute = roueArriereGaucheTypeRoute;
         this.roueAvantDroiteTypeRoute = roueAvantDroiteTypeRoute;
         this.roueAvantGaucheTypeRoute = roueAvantGaucheTypeRoute;
-        this.inputAcceleration = inputAcceleration
-        this.inputFrein = inputFrein
-        this.inputDirection = inputDirection
+        this.inputAcceleration = inputAcceleration;
+        this.inputFrein = inputFrein;
+        this.inputDirection = inputDirection;
 
         this.vitesse = this.accelerationCalculTypeRoute + this.vitesse;
-        this.forwardOnePoint(this.centreVehicule)
-        this.rotate()
+        this.forwardOnePoint(this.centreVehicule);
+        this.rotate();
     }
 
     /**
@@ -114,41 +114,41 @@ class MoteurPhysique {
      */
     resetCar(centreVehicule,orientationVehicule){
         this.centreVehicule = centreVehicule;
-        this.orientationVehicule = orientationVehicule
-        this.setup()
+        this.orientationVehicule = orientationVehicule;
+        this.setup();
     }
 
 
     rotate(){
-        if(this.inputDirection == -1){
-            this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate)%360
+        if(this.inputDirection === -1){
+            this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate)%360;
         }
-        if(this.inputDirection == 1){
-            this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate)%360
+        if(this.inputDirection === 1){
+            this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate)%360;
         }
 
     }
     getCentreVehicule(){
-        return this.centreVehicule
+        return this.centreVehicule;
     }
     getOrientationVehicule(){
-        return this.orientationVehicule
+        return this.orientationVehicule;
     }
     isNotRoute(typeRoute){
-        return typeRoute.r >= 34 || typeRoute.g >= 34 || typeRoute.b >= 34
+        return typeRoute.r >= 34 || typeRoute.g >= 34 || typeRoute.b >= 34;
     }
 
     forwardOnePoint(monPoint ){
-        if(this.orientationVehicule == 0){
+        if(this.orientationVehicule === 0){
             monPoint.setY = monPoint.getY - this.vitesse;
         }
-        if(this.orientationVehicule == 90){
+        if(this.orientationVehicule === 90){
             monPoint.setX = monPoint.getX + this.vitesse;
         }
-        if(this.orientationVehicule == 180 ){
+        if(this.orientationVehicule === 180 ){
             monPoint.setY = monPoint.getY - this.vitesse;
         }
-        if(this.orientationVehicule == 270){
+        if(this.orientationVehicule === 270){
             monPoint.setX = monPoint.getX - this.vitesse;
         }
         if(this.orientationVehicule > 0 && this.orientationVehicule < 90 ){
@@ -169,7 +169,7 @@ class MoteurPhysique {
         }
     }
     accelerationCalculTypeRoute(){
-        var a = this.fonctionAcceleration()
+        let a = this.fonctionAcceleration();
         if(this.isNotRoute(this.roueArriereDroiteTypeRoute)){
             a = a * 5/6
         }
@@ -185,12 +185,12 @@ class MoteurPhysique {
         return a
     }
     fonctionAcceleration() {
-        var incrementVitesse;
-        if(this.inputFrein == true){
-            if(this.inputAcceleration == true){
+        let incrementVitesse;
+        if(this.inputFrein === 1){
+            if(this.inputAcceleration === 1){
                 if(this.vitesse < 0){
                     incrementVitesse = 2/this.tickRate
-                }if(this.vitesse==0){
+                }if(this.vitesse===0){
                     incrementVitesse = 0/this.tickRate
                 } else {
                     incrementVitesse =-3/this.tickRate
@@ -203,8 +203,8 @@ class MoteurPhysique {
                 }
             }
         }else{
-            if(this.inputAcceleration == true){
-                if(this.inputDirection == 0){
+            if(this.inputAcceleration === 1){
+                if(this.inputDirection === 0){
                     if(this.vitesse < 0){
                         incrementVitesse = 3/this.tickRate
                     }else {
@@ -220,7 +220,7 @@ class MoteurPhysique {
             }else{
                 if(this.vitesse < 0){
                     incrementVitesse = 1/this.tickRate
-                }if(this.vitesse==0){
+                }if(this.vitesse===0){
                     incrementVitesse = 0/this.tickRate
                 } else {
                     incrementVitesse =-1/this.tickRate
