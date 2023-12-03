@@ -40,7 +40,7 @@ export class Tileset {
     }
     
     dessinerVoiture (context, xDestination, yDestination, degrees) {
-        const numeroVoiture = 1;
+        const numeroVoiture = 42;
         
         // Dessine la voiture
         this.dessinerTile(numeroVoiture, context, xDestination, yDestination, degrees);

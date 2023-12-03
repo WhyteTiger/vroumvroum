@@ -26,15 +26,10 @@ export class Map {
             const angle = this.rotate[i];
             const y = i * 160;
             let j = 0, k = ligne.length;
-            console.log("hello -1");
             for(; j<k; j++){
-                console.log("hello 0");
                 this.tileset.dessinerTile(ligne[j], context, j*160, y, angle[j]);
-                console.log("hello 1");
                 if (this.isImagePresent(j)) {
-                    console.log("hello 2");
                     this.tileset.dessinerVoiture(context, j*160, y, angle[j]);
-                    console.log("hello 3");
                 }
             }
         }

@@ -1,7 +1,7 @@
 import {Map} from "../entities/Map.js";
 import {API} from "../API.js";
 import {Tileset} from "../entities/Tileset.js";
-import {Chargement} from "./Chargement.js";
+import {Kart} from "../entities/Kart.js";
 import {Maths} from "./Maths.js";
 import {ControllerDirection} from "../../controllers/gameplay/controllerDirection.js";
 
@@ -28,7 +28,9 @@ window.onload = function () {
        .then((data) => {
            
            const map       = new Map(new Tileset("circuit.png"), data.tileSet.circuit, data.tileSet.rotation);
-           const car = new Chargement(new Tileset("circuit.png"), 3, 8, 0);
+           console.log("Hello 1");
+           const kart      = new Kart(3, 8, 0);
+           console.log("Hello 2");
            
            const canvas = document.getElementById('canvas');
            const ctx = canvas.getContext('2d');
@@ -46,10 +48,10 @@ window.onload = function () {
           circuitTileset.onload = function () {
              
              function updateCar() {
-                const carTileX             = car.getColone(); // L'indice de la colonne de la voiture (commence à 0)
-                const carTileY             = car.getLigne(); // La voiture est à la quatrième ligne (commence à 0)
+                const carTileX             = kart.getColone();
+                const carTileY             = kart.getLigne();
                 const carTileSize = 160; // Taille de chaque tile en pixels
-                const angleDegrees   = car.getRotate();
+                const angleDegrees   = kart.getRotate();
                 
                 const carTilePixelX = carTileX * carTileSize;
                 const carTilePixelY = carTileY * carTileSize;
