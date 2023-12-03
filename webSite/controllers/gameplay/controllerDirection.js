@@ -47,8 +47,6 @@ export class ControllerDirection {
 	}
 	
 	rotateRight() {
-		this.directionX += this.speed
+		this.directionX += this.speed;
 	}
-	
-	
 }

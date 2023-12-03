@@ -20,7 +20,6 @@ export class Chargement {
 		return this.kartTileY[0];
 	}
 	getRotate() {
-		console.log(this.rotate)
 		return this.rotate;
 	}
 }

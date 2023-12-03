@@ -14,10 +14,7 @@
             <canvas id="canvasChoix">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
             <section id="buttonsContainer"></section>
         </div>
-        <script type="text/javascript" src="../models/classes/Tileset.js"></script>
-        <script type="text/javascript" src="../models/getXMLHttpRequest.js"></script>
-        <script type="text/javascript" src="../models/classes/Map.js"></script>
-        <script src="../models/voiture.js"></script>
+        <script src="../models/entities/Kart.js"></script>
     </main>
 </body>
 </html>

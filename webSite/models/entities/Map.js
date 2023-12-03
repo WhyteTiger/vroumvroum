@@ -33,7 +33,6 @@ export class Map {
     }
 
     isImagePresent (index) {
-        // Remplacez 'carte' par le nom correct de votre propriété dans le fichier JSON
         return this.terrain[0][index] !== undefined;
     }
     
@@ -41,7 +40,6 @@ export class Map {
         for(let i = 0; i<this.getHauteur(); i++ ){
             for (let j = 0; j<this.getLargeur(); j++){
                 if (this.terrain[i][j] === 7){
-                    console.log(i);
                     return i;
                 }
             }
@@ -52,7 +50,6 @@ export class Map {
         for(let i = 0; i<this.getHauteur(); i++ ){
             for (let j = 0; j<this.getLargeur(); j++){
                 if (this.terrain[i][j] === 7){
-                    console.log(j);
                     return j;
                 }
             }

@@ -7,16 +7,12 @@ export class Tileset {
     
     constructor(tilesetName) {
         
-        console.log("hello 1");
         this.image = new Image();
         this.image.referenceDuTileset = this;
-        console.log("hello 2");
         
         this.image.onload = function () {
-            console.log("hello 3");
             
             this.referenceDuTileset.largeur = this.width / 160;
-            console.log("12 : " + this.referenceDuTileset.largeur);
             if (!this.complete)
                 throw new Error("Erreur de chargement du tileset nommé\"" + tilesetName + "\".");
         }
@@ -24,9 +20,6 @@ export class Tileset {
     }
     
     dessinerTile(numero, context, xDestination, yDestination, degrees){
-        
-        console.log("hello 4");
-        console.log("22 dessinerTile largeur : "+this.largeur);
         
         let xSourceEnTiles = numero % this.largeur;
         if (xSourceEnTiles === 0){
