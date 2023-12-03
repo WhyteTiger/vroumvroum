@@ -5,6 +5,7 @@
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/styleCanvas.css">
+     <script src="../models/entities/Kart.js"></script>
     <title>Vroumvroum - choix voiture</title>
 </head>
 <body>
@@ -14,7 +15,6 @@
             <canvas id="canvasChoix">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
             <section id="buttonsContainer"></section>
         </div>
-        <script src="../models/entities/Kart.js"></script>
     </main>
 </body>
 </html>
