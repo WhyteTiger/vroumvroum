@@ -5,7 +5,7 @@
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/styleCanvas.css">
-     <script src="../models/ChoiceKart.js"></script>
+     <script type="module" src="../models/ChoiceKart.js"></script>
     <title>Vroumvroum - choix voiture</title>
 </head>
 <body>
