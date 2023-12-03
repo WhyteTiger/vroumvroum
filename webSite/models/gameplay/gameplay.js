@@ -70,20 +70,13 @@ window.onload = function () {
                    }
                 }
                 
-                console.log("hello 1");
                 // Dessine la voiture
                 ctx.save();
-                console.log("hello 2");
                 const controller = new ControllerDirection(map);
-                console.log("hello 3");
                 ctx.translate(controller.directionX + carTileSize / 4, controller.directionY + carTileSize / 4);
-                console.log("hello 4");
                 ctx.rotate(angleRadians);
-                console.log("hello 5");
                 ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
-                console.log("hello 6");
                 ctx.restore();
-                console.log("hello 12");
                 
                 requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
              }

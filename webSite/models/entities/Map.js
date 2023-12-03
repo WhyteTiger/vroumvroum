@@ -19,17 +19,22 @@ export class Map {
     }
     
     dessinerMap(context){
+        console.log("dessiner map -1 / 3");
         let i = 0, l = this.terrain.length;
         for( ; i < l ; i++) {
             const ligne = this.terrain[i];
             const angle = this.rotate[i];
             const y = i * 160;
             let j = 0, k = ligne.length;
+            console.log("hello -1");
             for(; j<k; j++){
+                console.log("hello 0");
                 this.tileset.dessinerTile(ligne[j], context, j*160, y, angle[j]);
-                // Dessine la voiture à la position spécifiée
+                console.log("hello 1");
                 if (this.isImagePresent(j)) {
+                    console.log("hello 2");
                     this.tileset.dessinerVoiture(context, j*160, y, angle[j]);
+                    console.log("hello 3");
                 }
             }
         }
