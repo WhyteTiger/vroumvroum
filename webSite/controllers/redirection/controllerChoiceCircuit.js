@@ -1,2 +1,2 @@
 
-document.location.href = "playCircuit.php";
+document.location.href = "playCircuit.html";

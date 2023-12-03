@@ -11,12 +11,12 @@ if (isConnected === "false") {
 	
 	connectionButton.id 			= "connection";
 	connectionButton.innerText = "Connexion";
-	connectionA.setAttribute("href", "connection.php");
+	connectionA.setAttribute("href", "connection.html");
 	connectionA.appendChild(connectionButton);
 	
 	registrationButton.id 		  = "register";
 	registrationButton.innerText = "Inscription";
-	registrationA.setAttribute("href", "registration.php");
+	registrationA.setAttribute("href", "registration.html");
 	registrationA.appendChild(registrationButton);
 	
 	header.appendChild(connectionA);

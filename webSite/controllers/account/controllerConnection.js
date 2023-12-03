@@ -33,7 +33,7 @@ async function tryToConnect(username, password) {
 			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {
 				window.localStorage.isConnected = true;
 				
-				document.location.href="../views/index.php";
+				document.location.href="../views/index.html";
 			} else {
 				console.log("Connection failed");
 			}
