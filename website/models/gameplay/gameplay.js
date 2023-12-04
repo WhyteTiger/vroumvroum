@@ -85,8 +85,8 @@ window.onload = function () {
    
                  // Dessine la voiture
                 ctx.save();
-                console.log("engine.getCentreVehicule().getX() : "+engine.getCentreVehicule().getX());
-                console.log("engine.getCentreVehicule().getY() : "+engine.getCentreVehicule().getY());
+                console.log("engine.getCentreVehicule().getX() : " + engine.getCentreVehicule().getX());
+                console.log("engine.getCentreVehicule().getY() : " + engine.getCentreVehicule().getY());
                 ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 4, engine.getCentreVehicule().getY() - carTileSize / 4);
                 ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
                 ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);

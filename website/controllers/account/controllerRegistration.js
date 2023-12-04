@@ -28,7 +28,7 @@ async function whantToRegistrate(nickname, password) {
 				window.localStorage.isConnected = true;
 				window.localStorage.username    = data.usernameOut;
 				
-				document.location.href="../views/index.html";
+				document.location.href="../views/home.html";
 				return;
 			}
 			console.log("nickname is already used");

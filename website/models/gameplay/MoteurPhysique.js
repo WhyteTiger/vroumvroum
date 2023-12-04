@@ -134,7 +134,11 @@ export class MoteurPhysique {
         return this.orientationVehicule;
     }
     isNotRoute(typeRoute){
-        return typeRoute.r >= 34 || typeRoute.g >= 34 || typeRoute.b >= 34;
+        if (typeRoute.r >= 34 || typeRoute.g >= 34 || typeRoute.b >= 34) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     forwardOnePoint(monPoint ){
@@ -155,12 +159,12 @@ export class MoteurPhysique {
             monPoint.setY(monPoint.getY() + Math.cos(this.orientationVehicule * Math.PI / 180));
         }
         if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
-            monPoint.setX(monPoint.getX() + Math.cos((this.orientationVehicule-90) * Math.PI / 180));
-            monPoint.setY(monPoint.getY() - Math.cos((180-this.orientationVehicule) * Math.PI / 180));
+            monPoint.setX(monPoint.getX() + Math.cos((this.orientationVehicule - 90) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() - Math.cos((180-this.orientationVehicule)  * Math.PI / 180));
         }
         if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
-            monPoint.setX(monPoint.getX() - Math.cos((270-this.orientationVehicule) * Math.PI / 180));
-            monPoint.setY(monPoint.getY() - Math.cos((this.orientationVehicule-180) * Math.PI / 180));
+            monPoint.setX(monPoint.getX() - Math.cos((270 - this.orientationVehicule) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() - Math.cos((this.orientationVehicule - 180) * Math.PI / 180));
         }
         if(this.orientationVehicule > 90 && this.orientationVehicule < 180) {
             monPoint.setX(monPoint.getX() - Math.cos((this.orientationVehicule - 270) * Math.PI / 180));
@@ -169,16 +173,16 @@ export class MoteurPhysique {
     }
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
-        if(this.isNotRoute(this.roueArriereDroiteTypeRoute)){
+        if(this.isNotRoute(this.roueArriereDroiteTypeRoute) === 1){
             a = a * 5/6;
         }
-        if(this.isNotRoute(this.roueArriereGaucheTypeRoute)){
+        if(this.isNotRoute(this.roueArriereGaucheTypeRoute) === 1){
             a = a * 5/6;
         }
-        if(this.isNotRoute(this.roueAvantDroiteTypeRoute)){
+        if(this.isNotRoute(this.roueAvantDroiteTypeRoute)   === 1){
             a = a * 5/6;
         }
-        if(this.isNotRoute(this.roueAvantGaucheTypeRoute)){
+        if(this.isNotRoute(this.roueAvantGaucheTypeRoute)   === 1){
             a = a * 5/6;
         }
         return a;
