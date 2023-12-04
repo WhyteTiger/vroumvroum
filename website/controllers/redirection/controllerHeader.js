@@ -1,6 +1,14 @@
 
+// ajout balises script et link en en-tête
+const head = document.querySelector('head');
+const link = document.createElement('link');
+
+link.setAttribute('rel', 'stylesheet');
+link.setAttribute('href', 'styles/headerStyle.css');
+head.appendChild(link);
+
 const isConnected = window.localStorage.isConnected;
-const header = document.body.getElementsByTagName("header")[0];
+const header = document.createElement("header");
 
 const img = document.createElement('img');
 img.setAttribute("src", "../../assets/logoLong.png");
@@ -39,3 +47,6 @@ if (isConnected === "false") {
 	
 	header.appendChild(profileImg);
 }
+
+// ajout header
+document.body.insertBefore(header, document.querySelector('main'));
