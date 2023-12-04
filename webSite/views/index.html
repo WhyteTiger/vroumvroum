@@ -3,20 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <title>VroumVroum - Accueil</title>
+
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
+
         <script src="../controllers/redirection/controllerIndex.js" defer></script>
         <script src="templates/header.js" defer></script>
     </head>
 
-    <body>
+    <body id="welcomeBody">
 
     <main id="welcome">
         <img src="../../assets/logoLong.png">
 
-        <section>
-            <button type="submit" id="create" class="menuJeu">CRÉER</button>
-            <button type="submit" id="play">JOUER</button>
+        <section id="welcomeButtons">
+            <button type="submit" id="create" class="menuJeu">CREER UN CIRCUIT</button>
+            <button type="submit" id="play" class="menuJeu">JOUER</button>
             <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
         </section>
     </main>

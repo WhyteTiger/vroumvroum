@@ -2,7 +2,14 @@
 const isConnected = window.localStorage.isConnected;
 const header = document.body.getElementsByTagName("header")[0];
 
+const img = document.createElement('img');
+img.setAttribute("src", "../../assets/logoLong.png");
+
+header.appendChild(img);
+
 if (isConnected === "false") {
+
+	const divButtons 	   = document.createElement("div");
 	const connectionA      = document.createElement("a");
 	const connectionButton = document.createElement("button");
 	
@@ -19,8 +26,10 @@ if (isConnected === "false") {
 	registrationA.setAttribute("href", "registration.html");
 	registrationA.appendChild(registrationButton);
 	
-	header.appendChild(connectionA);
-	header.appendChild(registrationA);
+	divButtons.appendChild(connectionA);
+	divButtons.appendChild(registrationA);
+
+	header.appendChild(divButtons);
 	
 } else {
 	const profileImg = document.createElement("img");

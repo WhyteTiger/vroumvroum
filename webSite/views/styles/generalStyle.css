@@ -1,13 +1,35 @@
-/* cette partie est utile sinon bordure blanche autour de la page */
+/* for specific font-styles */
+@font-face {
+    font-family: 'PlayPretend';
+    src: url('fonts/PlayPretend.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'OctoSquares';
+    src: url('fonts/OctoSquares.ttf');
+}
+
+
+/* the main body sticks to the window's frame */
 body {
     margin: 0;
     padding: 0;
+    font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
+    background-color: rgb(71, 223, 215);
 }
 
-/* style de la page principale */
+/* main page style */
 main {
     justify-content: space-between;
     align-items: center;
+    
+}
+
+#welcomeBody {
+    background: url("../../../assets/fondCircuit.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
 }
 
 #welcome {
@@ -16,17 +38,32 @@ main {
 
     justify-content: space-between;
     align-items: center;
-    background: url("../assets/fondCircuit.jpg") no-repeat fixed top left;
-    background-size: cover;
-    height: 100%;
-
 }
+
+#welcomeButtons {
+    display: grid;
+    grid-template: auto / 1fr;
+    align-items: center;
+    max-width: 60em;
+
+    grid-area: 2 / 2 / 3 / 3;
+    margin: auto;
+}
+
+#welcome img {
+    display: grid;
+    grid-area: 1 / 1 / 2 / 4;
+    margin: 100px auto;
+    scale: 1.8;
+}
+
 
 h1, h2, h3 {
     text-align: center;
 }
 
 h1 {
+    font-family: 'PlayPretend', Arial, Helvetica, sans-serif, serif;
     font-size: 70px;
 }
 
@@ -34,17 +71,18 @@ h1 {
     STYLE DES BOUTONS
  */
 button {
-    border: 10px solid blue;
+    font-family: 'PlayPretend', Arial, Helvetica, sans-serif, serif;
+    border: none;
     border-radius: 50px;
     font-size: 2em;
     font-weight: bold;
     padding: 0.4em 0.8em;
-    color: blue;
+    color: black;
+
 }
 
 button:hover {
-    border-color: red;
-    color: red;
+    color: blue;
 }
 
 .menuJeu {
@@ -52,14 +90,9 @@ button:hover {
     border: none;
 }
 
-#jouer {
-    background: linear-gradient(90deg, #CDFFD8, #94B9FF);
-    border-width: 5px;
-    grid-area: 2/2/3/3;
-}
-
 .menuJeu, #jouer {
-    width: 10em;
+    width: 16em;
     align-self: center;
     justify-self: center;
+    margin: 1em;
 }

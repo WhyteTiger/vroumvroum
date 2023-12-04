@@ -10,7 +10,7 @@
 form {
     display: flex;
     flex-direction: column;
-    background-color: #89fdff;
+    background: linear-gradient(90deg, #7c97f7, #00bf9c);
     border-radius: 24px;
     margin: 50px auto;
     padding: 20px;
