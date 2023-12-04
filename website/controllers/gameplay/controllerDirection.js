@@ -1,6 +1,5 @@
 export class ControllerDirection {
 	
-
 	up;
 	down;
 	left;
