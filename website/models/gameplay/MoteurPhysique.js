@@ -1,5 +1,4 @@
 import {Color} from "../entities/Color.js";
-import {Point} from "../entities/Point.js";
 export class MoteurPhysique {
     /**
      * donne si le joueur appuit sur avancer ou pas
@@ -64,17 +63,17 @@ export class MoteurPhysique {
      * @param {l'orientationd du véhicule} orientationVehicule
      */
     constructor(centreVehicule,tickRate,orientationVehicule ){
-
-        this.tickRate = tickRate;
-        this.centreVehicule = centreVehicule;
-        this.setup();
+        
+        this.centreVehicule      = centreVehicule;
+        this.tickRate            = tickRate;
         this.orientationVehicule = orientationVehicule;
+        this.setup();
     }
     setup(){
         this.inputAcceleration = 0;
-        this.inputFrein = 0;
-        this.inputDirection = 0;
-        this.vitesse = 0;
+        this.inputFrein        = 0;
+        this.inputDirection    = 0;
+        this.vitesse           = 0;
         this.roueArriereDroiteTypeRoute = new Color("545454",33,33,33);
         this.roueArriereGaucheTypeRoute = new Color("545454",33,33,33);
         this.roueAvantDroiteTypeRoute   = new Color("545454",33,33,33);
@@ -96,11 +95,11 @@ export class MoteurPhysique {
          roueAvantDroiteTypeRoute ,roueAvantGaucheTypeRoute ){
         this.roueArriereDroiteTypeRoute = roueArriereDroiteTypeRoute;
         this.roueArriereGaucheTypeRoute = roueArriereGaucheTypeRoute;
-        this.roueAvantDroiteTypeRoute = roueAvantDroiteTypeRoute;
-        this.roueAvantGaucheTypeRoute = roueAvantGaucheTypeRoute;
-        this.inputAcceleration = inputAcceleration;
-        this.inputFrein = inputFrein;
-        this.inputDirection = inputDirection;
+        this.roueAvantDroiteTypeRoute   = roueAvantDroiteTypeRoute;
+        this.roueAvantGaucheTypeRoute   = roueAvantGaucheTypeRoute;
+        this.inputAcceleration          = inputAcceleration;
+        this.inputFrein                 = inputFrein;
+        this.inputDirection             = inputDirection;
 
         this.vitesse = this.accelerationCalculTypeRoute + this.vitesse;
         this.forwardOnePoint(this.centreVehicule);
@@ -113,7 +112,7 @@ export class MoteurPhysique {
      * @param {*} orientationVehicule
      */
     resetCar(centreVehicule,orientationVehicule){
-        this.centreVehicule = centreVehicule;
+        this.centreVehicule      = centreVehicule;
         this.orientationVehicule = orientationVehicule;
         this.setup();
     }
@@ -143,91 +142,90 @@ export class MoteurPhysique {
             monPoint.setY = monPoint.getY - this.vitesse;
         }
         if(this.orientationVehicule === 90){
-            monPoint.setX = monPoint.getX + this.vitesse;
+            monPoint.setX(monPoint.getX() + this.vitesse);
         }
         if(this.orientationVehicule === 180 ){
-            monPoint.setY = monPoint.getY - this.vitesse;
+            monPoint.setY(monPoint.getY() - this.vitesse);
         }
         if(this.orientationVehicule === 270){
-            monPoint.setX = monPoint.getX - this.vitesse;
+            monPoint.setX(monPoint.getX() - this.vitesse);
         }
         if(this.orientationVehicule > 0 && this.orientationVehicule < 90 ){
-            monPoint.setX = monPoint.getX + Math.cos((90 - this.orientationVehicule) * Math.PI / 180)
-            monPoint.setY = monPoint.getY + Math.cos(this.orientationVehicule * Math.PI / 180)
+            monPoint.setX(monPoint.getX() + Math.cos((90 - this.orientationVehicule) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() + Math.cos(this.orientationVehicule * Math.PI / 180));
         }
         if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
-            monPoint.setX = monPoint.getX + Math.cos((this.orientationVehicule-90) * Math.PI / 180)
-            monPoint.setY = monPoint.getY - Math.cos((180-this.orientationVehicule) * Math.PI / 180)
+            monPoint.setX(monPoint.getX() + Math.cos((this.orientationVehicule-90) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() - Math.cos((180-this.orientationVehicule) * Math.PI / 180));
         }
         if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
-            monPoint.setX = monPoint.getX - Math.cos((270-this.orientationVehicule) * Math.PI / 180)
-            monPoint.setY = monPoint.getY - Math.cos((this.orientationVehicule-180) * Math.PI / 180)
+            monPoint.setX(monPoint.getX() - Math.cos((270-this.orientationVehicule) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() - Math.cos((this.orientationVehicule-180) * Math.PI / 180));
         }
-        if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
-            monPoint.setX = monPoint.getX - Math.cos((this.orientationVehicule-270) * Math.PI / 180)
-            monPoint.setY = monPoint.getY + Math.cos((360-this.orientationVehicule) * Math.PI / 180)
+        if(this.orientationVehicule > 90 && this.orientationVehicule < 180) {
+            monPoint.setX(monPoint.getX() - Math.cos((this.orientationVehicule - 270) * Math.PI / 180));
+            monPoint.setY(monPoint.getY() + Math.cos((360 - this.orientationVehicule) * Math.PI / 180));
         }
     }
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
         if(this.isNotRoute(this.roueArriereDroiteTypeRoute)){
-            a = a * 5/6
+            a = a * 5/6;
         }
         if(this.isNotRoute(this.roueArriereGaucheTypeRoute)){
-            a = a * 5/6
+            a = a * 5/6;
         }
         if(this.isNotRoute(this.roueAvantDroiteTypeRoute)){
-            a = a * 5/6
+            a = a * 5/6;
         }
         if(this.isNotRoute(this.roueAvantGaucheTypeRoute)){
-            a = a * 5/6
+            a = a * 5/6;
         }
-        return a
+        return a;
     }
     fonctionAcceleration() {
         let incrementVitesse;
         if(this.inputFrein === 1){
             if(this.inputAcceleration === 1){
                 if(this.vitesse < 0){
-                    incrementVitesse = 2/this.tickRate
+                    incrementVitesse = 2/this.tickRate;
                 }if(this.vitesse===0){
-                    incrementVitesse = 0/this.tickRate
+                    incrementVitesse = 0/this.tickRate;
                 } else {
-                    incrementVitesse =-3/this.tickRate
+                    incrementVitesse =-3/this.tickRate;
                 }
             }else{
                 if(this.vitesse < 0){
-                    incrementVitesse = -2/this.tickRate
+                    incrementVitesse = -2/this.tickRate;
                 }else{
-                    incrementVitesse=-5/this.tickRate
+                    incrementVitesse=-5/this.tickRate;
                 }
             }
         }else{
             if(this.inputAcceleration === 1){
                 if(this.inputDirection === 0){
                     if(this.vitesse < 0){
-                        incrementVitesse = 3/this.tickRate
+                        incrementVitesse = 3/this.tickRate;
                     }else {
-                        incrementVitesse = 5/this.tickRate
+                        incrementVitesse = 5/this.tickRate;
                     }
                 }else{
                     if(this.vitesse < 0){
-                        incrementVitesse = 2/this.tickRate
+                        incrementVitesse = 2/this.tickRate;
                     } else {
-                        incrementVitesse = 3/this.tickRate
+                        incrementVitesse = 3/this.tickRate;
                     }
                 }
             }else{
                 if(this.vitesse < 0){
-                    incrementVitesse = 1/this.tickRate
+                    incrementVitesse = 1/this.tickRate;
                 }if(this.vitesse===0){
-                    incrementVitesse = 0/this.tickRate
+                    incrementVitesse = 0/this.tickRate;
                 } else {
-                    incrementVitesse =-1/this.tickRate
+                    incrementVitesse =-1/this.tickRate;
                 }
             }
         }
-        return incrementVitesse
+        return incrementVitesse;
     }
-
 }

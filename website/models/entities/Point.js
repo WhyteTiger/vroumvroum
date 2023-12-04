@@ -6,16 +6,16 @@ export class Point{
         this.x = x;
         this.y = y;
     }
-    get getX(){
+    getX(){
         return this.x;
     }
-    set setY(value) {
+    setY(value) {
         this.y = value;
     }
-    set setX(value) {
+    setX(value) {
         this.x = value;
     }
-    get getY(){
+    getY(){
         return this.y;
     }
 }
