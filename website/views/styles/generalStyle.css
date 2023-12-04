@@ -78,6 +78,7 @@ button {
     font-weight: bold;
     padding: 0.4em 0.8em;
     color: black;
+    background: linear-gradient(90deg, #cecece, #5c5c5c);
 
 }
 
