@@ -6,7 +6,7 @@ window.localStorage.setItem("username", 		  "");
 window.localStorage.setItem("alreadyRegister", "");
 window.localStorage.setItem("circuitId",       "1");
 
-document.location.href="./webSite/views/index.html";
+document.location.href="./website/views/index.html";
 
 const text = document.body.getElementById("text");
 text.innerText = "Error 500 : Un problème est survenue lors du chargement de la page...";
