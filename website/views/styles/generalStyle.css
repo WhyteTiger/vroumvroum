@@ -1,0 +1,99 @@
+/* for specific font-styles */
+@font-face {
+    font-family: 'PlayPretend';
+    src: url('fonts/PlayPretend.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'OctoSquares';
+    src: url('fonts/OctoSquares.ttf');
+}
+
+
+/* the main body sticks to the window's frame */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
+    background-color: rgb(71, 223, 215);
+}
+
+/* main page style */
+main {
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#welcomeBody {
+    background: url("../../../assets/fondCircuit.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
+}
+
+#welcome {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+#welcomeButtons {
+    display: grid;
+    grid-template: auto / 1fr;
+    align-items: center;
+    max-width: 60em;
+
+    grid-area: 2 / 2 / 3 / 3;
+    margin: auto;
+}
+
+#welcome img {
+    display: grid;
+    grid-area: 1 / 1 / 2 / 4;
+    margin: 100px auto;
+    scale: 1.8;
+}
+
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'PlayPretend', Arial, Helvetica, sans-serif, serif;
+    font-size: 70px;
+}
+
+/*
+    STYLE DES BOUTONS
+ */
+button {
+    font-family: 'PlayPretend', Arial, Helvetica, sans-serif, serif;
+    border: none;
+    border-radius: 50px;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0.4em 0.8em;
+    color: black;
+    background: linear-gradient(90deg, #cecece, #5c5c5c);
+
+}
+
+button:hover {
+    color: blue;
+}
+
+.menuJeu {
+    background: linear-gradient(90deg, #5DE0E6, #004AAD);
+    border: none;
+}
+
+.menuJeu, #jouer {
+    width: 16em;
+    align-self: center;
+    justify-self: center;
+    margin: 1em;
+}
