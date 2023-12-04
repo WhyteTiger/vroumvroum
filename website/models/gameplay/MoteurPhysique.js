@@ -143,7 +143,7 @@ export class MoteurPhysique {
 
     forwardOnePoint(monPoint ){
         if(this.orientationVehicule === 0){
-            monPoint.setY(monPoint.getY() - this.vitesse);
+            monPoint.setY(monPoint.getY() + this.vitesse);
         }
         if(this.orientationVehicule === 90){
             monPoint.setX(monPoint.getX() + this.vitesse);
@@ -187,6 +187,7 @@ export class MoteurPhysique {
         }
         return a;
     }
+    
     fonctionAcceleration() {
         let incrementVitesse;
         if(this.inputFrein === 1){
