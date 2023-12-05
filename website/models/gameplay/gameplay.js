@@ -59,7 +59,7 @@ window.onload = function () {
              .then((response) => response.json())
              .then((dataKart) => {
                 
-                const kart = new Kart(3, dataKart.kartid, 0);
+                const kart = new Kart(3, dataKart.kartid-1, 0);
                 const controller = new ControllerDirection();
                 
                 const canvas = document.getElementById('canvas');
@@ -82,6 +82,25 @@ window.onload = function () {
                 
                 const carTilePixelX = carTileX * carTileSize;
                 const carTilePixelY = carTileY * carTileSize;
+                
+                //dessin Circuit
+                let i = 0, l = map.getHauteur();
+                for (; i < l; i++) {
+                   const ligne = map.terrain[i];
+                   const angle = map.rotate[i];
+                   const y = i * 160;
+                   
+                   let j = 0, k = ligne.length;
+                   for (; j < k; j++) {
+                      map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
+                   }
+                }
+                ctx.save();
+                ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 4, engine.getCentreVehicule().getY() - carTileSize / 4);
+                ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
+                ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
+                ctx.restore();
+                
                 // Attendre que l'image soit complètement chargée
                 /*
 					 circuitTileset.onload = function () {
@@ -91,18 +110,7 @@ window.onload = function () {
 							 const angleRadians = Maths.degToRad(angleDegrees);
 							 ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
 		
-							 //dessin Circuit
-							 let i = 0, l = map.getHauteur();
-							 for (; i < l; i++) {
-								 const ligne = map.terrain[i];
-								 const angle = map.rotate[i];
-								 const y = i * 160;
-		
-								 let j = 0, k = ligne.length;
-								 for (; j < k; j++) {
-									 map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
-								 }
-							 }
+							 
 							 
 							 engine.next(controller.up , controller.down, controller.getdirection(),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33));
 			
