@@ -17,5 +17,10 @@ export class API {
       return 'http://'+API.server+'/gameplay/getCircuitTileById';
    }
    
+   static getURLgetKartsByPlayerId() {
+      
+      return 'http://'+API.server+'personalize/getKartsByPlayerId';
+   }
+   
 }
 

@@ -28,6 +28,7 @@ async function tryToConnect(username, password) {
 		.then((data) => {
 			window.localStorage.setItem("alreadyRegister", data.alreadyRegisterOut);
 			window.localStorage.setItem("rightPassword",   data.rightPasswordOut);
+			window.localStorage.setItem("playerId",   	  data.playerIdOut);
 			window.localStorage.setItem("username", 	 	  data.usernameOut);
 			
 			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {

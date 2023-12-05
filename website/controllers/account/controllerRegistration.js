@@ -26,6 +26,7 @@ async function whantToRegistrate(nickname, password) {
 			
 			if (window.localStorage.alreadyRegister === "false") {
 				window.localStorage.isConnected = true;
+				window.localStorage.playerId    = data.playeridOut;
 				window.localStorage.username    = data.usernameOut;
 				
 				document.location.href="../views/home.html";
