@@ -2,7 +2,8 @@ console.log("Welcome to VroumVroum !");
 
 window.localStorage.setItem("isConnected",     "false");
 window.localStorage.setItem("rightPassword",   "false");
-window.localStorage.setItem("username", 		  "");
+window.localStorage.setItem("username", 		  "anonymous");
+window.localStorage.setItem("playerIde", 		  "12");
 window.localStorage.setItem("alreadyRegister", "");
 window.localStorage.setItem("circuitId",       "1");
 
