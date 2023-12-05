@@ -41,7 +41,7 @@ window.onload = function () {
              playerIdIn  = "12";
           }
           
-          const url = API.getURLgetKartsByPlayerId();
+          const url = API.getURLgetOwnKartByPlayerId();
           const dataKart = {
              playerIdIn: playerIdIn
           };
