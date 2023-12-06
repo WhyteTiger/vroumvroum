@@ -1,31 +1,31 @@
 #canvas{
     border: 1px solid black;
-    width: 100%;
+    /*width: 100%;*/
 }
 
-body {
+body{
     background-color: #00be63;
-    /* display: flex;
+    /*display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    margin: 0; */
+    margin: 0;*/
 }
 
 /*pour mettre une scrollbar sur le canvas*/
-div {
+#divCanvas{
     overflow-x: scroll;
     max-width: 80%;
     border: 1px solid black;
     border-radius: 10px;
 
+    padding-top : 5%;
     margin: 10% auto; /* Ajustez la valeur de la marge pour centrer verticalement */
-    display: flex;
+    /*display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
 }
 
-/*
 ::-webkit-scrollbar {
     width: 7px;
     background: #8f9ea0;
@@ -35,7 +35,7 @@ div {
     border: solid 0 transparent;
     background-color: #54585b;
     border-radius: 10px;
-}*/
+}
 
 #buttonsContainer {
     display: flex;
@@ -45,11 +45,26 @@ div {
 
 #buttonsContainer button {
     display: none;
-    margin: 20px 42px;
+
+}
+
+#buttonCarChoisi{
+    background:linear-gradient(145deg, #FFDE59, #FF914D);
+    font-size: 15px;
+    border: none;
+    margin: 20px 37px;
 }
 
 #buttonCar{
     background:linear-gradient(145deg, #5de0e6, #004aad);
     font-size: 15px;
     border: none;
+    margin: 20px 36px;
+}
+
+#buttonCarAchat{
+    background:linear-gradient(145deg, #FF3131, #FF914D);
+    font-size: 15px;
+    border: none;
+    margin: 20px 30px;
 }

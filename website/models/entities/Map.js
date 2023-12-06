@@ -35,6 +35,18 @@ export class Map {
         }
     }
     
+    dessinerKart(context, carte, rotation){
+        const ligne = carte[0];
+        const angle = rotation[0];
+        
+        for(let j = 0, k = ligne.length; j<k; j++){
+            let y = j*160;
+            
+            this.tileset.dessinerTile(ligne[j], context, j*160, 0, angle[j]);
+        }
+    }
+    
+    
     
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;

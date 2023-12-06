@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Vroumvroum - choix voiture</title>
-
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
-    <link rel="stylesheet" href="styles/styleCanvas.css">
-
-    <script src="../controllers/redirection/controllerHeader.js" defer></script>
+    <link rel="stylesheet" href="styles/canvasStyle.css">
+    <script src="templates/header.js" defer></script>
     <script type="module" src="../models/ChoiceKart.js"></script>
 </head>
 <body>
-    <main>
-        <div>
-            <canvas id="canvasChoix">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-            <section id="buttonsContainer"></section>
-        </div>
-    </main>
+<main>
+    <div id="divCanvas">
+        <canvas id="canvasChoix">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+        <section id="buttonsContainer"></section>
+    </div>
+</main>
 </body>
 </html>
