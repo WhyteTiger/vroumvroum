@@ -1,6 +1,6 @@
 /* PARTIE GENERALE */
 
-#mainCircuit {
+#main-circuit {
     display: grid;
     grid-template: auto / 6fr 1fr;
 }
@@ -27,7 +27,7 @@
     padding: 30px;
 }
 
-#leaderboardTitle {
+#leaderboard-title {
     font-family: 'PlayPretend', Arial, Helvetica, sans-serif;
     font-size: 45px;
     text-align: center;
@@ -37,7 +37,9 @@ i {
     color: rgb(190, 168, 0);
 }
 
-
+.leaderboard-time {
+    display: inline;
+}
 
 
 
@@ -71,12 +73,12 @@ canvas {
     border-radius: 50% 50% 0 0;
 }
 
-#playMain {
+#play-main {
     display: grid;
     grid-template: auto / 3fr 1fr;
 }
 
-#playMain section {
+#play-main section {
     max-width: 28em;
 }
 
