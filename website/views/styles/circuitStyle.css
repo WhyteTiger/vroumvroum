@@ -1,3 +1,5 @@
+/* PARTIE GENERALE */
+
 #mainCircuit {
     display: grid;
     grid-template: auto / 6fr 1fr;
@@ -17,15 +19,30 @@
     align-self: center;
 }
 
+/* LEADERBOARD */
+
 #leaderboard {
-    border: 2px ridge red;
+    border: 2px solid red;
+    border-radius: 45px;
+    padding: 30px;
 }
 
 #leaderboardTitle {
-    color: red;
+    font-family: 'PlayPretend', Arial, Helvetica, sans-serif;
     font-size: 45px;
     text-align: center;
 }
+
+i {
+    color: rgb(190, 168, 0);
+}
+
+
+
+
+
+
+/* ZONE DU CIRCUIT */
 
 canvas {
     display: flex;
@@ -35,7 +52,6 @@ canvas {
 
 .chooser {
     display: flex;
-    border: 1px solid green;
     text-align: center;
 
 }
@@ -54,3 +70,13 @@ canvas {
 #choosers button {
     border-radius: 50% 50% 0 0;
 }
+
+#playMain {
+    display: grid;
+    grid-template: auto / 3fr 1fr;
+}
+
+#playMain section {
+    max-width: 28em;
+}
+

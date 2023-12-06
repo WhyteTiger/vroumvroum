@@ -22,11 +22,11 @@ body {
 main {
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 #welcomeBody {
-    background: url("../../../assets/fondCircuit.jpg") no-repeat fixed top left;
+    background: url("../../../assets/fondCircuit.png") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
     background-color: none;
@@ -54,7 +54,13 @@ main {
     display: grid;
     grid-area: 1 / 1 / 2 / 4;
     margin: 100px auto;
+
     scale: 1.8;
+    transition: scale 0.2s ease 0s;
+}
+
+#welcome img:hover {
+    scale: 2;
 }
 
 
@@ -70,20 +76,39 @@ h1 {
 /*
     STYLE DES BOUTONS
  */
+
 button {
-    font-family: 'PlayPretend', Arial, Helvetica, sans-serif, serif;
+    font-family: 'OctoSquares', Arial, Helvetica, sans-serif, serif;
+
+    margin: 10px;
+    padding: 20px 45px;
+
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    color: black;
+    background-color: #fff;
+
     border: none;
     border-radius: 50px;
-    font-size: 2em;
-    font-weight: bold;
-    padding: 0.4em 0.8em;
-    color: black;
-    background: linear-gradient(90deg, #cecece, #5c5c5c);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
 
 }
 
 button:hover {
-    color: blue;
+    background-color: black;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: white;
+    transform: translateY(-7px);
+}
+
+button:active {
+    transform: translateY(-1px);
 }
 
 .menuJeu {
@@ -96,4 +121,14 @@ button:hover {
     align-self: center;
     justify-self: center;
     margin: 1em;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: blue;
+    transition: color 0.2s ease 0s;
+}
+
+a:hover {
+    color: rgb(213, 59, 233);
 }

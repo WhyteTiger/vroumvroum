@@ -11,11 +11,14 @@ form {
     display: flex;
     flex-direction: column;
     background: linear-gradient(90deg, #7c97f7, #00bf9c);
-    border-radius: 24px;
+    border-radius: 45px;
     margin: 50px auto;
     padding: 20px;
     max-width: 50em;
     text-align: left;
+
+    /* source : le générateur de Neumorphism */
+    box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;
 }
 
 .field {
@@ -27,15 +30,26 @@ form {
 form label {
     color: #000000;
     font-weight: bold;
-    font-size: 40px;
-    margin: 20px;
+    font-size: 30px;
+    margin: 10px;
 }
 
 form input {
-    font-size: 30px;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
     height: 35px;
-    border-radius: 30px;
+    border-radius: 40px;
     padding: 20px;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.2);
+    border: gray solid 1px;
+}
+
+form input:focus {
+    background-color: rgb(221, 221, 221);
+    box-shadow: inset 0 18px 10px rgba(0, 0, 0, 0.2);
 }
 
 form button {
@@ -45,4 +59,3 @@ form button {
     width: 12em;
     text-align: center;
 }
-

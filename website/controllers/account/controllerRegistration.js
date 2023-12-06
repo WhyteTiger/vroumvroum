@@ -1,8 +1,8 @@
 import {API} from "../../models/API.js";
 
-window.localStorage.setItem("isConnected", false);
-window.localStorage.setItem("username", 	 "");
-window.localStorage.setItem("alreadyRegister", 	 "");
+window.localStorage.setItem("isConnected",     false);
+window.localStorage.setItem("username", 	     "");
+window.localStorage.setItem("alreadyRegister", "");
 
 async function whantToRegistrate(nickname, password) {
 	
@@ -26,6 +26,7 @@ async function whantToRegistrate(nickname, password) {
 			
 			if (window.localStorage.alreadyRegister === "false") {
 				window.localStorage.isConnected = true;
+				window.localStorage.playerId    = data.playerIdOut;
 				window.localStorage.username    = data.usernameOut;
 				
 				document.location.href="../views/home.html";
