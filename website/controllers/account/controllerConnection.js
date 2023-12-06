@@ -3,7 +3,7 @@ import {API} from "../../models/API.js";
 window.localStorage.setItem("alreadyRegister", "false");
 window.localStorage.setItem("rightPassword",   "false");
 window.localStorage.setItem("isConnected",     "false");
-window.localStorage.setItem("playerId", 	 	  "12");
+window.localStorage.setItem("playerId", 	 	  "0");
 window.localStorage.setItem("username", 	 	  "");
 
 async function tryToConnect(username, password) {
