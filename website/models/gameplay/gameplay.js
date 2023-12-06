@@ -8,7 +8,6 @@ import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
 import {Color} from "../entities/Color.js";
 
-
 window.onload = function () {
     
     const circuitId = window.localStorage.circuitId;
@@ -33,13 +32,7 @@ window.onload = function () {
           
           const map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
           
-          let playerIdIn;
-          const isConnected = window.localStorage.isConnected;
-          if (isConnected === "true") {
-             playerIdIn  = window.localStorage.playerId;
-          } else {
-             playerIdIn  = "12";
-          }
+          const playerIdIn = window.localStorage.playerId;
           
           const url = API.getURLgetOwnKartByPlayerId();
           const dataKart = {
