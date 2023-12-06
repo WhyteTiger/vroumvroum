@@ -59,7 +59,8 @@ window.onload = function () {
              .then((response) => response.json())
              .then((dataKart) => {
                 
-                const kart = new Kart(3, dataKart.kartid-1, 0);
+                console.log("dataKart : "+dataKart.kartId);
+                const kart = new Kart(3, dataKart.kartId-1, 0);
                 const controller = new ControllerDirection();
                 
                 const canvas = document.getElementById('canvas');

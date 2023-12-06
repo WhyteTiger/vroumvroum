@@ -1,8 +1,9 @@
 import {API} from "../../models/API.js";
 
-window.localStorage.setItem("alreadyRegister", false);
-window.localStorage.setItem("rightPassword",   false);
-window.localStorage.setItem("isConnected",     false);
+window.localStorage.setItem("alreadyRegister", "false");
+window.localStorage.setItem("rightPassword",   "false");
+window.localStorage.setItem("isConnected",     "false");
+window.localStorage.setItem("playerId", 	 	  "12");
 window.localStorage.setItem("username", 	 	  "");
 
 async function tryToConnect(username, password) {
@@ -26,10 +27,13 @@ async function tryToConnect(username, password) {
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			window.localStorage.setItem("alreadyRegister", data.alreadyRegisterOut);
-			window.localStorage.setItem("rightPassword",   data.rightPasswordOut);
-			window.localStorage.setItem("playerId",   	  data.playerIdOut);
-			window.localStorage.setItem("username", 	 	  data.usernameOut);
+			console.log(data);
+			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
+			window.localStorage.rightPassword   = data.rightPasswordOut;
+			window.localStorage.playerId 		   = data.playerIdOut;
+			window.localStorage.username 			= data.usernameOut;
+			
+			console.log(data.alreadyRegisterOut+" "+data.rightPasswordOut+" "+data.playerIdOut+" "+data.usernameOut);
 			
 			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {
 				window.localStorage.isConnected = true;
