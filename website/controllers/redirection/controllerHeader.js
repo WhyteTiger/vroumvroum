@@ -10,13 +10,17 @@ head.appendChild(link);
 const isConnected = window.localStorage.isConnected;
 const header = document.createElement("header");
 
+const a = document.createElement('a');
+a.setAttribute("href", "home.html");
+
 const img = document.createElement('img');
 img.setAttribute("src", "../../assets/logoLong.png");
 
-header.appendChild(img);
+a.appendChild(img);
+header.appendChild(a);
 
 if (isConnected === "false") {
-
+	
 	const divButtons 	   = document.createElement("div");
 	const connectionA      = document.createElement("a");
 	const connectionButton = document.createElement("button");
@@ -36,7 +40,7 @@ if (isConnected === "false") {
 	
 	divButtons.appendChild(connectionA);
 	divButtons.appendChild(registrationA);
-
+	
 	header.appendChild(divButtons);
 	
 } else {

@@ -12,7 +12,7 @@ header {
 header img {
     text-align: left;
     width: 70%;
-    margin-left: 2rem;
+    transition: scale 0.2s ease 0s;
 }
 
 header div {
@@ -22,5 +22,10 @@ header div {
 
 header button {
     margin: 1em 1em;
+}
+
+/* img transition on hover */
+header img:hover {
+    scale: 0.9;
 }
 

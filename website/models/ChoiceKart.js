@@ -103,8 +103,6 @@ window.onload = function(){
 			
 		};
 		
-		
-		
 		buttonsContainer.appendChild(button);
 		if (map.isImagePresent(i)) {
 			button.style.display = 'block';

@@ -45,7 +45,6 @@ window.onload = function () {
              },
              body: JSON.stringify(dataKart)
           };
-          
           console.log(params);
           
           fetch(url, params)
