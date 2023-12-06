@@ -29,6 +29,10 @@ window.onload = function () {
    fetch(url, params)
       .then((response) => response.json())
       .then((dataCircuit) => {
+         
+         
+         
+         
          const url = API.getURLgetCircuitTileById();
          const dataMap = {
             circuitIdIn: circuitId
