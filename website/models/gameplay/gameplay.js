@@ -30,7 +30,7 @@ window.onload = function () {
       .then((response) => response.json())
       .then((dataCircuit) => {
          
-         
+         console.log(dataCircuit);
          
          
          const url = API.getURLgetCircuitTileById();
