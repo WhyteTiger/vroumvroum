@@ -25,45 +25,6 @@ main {
 
 }
 
-#welcomeBody {
-    background: url("../../../assets/fondCircuit.png") no-repeat fixed top left;
-    background-position: center bottom;
-    background-size: cover;
-    background-color: none;
-}
-
-#welcome {
-    display: grid;
-    grid-template: auto / 1fr 4fr 1fr;
-
-    justify-content: space-between;
-    align-items: center;
-}
-
-#welcomeButtons {
-    display: grid;
-    grid-template: auto / 1fr;
-    align-items: center;
-    max-width: 60em;
-
-    grid-area: 2 / 2 / 3 / 3;
-    margin: auto;
-}
-
-#welcome img {
-    display: grid;
-    grid-area: 1 / 1 / 2 / 4;
-    margin: 100px auto;
-
-    scale: 1.8;
-    transition: scale 0.2s ease 0s;
-}
-
-#welcome img:hover {
-    scale: 2;
-}
-
-
 h1, h2, h3 {
     text-align: center;
 }
@@ -111,18 +72,10 @@ button:active {
     transform: translateY(-1px);
 }
 
-.menuJeu {
-    background: linear-gradient(90deg, #5DE0E6, #004AAD);
-    border: none;
-}
 
-.menuJeu, #jouer {
-    width: 16em;
-    align-self: center;
-    justify-self: center;
-    margin: 1em;
-}
-
+/*
+ LINKS
+*/
 a, a:visited {
     text-decoration: none;
     color: blue;
