@@ -22,18 +22,10 @@ export class API {
       return 'http://'+API.server+'/gameplay/getOwnKartByPlayerId';
    }
    
-   static getURLgetCircuitInformation() {
-      
-      return 'http://'+API.server+'/gameplay/getCircuitInformation';
-   }
-   static getURLaddScoreToLeaderBoard() {
-      
-      return 'http://'+API.server+'gameplay/addScoreToLeaderBoard';
-   }
-   
    static getURLgetKartsByPlayerId() {
       
       return 'http://'+API.server+'/personalize/getKartsByPlayerId';
    }
+   
 }
 
