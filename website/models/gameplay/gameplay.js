@@ -30,8 +30,19 @@ window.onload = function () {
       .then((response) => response.json())
       .then((dataCircuit) => {
 
-                  
-         
+         // to manage the author
+         // à compléter
+
+         // to manage the 5 (or less) best scores
+         if(dataCircuit.leaderBoard == null) {
+            document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+         } else {
+            let i = 0;
+            for (let player in document.querySelector('#leaderboard-players p')) {
+               player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
+               i += 2;
+            }
+         }
          console.log(dataCircuit);
          
          
