@@ -50,10 +50,12 @@ window.onload = function(){
 	}
 	
 	const buttonsContainer = document.getElementById('buttonsContainer');
+	const prixContainer = document.getElementById('prixContainer');
 	let chosenButtonIndex = null;
 	
 	for (let i = 0; i < map.getLargeur(); i++) {
 		const button = document.createElement('button');
+		const prix = document.createElement('p');
 		if (listeButton[i].getVal() === 1){
 			button.id='buttonCarChoisi';
 			button.innerHTML = 'utilise';
@@ -61,12 +63,14 @@ window.onload = function(){
 		if (listeButton[i].getVal() === -1){
 			button.id='buttonCar';
 			button.innerHTML = 'choisir';
+
 		}
 		if (listeButton[i].getVal() > 1 ){
 			button.id='buttonCarAchat';
 			button.innerHTML = 'Acheter';
+			prix.innerHTML = listeButton[i].getVal();
 		}
-		
+
 		button.onclick   = function() {
 			if(button.id === 'buttonCarChoisi'){
 				return;
@@ -91,6 +95,8 @@ window.onload = function(){
 			if (button.id === "buttonCarAchat"){
 				const controller = new ControllerVoiture(listeButton[i].getVal(), vroumCoin);
 				result = controller.buttonPress();
+				// suprime le prix une fois la voiture achetée !
+				prix.remove();
 				
 				// Mise à jour du texte du bouton et de la quantité de vroumCoin
 				if (result === 1) {
@@ -102,8 +108,9 @@ window.onload = function(){
 			}
 			
 		};
-		
+
 		buttonsContainer.appendChild(button);
+		prixContainer.appendChild(prix);
 		if (map.isImagePresent(i)) {
 			button.style.display = 'block';
 		} else {
