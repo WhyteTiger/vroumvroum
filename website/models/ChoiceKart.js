@@ -54,6 +54,7 @@ window.onload = function(){
 	let chosenButtonIndex = null;
 	
 	for (let i = 0; i < map.getLargeur(); i++) {
+		const container = document.createElement('div');
 		const button = document.createElement('button');
 		const prix = document.createElement('p');
 		if (listeButton[i].getVal() === 1){
@@ -109,8 +110,9 @@ window.onload = function(){
 			
 		};
 
-		buttonsContainer.appendChild(button);
-		prixContainer.appendChild(prix);
+		container.appendChild(button);
+		container.appendChild(prix);
+		buttonsContainer.appendChild(container);
 		if (map.isImagePresent(i)) {
 			button.style.display = 'block';
 		} else {
