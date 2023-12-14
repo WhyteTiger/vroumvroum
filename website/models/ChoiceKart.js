@@ -2,6 +2,7 @@ import {Tileset} from "./entities/Tileset.js";
 import {Map} from "./entities/Map.js";
 import {ControllerVoiture} from "../controllers/gameplay/controllerVoiture.js";
 import {ButtonKart} from "./entities/ButtonKart.js";
+import {Coin} from './entities/Coin.js';
 
 const carte = [
 	[37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
@@ -9,6 +10,10 @@ const carte = [
 const rotation = [
 	[270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270]
 ];
+
+// place de la pile de vroumCoin et de la piece seule dans le tileset
+const pileCoin = [34];
+const pieceCoin = [35];
 
 // A remplacer plus tard par les valeurs chargée par l'api
 const valButton = [1, -1, -1, 52, 65, -1, 235, 23, 45, 47, 32, 69];
@@ -39,22 +44,23 @@ window.onload = function(){
 	
 	map.dessinerKart(ctx, carte, rotation);
 	
-	const vroumCoinContainer = document.createElement(('div'));
-	vroumCoinContainer.id = 'vroumCoinContainer';
-	document.body.appendChild(vroumCoinContainer);
+	const vroumCoinContainer = document.getElementById('vroumCoinContainer');
 	
 	updateVroumCoin();
 	
 	function updateVroumCoin(){
 		vroumCoinContainer.innerHTML = 'VroumCoin : '+ vroumCoin;
+		//const coin = new Coin('../../../assets/tilesets/circuit.png',pieceCoin);
+		//coin.dessinPiece();
 	}
 	
 	const buttonsContainer = document.getElementById('buttonsContainer');
-	const prixContainer = document.getElementById('prixContainer');
+	//const prixContainer = document.getElementById('prixContainer');
 	let chosenButtonIndex = null;
 	
 	for (let i = 0; i < map.getLargeur(); i++) {
 		const container = document.createElement('div');
+		container.id='divChoixCar';
 		const button = document.createElement('button');
 		const prix = document.createElement('p');
 		if (listeButton[i].getVal() === 1){
@@ -80,7 +86,9 @@ window.onload = function(){
 			if(button.id === 'buttonCar'){
 				//mise a jour des bouton utilise en choisir
 				for (let j = 0; j < map.getLargeur(); j++) {
-					const otherButton = buttonsContainer.children[j];
+					const otherContainer = buttonsContainer.children[j];
+					const otherButton = otherContainer.querySelector('button');
+					console.log(otherButton);
 					if (otherButton.id === 'buttonCarChoisi') {
 						otherButton.id = 'buttonCar';
 						otherButton.innerHTML = 'choisir';
@@ -97,14 +105,15 @@ window.onload = function(){
 				const controller = new ControllerVoiture(listeButton[i].getVal(), vroumCoin);
 				result = controller.buttonPress();
 				// suprime le prix une fois la voiture achetée !
-				prix.remove();
-				
+
+
 				// Mise à jour du texte du bouton et de la quantité de vroumCoin
 				if (result === 1) {
 					button.id = 'buttonCar';
 					button.innerHTML = 'choisir';
 					vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
 					updateVroumCoin();
+					prix.remove();
 				}
 			}
 			

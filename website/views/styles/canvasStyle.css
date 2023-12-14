@@ -21,6 +21,9 @@ body {
     margin: 0; */
 }
 
+#vroumCoinContainer{
+    margin: 2%;
+}
 /*pour mettre une scrollbar sur le canvas*/
 /*canvas {
     overflow-x: scroll;
@@ -41,7 +44,7 @@ justify-content: center;
     border-radius: 10px;
 
     padding-top : 5%;
-    margin: 10% auto;
+    margin: 5% auto 0;
 
 }
 
@@ -87,4 +90,13 @@ justify-content: center;
     font-size: 15px;
     border: none;
     margin: 20px 30px;
+}
+
+
+#divChoixCar{
+    display: flex;
+    /*position: relative;*/
+    align-items: center;
+    /*justify-content: center;*/
+    flex-flow: column;
 }
