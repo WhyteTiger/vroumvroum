@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Vroumvroum - gameplay</title>
+    <title>Vroumvroum - Création de circuit</title>
 
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
@@ -13,33 +13,44 @@
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
 </head>
 
-<body id="play-body">
-<main id="play-main">
-    <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+<body>
+    <main id="create-main">
+        <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
 
-    <section id="circuit-infos">
-        <h2>Nom de la carte</h2>
-
-        <div id="mark">
-            <p>Note : </p>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-        </div>
-
-        <p>Créateur : </p>
-
-        <div id="leaderboard">
-            <div id="leaderboard-title">Leaderboard</div>
-            <div class="leaderboard-time"></div>
-            <div class="leaderboard-time"></div>
-            <div class="leaderboard-time"></div>
-            <div class="leaderboard-time"></div>
-            <div class="leaderboard-time"></div>
-        </div>
-    </section>
-</main>
+        <section id="items">
+            <div id="choosers">
+                <section id="buttons-info">
+                    <button>Tuiles</button>
+                    <button>Départs / Arrivées</button>
+                    <button>Checkpoints</button>
+                </section>
+    
+                <section id="tile-selector">
+                    <h2>Nom de la carte</h2>
+    
+                    <div id="mark">
+                        <p>Note : </p>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+        
+                    <p>Créateur : </p>
+        
+                    <div id="leaderboard">
+                        <div id="leaderboard-title">Leaderboard</div>
+                        <div class="leaderboard-time"></div>
+                        <div class="leaderboard-time"></div>
+                        <div class="leaderboard-time"></div>
+                        <div class="leaderboard-time"></div>
+                        <div class="leaderboard-time"></div>
+                    </div>
+                </section>
+            </div>
+        </section>
+            
+    </main>
 </body>
 </html>

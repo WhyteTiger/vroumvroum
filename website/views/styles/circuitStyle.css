@@ -22,14 +22,37 @@
 #circuit-infos {
     padding: 30px;
     margin: 15px;
+}
+
+/* ZONE DU CIRCUIT */
+
+canvas {
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+}
+
+#items {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+}
+
+#choosers {
+    grid-area : 2 / 3 / 1 / 2;
     
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid #00be63;
+}
+
+#choosers button{
+    margin: 0px;
+}
+
+#play-main {
+    display: grid;
+    grid-template: auto / 3fr 1fr;
+}
+
+#play-main section {
+    max-width: 28em;
 }
 
 /* LEADERBOARD */
@@ -48,41 +71,40 @@ i {
     display: inline;
 }
 
+/* SELECTEUR DE TUILES */
 
-/* ZONE DU CIRCUIT */
+#tile-selector {
+    padding: 30px;
+    margin: 15px;
 
-canvas {
     display: flex;
-    width: 100%;
-    border: 1px solid black;
-}
-
-.chooser {
-    display: flex;
-    text-align: center;
+    border-radius: 45px;
+    margin: 5px 0px 30px 0px;
+    padding: 20px;
+    width: 70em;
+    text-align: left;
 
 }
 
-#items {
+#tile-selector, #circuit-infos, #choosers button {
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid #00be63;
+}
+
+#create-main {
     display: grid;
-    grid-template: auto / 1fr 4fr 1fr;
+    grid-template: auto / 1fr;
 }
 
-#choosers {
-    grid-area : 2 / 3 / 1 / 2;
-    max-width: 70em;
-    margin: 10px 5em;
+body {
+    background: url("../../../assets/circuitFond1.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
 }
 
-#choosers button {
-    border-radius: 50% 50% 0 0;
-}
-
-#play-main {
-    display: grid;
-    grid-template: auto / 3fr 1fr;
-}
-
-#play-main section {
-    max-width: 28em;
-}
