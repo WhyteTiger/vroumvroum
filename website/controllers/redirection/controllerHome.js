@@ -1,10 +1,12 @@
 
-const playButton = document.getElementById("play");
-playButton.addEventListener("click", () => {
+document.getElementById("play").addEventListener("click", () => {
 	document.location.href = "choiceCircuit.html";
 });
 
-const personalizeButton = document.getElementById("personalize");
-personalizeButton.addEventListener("click", () => {
+document.getElementById("personalize").addEventListener("click", () => {
 	document.location.href = "choiceKart.html";
+});
+
+document.getElementById("create").addEventListener("click", () => {
+	document.location.href = "createCircuit.html";
 });
