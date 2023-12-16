@@ -32,19 +32,7 @@ canvas {
     border: 1px solid black;
 }
 
-#items {
-    display: grid;
-    grid-template: auto / 1fr 4fr 1fr;
-}
 
-#choosers {
-    grid-area : 2 / 3 / 1 / 2;
-    
-}
-
-#choosers button{
-    margin: 0px;
-}
 
 #play-main {
     display: grid;
@@ -93,7 +81,7 @@ i {
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid #00be63;
+        border: 1px solid black;
 }
 
 #create-main {
@@ -106,5 +94,28 @@ body {
     background-position: center bottom;
     background-size: cover;
     background-color: none;
+}
+
+#items {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+}
+
+#choosers {
+    grid-area : 2 / 3 / 1 / 2;
+    
+}
+
+#choosers button {
+    margin: 0px;
+    transition: color 0.3s ease 0s;
+}
+
+#choosers button:hover {
+    color: white;
+}
+
+#choosers button.selected {
+    border-color: #00be63;
 }
 
