@@ -27,10 +27,20 @@
 /* ZONE DU CIRCUIT */
 
 canvas {
+    border: 1px solid black;
+    overflow-x: scroll;
+}
+
+canvas:not(.tile-canvas) {
     display: flex;
     width: 100%;
-    border: 1px solid black;
 }
+
+#tiles-to-select {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 
 
@@ -118,4 +128,3 @@ body {
 #choosers button.selected {
     border-color: #00be63;
 }
-

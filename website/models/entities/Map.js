@@ -46,7 +46,24 @@ export class Map {
         }
     }
     
-    
+    dessinerTuiles(carte, rotation) {
+        const ligne = carte[0];
+        const angle = rotation[0];
+        
+        for(let j = 0, k = ligne.length; j<k; j++){
+            const div = document.createElement('div');
+            const miniCanvas = document.createElement('canvas');
+            miniCanvas.setAttribute('class', 'tile-canvas');
+            miniCanvas.width  = 160;
+            miniCanvas.height = 160;
+            
+            // that is why you don't need to pass context as a parameter here
+            this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j]);
+
+            div.appendChild(miniCanvas);
+            document.querySelector('#tiles-to-select').appendChild(div);
+        }
+    }
     
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;
