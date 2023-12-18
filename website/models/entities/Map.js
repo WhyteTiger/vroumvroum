@@ -46,7 +46,9 @@ export class Map {
         }
     }
     
-    dessinerTuiles(carte, rotation) {
+    dessinerTuiles(carte, rotation, container) {
+
+        console.log(container)
         const ligne = carte[0];
         const angle = rotation[0];
         
@@ -59,9 +61,10 @@ export class Map {
             
             // that is why you don't need to pass context as a parameter here
             this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j]);
+            console.log('ok !')
 
             div.appendChild(miniCanvas);
-            document.querySelector('#tiles-to-select').appendChild(div);
+            container.appendChild(div);
         }
     }
     

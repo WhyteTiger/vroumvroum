@@ -71,7 +71,7 @@ i {
 
 /* SELECTEUR DE TUILES */
 
-#tile-selector {
+.tile-selector {
     padding: 30px;
     margin: 15px;
 
@@ -82,9 +82,11 @@ i {
     width: 70em;
     text-align: left;
 
+    overflow-x: scroll;
+
 }
 
-#tile-selector, #circuit-infos, #choosers button {
+.tile-selector, #circuit-infos, #choosers button {
         /* From https://css.glass */
         background: rgba(255, 255, 255, 0.07);
         border-radius: 16px;
