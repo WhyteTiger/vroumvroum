@@ -29,8 +29,7 @@ window.onload = function () {
     map.dessinerTuiles([[13, 14, 15, 16, 17, 18]], [[0, 0, 0, 0, 0, 0]], cont3);
     div.appendChild(cont3);
 
-
-
+    // eventListener to display the correct container
     document.querySelector('#buttons-info').addEventListener('click', (evt) => {
         const buttons = document.querySelectorAll('.chooser');
         
@@ -40,11 +39,6 @@ window.onload = function () {
                 buttons[i].classList.add('selected');
 
                 const sectionList = document.querySelectorAll('section.tile-selector');
-
-                
-
-
-
 
                 switch(buttons[i].id) {
                     case 'b1' :
@@ -66,8 +60,16 @@ window.onload = function () {
             else buttons[i].classList.remove('selected');
         }
     });
-    
-    
+
+    // eventListener to try things lmao
+    const divList = document.querySelectorAll('.tile-selector div');
+    for(let i = 0 ; i < divList.length ; i++) {
+        divList[i].addEventListener('click', (evt) => {
+            console.log(divList[i].id);
+        });
+    }
+
+
 
 
     
