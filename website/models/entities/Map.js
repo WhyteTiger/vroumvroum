@@ -54,6 +54,8 @@ export class Map {
         
         for(let j = 0, k = ligne.length; j<k; j++){
             const div = document.createElement('div');
+            div.setAttribute('id', ligne[j]);
+            
             const miniCanvas = document.createElement('canvas');
             miniCanvas.setAttribute('class', 'tile-canvas');
             miniCanvas.width  = 160;
@@ -61,7 +63,6 @@ export class Map {
             
             // that is why you don't need to pass context as a parameter here
             this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j]);
-            console.log('ok !')
 
             div.appendChild(miniCanvas);
             container.appendChild(div);

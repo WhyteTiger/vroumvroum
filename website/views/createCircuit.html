@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/canvasStyle.css">
     <link rel="stylesheet" href="styles/circuitStyle.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
-    <!-- <script type="module" src="../controllers/creation/tileChooser.js" defer></script> -->
-    <script type="module" src="../models/creation.js" defer></script>
+    <script type="module" src="../models/tileChooser.js" defer></script>
 </head>
 
 <body>
@@ -22,18 +20,12 @@
 
         <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
 
-        <section id="tiles-to-select"></section>
-
         <section id="items">
             <div id="choosers">
                 <section id="buttons-info">
                     <button id="b1" class="chooser">Tuiles</button>
                     <button id="b2" class="chooser">Départs / Arrivées</button>
                     <button id="b3" class="chooser">Checkpoints</button>
-                </section>
-    
-                <section class="tile-selector">
-                    
                 </section>
             </div>
         </section>

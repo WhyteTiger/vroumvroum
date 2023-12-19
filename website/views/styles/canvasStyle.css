@@ -6,7 +6,7 @@
     /*border: 1px solid black;*/
     border-radius: 10px;
 
-    margin: 10% auto; /* Ajustez la valeur de la marge pour centrer verticalement */
+    margin: 30px auto; /* Ajustez la valeur de la marge pour centrer verticalement */
     display: flex;
     align-items: center;
     justify-content: center;

@@ -83,17 +83,18 @@ i {
     text-align: left;
 
     overflow-x: scroll;
+    column-gap: 3em;
 
 }
 
 .tile-selector, #circuit-infos, #choosers button {
-        /* From https://css.glass */
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid black;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid black;
 }
 
 #create-main {
@@ -129,4 +130,8 @@ body {
 
 #choosers button.selected {
     border-color: #00be63;
+}
+
+.invisible {
+    display: none;
 }

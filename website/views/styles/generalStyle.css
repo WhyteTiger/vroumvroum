@@ -61,7 +61,7 @@ button {
 
 }
 
-button:hover :not(#choosers button:hover) {
+button:not(#choosers button):hover {
     background-color: black;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: white;
