@@ -1,33 +1,49 @@
-export class Coin{
+export class Coin {
+    tilesetPath = null;
+    images = null;
+    rotations = null;
+    tilesPerRow = 12;
 
-
-    image = null;
-
-    constructor(tileset, image){
-        this.tileset = tilesetImg.src(tileset);
-        this.image = image;
+    constructor(tilesetPath, images, rotations) {
+        this.tilesetPath = tilesetPath;
+        this.images = images;
+        this.rotations = rotations;
     }
 
-    dessinPiece() {
+    dessinerPiece(targetElement) {
         const canvas = document.createElement('canvas');
-        canvas.id = 'canvasCoin';
         const ctx = canvas.getContext('2d');
+
+        if (this.images[0][0] === 33){
+            canvas.id = 'canvasPiece';
+        }else{
+            canvas.id = 'canvasPile';
+        }
 
         const tileSize = 160;
 
-        const tilesPerRow = 12;
-
-        const tileX = (this.image % tilesPerRow) * tileSize;
-        const tileY = Math.floor(this.image / tilesPerRow) * tileSize;
-
-        canvas.width = tileSize;
+        canvas.width = tileSize * this.images[0].length;
         canvas.height = tileSize;
 
-        ctx.drawImage(this.tileset, tileX, tileY, tileSize, tileSize, 0, 0, tileSize, tileSize);
+        const tileset = new Image();
+        tileset.src = this.tilesetPath;
 
-        const tileImage = canvas.toDataURL('image/png');
+        tileset.onload = function () {
+            for (let j = 0; j < this.images[0].length; j++) {
+                const image = this.images[0][j];
+                const rotation = this.rotations[0][j];
 
-        document.body.appendChild(new Image()).src = tileImage;
-    };
+                const tileX = (image % this.tilesPerRow) * tileSize;
+                const tileY = Math.floor(image / this.tilesPerRow) * tileSize;
 
+                ctx.save();
+                ctx.translate(j * tileSize, 0);
+                ctx.rotate(rotation * Math.PI / 180);
+                ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, tileSize, tileSize);
+                ctx.restore();
+            }
+
+            targetElement.appendChild(canvas);
+        }.bind(this);
+    }
 }

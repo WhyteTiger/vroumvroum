@@ -11,13 +11,23 @@ const rotation = [
 	[270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270, 270]
 ];
 
-// place de la pile de vroumCoin et de la piece seule dans le tileset
-const pileCoin = [34];
-const pieceCoin = [35];
-
 // A remplacer plus tard par les valeurs chargée par l'api
 const valButton = [1, -1, -1, 52, 65, -1, 235, 23, 45, 47, 32, 69];
-let vroumCoin = 200;
+
+window.localStorage.setItem("vroumCoin", "200");
+let vroumCoin = window.localStorage.getItem("vroumCoin");
+
+const pieceVroum = [
+	[33]
+];
+
+const pileVroum = [
+	[34]
+];
+
+const rotationVroum = [
+	[0]
+];
 
 const map = new Map(new Tileset("circuit.png"), carte, rotation);
 
@@ -43,19 +53,31 @@ window.onload = function(){
 	canvas.height = map.getHauteur()*160;
 	
 	map.dessinerKart(ctx, carte, rotation);
-	
+
 	const vroumCoinContainer = document.getElementById('vroumCoinContainer');
-	
+	const vroumCoinDiv = document.getElementById('vroumCoinDiv');
+
 	updateVroumCoin();
-	
+
+	const pileCoin = new Coin('../../assets/tilesets/circuit.png', pieceVroum, rotationVroum);
+	pileCoin.dessinerPiece(vroumCoinContainer);
+
 	function updateVroumCoin(){
-		vroumCoinContainer.innerHTML = 'VroumCoin : '+ vroumCoin;
-		//const coin = new Coin('../../../assets/tilesets/circuit.png',pieceCoin);
-		//coin.dessinPiece();
+		if (vroumCoin >= 100){
+			vroumCoinDiv.innerText = vroumCoin;
+		}
+		else if (vroumCoin < 100){
+			vroumCoinDiv.innerText = "0" + vroumCoin;
+		}
+		else{
+			vroumCoinDiv.innerText = "00" + vroumCoin;
+		}
+
+
 	}
 	
 	const buttonsContainer = document.getElementById('buttonsContainer');
-	//const prixContainer = document.getElementById('prixContainer');
+
 	let chosenButtonIndex = null;
 	
 	for (let i = 0; i < map.getLargeur(); i++) {
@@ -63,6 +85,7 @@ window.onload = function(){
 		container.id='divChoixCar';
 		const button = document.createElement('button');
 		const prix = document.createElement('p');
+		prix.id = 'pCoin';
 		if (listeButton[i].getVal() === 1){
 			button.id='buttonCarChoisi';
 			button.innerHTML = 'utilise';
@@ -76,6 +99,8 @@ window.onload = function(){
 			button.id='buttonCarAchat';
 			button.innerHTML = 'Acheter';
 			prix.innerHTML = listeButton[i].getVal();
+			const coin = new Coin('../../assets/tilesets/circuit.png', pileVroum, rotationVroum);
+			coin.dessinerPiece(prix);
 		}
 
 		button.onclick   = function() {
