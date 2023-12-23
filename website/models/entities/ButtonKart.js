@@ -1,16 +1,12 @@
 export class ButtonKart{
 	
-	valeur;
+	value;
 	
-	constructor(valeur) {
-		this.valeur = valeur;
+	constructor(value) {
+		this.value = value;
 	}
 	
-	getVal(){
-		return this.valeur;
-	}
-	
-	changeVal(newVal){
-		this.valeur = newVal;
+	getValue(){
+		return this.value;
 	}
 }
