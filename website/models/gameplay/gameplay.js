@@ -29,6 +29,7 @@ window.onload = function () {
    fetch(url, params)
       .then((response) => response.json())
       .then((dataCircuit) => {
+         console.log(dataCircuit);
          
          const circuitName = document.getElementById("circuitName");
          circuitName.innerText = dataCircuit.circuitName;
@@ -51,9 +52,6 @@ window.onload = function () {
                i += 2;
             }
          }
-         console.log(dataCircuit);
-         
-         
 
          const url = API.getURLgetCircuitTileById();
          const dataMap = {
