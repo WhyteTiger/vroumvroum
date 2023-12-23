@@ -72,7 +72,7 @@ window.onload = () => {
 			map.dessinerKart(ctx, carte, rotation);
 			
 			const vroumCoinContainer = document.getElementById('vroumCoinContainer');
-			const vroumCoinDiv = document.getElementById('vroumCoinDiv');
+			const vroumCoinDiv 		= document.getElementById('vroumCoinDiv');
 			
 			updateVroumCoin();
 			
@@ -96,24 +96,24 @@ window.onload = () => {
 			let chosenButtonIndex = null;
 			
 			for (let i = 0; i < map.getLargeur(); i++) {
-				const container = document.createElement('div');
+				const container  = document.createElement('div');
 				container.id='divChoixCar';
-				const button = document.createElement('button');
+				const button  = document.createElement('button');
 				const prix = document.createElement('p');
 				prix.id = 'pCoin';
 				if (listeButton[i].getValue() === 1){
-					button.id='buttonCarChoisi';
+					button.id 		  ='buttonCarChoisi';
 					button.innerText = 'utilise';
 				}
 				if (listeButton[i].getValue() === -1){
-					button.id='buttonCar';
+					button.id 		  ='buttonCar';
 					button.innerText = 'choisir';
 					
 				}
 				if (listeButton[i].getValue() > 1 ){
-					button.id='buttonCarAchat';
+					button.id 		  ='buttonCarAchat';
 					button.innerText = 'Acheter';
-					prix.innerText = listeButton[i].getValue();
+					prix.innerText   = listeButton[i].getValue();
 					const coin = new Coin('../../assets/tilesets/circuit.png', pileVroum, rotationVroum);
 					coin.dessinerPiece(prix);
 				}
@@ -130,11 +130,11 @@ window.onload = () => {
 							const otherButton = otherContainer.querySelector('button');
 							console.log(otherButton);
 							if (otherButton.id === 'buttonCarChoisi') {
-								otherButton.id = 'buttonCar';
+								otherButton.id 		 = 'buttonCar';
 								otherButton.innerText = 'choisir';
 							}
 						}
-						button.id = 'buttonCarChoisi';
+						button.id 		  = 'buttonCarChoisi';
 						button.innerText = 'utilise';
 						chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
 					}
@@ -146,10 +146,9 @@ window.onload = () => {
 						result = controller.buttonPress();
 						// suprime le prix une fois la voiture achetée !
 						
-						
 						// Mise à jour du texte du bouton et de la quantité de vroumCoin
 						if (result === 1) {
-							button.id = 'buttonCar';
+							button.id 		  = 'buttonCar';
 							button.innerText = 'choisir';
 							vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
 							updateVroumCoin();
