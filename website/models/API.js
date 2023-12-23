@@ -31,9 +31,14 @@ export class API {
       return 'http://'+API.server+'gameplay/addScoreToLeaderBoard';
    }
    
-   static getURLgetKartsByPlayerId() {
+   static getURLgetKartsAndCoinsByPlayerId() {
       
-      return 'http://'+API.server+'/personalize/getKartsByPlayerId';
+      return 'http://'+API.server+'/personalize/getKartsAndCoinsByPlayerId';
+   }
+   
+   static getURLpostKartsAndCoinsInformationOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
    }
    
 }
