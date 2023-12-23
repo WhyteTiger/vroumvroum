@@ -1,8 +1,10 @@
 export class Alert{
     message;
+    motBouton;
 
-    constructor(message) {
+    constructor(message, motBouton) {
         this.message = message;
+        this.motBouton = motBouton;
     }
 
     customAlert() {
@@ -16,11 +18,17 @@ export class Alert{
 
         const closebutton = document.createElement('button');
         closebutton.id = 'buttonAlert';
-        closebutton.innerHTML = 'Fermer !';
+        closebutton.innerHTML = this.motBouton;
         closebutton.addEventListener('click', function(){
 
             alertCustom.style.display = 'none';
             overlay.style.display ='none';
+
+            console.log(closebutton.innerText);
+            if (closebutton.innerText === "Se Connecter"){
+                console.log('cahngemetn de page');
+                document.location.href = "connection.html";
+            }
         });
 
         alertCustom.appendChild(closebutton);

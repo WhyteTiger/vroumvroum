@@ -4,8 +4,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    background-color: #ff5f5f; /* Une nuance de rouge */
-    color: #ffffff; /* Texte en blanc pour un bon contraste */
+    background-color: #ff5f5f;
+    color: #ffffff;
     border: 1px solid #d93232;
     font-size: 20px;
 
@@ -25,7 +25,7 @@
 #buttonAlert{
     margin-top: 40px;
     font-size: 20px;
-    width: 200px;
+    width: auto;
     height: auto;
     background-color: #d93232;
     color: #ffffff;
