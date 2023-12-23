@@ -29,9 +29,17 @@ window.onload = function () {
    fetch(url, params)
       .then((response) => response.json())
       .then((dataCircuit) => {
-
-         // to manage the author
-         // à compléter
+         
+         const circuitName = document.getElementById("circuitName");
+         circuitName.innerText = dataCircuit.circuitName;
+         
+         console.log("circuitScore : " + dataCircuit.circuitScore);
+         
+         const creatorName = document.getElementById("creatorName");
+         creatorName.innerText = "Créateur : " + dataCircuit.creatorUsername;
+         
+         const creatorScore = document.getElementById("creatorScore");
+         creatorScore.innerText = "Médaille auteur : " + dataCircuit.creatorTime;
 
          // to manage the 5 (or less) best scores
          if(dataCircuit.leaderBoard == null) {
