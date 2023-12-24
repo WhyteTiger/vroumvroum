@@ -9,4 +9,8 @@ export class ButtonKart{
 	getValue(){
 		return this.value;
 	}
+	
+	setValue(value){
+		this.value = value;
+	}
 }

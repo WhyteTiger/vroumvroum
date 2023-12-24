@@ -5,7 +5,7 @@ import {ButtonKart} from "./entities/ButtonKart.js";
 import {Coin} from './entities/Coin.js';
 import {API} from "./API.js";
 
-let valButton;
+let listeButton;
 let vroumCoin;
 
 window.onload = () => {
@@ -46,7 +46,7 @@ window.onload = () => {
 		.then((dataKarts) => {
 			console.log(dataKarts);
 			
-			valButton = dataKarts.resultPrice;
+			const valButtonInit = dataKarts.resultPrice;
 			vroumCoin = dataKarts.vroumCoins;
 			
 			// création des bouttons qui vont contenir la valeur de la voiture vis à vis des joueurs.
@@ -55,12 +55,12 @@ window.onload = () => {
 				const listeButton = [];
 				for (let i = 0; i < map.getLargeur(); i++) {
 					
-					listeButton.push(new ButtonKart(valButton[i]));
+					listeButton.push(new ButtonKart(valButtonInit[i]));
 				}
 				
 				return listeButton;
 			}
-			const listeButton = creationButton();
+			listeButton = creationButton();
 			
 			const canvas = document.getElementById('canvasChoix');
 			const ctx = canvas.getContext('2d');
@@ -134,11 +134,13 @@ window.onload = () => {
 							if (otherButton.id === 'buttonCarChoisi') {
 								otherButton.id 		 = 'buttonCar';
 								otherButton.innerText = 'choisir';
+								listeButton[j].setValue(0);
 							}
 						}
 						button.id 		   = 'buttonCarChoisi';
 						button.innerText  = 'utilise';
 						chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
+						listeButton[i].setValue(-1);
 					}
 					
 					let result = 0;
@@ -155,6 +157,7 @@ window.onload = () => {
 							vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
 							updateVroumCoin();
 							prix.remove();
+							listeButton[i].setValue(0);
 						}
 					}
 				};
@@ -174,12 +177,19 @@ window.onload = () => {
 window.onunload = () => {
 	console.log("Quittance de la page personalisation");
 	
+	const tabInfo = [];
+	for (let i = 0; i < listeButton.length; i++) {
+		
+		tabInfo.push(listeButton[i].getValue());
+		console.log(listeButton[i].getValue());
+	}
+	
 	const url = API.getURLpostKartsAndCoinsInformationOfPlayerId();
 	
 	const playerId = window.localStorage.playerId;
 	const dataKarts = {
 		playerIdIn:   playerId,
-		tabInfoIn:    valButton,
+		tabInfoIn:    tabInfo,
 		vroumCoinsIn: vroumCoin
 	};
 	const params = {
