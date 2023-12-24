@@ -5,6 +5,9 @@ import {ButtonKart} from "./entities/ButtonKart.js";
 import {Coin} from './entities/Coin.js';
 import {API} from "./API.js";
 
+let valButton;
+let vroumCoin;
+
 window.onload = () => {
 	
 	const carte = [
@@ -24,11 +27,9 @@ window.onload = () => {
 	];
 	const map = new Map(new Tileset("circuit.png"), carte, rotation);
 	
-	let vroumCoin;
-	
 	const playerId = window.localStorage.playerId;
 	const url = API.getURLgetKartsAndCoinsByPlayerId();
-	const dataCircuit = {
+	const dataPlayer = {
 		playerIdIn: playerId
 	};
 	const params = {
@@ -36,7 +37,7 @@ window.onload = () => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(dataCircuit)
+		body: JSON.stringify(dataPlayer)
 	};
 	console.log(params);
 	
@@ -45,11 +46,8 @@ window.onload = () => {
 		.then((dataKarts) => {
 			console.log(dataKarts);
 			
-			//TODO recup vroumcoins et ownKart
-			const valButton = dataKarts.resultPrice;
-			vroumCoin       = dataKarts.vroumCoins;
-			
-			const listeButton = creationButton();
+			valButton = dataKarts.resultPrice;
+			vroumCoin = dataKarts.vroumCoins;
 			
 			// création des bouttons qui vont contenir la valeur de la voiture vis à vis des joueurs.
 			function creationButton() {
@@ -62,6 +60,7 @@ window.onload = () => {
 				
 				return listeButton;
 			}
+			const listeButton = creationButton();
 			
 			const canvas = document.getElementById('canvasChoix');
 			const ctx = canvas.getContext('2d');
@@ -168,6 +167,37 @@ window.onload = () => {
 				} else {
 					button.style.display = 'none';
 				}
+			}
+		});
+}
+
+window.onunload = () => {
+	console.log("Quittance de la page personalisation");
+	
+	const url = API.getURLpostKartsAndCoinsInformationOfPlayerId();
+	
+	const playerId = window.localStorage.playerId;
+	const dataKarts = {
+		playerIdIn:   playerId,
+		tabInfoIn:    valButton,
+		vroumCoinsIn: vroumCoin
+	};
+	const params = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(dataKarts)
+	};
+	console.log(params);
+	
+	fetch(url, params)
+		.then((response) => response.json())
+		.then((result) => {
+			if (result.success === "true") {
+				console.log("postKartsAndCoinsInformationOfPlayerId Success");
+			} else {
+				console.log("postKartsAndCoinsInformationOfPlayerId Failed");
 			}
 		});
 }
