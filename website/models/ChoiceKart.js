@@ -99,21 +99,21 @@ window.onload = () => {
 			
 			for (let i = 0; i < map.getLargeur(); i++) {
 				const container  = document.createElement('div');
-				container.id='divChoixCar';
+				container.id ='divChoixCar';
 				const button  = document.createElement('button');
 				const prix = document.createElement('p');
 				prix.id = 'pCoin';
-				if (listeButton[i].getValue() === 0){
-					button.id 		  ='buttonCarChoisi';
+				if (listeButton[i].getValue() === -1){
+					button.id 		  = 'buttonCarChoisi';
 					button.innerText = 'utilise';
 				}
-				if (listeButton[i].getValue() === -1){
-					button.id 		  ='buttonCar';
+				if (listeButton[i].getValue() === 0){
+					button.id 		  = 'buttonCar';
 					button.innerText = 'choisir';
 					
 				}
-				if (listeButton[i].getValue() > 1 ){
-					button.id 		  ='buttonCarAchat';
+				if (listeButton[i].getValue() > 0 ){
+					button.id 		  = 'buttonCarAchat';
 					button.innerText = 'Acheter';
 					prix.innerText   = listeButton[i].getValue();
 					const coin = new Coin('../../assets/tilesets/circuit.png', pileVroum, rotationVroum);
@@ -128,7 +128,7 @@ window.onload = () => {
 					if(button.id === 'buttonCar'){
 						//mise a jour des bouton utilise en choisir
 						for (let j = 0; j < map.getLargeur(); j++) {
-							const otherContainer = buttonsContainer.children[j];
+							const otherContainer        = buttonsContainer.children[j];
 							const otherButton = otherContainer.querySelector('button');
 							console.log(otherButton);
 							if (otherButton.id === 'buttonCarChoisi') {
