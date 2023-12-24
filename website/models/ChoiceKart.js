@@ -120,7 +120,7 @@ window.onload = () => {
 					coin.dessinerPiece(prix);
 				}
 				
-				button.onclick   = function() {
+				button.onclick = () => {
 					if(button.id === 'buttonCarChoisi'){
 						return;
 					}
@@ -136,8 +136,8 @@ window.onload = () => {
 								otherButton.innerText = 'choisir';
 							}
 						}
-						button.id 		  = 'buttonCarChoisi';
-						button.innerText = 'utilise';
+						button.id 		   = 'buttonCarChoisi';
+						button.innerText  = 'utilise';
 						chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
 					}
 					
