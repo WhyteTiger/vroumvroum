@@ -26,5 +26,4 @@ personalizeButton.addEventListener("click", () => {
 	}else {
 		document.location.href = "choiceKart.html";
 	}
-
 });
