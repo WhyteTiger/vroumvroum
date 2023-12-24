@@ -101,7 +101,7 @@ window.onload = () => {
 				const button  = document.createElement('button');
 				const prix = document.createElement('p');
 				prix.id = 'pCoin';
-				if (listeButton[i].getValue() === 1){
+				if (listeButton[i].getValue() === 0){
 					button.id 		  ='buttonCarChoisi';
 					button.innerText = 'utilise';
 				}
