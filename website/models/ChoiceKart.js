@@ -83,11 +83,14 @@ window.onload = () => {
 				if (vroumCoin >= 100){
 					vroumCoinDiv.innerText = vroumCoin;
 				}
-				else if (vroumCoin < 100){
+				else if (10 <= vroumCoin && vroumCoin < 100){
 					vroumCoinDiv.innerText = "0" + vroumCoin;
 				}
-				else{
+				else if (vroumCoin >= 1) {
 					vroumCoinDiv.innerText = "00" + vroumCoin;
+				}
+				else {
+					vroumCoinDiv.innerText = "000";
 				}
 			}
 			

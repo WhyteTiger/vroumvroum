@@ -7,8 +7,8 @@ playButton.addEventListener("click", () => {
 
 const createCircuit = document.getElementById("create");
 createCircuit.addEventListener("click", () => {
-	const player = window.localStorage.getItem("playerId");
-	if( player === '0'){
+	const playerId = window.localStorage.getItem("playerId");
+	if( playerId === '0'){
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter");
 		newAlert.customAlert();
 	}else {
