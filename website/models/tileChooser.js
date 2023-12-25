@@ -8,6 +8,19 @@ const map = new Map(new Tileset("circuit.png"), tiles, rotations);
 
 window.onload = function () {
     const div = document.querySelector('#choosers');
+    const circuit = document.querySelector('#circuit');
+
+    loadMatrix();
+
+    var tab1 = [[]];
+    var tab2 = [[]];
+    for(let i = 0 ; i < (8*12) ; i++) {
+        tab1[0][i] = 1;
+        tab2[0][i] = 0; 
+    }
+
+    // empty circuit
+    map.dessinerTuiles(tab1, tab2, circuit, 80);
 
     // 1st container with common tiles. Visible by default.
     const cont1 = document.createElement('section');
@@ -59,17 +72,49 @@ window.onload = function () {
             }
             else buttons[i].classList.remove('selected');
         }
+
+        // need to de-select every div
+        const divList = document.querySelectorAll('.tile-selector div');
+        for(let i = 0; i < divList.length; i++) {
+            divList[i].classList.remove('selected');
+        }
+
+
     });
 
-    // eventListener to try things lmao
+
+    // eventListener to choose the tile you want to place
     const divList = document.querySelectorAll('.tile-selector div');
     for(let i = 0 ; i < divList.length ; i++) {
         divList[i].addEventListener('click', (evt) => {
-            console.log(divList[i].id);
+
+            // to show the selected image
+            const children = divList[i].parentElement.children;
+            for(let i = 0 ; i < children.length ; i++) {
+                if(children[i] === evt.currentTarget) children[i].classList.add('selected');
+                else children[i].classList.remove('selected');
+            }
+                
+            console.log(divList[i].getAttribute("name"));
         });
     }
 
+    function loadMatrix() {
+        // if no matrix, then create an "empty" one
+        if(sessionStorage.getItem('matrix') === null || sessionStorage.getItem('matrix') === undefined) {
+            let matrix = [];
+            for(let i = 0; i < 8; i++) {
+                matrix.push([]);
+                for(let j = 0; j < 12; j++) {
+                    matrix[i].push([1, 0]);
+                }
+            }
+            sessionStorage.setItem('matrix', matrix);
+        } else {
+            
+        }
 
+    }
 
 
     

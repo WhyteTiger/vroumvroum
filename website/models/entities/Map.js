@@ -46,7 +46,9 @@ export class Map {
         }
     }
     
-    dessinerTuiles(carte, rotation, container) {
+    dessinerTuiles(carte, rotation, container, value) {
+
+        if(value === undefined || value === null || value === 0) value = 160;
 
         console.log(container)
         const ligne = carte[0];
@@ -54,12 +56,12 @@ export class Map {
         
         for(let j = 0, k = ligne.length; j<k; j++){
             const div = document.createElement('div');
-            div.setAttribute('id', ligne[j]);
+            div.setAttribute('name', ligne[j]);
             
             const miniCanvas = document.createElement('canvas');
             miniCanvas.setAttribute('class', 'tile-canvas');
-            miniCanvas.width  = 160;
-            miniCanvas.height = 160;
+            miniCanvas.width  = value;
+            miniCanvas.height = value;
             
             // that is why you don't need to pass context as a parameter here
             this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j]);
@@ -67,6 +69,15 @@ export class Map {
             div.appendChild(miniCanvas);
             container.appendChild(div);
         }
+    }
+
+    creerCircuitVierge(container) {
+        for(let i = 0 ; i <= 12 ; i++) {
+            for(let j = 0 ; j <= 8 ; j++) {
+                const div = document.createElement()
+            }
+        }
+        
     }
     
     isImagePresent (index) {

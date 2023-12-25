@@ -97,6 +97,15 @@ i {
     border: 1px solid black;
 }
 
+.tile-selector div {
+    height: 162px;
+    width: 165px;
+}
+
+.tile-selector div.selected {
+    border: 3px solid red;
+}
+
 #create-main {
     display: grid;
     grid-template: auto / 1fr;
@@ -135,3 +144,17 @@ body {
 .invisible {
     display: none;
 }
+
+/* CIRCUIT DIVS */
+
+#circuit {
+    display: grid;
+    grid-template : 80px / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin: auto;
+}
+
+#circuit div {
+    width: 80px;    /* ben oui, sinon ça veut pas */
+    height: 80px;
+}
+
