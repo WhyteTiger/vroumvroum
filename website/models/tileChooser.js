@@ -6,21 +6,38 @@ var rotations = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 const map = new Map(new Tileset("circuit.png"), tiles, rotations);
 
-window.onload = function () {
-    const div = document.querySelector('#choosers');
-    const circuit = document.querySelector('#circuit');
+function newMatrix() {
+    let matrix = [[], []];
+        for(let i = 0; i < (8*12); i++) {
+            matrix[0].push(1);
+            matrix[1].push(0);
+        }
+        console.log('ok')
+console.log(matrix)
+console.log(JSON.stringify(matrix))
+        sessionStorage.setItem('matrix', JSON.stringify(matrix));
+}
 
-    loadMatrix();
-
-    var tab1 = [[]];
-    var tab2 = [[]];
-    for(let i = 0 ; i < (8*12) ; i++) {
-        tab1[0][i] = 1;
-        tab2[0][i] = 0; 
+function reloadMatrix() {
+    // if no matrix, then create an "empty" one
+    if(sessionStorage.getItem('matrix') === null || sessionStorage.getItem('matrix') === undefined) {
+        newMatrix();
+    } else {
+        console.log('hehe')
+        console.log(JSON.parse(sessionStorage.getItem('matrix')))
     }
 
+}
+
+window.onload = function () {
+    newMatrix();
+
+    const div = document.querySelector('#choosers');
+    const circuit = document.querySelector('#circuit');
+    const matrix = JSON.parse(sessionStorage.getItem('matrix'))
+
     // empty circuit
-    map.dessinerTuiles(tab1, tab2, circuit, 80);
+    map.dessinerTuiles([matrix[0]], [matrix[1]], circuit, 80);
 
     // 1st container with common tiles. Visible by default.
     const cont1 = document.createElement('section');
@@ -89,9 +106,10 @@ window.onload = function () {
         divList[i].addEventListener('click', (evt) => {
 
             // to show the selected image
-            const children = divList[i].parentElement.children;
+            const children = divList[i].parentElement.children; // get siblings from the same selector
             for(let i = 0 ; i < children.length ; i++) {
-                if(children[i] === evt.currentTarget) children[i].classList.add('selected');
+                if(children[i] === evt.currentTarget && children[i].classList.contains('selected')) children[i].classList.remove('selected');
+                else if(children[i] === evt.currentTarget && !children[i].classList.contains('selected')) children[i].classList.add('selected');
                 else children[i].classList.remove('selected');
             }
                 
@@ -99,25 +117,34 @@ window.onload = function () {
         });
     }
 
-    function loadMatrix() {
-        // if no matrix, then create an "empty" one
-        if(sessionStorage.getItem('matrix') === null || sessionStorage.getItem('matrix') === undefined) {
-            let matrix = [];
-            for(let i = 0; i < 8; i++) {
-                matrix.push([]);
-                for(let j = 0; j < 12; j++) {
-                    matrix[i].push([1, 0]);
-                }
-            }
-            sessionStorage.setItem('matrix', matrix);
-        } else {
-            
-        }
-
+    // eventListener on the circuit divs
+    const cDivs = document.querySelectorAll('#circuit div');
+    for(let i = 0; i < cDivs.length; i++) {
+        cDivs[i].addEventListener('click', (evt) => {
+                listener(i);
+        });
     }
 
+    function listener(i) {
+// if a selector tile is selected, please replace it
+const sDivs = document.querySelectorAll('.tile-selector div');
+for(let j = 0; j < sDivs.length; j++) {
+    if(sDivs[j].classList.contains('selected')) {
+        matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
+        while(circuit.firstChild) circuit.removeChild(circuit.firstChild);
+        map.dessinerTuiles([matrix[0]], [matrix[1]], circuit, 80, 80)
 
-    
+        const cDivs = document.querySelectorAll('#circuit div');
+        for(let k = 0; k < cDivs.length; k++) {
+            cDivs[k].addEventListener('click', (evt) => {
+                listener(k);
+            });
+        }
+    }
+
+}
+    }
+
 }
 
 

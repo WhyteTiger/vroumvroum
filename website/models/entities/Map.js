@@ -46,9 +46,10 @@ export class Map {
         }
     }
     
-    dessinerTuiles(carte, rotation, container, value) {
+    dessinerTuiles(carte, rotation, container, value, size) {
 
         if(value === undefined || value === null || value === 0) value = 160;
+        if(size === undefined || size === null || size === 0) size = 160;
 
         console.log(container)
         const ligne = carte[0];
@@ -64,7 +65,7 @@ export class Map {
             miniCanvas.height = value;
             
             // that is why you don't need to pass context as a parameter here
-            this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j]);
+            this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j], size);
 
             div.appendChild(miniCanvas);
             container.appendChild(div);
