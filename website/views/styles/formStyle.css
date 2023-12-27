@@ -1,0 +1,61 @@
+#mainForm {
+    display: grid;
+    grid-template: auto / 1fr 4fr 1fr;
+}
+
+#toutForm {
+    grid-area: 2/3/1/2;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, #7c97f7, #00bf9c);
+    border-radius: 45px;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 50em;
+    text-align: left;
+
+    /* source : le générateur de Neumorphism */
+    box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+}
+
+form label {
+    color: #000000;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 10px;
+}
+
+form input {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    height: 35px;
+    border-radius: 40px;
+    padding: 20px;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.2);
+    border: gray solid 1px;
+}
+
+form input:focus {
+    background-color: rgb(221, 221, 221);
+    box-shadow: inset 0 18px 10px rgba(0, 0, 0, 0.2);
+}
+
+form button {
+    display: flex;
+    margin: 40px auto auto auto;
+    justify-content: center;
+    width: 12em;
+    text-align: center;
+}

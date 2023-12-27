@@ -1,0 +1,31 @@
+/* cette partie est utile et définit le header pour toutes les pages, et le footer */
+header {
+    display: grid;
+    grid-template: auto / 1fr 3fr;
+    text-align: center;
+    background: linear-gradient(90deg, #8b53fb, #00BF63);
+    align-items: center;
+
+    justify-content: space-around;
+}
+
+header img {
+    text-align: left;
+    width: 70%;
+    transition: scale 0.2s ease 0s;
+}
+
+header div {
+    margin-right: 1rem;
+    text-align: right;
+}
+
+header button {
+    margin: 1em 1em;
+}
+
+/* img transition on hover */
+header img:hover {
+    scale: 0.9;
+}
+

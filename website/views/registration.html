@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>VroumVroum - Inscription</title>
+
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
+
+        <script src="../controllers/redirection/controllerHeader.js" defer></script>
+        <script type="module" src="../controllers/account/controllerRegistration.js"></script>
+    </head>
+
+    <body>
+    <main id="mainForm">
+
+        <section id="toutForm">
+            <h1>Inscription au site</h1>
+
+            <form id="form" action="" method="post">
+                <div class="field">
+                    <label for="nickname">Pseudo souhaité</label>
+                    <input type="text" name="nickname" id="nickname" minlength="2" maxlength="32" required>
+                </div>
+
+                <div class="field">
+                    <label for="pwd">Mot de passe</label>
+                    <input type="password" name="pwd" id="pwd" minlength="12" maxlength="32" required>
+                </div>
+
+                <div class="field">
+                    <label for="pwd">Confirmation mot de passe</label>
+                    <input type="password" name="pwd" id="confpwd" minlength="12" maxlength="32" required>
+                </div>
+
+                <button type="submit" id="validFormRegistration">Se connecter</button>
+            </form>
+
+            <h2>Vous avez déjà un compte ? <a href="connection.html">Se connecter</a></h2>
+        </section>
+    </main>
+    </body>
+</html>
