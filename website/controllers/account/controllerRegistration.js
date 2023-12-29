@@ -1,9 +1,5 @@
 import {API} from "../../models/API.js";
 
-window.localStorage.setItem("isConnected",     false);
-window.localStorage.setItem("username", 	     "");
-window.localStorage.setItem("alreadyRegister", "");
-
 async function whantToRegistrate(nickname, password) {
 	
 	const url = API.getURLWhantToRegistrate();
@@ -25,14 +21,16 @@ async function whantToRegistrate(nickname, password) {
 			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
 			
 			if (window.localStorage.alreadyRegister === "false") {
-				window.localStorage.isConnected = true;
+				window.localStorage.isConnected = "true";
 				window.localStorage.playerId    = data.playerIdOut;
 				window.localStorage.username    = data.usernameOut;
 				
+				console.log("LLLAAAA"+data.playerIdOut);
+				
 				document.location.href="../views/home.html";
-				return;
+			} else {
+				console.log("nickname is already used");
 			}
-			console.log("nickname is already used");
 		})
 		.catch(() => {
 			console.log("Fetch failed");
