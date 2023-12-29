@@ -41,9 +41,6 @@ canvas:not(.tile-canvas) {
     flex-wrap: wrap;
 }
 
-
-
-
 #play-main {
     display: grid;
     grid-template: auto / 3fr 1fr;
@@ -71,22 +68,6 @@ i {
 
 /* SELECTEUR DE TUILES */
 
-.tile-selector {
-    padding: 30px;
-    margin: 15px;
-
-    display: flex;
-    border-radius: 45px;
-    margin: 5px 0px 30px 0px;
-    padding: 20px;
-    width: 70em;
-    text-align: left;
-
-    overflow-x: scroll;
-    column-gap: 3em;
-
-}
-
 .tile-selector, #circuit-infos, #choosers button {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);
@@ -95,6 +76,17 @@ i {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid black;
+}
+
+.tile-selector {
+    display: flex;
+    border-radius: 24px;
+    padding: 20px;
+    margin: 10px 0px;
+    width: 1280px;
+    text-align: left;
+    overflow-x: scroll;
+    column-gap: 3em;
 }
 
 .tile-selector div {
@@ -108,7 +100,7 @@ i {
 
 #create-main {
     display: grid;
-    grid-template: auto / 1fr;
+    grid-template: auto / 5fr 2fr;
 }
 
 body {
@@ -119,13 +111,9 @@ body {
 }
 
 #items {
-    display: grid;
-    grid-template: auto / 1fr 4fr 1fr;
-}
-
-#choosers {
-    grid-area : 2 / 3 / 1 / 2;
-    
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #choosers button {
@@ -145,12 +133,15 @@ body {
     display: none;
 }
 
-/* CIRCUIT DIVS */
+/* CIRCUIT */
 
 #circuit {
     display: grid;
     grid-template : 80px / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    margin: auto;
+    margin: 50px auto;
+    border: 5px solid black;
+    border-radius: 10px;
+    width: 960px;
 }
 
 #circuit div {
@@ -158,3 +149,21 @@ body {
     height: 80px;
 }
 
+/* ASIDE */
+
+aside {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color :#00be63;
+    padding: 10em 0px;
+    border-radius: 24px;
+    margin-right: 5em;
+}
+
+aside div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}

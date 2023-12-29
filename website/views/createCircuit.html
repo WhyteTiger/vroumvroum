@@ -2,12 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Vroumvroum - Création de circuit</title>
+    <title>Vroumvroum - Création de circuits</title>
 
     <link rel="icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/canvasStyle.css">
     <link rel="stylesheet" href="styles/circuitStyle.css">
+    <link rel="stylesheet" href="styles/formStyle.css">
 
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
     <script type="module" src="../models/tileChooser.js" defer></script>
@@ -16,17 +17,31 @@
 <body>
     <main id="create-main">
 
-        <section id="circuit"></section>
+        
 
-        <section id="items">
-            <div id="choosers">
-                <section id="buttons-info">
-                    <button id="b1" class="chooser selected">Tuiles</button>
-                    <button id="b2" class="chooser">Départs / Arrivées</button>
-                    <button id="b3" class="chooser">Checkpoints</button>
-                </section>
-            </div>
+        <section>
+            <section id="circuit"></section>
+
+            <section id="items">
+                <div id="choosers">
+                    <section id="buttons-info">
+                        <button id="b1" class="chooser selected">Tuiles</button>
+                        <button id="b2" class="chooser">Départs / Arrivées</button>
+                        <button id="b3" class="chooser">Checkpoints</button>
+                    </section>
+                </div>
+            </section>
+
         </section>
+
+        <aside>
+            <h1>SAUVEGARDE</h1>
+            <div>
+                <label for="circuitname">Nom de votre circuit</label>
+                <input type="text">
+            </div>
+            <button id="savebutton">SAUVEGARDER</button>
+        </aside>
             
     </main>
 </body>
