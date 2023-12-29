@@ -167,3 +167,7 @@ aside div {
     flex-direction: column;
     padding: 10px;
 }
+
+aside h1 {
+    font-size: 55px;
+}
