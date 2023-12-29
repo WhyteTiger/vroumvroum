@@ -5,13 +5,15 @@ header {
     text-align: center;
     background: linear-gradient(90deg, #8b53fb, #00BF63);
     align-items: center;
-
+    z-index: 1000;
     justify-content: space-around;
+    position: sticky;
+    top: 0;
 }
 
 header img {
     text-align: left;
-    width: 70%;
+    width: 50%;
     transition: scale 0.2s ease 0s;
 }
 
@@ -21,7 +23,9 @@ header div {
 }
 
 header button {
-    margin: 1em 1em;
+    margin: 0.5em 1em;
+    padding: 10px 20px;
+    font-size: 15px;
 }
 
 /* img transition on hover */

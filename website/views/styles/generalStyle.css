@@ -12,8 +12,8 @@
 
 /* the main body sticks to the window's frame */
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
     background-color: rgb(71, 223, 215);
 }
