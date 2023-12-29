@@ -8,14 +8,11 @@ const map = new Map(new Tileset("circuit.png"), tiles, rotations);
 
 function newMatrix() {
     let matrix = [[], []];
-        for(let i = 0; i < (8*12); i++) {
-            matrix[0].push(1);
-            matrix[1].push(0);
-        }
-        console.log('ok')
-console.log(matrix)
-console.log(JSON.stringify(matrix))
-        sessionStorage.setItem('matrix', JSON.stringify(matrix));
+    for(let i = 0; i < (8*12); i++) {
+        matrix[0].push(1);
+        matrix[1].push(0);
+    }
+    sessionStorage.setItem('matrix', JSON.stringify(matrix));
 }
 
 function reloadMatrix() {
@@ -99,7 +96,6 @@ window.onload = function () {
 
     });
 
-
     // eventListener to choose the tile you want to place
     const divList = document.querySelectorAll('.tile-selector div');
     for(let i = 0 ; i < divList.length ; i++) {
@@ -120,29 +116,27 @@ window.onload = function () {
     // eventListener on the circuit divs
     const cDivs = document.querySelectorAll('#circuit div');
     for(let i = 0; i < cDivs.length; i++) {
-        cDivs[i].addEventListener('click', (evt) => {
-                listener(i);
+        cDivs[i].oncontextmenu = () => {return false;};
+        cDivs[i].addEventListener('mousedown', (evt) => {
+            if(evt.button === 0) {
+                // if a selector tile is selected, please replace it
+                const sDivs = document.querySelectorAll('.tile-selector div');
+                for(let j = 0; j < sDivs.length; j++) {
+                    if(sDivs[j].classList.contains('selected')) {
+                        matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
+                        map.replaceTiles(matrix[0], matrix[1], circuit, 80);
+                    }
+                }
+            }
+            else if(evt.button === 2) {
+                console.log(matrix)
+                matrix[1][i] = (matrix[1][i] + 90) % 360;
+                console.log(matrix)
+                map.replaceTiles(matrix[0], matrix[1], circuit, 80);
+            }
         });
-    }
 
-    function listener(i) {
-// if a selector tile is selected, please replace it
-const sDivs = document.querySelectorAll('.tile-selector div');
-for(let j = 0; j < sDivs.length; j++) {
-    if(sDivs[j].classList.contains('selected')) {
-        matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
-        while(circuit.firstChild) circuit.removeChild(circuit.firstChild);
-        map.dessinerTuiles([matrix[0]], [matrix[1]], circuit, 80, 80)
-
-        const cDivs = document.querySelectorAll('#circuit div');
-        for(let k = 0; k < cDivs.length; k++) {
-            cDivs[k].addEventListener('click', (evt) => {
-                listener(k);
-            });
-        }
-    }
-
-}
+        
     }
 
 }

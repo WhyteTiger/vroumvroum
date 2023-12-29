@@ -51,7 +51,6 @@ export class Map {
         if(value === undefined || value === null || value === 0) value = 160;
         if(size === undefined || size === null || size === 0) size = 160;
 
-        console.log(container)
         const ligne = carte[0];
         const angle = rotation[0];
         
@@ -64,7 +63,6 @@ export class Map {
             miniCanvas.width  = value;
             miniCanvas.height = value;
             
-            // that is why you don't need to pass context as a parameter here
             this.tileset.dessinerTile(ligne[j], miniCanvas.getContext('2d'), 0, 0, angle[j], size);
 
             div.appendChild(miniCanvas);
@@ -72,13 +70,19 @@ export class Map {
         }
     }
 
-    creerCircuitVierge(container) {
-        for(let i = 0 ; i <= 12 ; i++) {
-            for(let j = 0 ; j <= 8 ; j++) {
-                const div = document.createElement()
+    replaceTiles(carte, rotation, container, value) {
+
+        if(value === undefined || value === null || value === 0) value = 160;
+
+        if(carte.length === 96 && rotation.length === 96 && container.querySelectorAll('div').length === 96) {
+
+            const cDivs = container.querySelectorAll('div');
+
+            for(let i = 0 ; i < cDivs.length ; i++) {
+                this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], value);
             }
-        }
-        
+
+        } else console.log('error : not 96');
     }
     
     isImagePresent (index) {
