@@ -99,6 +99,7 @@ window.onload = () => {
         }
     });
 
+    //TODO controller
     // eventListener to choose the tile you want to place
     const divList = document.querySelectorAll('.tile-selector div');
     for(let i = 0 ; i < divList.length ; i++) {
@@ -107,15 +108,19 @@ window.onload = () => {
             // to show the selected image
             const children = divList[i].parentElement.children; // get siblings from the same selector
             for(let i = 0 ; i < children.length ; i++) {
-                if(children[i] === evt.currentTarget && children[i].classList.contains('selected')) children[i].classList.remove('selected');
-                else if(children[i] === evt.currentTarget && !children[i].classList.contains('selected')) children[i].classList.add('selected');
-                else children[i].classList.remove('selected');
+                
+                if (children[i] === evt.currentTarget && !children[i].classList.contains('selected')) {
+                    children[i].classList.add('selected');
+                } else {
+                    children[i].classList.remove('selected');
+                }
             }
                 
             console.log(divList[i].getAttribute("name"));
         });
     }
 
+    //TODO controller
     // eventListener on the circuit divs
     const cDivs = document.querySelectorAll('#circuit div');
     for(let i = 0; i < cDivs.length; i++) {
