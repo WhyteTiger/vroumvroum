@@ -1,37 +1,40 @@
-import {Map} from "./entities/Map.js";
-import {Tileset} from "./entities/Tileset.js";
+import {Map} from "../entities/Map.js";
+import {Tileset} from "../entities/Tileset.js";
+
+sessionStorage.setItem("matrix", '');
 
 const tiles     = [[1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]];
-const rotations = [[0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]];
+const rotations = [[0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]];
 
 const map = new Map(new Tileset("circuit.png"), tiles, rotations);
 
 function newMatrix() {
     let matrix = [[], []];
+    
     for(let i = 0; i < (8*12); i++) {
         matrix[0].push(1);
         matrix[1].push(0);
     }
+    
     sessionStorage.setItem('matrix', JSON.stringify(matrix));
 }
 
 function reloadMatrix() {
     // if no matrix, then create an "empty" one
-    if(sessionStorage.getItem('matrix') === null || sessionStorage.getItem('matrix') === undefined) {
+    if(sessionStorage.getItem('matrix') === '') {
         newMatrix();
     } else {
         console.log('hehe')
         console.log(JSON.parse(sessionStorage.getItem('matrix')))
     }
-
 }
 
-window.onload = function () {
+window.onload = () => {
     newMatrix();
 
-    const div = document.querySelector('#choosers');
+    const div     = document.querySelector('#choosers');
     const circuit = document.querySelector('#circuit');
-    const matrix = JSON.parse(sessionStorage.getItem('matrix'))
+    const matrix = JSON.parse(sessionStorage.getItem('matrix'));
 
     // empty circuit
     map.dessinerTuiles([matrix[0]], [matrix[1]], circuit, 80);
@@ -92,8 +95,6 @@ window.onload = function () {
         for(let i = 0; i < divList.length; i++) {
             divList[i].classList.remove('selected');
         }
-
-
     });
 
     // eventListener to choose the tile you want to place
@@ -135,10 +136,7 @@ window.onload = function () {
                 map.replaceTiles(matrix[0], matrix[1], circuit, 80);
             }
         });
-
-        
     }
-
 }
 
 
