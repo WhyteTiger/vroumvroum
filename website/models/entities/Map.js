@@ -46,13 +46,10 @@ export class Map {
         }
     }
     
-    dessinerTuiles(carte, rotation, container, value, size) {
+    dessinerTuiles(ligne, angle, container, value, size) {
 
-        if(value === undefined || value === null || value === 0) value = 160;
-        if(size === undefined || size === null || size === 0) size = 160;
-
-        const ligne = carte[0];
-        const angle = rotation[0];
+        if(value === undefined) value = 160;
+        if(size  === undefined) size  = 160;
         
         for(let j = 0, k = ligne.length; j<k; j++){
             const div = document.createElement('div');

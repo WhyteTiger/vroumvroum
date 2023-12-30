@@ -37,26 +37,26 @@ window.onload = () => {
     const matrix = JSON.parse(sessionStorage.getItem('matrix'));
 
     // empty circuit
-    map.dessinerTuiles([matrix[0]], [matrix[1]], circuit, 80);
+    map.dessinerTuiles(matrix[0], matrix[1], circuit, 80);
 
     // 1st container with common tiles. Visible by default.
     const cont1 = document.createElement('section');
     cont1.classList.add('tile-selector');
-    map.dessinerTuiles([[1, 2, 3, 4, 5, 6, 8, 9, 10, 11]], [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], cont1);
+    map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1);
     div.appendChild(cont1);
 
     // 2nd container with starts and ends. Invisible by default.
     const cont2 = document.createElement('section');
     cont2.classList.add('tile-selector');
     cont2.classList.add('invisible');
-    map.dessinerTuiles([[7, 12]], [[0, 0]], cont2);
+    map.dessinerTuiles([7, 12], [0, 0], cont2);
     div.appendChild(cont2);
 
     // 3rd container with checkpoints. Invisible by default.
     const cont3 = document.createElement('section');
     cont3.classList.add('tile-selector');
     cont3.classList.add('invisible');
-    map.dessinerTuiles([[13, 14, 15, 16, 17, 18]], [[0, 0, 0, 0, 0, 0]], cont3);
+    map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
     div.appendChild(cont3);
 
     // eventListener to display the correct container
