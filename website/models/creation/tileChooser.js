@@ -138,9 +138,8 @@ window.onload = () => {
             }
             //Right click to rotate tiles
             else if(evt.button === 2) {
-                console.log(matrix)
                 matrix[1][i] = (matrix[1][i] + 90) % 360;
-                console.log(matrix)
+                
                 map.replaceTiles(matrix[0], matrix[1], circuit, 80);
             }
         });
