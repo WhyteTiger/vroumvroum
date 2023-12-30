@@ -20,8 +20,8 @@ export class Tileset {
     }
     
     dessinerTile(numero, context, xDestination, yDestination, degrees, value){
-
-        if(value === undefined || value === null || value === 0) value = 160
+        
+        if (value === undefined) value = 160;
         
         let xSourceEnTiles = numero % this.largeur;
         if (xSourceEnTiles === 0){
@@ -34,6 +34,8 @@ export class Tileset {
         
         context.save();
         context.translate(xDestination + 80, yDestination + 80);
+        
+        console.log("degrees : " + degrees + ", Rad : " + Maths.degToRad(degrees));
         context.rotate(Maths.degToRad(degrees));
         
         context.drawImage(this.image, xSource, ySource, 160, 160, -80, -80, value, value);

@@ -68,10 +68,12 @@ export class Map {
     }
 
     replaceTiles(carte, rotation, container, value) {
+        
+        console.log("Map.replaceTiles");
 
-        if(value === undefined || value === null || value === 0) value = 160;
+        if (value === undefined) value = 160;
 
-        if(carte.length === 96 && rotation.length === 96 && container.querySelectorAll('div').length === 96) {
+        if (carte.length === 96 && rotation.length === 96 && container.querySelectorAll('div').length === 96) {
 
             const cDivs = container.querySelectorAll('div');
 

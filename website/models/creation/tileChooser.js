@@ -136,6 +136,7 @@ window.onload = () => {
                     }
                 }
             }
+            //Right click to rotate tiles
             else if(evt.button === 2) {
                 console.log(matrix)
                 matrix[1][i] = (matrix[1][i] + 90) % 360;
