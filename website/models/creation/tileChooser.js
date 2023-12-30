@@ -59,6 +59,7 @@ window.onload = () => {
     map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
     div.appendChild(cont3);
 
+    //TODO controller
     // eventListener to display the correct container
     document.querySelector('#buttons-info').addEventListener('click', (evt) => {
         const buttons = document.querySelectorAll('.chooser');
@@ -85,6 +86,7 @@ window.onload = () => {
                         sectionList[0].classList.add('invisible');
                         sectionList[1].classList.add('invisible');
                         sectionList[2].classList.remove('invisible');
+                        break;
                 }
             }
             else buttons[i].classList.remove('selected');
