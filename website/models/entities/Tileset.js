@@ -47,7 +47,6 @@ export class Tileset {
         // Dessine la voiture
         this.dessinerTile(numeroVoiture, context, xDestination, yDestination, degrees);
     }
-    
 }
 
 
