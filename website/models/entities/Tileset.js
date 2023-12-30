@@ -34,8 +34,6 @@ export class Tileset {
         
         context.save();
         context.translate(xDestination + 80, yDestination + 80);
-        
-        console.log("degrees : " + degrees + ", Rad : " + Maths.degToRad(degrees));
         context.rotate(Maths.degToRad(degrees));
         
         context.drawImage(this.image, xSource, ySource, 160, 160, -80, -80, value, value);
