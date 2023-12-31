@@ -1,40 +1,23 @@
 import {Map} from "../entities/Map.js";
 import {Tileset} from "../entities/Tileset.js";
 
-sessionStorage.setItem("matrix", '');
-
-const tiles     = [[1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]];
-const rotations = [[0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]];
-
-const map = new Map(new Tileset("circuit.png"), tiles, rotations);
+const map = new Map(new Tileset("circuit.png"), [[]], [[]]);
 
 function newMatrix() {
     let matrix = [[], []];
-    
-    for(let i = 0; i < (8*12); i++) {
+    for(let i = 0; i < 96; i++) {
         matrix[0].push(1);
         matrix[1].push(0);
     }
-    
-    sessionStorage.setItem('matrix', JSON.stringify(matrix));
-}
-
-function reloadMatrix() {
-    // if no matrix, then create an "empty" one
-    if(sessionStorage.getItem('matrix') === '') {
-        newMatrix();
-    } else {
-        console.log('hehe')
-        console.log(JSON.parse(sessionStorage.getItem('matrix')))
-    }
+    localStorage.setItem('matrix', JSON.stringify(matrix));
 }
 
 window.onload = () => {
-    newMatrix();
+    if(localStorage.getItem('matrix') === '') newMatrix();
 
     const div     = document.querySelector('#choosers');
     const circuit = document.querySelector('#circuit');
-    const matrix = JSON.parse(sessionStorage.getItem('matrix'));
+    const matrix  = JSON.parse(localStorage.getItem('matrix'));
 
     // empty circuit
     map.dessinerTuiles(matrix[0], matrix[1], circuit, 80);
@@ -115,8 +98,6 @@ window.onload = () => {
                     children[i].classList.remove('selected');
                 }
             }
-                
-            console.log(divList[i].getAttribute("name"));
         });
     }
 
@@ -133,14 +114,15 @@ window.onload = () => {
                     if(sDivs[j].classList.contains('selected')) {
                         matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
                         map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
+                        localStorage.setItem('matrix', JSON.stringify(matrix));
                     }
                 }
             }
             //Right click to rotate tiles
             else if(evt.button === 2) {
                 matrix[1][i] = (matrix[1][i] + 90) % 360;
-                
                 map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
+                localStorage.setItem('matrix', JSON.stringify(matrix));
             }
         });
     }

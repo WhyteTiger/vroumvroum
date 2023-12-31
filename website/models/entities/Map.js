@@ -67,9 +67,8 @@ export class Map {
         }
     }
 
-    replaceTiles(carte, rotation, container, value, matrix) {
-        console.log(value);
-        if (value === undefined) value = 160;
+    replaceTiles(carte, rotation, container, size, matrix) {
+        if (size === undefined) size = 160;
 
         if (carte.length !== 96 || rotation.length !== 96 || container.querySelectorAll('div').length !== 96) {
            console.log('error : not 96');
@@ -81,20 +80,22 @@ export class Map {
         for (let i = 0; i < cDivs.length; i++) {
             switch (matrix[i]) {
                 case 0 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], value);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], size);
                     break;
                 case 90 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, 0, rotation[i], value);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, 0, rotation[i], size);
                     break;
                 case 180 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, -80, rotation[i], value);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, -80, rotation[i], size);
                     break;
                 case 270 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, -80, rotation[i], value);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, -80, rotation[i], size);
+                    break;
+                default :
                     break;
             }
         }
-}
+    }
     
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;
