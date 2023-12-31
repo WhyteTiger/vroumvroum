@@ -21,6 +21,7 @@ window.onload = () => {
 
     // empty circuit
     map.dessinerTuiles(matrix[0], matrix[1], circuit, 80);
+    map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
 
     // 1st container with common tiles. Visible by default.
     const cont1 = document.createElement('section');
