@@ -132,7 +132,7 @@ window.onload = () => {
                 for(let j = 0; j < sDivs.length; j++) {
                     if(sDivs[j].classList.contains('selected')) {
                         matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
-                        map.replaceTiles(matrix[0], matrix[1], circuit, 80);
+                        map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
                     }
                 }
             }
@@ -140,7 +140,7 @@ window.onload = () => {
             else if(evt.button === 2) {
                 matrix[1][i] = (matrix[1][i] + 90) % 360;
                 
-                map.replaceTiles(matrix[0], matrix[1], circuit, 80);
+                map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
             }
         });
     }

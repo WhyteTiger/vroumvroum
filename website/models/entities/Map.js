@@ -67,22 +67,34 @@ export class Map {
         }
     }
 
-    replaceTiles(carte, rotation, container, value) {
-        
-        console.log("Map.replaceTiles");
-
+    replaceTiles(carte, rotation, container, value, matrix) {
+        console.log(value);
         if (value === undefined) value = 160;
 
-        if (carte.length === 96 && rotation.length === 96 && container.querySelectorAll('div').length === 96) {
+        if (carte.length !== 96 || rotation.length !== 96 || container.querySelectorAll('div').length !== 96) {
+           console.log('error : not 96');
+           return -12;
+        }
 
-            const cDivs = container.querySelectorAll('div');
+        const cDivs = container.querySelectorAll('div');
 
-            for(let i = 0 ; i < cDivs.length ; i++) {
-                this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], value);
+        for (let i = 0; i < cDivs.length; i++) {
+            switch (matrix[i]) {
+                case 0 :
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], value);
+                    break;
+                case 90 :
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, 0, rotation[i], value);
+                    break;
+                case 180 :
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, -80, rotation[i], value);
+                    break;
+                case 270 :
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, -80, rotation[i], value);
+                    break;
             }
-
-        } else console.log('error : not 96');
-    }
+        }
+}
     
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;
