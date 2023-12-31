@@ -12,7 +12,7 @@
 
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
     <script type="module" src="../models/creation/tileChooser.js" defer></script>
-    <script src="../controllers/creation/controllerSave.js" defer></script>
+    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
 </head>
 
 <body>
@@ -39,15 +39,25 @@
             <section>
                 <p>Bienvenue dans le créateur de circuits !</p>
                 <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
-                <p>Clic droit pour faire pivoter les tuiles.</p>
-                <button id="reinitbutton">REINITIALISER</button>
+                <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
+                <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>
             </section>
-            <h1>SAUVEGARDE</h1>
-            <div>
-                <label for="circuitname">Nom de votre circuit</label>
-                <input type="text">
-            </div>
-            <button id="savebutton">SAUVEGARDER</button>
+
+            <section>
+                <h1>SAUVEGARDE</h1>
+                <div>
+                    <label for="circuitname">Nom de votre circuit</label>
+                    <input type="text">
+                </div>
+                <button id="savebutton">SAUVEGARDER</button>
+
+                <div>
+                    <label>Effacer le circuit ?</label>
+                <button id="reinitbutton">EFFACER</button>
+                </div>
+
+            </section>
+            
         </aside>
             
     </main>

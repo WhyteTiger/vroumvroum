@@ -17,7 +17,7 @@ window.onload = () => {
 
     const div     = document.querySelector('#choosers');
     const circuit = document.querySelector('#circuit');
-    const matrix  = JSON.parse(localStorage.getItem('matrix'));
+    let matrix  = JSON.parse(localStorage.getItem('matrix'));
 
     // empty circuit
     map.dessinerTuiles(matrix[0], matrix[1], circuit, 80);
@@ -108,7 +108,7 @@ window.onload = () => {
     for(let i = 0; i < cDivs.length; i++) {
         cDivs[i].oncontextmenu = () => {return false;};
         cDivs[i].addEventListener('mousedown', (evt) => {
-            if(evt.button === 0) {
+            if(evt.button === 0) {  // left click listener (place)
                 // if a selector tile is selected, please replace it
                 const sDivs = document.querySelectorAll('.tile-selector div');
                 for(let j = 0; j < sDivs.length; j++) {
@@ -119,12 +119,23 @@ window.onload = () => {
                     }
                 }
             }
-            //Right click to rotate tiles
-            else if(evt.button === 2) {
+            else if(evt.button === 2) {     // right click listener (rotate)
                 matrix[1][i] = (matrix[1][i] + 90) % 360;
                 map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
                 localStorage.setItem('matrix', JSON.stringify(matrix));
             }
         });
     }
+
+    // GESTION DE LA REINITIALISATION
+    document.querySelector('#reinitbutton').addEventListener('click', (evt) => {
+        newMatrix();
+        matrix = JSON.parse(localStorage.getItem('matrix'));
+        console.log(matrix)
+        map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
+        localStorage.setItem('matrix', JSON.stringify(matrix));
+    });
+
+
+
 }
