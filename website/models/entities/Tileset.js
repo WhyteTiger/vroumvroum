@@ -19,7 +19,9 @@ export class Tileset {
         this.image.src = "../../assets/tilesets/" + tilesetName;
     }
     
-    dessinerTile(numero, context, xDestination, yDestination, degrees){
+    dessinerTile(numero, context, xDestination, yDestination, degrees, value){
+        
+        if (value === undefined) value = 160;
         
         let xSourceEnTiles = numero % this.largeur;
         if (xSourceEnTiles === 0){
@@ -34,7 +36,7 @@ export class Tileset {
         context.translate(xDestination + 80, yDestination + 80);
         context.rotate(Maths.degToRad(degrees));
         
-        context.drawImage(this.image, xSource, ySource, 160, 160, -80, -80, 160, 160);
+        context.drawImage(this.image, xSource, ySource, 160, 160, -80, -80, value, value);
         
         context.restore();
     }
@@ -45,7 +47,6 @@ export class Tileset {
         // Dessine la voiture
         this.dessinerTile(numeroVoiture, context, xDestination, yDestination, degrees);
     }
-    
 }
 
 

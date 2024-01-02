@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vroumvroum - Création de circuits</title>
+
+    <link rel="icon" href="../../assets/logo.png">
+    <link rel="stylesheet" href="styles/generalStyle.css">
+    <link rel="stylesheet" href="styles/canvasStyle.css">
+    <link rel="stylesheet" href="styles/circuitStyle.css">
+    <link rel="stylesheet" href="styles/formStyle.css">
+
+    <script src="../controllers/redirection/controllerHeader.js" defer></script>
+    <script type="module" src="../models/creation/tileChooser.js" defer></script>
+    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
+</head>
+
+<body>
+    <main id="create-main">
+
+        
+
+        <section>
+            <section id="circuit"></section>
+
+            <section id="items">
+                <div id="choosers">
+                    <section id="buttons-info">
+                        <button id="b1" class="chooser selected">Tuiles</button>
+                        <button id="b2" class="chooser">Départs / Arrivées</button>
+                        <button id="b3" class="chooser">Checkpoints</button>
+                    </section>
+                </div>
+            </section>
+
+        </section>
+
+        <aside>
+            <section>
+                <p>Bienvenue dans le créateur de circuits !</p>
+                <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
+                <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
+                <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>
+            </section>
+
+            <section>
+                <h1>SAUVEGARDE</h1>
+                <div>
+                    <label for="circuitname">Nom de votre circuit</label>
+                    <input type="text">
+                </div>
+                <button id="savebutton">SAUVEGARDER</button>
+
+                <div>
+                    <label>Effacer le circuit ?</label>
+                <button id="reinitbutton">EFFACER</button>
+                </div>
+
+            </section>
+            
+        </aside>
+            
+    </main>
+</body>
+</html>

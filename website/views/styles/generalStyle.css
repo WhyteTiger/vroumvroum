@@ -12,8 +12,8 @@
 
 /* the main body sticks to the window's frame */
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
     background-color: rgb(71, 223, 215);
 }
@@ -61,7 +61,7 @@ button {
 
 }
 
-button:hover {
+button:not(#choosers button):hover {
     background-color: black;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: white;
@@ -86,10 +86,5 @@ a:hover {
     color: rgb(213, 59, 233);
 }
 
-#play-body {
-    background: url("../../../assets/circuitFond1.jpg") no-repeat fixed top left;
-    background-position: center bottom;
-    background-size: cover;
-    background-color: none;
-}
+
 

@@ -22,14 +22,32 @@
 #circuit-infos {
     padding: 30px;
     margin: 15px;
-    
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid #00be63;
+}
+
+/* ZONE DU CIRCUIT */
+
+canvas {
+    border: 1px solid black;
+    overflow-x: scroll;
+}
+
+canvas:not(.tile-canvas) {
+    display: flex;
+    width: 100%;
+}
+
+#tiles-to-select {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#play-main {
+    display: grid;
+    grid-template: auto / 3fr 1fr;
+}
+
+#play-main section {
+    max-width: 28em;
 }
 
 /* LEADERBOARD */
@@ -48,41 +66,118 @@ i {
     display: inline;
 }
 
+/* SELECTEUR DE TUILES */
 
-/* ZONE DU CIRCUIT */
-
-canvas {
-    display: flex;
-    width: 100%;
+.tile-selector, #circuit-infos, #choosers button {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid black;
 }
 
-.chooser {
+.tile-selector {
     display: flex;
-    text-align: center;
+    border-radius: 24px;
+    padding: 20px;
+    margin: 10px 0px;
+    width: 1280px;
+    text-align: left;
+    overflow-x: scroll;
+    column-gap: 3em;
+}
 
+.tile-selector div {
+    height: 162px;
+    width: 165px;
+}
+
+.tile-selector div.selected {
+    border: 2px solid red;
+}
+
+#create-main {
+    display: grid;
+    grid-template: auto / 5fr 2fr;
+}
+
+body {
+    background: url("../../../assets/circuitFond1.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
 }
 
 #items {
-    display: grid;
-    grid-template: auto / 1fr 4fr 1fr;
-}
-
-#choosers {
-    grid-area : 2 / 3 / 1 / 2;
-    max-width: 70em;
-    margin: 10px 5em;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #choosers button {
-    border-radius: 50% 50% 0 0;
+    margin: 0px;
+    transition: color 0.3s ease 0s;
 }
 
-#play-main {
+#choosers button:hover {
+    color: white;
+}
+
+#choosers button.selected {
+    border-color: #00be63;
+}
+
+.invisible {
+    display: none;
+}
+
+/* CIRCUIT */
+
+#circuit {
     display: grid;
-    grid-template: auto / 3fr 1fr;
+    grid-template : 80px / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin: 50px auto;
+    border: 5px solid black;
+    border-radius: 10px;
+    width: 960px;
 }
 
-#play-main section {
-    max-width: 28em;
+#circuit div {
+    width: 80px;    /* ben oui, sinon ça veut pas */
+    height: 80px;
+}
+
+/* ASIDE */
+
+aside {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00be63;
+    padding: 6em 1em;
+    border-radius: 24px;
+    margin: 2em 5em 2em 1em;
+}
+
+aside div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+aside h1 {
+    font-size: 55px;
+    margin-bottom: 0em;
+}
+
+aside section {
+    display: flex;
+    flex-direction: column;
+}
+
+aside p {
+    margin: 0.5em 0em;
 }
