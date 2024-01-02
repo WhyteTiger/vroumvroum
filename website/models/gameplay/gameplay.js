@@ -138,17 +138,29 @@ window.onload = function () {
                               map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
                            }
                         }
-                        
-                        engine.next(controller.up , controller.down, controller.getdirection(),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33));
+                        /** Test hit box
+                        var datax = ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data;
+                        datax = ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data;
+                        let red  = datax[0];
+                        let green = datax[1];
+                        let blue  = datax[2];
+                        ctx.fillRect(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 10, 10);
+                        ctx.fillRect(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 10, 10);
+                        ctx.fillRect(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 10, 10);
+                        ctx.fillRect(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 10, 10);
+                        console.log(red +" "+green +" "+blue)
+                        */
+                        engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
                         // Dessine la voiture
                         if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
                            engine.resetCar(new Point(canvas.width/2,canvas.height/2),0)
                         }
-                        console.log(controller.getdirection())
+                        
                         ctx.save();
                         ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 2, engine.getCentreVehicule().getY() - carTileSize / 2);
                         ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
                         ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
+                        
                         ctx.restore();
                         
                         requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide

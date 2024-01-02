@@ -74,10 +74,10 @@ export class MoteurPhysique {
         this.inputFrein        = 0;
         this.inputDirection    = 0;
         this.vitesse           = 0;
-        this.roueArriereDroiteTypeRoute = new Color("545454",33,33,33);
-        this.roueArriereGaucheTypeRoute = new Color("545454",33,33,33);
-        this.roueAvantDroiteTypeRoute   = new Color("545454",33,33,33);
-        this.roueAvantGaucheTypeRoute   = new Color("545454",33,33,33);
+        this.roueArriereDroiteTypeRoute = [54,54,54];
+        this.roueArriereGaucheTypeRoute = [54,54,54];
+        this.roueAvantDroiteTypeRoute   = [54,54,54];
+        this.roueAvantGaucheTypeRoute   = [54,54,54];
     }
     
     /**
@@ -192,17 +192,13 @@ export class MoteurPhysique {
     }
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
-        if(this.isNotRoute(this.roueArriereDroiteTypeRoute) === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueArriereGaucheTypeRoute) === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueAvantDroiteTypeRoute)   === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueAvantGaucheTypeRoute)   === 1){
-            a = a * 5/6;
+        //console.log(this.roueArriereDroiteTypeRoute.g +" " + this.roueArriereDroiteTypeRoute.r + " "+ this.roueArriereDroiteTypeRoute.g>=150 && this.roueArriereDroiteTypeRoute.r < 5 )
+        if(this.roueArriereDroiteTypeRoute[1]>=150 && this.roueArriereDroiteTypeRoute[0] < 5 && this.roueArriereGaucheTypeRoute[1]>=150 && this.roueArriereGaucheTypeRoute[0] < 5&&this.roueAvantDroiteTypeRoute[1]>=150 && this.roueAvantDroiteTypeRoute[0] < 5&&this.roueAvantGaucheTypeRoute[1]>=150 && this.roueAvantGaucheTypeRoute[0] < 5){
+            if(this.vitesse >= 4){
+                a = -10/this.tickRate
+            }else if(this.vitesse <= -4){
+                a = 10/this.tickRate
+            }
         }
         return a;
     }
@@ -231,15 +227,15 @@ export class MoteurPhysique {
                 if(this.inputDirection === 0){
                     if(this.vitesse < 0){
                         incrementVitesse = 3/this.tickRate;
-                    }else if(this.vitesse < 100){
+                    }else if(this.vitesse < 15){
                         incrementVitesse = 5/this.tickRate;
                     } 
                 }else{
                     if(this.vitesse < 0){
                         incrementVitesse = 2/this.tickRate;
-                    } else {
-                        incrementVitesse = 3/this.tickRate;
-                    }
+                    }else if(this.vitesse < 12){
+                        incrementVitesse = 5/this.tickRate;
+                    } 
                 }
             }else{
                 if(this.vitesse < -0.5){
