@@ -135,7 +135,4 @@ window.onload = () => {
         map.replaceTiles(matrix[0], matrix[1], circuit, 80, matrix[1]);
         localStorage.setItem('matrix', JSON.stringify(matrix));
     });
-
-
-
 }
