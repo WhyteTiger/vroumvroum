@@ -21,6 +21,10 @@ export class API {
       
       return 'http://'+API.server+'/gameplay/getOwnKartByPlayerId';
    }
+
+   static getURLgetCircuitInformation() {
+      return 'http://'+API.server+'/gameplay/getCircuitInformation';
+   }
    
    static getURLgetKartsAndCoinsByPlayerId() {
       
