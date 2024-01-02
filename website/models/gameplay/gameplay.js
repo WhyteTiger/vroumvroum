@@ -95,6 +95,7 @@ window.onload = function () {
                      console.log("dataKart : "+dataKart.kartId);
                      const kart = new Kart(3, dataKart.kartId-1, 0);
                      const controller = new ControllerDirection();
+                     controller.init();
                      
                      const canvas = document.getElementById('canvas');
                      const ctx = canvas.getContext('2d');
@@ -140,9 +141,10 @@ window.onload = function () {
                         
                         engine.next(controller.up , controller.down, controller.getdirection(),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33));
                         // Dessine la voiture
-                        if(canvas.width < engine.getCentreVehicule().getX()  || canvas.height < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
+                        if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
                            engine.resetCar(new Point(canvas.width/2,canvas.height/2),0)
                         }
+                        console.log(controller.getdirection())
                         ctx.save();
                         ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 2, engine.getCentreVehicule().getY() - carTileSize / 2);
                         ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
