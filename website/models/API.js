@@ -21,11 +21,19 @@ export class API {
       
       return 'http://'+API.server+'/gameplay/getOwnKartByPlayerId';
    }
-   
-   static getURLgetKartsByPlayerId() {
-      
-      return 'http://'+API.server+'/personalize/getKartsByPlayerId';
+
+   static getURLgetCircuitInformation() {
+      return 'http://'+API.server+'/gameplay/getCircuitInformation';
    }
    
+   static getURLgetKartsAndCoinsByPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/getKartsAndCoinsByPlayerId';
+   }
+   
+   static getURLpostKartsAndCoinsInformationOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
+   }
 }
 
