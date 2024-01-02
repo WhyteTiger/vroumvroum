@@ -2,7 +2,7 @@
 
 #main-circuit {
     display: grid;
-    grid-template: auto / 6fr 1fr;
+    grid-template: auto / 5fr 1fr;
 }
 
 #mark p {
@@ -19,13 +19,20 @@
     align-self: center;
 }
 
-/* LEADERBOARD */
-
-#leaderboard {
-    border: 2px solid red;
-    border-radius: 45px;
+#circuit-infos {
     padding: 30px;
+    margin: 15px;
+    
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid #00be63;
 }
+
+/* LEADERBOARD */
 
 #leaderboard-title {
     font-family: 'PlayPretend', Arial, Helvetica, sans-serif;
@@ -40,8 +47,6 @@ i {
 .leaderboard-time {
     display: inline;
 }
-
-
 
 
 /* ZONE DU CIRCUIT */
@@ -81,4 +86,3 @@ canvas {
 #play-main section {
     max-width: 28em;
 }
-

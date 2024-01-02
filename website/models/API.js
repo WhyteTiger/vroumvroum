@@ -26,11 +26,6 @@ export class API {
       return 'http://'+API.server+'/gameplay/getCircuitInformation';
    }
    
-   static getURLaddScoreToLeaderBoard() {
-      
-      return 'http://'+API.server+'gameplay/addScoreToLeaderBoard';
-   }
-   
    static getURLgetKartsAndCoinsByPlayerId() {
       
       return 'http://'+API.server+'/personalize/getKartsAndCoinsByPlayerId';
@@ -40,6 +35,5 @@ export class API {
       
       return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
    }
-   
 }
 
