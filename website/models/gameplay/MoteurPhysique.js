@@ -119,22 +119,23 @@ export class MoteurPhysique {
     
     
     rotate(){
-        if(this.inputDirection === -1){
-            if(this.orientationVehicule - 45/this.tickRate < 0){
-                this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate) +360;
-            }else {
-                this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate);
+        if(this.vitesse !== 0){
+            if(this.inputDirection === -1){
+                if(this.orientationVehicule - 45/this.tickRate <= 0){
+                    this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate) +360;
+                }else {
+                    this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate);
+                }
+                
             }
-            
-        }
-        if(this.inputDirection === 1){
-            if(this.orientationVehicule + 45/this.tickRate > 360){
-                this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate)-360;
-            }else {
-                this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate);
+            if(this.inputDirection === 1){
+                if(this.orientationVehicule + 45/this.tickRate > 360){
+                    this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate)-360;
+                }else {
+                    this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate);
+                }
             }
-        }
-        
+        }  
     }
     getCentreVehicule(){
         return this.centreVehicule;
@@ -206,14 +207,13 @@ export class MoteurPhysique {
     }
     
     fonctionAcceleration() {
-        let incrementVitesse;
+        let incrementVitesse = 0;
         if(this.inputFrein === 1){
             if(this.inputAcceleration === 1){
-                if(this.vitesse < 2){
+                if(this.vitesse < 0.5){
                     incrementVitesse = 2/this.tickRate;
-                }if(this.vitesse<2 && this.vitesse >0){
+                }else if(this.vitesse<0.5 && this.vitesse >-0.5){
                     this.vitesse = 0;
-                    incrementVitesse = 0/this.tickRate;
                 } else {
                     incrementVitesse =-3/this.tickRate;
                 }
@@ -233,7 +233,7 @@ export class MoteurPhysique {
                         if(this.vitesse < 100){
                             incrementVitesse = 5/this.tickRate;
                         }else{
-                            incrementVitesse = 0/this.tickRate;
+                            incrementVitesse = 0;
                         }
                         
                     }
@@ -245,11 +245,10 @@ export class MoteurPhysique {
                     }
                 }
             }else{
-                if(this.vitesse < -3){
+                if(this.vitesse < -0.5){
                     incrementVitesse = 1/this.tickRate;
-                }if(this.vitesse >-3 && this.vitesse < 3){
+                }else if(this.vitesse >-0.5 && this.vitesse < 0.5){
                     this.vitesse = 0 ;
-                    incrementVitesse = 0/this.tickRate;
                 } else {
                     incrementVitesse =-1/this.tickRate;
                 }
