@@ -1,70 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>VroumVroum - Circuits</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Vroumvroum - Création de circuits</title>
 
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/circuitStyle.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="icon" href="../../assets/logo.png">
+    <link rel="stylesheet" href="styles/generalStyle.css">
+    <link rel="stylesheet" href="styles/canvasStyle.css">
+    <link rel="stylesheet" href="styles/circuitStyle.css">
+    <link rel="stylesheet" href="styles/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script src="../controllers/redirection/controllerChoiceCircuit.js" defer></script>
-    </head>
 
-    <body>
+    <script src="../controllers/redirection/controllerHeader.js" defer></script>
+    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
+</head>
 
-    <main>
-        <section id="mainCircuit">
+<body>
+    <main class="circuit-main">
 
-            <canvas></canvas>
+        <section id="choice-section">
+            <h1 id="choice-title">Choix du circuit</h1>
 
-            <section id="circuitInfos">
-                <h2>Nom de la carte</h2>
+            <div>
+                <h2>dedede</h2>
 
-                <div id="mark">
-                    <p>Note : </p>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-
-                <p>Créateur : </p>
-
-                <div id="leaderboard">
-                    <div id="leaderboardTitle">Leaderboard</div>
-                    <div>
-                        <p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <section id="items">
-
-            <section id="choosers">
-                <button></button>
-                <button></button>
-                <button></button>
-
-                <div id="pathChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="startEndChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="checkpointChooser" class="chooser">
-                    <div>test</div>
-                </div>
-            </section>
+                <section id="circuits">
+                    <!-- just as a test for now -->
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                    <div class="circuit-box"></div>
+                </section>
+            </div>
 
         </section>
 
+        <aside>
+            <h2 id="circuitName">Nom de la carte</h2>
+
+        <div id="mark">
+            <p>Note : </p>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+        </div>
+
+        <p id="creatorName">Créateur : CreateurUsername</p>
+
+        <p id="creatorScore">Médaille auteur : createurScore</p>
+
+        <div id="leaderboard">
+            <div id="leaderboard-title">Leaderboard</div>
+            <div id="leaderboard-players">
+                <p>Player1 : temp1</p>
+                <p>Player2 : temp2</p>
+                <p>Player3 : temp3</p>
+                <p>Player4 : temp4</p>
+                <p>Player5 : temp5</p>
+            </div>
+        </div>
+
+        <div>
+            <button>JOUER</button>
+        </div>
+            
+        </aside>
+            
     </main>
-    </body>
+</body>
 </html>
