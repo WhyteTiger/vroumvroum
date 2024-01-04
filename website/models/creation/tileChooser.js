@@ -13,7 +13,7 @@ function newMatrix() {
 }
 
 window.onload = () => {
-    if(localStorage.getItem('matrix') === '') newMatrix();
+    if(localStorage.getItem('matrix') === null || localStorage.getItem('matrix') === '') newMatrix();
 
     const div     = document.querySelector('#choosers');
     const circuit = document.querySelector('#circuit');
