@@ -2,7 +2,7 @@ import {Alert} from "../../models/entities/Alert.js";
 
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
-	document.location.href = "choiceCircuit.html";
+	document.location.href = "playCircuit.html";
 });
 
 const createCircuit = document.getElementById("create");
