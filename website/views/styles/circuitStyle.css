@@ -182,7 +182,10 @@ aside p {
 }
 
 .circuit-box {
-    border: 1px solid red;
+    border: 1px solid black;
+    border-radius: 16px;
+    background-color: #00be63;
+
     height: 160px;
     width: 160px;
 }
@@ -201,4 +204,12 @@ aside p {
 #choice-section h2 {
     display: flex;
     padding-left: 20px;
+}
+
+.circuit-box p.invisible {
+    display: none;
+}
+
+.circuit-box:hover {
+    background-color: red;
 }
