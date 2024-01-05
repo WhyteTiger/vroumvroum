@@ -54,7 +54,7 @@ canvas {
     text-align: center;
 }
 
-i {
+aside i {
     color: rgb(190, 168, 0);
 }
 
@@ -68,7 +68,8 @@ i {
 aside,
 #choosers button,
 h1#choice-title,
-#choice-section h2 {
+#choice-section h2,
+#page-selection {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);
     border-radius: 16px;
@@ -202,7 +203,8 @@ aside p {
 
 #choice-section h2 {
     display: flex;
-    padding-left: 20px;
+    padding: 5px 0px 5px 20px;
+    
 }
 
 .circuit-box p.invisible {
@@ -211,4 +213,23 @@ aside p {
 
 .circuit-box:hover {
     background-color: red;
+}
+
+#page-selection {
+    margin : 3em 0px;
+    padding: 5px;
+}
+
+#page-selection * {
+    display: inline-block;
+    margin: 0px 10px;
+    font-size: 22px;
+}
+
+#page-selection :not(p) {
+    font-size: 36px;
+}
+
+#page-selection i:hover {
+    color: white;
 }
