@@ -7,19 +7,23 @@ export class Map {
     constructor(tileset, terrain, rotate) {
         this.tileset = tileset;
         this.terrain = terrain;
-        this.rotate  = rotate;
+        this.rotate  = rotate;  
     };
 
     getHauteur () {
         return this.terrain.length;
     }
-
+    getTileset () {
+        return this.tileset;
+    }
+    getTerrain () {
+        return this.terrain;
+    }
     getLargeur () {
         return this.terrain[0].length;
     }
     
     dessinerMap(context){
-        console.log("dessiner map -1 / 3");
         let i = 0, l = this.terrain.length;
         for( ; i < l ; i++) {
             const ligne = this.terrain[i];

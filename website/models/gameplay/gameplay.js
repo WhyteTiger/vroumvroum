@@ -7,6 +7,7 @@ import {ControllerDirection} from "../../controllers/gameplay/controllerDirectio
 import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
 import {Color} from "../entities/Color.js";
+import {ControllerCheckpoint} from "../../controllers/gameplay/controllerCheckpoint.js";
 
 window.onload = function () {
     
@@ -117,8 +118,8 @@ window.onload = function () {
                      
                      const carTilePixelX = carTileX * carTileSize;
                      const carTilePixelY = carTileY * carTileSize;
-                     
-                     
+                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
+                      
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {
@@ -138,35 +139,34 @@ window.onload = function () {
                               map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
                            }
                         }
-                        /** Test hit box
-                        var datax = ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data;
-                        datax = ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data;
-                        let red  = datax[0];
-                        let green = datax[1];
-                        let blue  = datax[2];
-                        ctx.fillRect(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 10, 10);
-                        ctx.fillRect(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 10, 10);
-                        ctx.fillRect(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 10, 10);
-                        ctx.fillRect(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 10, 10);
-                        console.log(red +" "+green +" "+blue)
-                        */
+                                          
+                        //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
+                        
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
+                        //deplacement de la voiture
                         engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
-                        // Dessine la voiture
+
                         if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
                            engine.resetCar(new Point(canvas.width/2,canvas.height/2),0)
                         }
-                        
+                        // Dessine la voiture
                         ctx.save();
                         ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 2, engine.getCentreVehicule().getY() - carTileSize / 2);
                         ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
                         ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
                         
                         ctx.restore();
-                        
-                        requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+                        if(controllerCheckpoint.fini ===0){
+                           requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+                        }else{
+                           console.log("La partie est terminée");
+                        }
                      }
-                     
                      updateCar(); // Appel initial de la fonction updateCar
+                     
                   });
                
             })

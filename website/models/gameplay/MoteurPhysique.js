@@ -211,7 +211,6 @@ export class MoteurPhysique {
                     incrementVitesse = 2/this.tickRate;
                 }else if(this.vitesse<0.5 && this.vitesse >-0.5){
                     this.vitesse = 0;
-                    ;
                 } else {
                     incrementVitesse =-3/this.tickRate;
                 }
