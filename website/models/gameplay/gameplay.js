@@ -8,7 +8,7 @@ import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
 import {Color} from "../entities/Color.js";
 
-window.onload = function () {
+window.onload = () => {
     
    const circuitId = window.localStorage.circuitId;
    

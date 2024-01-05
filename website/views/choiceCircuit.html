@@ -23,14 +23,14 @@
             <h1 id="choice-title">Choix du circuit</h1>
 
             <div>
-                <h2>dedede</h2>
+                <h2>Mes circuits</h2>
 
                 <section id="circuits">
                     <!-- just as a test for now -->
                     <div class="circuit-box">
                         <p>nom du circuit</p>
                     </div>
-                    <div class="circuit-box"></div>
+                    <div class="circuit-box" name="1"></div>
                     <div class="circuit-box"></div>
                     <div class="circuit-box"></div>
                     <div class="circuit-box"></div>
@@ -47,35 +47,40 @@
         </section>
 
         <aside>
-            <h2 id="circuitName">Nom de la carte</h2>
+            <section id="empty">
+                <p>Cliquez sur un circuit pour afficher ses informations !</p>
+            </section>
+            <section id="full" class="invisible">
+                <h2 id="circuitName">Nom de la carte</h2>
 
-        <div id="mark">
-            <p>Note : </p>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-        </div>
+                <div id="mark">
+                    <p>Note : </p>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
 
-        <p id="creatorName">Créateur : CreateurUsername</p>
+                <p id="creatorName">Créateur : CreateurUsername</p>
 
-        <p id="creatorScore">Médaille auteur : createurScore</p>
+                <p id="creatorScore">Médaille auteur : createurScore</p>
 
-        <div id="leaderboard">
-            <div id="leaderboard-title">Leaderboard</div>
-            <div id="leaderboard-players">
-                <p>Player1 : temp1</p>
-                <p>Player2 : temp2</p>
-                <p>Player3 : temp3</p>
-                <p>Player4 : temp4</p>
-                <p>Player5 : temp5</p>
-            </div>
-        </div>
+                <div id="leaderboard">
+                    <div id="leaderboard-title">Leaderboard</div>
+                    <div id="leaderboard-players">
+                        <p>Player1 : temp1</p>
+                        <p>Player2 : temp2</p>
+                        <p>Player3 : temp3</p>
+                        <p>Player4 : temp4</p>
+                        <p>Player5 : temp5</p>
+                    </div>
+                </div>
 
-        <div>
-            <button>JOUER</button>
-        </div>
+                <div>
+                    <button>JOUER</button>
+                </div>
+            </section>
             
         </aside>
             

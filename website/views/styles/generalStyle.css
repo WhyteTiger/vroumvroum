@@ -86,5 +86,11 @@ a:hover {
     color: rgb(213, 59, 233);
 }
 
+/* OTHER */
+
+.invisible {
+    display: none;
+}
+
 
 

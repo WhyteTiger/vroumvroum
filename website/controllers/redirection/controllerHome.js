@@ -8,10 +8,10 @@ playButton.addEventListener("click", () => {
 const createCircuit = document.getElementById("create");
 createCircuit.addEventListener("click", () => {
 	const playerId = window.localStorage.getItem("playerId");
-	if( playerId === '0'){
+	if( playerId === '0') {
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter");
 		newAlert.customAlert();
-	}else {
+	} else {
 		document.location.href = "createCircuit.html";
 	}
 });
@@ -19,10 +19,10 @@ createCircuit.addEventListener("click", () => {
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
 	const player = window.localStorage.getItem("playerId");
-	if( player === '0'){
+	if( player === '0') {
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter");
 		newAlert.customAlert();
-	}else {
+	} else {
 		document.location.href = "choiceKart.html";
 	}
 });
