@@ -16,7 +16,7 @@ export class ControllerVoiture{
 				this.valButton = 1;
 			}
 			else{
-				const newAlert = new Alert("Vous n'avez pas suffisamment de vroumCoin !", "Fermer !")
+				const newAlert = new Alert("Vous n'avez pas suffisamment de vroumCoin !", "Fermer !", null, "warning");
 				newAlert.customAlert();
 				return 0;
 			}
@@ -26,9 +26,9 @@ export class ControllerVoiture{
 		}
 		return 1;
 	}
-	
+
 	getUpdatedVroumCoin(){
 		return this.vroumCoin;
 	}
-	
+
 }
