@@ -2,49 +2,119 @@ import {API} from "../../models/API.js";
 
 console.log(localStorage)
 
-let nbCircuits;
-
-const circuitId = localStorage.circuitId
-const url = API.getURLpostCircuitsNumber();
-
-const dataCircuit = {
-    personnalCircuitIn: false,
-    circuitIdIn: circuitId
+let fetchParams = {
+    personnalCircuitIn: false
 };
 
-const params = {
+let params = {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
     },
-    body: JSON.stringify(dataCircuit)
+    body: JSON.stringify(fetchParams)
 };
 
-fetch(url, params)
+fetch(API.getURLpostCircuitsNumber(), params)
+.then((response) => response.json())
+.then((dataNb) => {
+    let nbCircuits = dataNb.result.circuitnumber;
+
+    // let's create the boxes
+    for(let i = 0; i < nbCircuits; i++) {
+        const box = document.createElement('div');
+        box.classList.add('circuit-box');
+        document.querySelector('#circuits').appendChild(box);
+    }
+
+    const nbPages = Math.ceil(nbCircuits / 12)
+
+    // fetch the circuits
+    fetchParams = {
+        personnalCircuitIn: false,
+        pageNumberIn: 1
+    };
+    
+    params = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fetchParams)
+    };
+
+    fetch(API.getURLpostCircuits(), params)
     .then((response) => response.json())
-    .then((data) => {
-        console.log('OKeeeee')
-        console.log(data)
-        console.log(data.result.circuitnumber)
+    .then((dataCircuits) => {
+        console.log('PARTIE 2')
+        console.log(dataCircuits.result)
+        const circuits = dataCircuits.result;
 
-        nbCircuits = data.result.circuitnumber;
+        const boxList = document.querySelectorAll('.circuit-box');
 
-        // let's create the boxes
-        for(let i = 0; i < nbCircuits; i++) {
-            const box = document.createElement('div');
-            box.classList.add('circuit-box');
+        for(let i = 0; i < boxList.length; i++) {
+            boxList[i].setAttribute("name", circuits[i].circuitid)
 
-            document.querySelector('#circuits').appendChild(box);
-            console.log('yes')
+            const p = document.createElement('p');
+            p.textContent = circuits[i].circuitname
+            boxList[i].appendChild(p)
+
+            boxList[i].addEventListener('click', (evt) => {
+                const id = boxList[i].getAttribute("name");
+
+                localStorage.circuitId = id;
+                console.log(`le circuitId actuel est ${localStorage.circuitId}`)
+
+                document.querySelector('#empty').classList.add('invisible');
+                document.querySelector('#full').classList.remove('invisible');
+                
+                fetchParams = {
+                    circuitIdIn: id
+                };
+
+                const params = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(fetchParams)
+                };
+
+                fetch(API.getURLgetCircuitInformation(), params)
+                .then((response) => response.json())
+                .then((dataCircuit) => {
+                    console.log(dataCircuit)
+                    document.getElementById("circuit-name").innerText = dataCircuit.circuitName;
+                    document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+                    document.getElementById("creator-score").innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    // to manage the 5 (or less) best scores
+                    if(dataCircuit.leaderBoard === null) {
+                        document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                    } else {
+                        let i = 0;
+                        for (let player in document.querySelector('#leaderboard-players p')) {
+                            player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
+                            i += 2;
+                        }
+                    }
+                })
+                .catch((err) => console.log(`error : dataCircuit : ${err}`));
+
+            });
         }
 
-        console.log(Math.round(55 / 12) + 1)
-
-
-
-        // nbCircuits = data.result
     })
-    .catch((error) => console.log(`fetch error : nbCircuits : ${error}`));
+    .catch((error) => console.log(`error : circuits : ${error}`));
+
+
+
+
+
+
+
+    // nbCircuits = data.result
+})
+.catch((error) => console.log(`fetch error : nbCircuits : ${error}`));
 
 
 
