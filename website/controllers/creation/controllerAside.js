@@ -1,6 +1,5 @@
 import {API} from "../../models/API.js";
 
-
 console.log('aside')
 console.log(localStorage)
 console.log(localStorage.isConnected)
@@ -21,9 +20,11 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
             document.querySelector('#full').classList.remove('invisible');
 
             const url = API.getURLgetCircuitInformation();
+            
             const dataCircuit = {
                 circuitIdIn: circuitId
             };
+
             const params = {
                 method: "POST",
                 headers: {

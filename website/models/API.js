@@ -23,6 +23,7 @@ export class API {
    }
 
    static getURLgetCircuitInformation() {
+
       return 'http://'+API.server+'/gameplay/getCircuitInformation';
    }
    
@@ -34,6 +35,16 @@ export class API {
    static getURLpostKartsAndCoinsInformationOfPlayerId() {
       
       return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
+   }
+
+   static getURLpostCircuitsNumber() {
+
+      return 'http://'+API.server+'/hubs/getCircuitsNumber';
+   }
+
+   static getURLpostCircuits() {
+
+      return 'http://'+API.server+'/hubs/getCircuits';
    }
 }
 
