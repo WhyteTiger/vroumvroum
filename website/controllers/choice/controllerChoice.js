@@ -6,12 +6,12 @@ function fetchPage(nb, nbPages) {
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
     // fetch the circuits
-    fetchParams = {
+    let fetchParams = {
         personnalCircuitIn: false,
         pageNumberIn: nb
     };
     
-    params = {
+    let params = {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -38,9 +38,13 @@ function fetchPage(nb, nbPages) {
         for(let i = 0; i < boxList.length; i++) {
             boxList[i].setAttribute("name", circuits[i].circuitid);
 
-            const p = document.createElement('p');
-            p.textContent = circuits[i].circuitname;
-            boxList[i].appendChild(p)
+            const p1 = document.createElement('p');
+            const p2 = document.createElement('p');
+            p1.textContent = `${circuits[i].circuitname}`;
+            p2.textContent = `par ${circuits[i].creatorusername}`;
+
+            boxList[i].appendChild(p1);
+            boxList[i].appendChild(p2);
 
             boxList[i].addEventListener('click', (evt) => {
                 const id = boxList[i].getAttribute("name");
@@ -155,7 +159,7 @@ function fetchCircuits() {
 
 
 
-
+fetchCircuits();
 
 
 
@@ -169,7 +173,7 @@ filter.addEventListener('change', (evt) => {
     console.log(filter.value)
 
     if(filter.value === "Créateur") {
-
+        console.log('okkk')
     }
 })
 

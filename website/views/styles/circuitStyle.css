@@ -177,9 +177,10 @@ aside p {
 
 #circuits {
     display: grid;
-    grid-template: auto / 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template: auto / 1fr 1fr 1fr 1fr;
     row-gap: 60px;
     column-gap: 50px;
+    margin-top: 2em;
 }
 
 .circuit-box {
@@ -187,8 +188,8 @@ aside p {
     border-radius: 16px;
     background-color: #00be63;
 
-    height: 160px;
-    width: 160px;
+    height: 260px;
+    width: 260px;
 }
 
 #choice-section {
@@ -234,6 +235,6 @@ aside p {
     color: white;
 }
 
-select {
+#choice-section > section {
     
 }
