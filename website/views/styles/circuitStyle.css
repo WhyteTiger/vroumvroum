@@ -69,7 +69,7 @@ aside,
 #choosers button,
 h1#choice-title,
 #choice-section h2,
-#page-selection {
+#page-selector {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);
     border-radius: 16px;
@@ -215,21 +215,21 @@ aside p {
     background-color: red;
 }
 
-#page-selection {
+#page-selector {
     margin : 3em 0px;
     padding: 5px;
 }
 
-#page-selection * {
+#page-selector * {
     display: inline-block;
     margin: 0px 10px;
     font-size: 22px;
 }
 
-#page-selection :not(p) {
+#page-selector :not(p) {
     font-size: 36px;
 }
 
-#page-selection i:hover {
+#page-selector i:hover {
     color: white;
 }
