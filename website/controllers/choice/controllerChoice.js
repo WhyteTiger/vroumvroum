@@ -5,7 +5,6 @@ function fetchPage(nb, nbPages) {
 
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
-
     // fetch the circuits
     fetchParams = {
         personnalCircuitIn: false,
@@ -88,57 +87,89 @@ function fetchPage(nb, nbPages) {
         }
     })
     .catch((error) => console.log(`fetch error : nbCircuits : ${error}`));
+
 }
 
+function fetchCircuits() {
+    let fetchParams = {
+        personnalCircuitIn: false
+    };
+    
+    let params = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fetchParams)
+    };
+    
+    fetch(API.getURLpostCircuitsNumber(), params)
+    .then((response) => response.json())
+    .then((dataNb) => {
+        const nbCircuits = dataNb.result.circuitnumber;
+        const nbPages = Math.ceil(nbCircuits / 12);
+    
+        // à décommenter plus tard
+        //if(nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
+    
+        let currentPage = 1;
+    
+        fetchPage(1, nbPages);
+    
+        // eventListeners for the page selector, only if there is more than 1 page
+        //if(nbPages > 1) {
+            document.querySelector('.fa-backward-step').addEventListener('click', (evt) => {    // go back to the 1st page
+                if(currentPage > 1) {
+                    currentPage = 1;
+                    fetchPage(1, nbPages);
+                }
+            });
+            
+            document.querySelector('.fa-backward').addEventListener('click', (evt) => {
+                if(currentPage > 1) fetchPage(--currentPage, nbPages);
+            });
+            
+            document.querySelector('.fa-forward').addEventListener('click', (evt) => {
+                if(currentPage < nbPages) fetchPage(++currentPage, nbPages);
+            });
+            
+            document.querySelector('.fa-forward-step').addEventListener('click', (evt) => {
+                if(currentPage < nbPages) {
+                    currentPage = nbPages;
+                    fetchPage(nbPages, nbPages);
+                }
+            });
+       // }
+    
+    
+    
+            
+    
+    })
+    .catch((error) => console.log(`error : circuits : ${error}`));
+
+}
 
 /* MAIN PART OF THE SCRIPT */
 
-let fetchParams = {
-    personnalCircuitIn: false
-};
 
-let params = {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify(fetchParams)
-};
 
-fetch(API.getURLpostCircuitsNumber(), params)
-.then((response) => response.json())
-.then((dataNb) => {
-    const nbCircuits = dataNb.result.circuitnumber;
-    const nbPages = Math.ceil(nbCircuits / 12);
 
-    // à décommenter plus tard
-    //if(nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
 
-    let currentPage = 1;
 
-    fetchPage(1, nbPages);
 
-    // eventListeners for the page selector, only if there is more than 1 page
-    //if(nbPages > 1) {
-        document.querySelector('.fa-backward-step').addEventListener('click', (evt) => {    // go back to the 1st page
-            fetchPage(1, nbPages);
-        });
-        
-        document.querySelector('.fa-backward').addEventListener('click', (evt) => {
-            if(currentPage > 1) fetchPage(--currentPage, nbPages);
-        });
-        
-        document.querySelector('.fa-forward').addEventListener('click', (evt) => {
-            if(currentPage < nbPages) fetchPage(++currentPage, nbPages);
-        });
-        
-        document.querySelector('.fa-forward-step').addEventListener('click', (evt) => {
-            fetchPage(nbPages, nbPages);
-        });
-   // }
 
-        
 
+
+const filter = document.querySelector('#filter select');
+console.log('PARTIE FILTR')
+console.log(filter.value)
+
+filter.addEventListener('change', (evt) => {
+    console.log(filter.value)
+
+    if(filter.value === "Créateur") {
+
+    }
 })
-.catch((error) => console.log(`error : circuits : ${error}`));
 

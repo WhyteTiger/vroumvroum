@@ -47,6 +47,11 @@ input {
     border: gray solid 1px;
 }
 
+#filter input {
+    padding: 5px;
+    margin: auto 0px auto 10px;
+}
+
 input:focus {
     background-color: rgb(221, 221, 221);
     box-shadow: inset 0 18px 10px rgba(0, 0, 0, 0.2);
@@ -59,3 +64,14 @@ form button {
     width: 12em;
     text-align: center;
 }
+
+select {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    height: 45px;
+    border-radius: 40px;
+    padding: 0px 12px;
+    margin: auto 0px auto 10px;
+}
+

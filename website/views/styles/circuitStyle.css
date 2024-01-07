@@ -68,7 +68,7 @@ aside i {
 aside,
 #choosers button,
 h1#choice-title,
-#choice-section h2,
+#filter,
 #page-selector {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);
@@ -201,7 +201,7 @@ aside p {
     padding: 0px 2em 0px 2em;
 }
 
-#choice-section h2 {
+#filter {
     display: flex;
     padding: 5px 0px 5px 20px;
     
@@ -232,4 +232,8 @@ aside p {
 
 #page-selector i:hover {
     color: white;
+}
+
+select {
+    
 }
