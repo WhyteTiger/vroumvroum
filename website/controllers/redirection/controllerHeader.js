@@ -64,30 +64,16 @@ if (isConnected === "false") {
 		div.appendChild(a);
 	}
 
-	// div.classList.add('invisible');
-
 	bigdiv.appendChild(div);
 	header.appendChild(bigdiv);
 
 	profileImg.addEventListener('click', (evt) => {
-		console.log('wow')
 		document.querySelector('#burger').classList.toggle('visible');
-
-
 	});
 
 	window.onclick = (evt) => {
-		console.log(evt.target)
-		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") {
-			document.querySelector('#burger').classList.remove('visible');
-		}
+		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible')
 	};
-
-
-
-
-	
-	
 
 }
 
