@@ -9,8 +9,8 @@ console.log(localStorage.isConnected)
 if(document.querySelector('#savebutton') === null) {    // means we're on the choice page
 
     document.querySelector('#playbutton').addEventListener('click', (evt) => {
-        console.log(`HAHA : ${localStorage.circuitId}`);
-    })
+        document.location.href = 'playCircuit.html';
+    });
 
 } else {    // means we're on the creation page
     console.log(document.querySelector('#savebutton'))

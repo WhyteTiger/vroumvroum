@@ -1,7 +1,10 @@
 import {API} from "../../models/API.js";
 
-function fetchPage(nb) {
+function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
+
+    document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
+
 
     // fetch the circuits
     fetchParams = {
@@ -113,24 +116,24 @@ fetch(API.getURLpostCircuitsNumber(), params)
 
     let currentPage = 1;
 
-    fetchPage(1);
+    fetchPage(1, nbPages);
 
     // eventListeners for the page selector, only if there is more than 1 page
     //if(nbPages > 1) {
         document.querySelector('.fa-backward-step').addEventListener('click', (evt) => {    // go back to the 1st page
-            fetchPage(1);
+            fetchPage(1, nbPages);
         });
         
         document.querySelector('.fa-backward').addEventListener('click', (evt) => {
-            if(currentPage > 1) fetchPage(--currentPage);
+            if(currentPage > 1) fetchPage(--currentPage, nbPages);
         });
         
         document.querySelector('.fa-forward').addEventListener('click', (evt) => {
-            if(currentPage < nbPages) fetchPage(++currentPage);
+            if(currentPage < nbPages) fetchPage(++currentPage, nbPages);
         });
         
         document.querySelector('.fa-forward-step').addEventListener('click', (evt) => {
-            fetchPage(nbPages);
+            fetchPage(nbPages, nbPages);
         });
    // }
 
