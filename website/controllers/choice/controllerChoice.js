@@ -158,7 +158,7 @@ function fetchCircuits() {
 
 
 
-
+console.log(localStorage)
 fetchCircuits();
 
 
