@@ -95,9 +95,21 @@ function fetchPage(nb, nbPages) {
 }
 
 function fetchCircuits() {
-    let fetchParams = {
-        personnalCircuitIn: false
-    };
+
+    // à retirer plus tard
+    localStorage.personal = "false";
+
+    let fetchParams;
+
+    if(localStorage.personal === "true") {
+        fetchParams = {
+            personnalCircuitIn: true
+        };
+    } else if(localStorage.personal === "false") {
+        fetchParams = {
+            personnalCircuitIn: false
+        };
+    }
     
     let params = {
         method: "POST",
@@ -110,6 +122,7 @@ function fetchCircuits() {
     fetch(API.getURLpostCircuitsNumber(), params)
     .then((response) => response.json())
     .then((dataNb) => {
+        console.log(dataNb)
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
     
@@ -144,11 +157,7 @@ function fetchCircuits() {
                 }
             });
        // }
-    
-    
-    
-            
-    
+
     })
     .catch((error) => console.log(`error : circuits : ${error}`));
 
@@ -156,14 +165,7 @@ function fetchCircuits() {
 
 /* MAIN PART OF THE SCRIPT */
 
-
-
-console.log(localStorage)
 fetchCircuits();
-
-
-
-
 
 const filter = document.querySelector('#filter select');
 console.log('PARTIE FILTR')

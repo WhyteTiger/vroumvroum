@@ -23,7 +23,11 @@
         <section id="choice-section">
             <h1 id="choice-title">Choix du circuit</h1>
 
-            <section>
+            <section class="true">
+                Mes circuits
+            </section>
+
+            <section class="false">
                 <div id="filter">
                     <h2>Filtrer par : </h2>
                     <select>
@@ -33,10 +37,7 @@
                     </select>
                     <input type="text">
                 </div>
-
-
-                <section id="circuits">
-                </section>
+                <section id="circuits"></section>
             </section>
 
             <section id="page-selector">
@@ -49,7 +50,7 @@
 
         </section>
 
-        <aside>
+        <aside class="false">
             <section id="empty">
                 <p>Cliquez sur un circuit pour afficher ses informations !</p>
             </section>
@@ -82,6 +83,43 @@
 
                 <div>
                     <button id="playbutton">JOUER</button>
+                </div>
+            </section>
+            
+        </aside>
+
+        <aside class="true">
+            <section id="empty">
+                <p>Cliquez sur un circuit pour afficher ses informations !</p>
+            </section>
+            <section id="full" class="invisible">
+                <h2 id="circuit-name">Nom de la carte</h2>
+
+                <div id="mark">
+                    <p>Note : </p>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+
+                <p id="creator-score">Médaille auteur : createurScore</p>
+
+                <div id="leaderboard">
+                    <div id="leaderboard-title">Leaderboard</div>
+                    <div id="leaderboard-players">
+                        <p>Player1 : temp1</p>
+                        <p>Player2 : temp2</p>
+                        <p>Player3 : temp3</p>
+                        <p>Player4 : temp4</p>
+                        <p>Player5 : temp5</p>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="modify-button">MODIFIER</button>
+                    <button id="delete-button">SUPPRIMER</button>
                 </div>
             </section>
             

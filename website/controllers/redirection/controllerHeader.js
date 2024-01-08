@@ -58,11 +58,31 @@ if (isConnected === "false") {
 	const div = document.createElement('div');
 	div.id = 'burger';
 
-	for(let elt of ['Mon compte', 'Mes circuits', 'Déconnexion']) {
-		const a = document.createElement('a');
-		a.textContent = elt;
-		div.appendChild(a);
-	}
+	const a1 = document.createElement('a');
+	a1.textContent = 'Mon compte';
+	a1.id = 'a-acc';
+	a1.addEventListener('click', () => {
+		document.location.href = 'account.html';
+	});
+	div.appendChild(a1);
+
+	const a2 = document.createElement('a');
+	a2.textContent = 'Mes circuits';
+	a2.id = 'a-circ';
+	a2.addEventListener('click', () => {
+		localStorage.setItem('personal', 'true');
+		document.location.href = 'choiceCircuit.html';
+	});
+	div.appendChild(a2);
+
+	const a3 = document.createElement('a');
+	a3.textContent = 'Déconnexion';
+	a3.id = 'a-acc';
+	a3.addEventListener('click', () => {
+		localStorage.setItem('isConnected', 'false');
+		document.location.href = 'home.html';
+	});
+	div.appendChild(a3);
 
 	bigdiv.appendChild(div);
 	header.appendChild(bigdiv);
@@ -74,6 +94,7 @@ if (isConnected === "false") {
 	window.onclick = (evt) => {
 		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible')
 	};
+
 
 }
 
