@@ -8,17 +8,17 @@
 window.localStorage.setItem("inputField", "");
 export class Alert{
     message;
-    motBouton;
-    lien;
+    labelButton;
+    link;
     type;
 
 
-    constructor(message, motBouton, lien, type) {
+    constructor(message, labelButton, link, type) {
         this.message = message;
-        this.motBouton = motBouton;
-        this.lien = lien;
+        this.labelButton = motBouton;
+        this.link = link;
         this.type = type;
-        console.log(this.lien);
+        console.log(this.link);
     }
 
     customAlert() {
@@ -85,7 +85,7 @@ export class Alert{
 
         const actionbutton = document.createElement('button');
         actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.motBouton;
+        actionbutton.innerHTML = this.labelButton;
 
         // css :
         actionbutton.style.background = '#d93232';
@@ -102,10 +102,10 @@ export class Alert{
             overlay.style.display ='none';
 
             console.log(actionbutton.innerText);
-            console.log(this.lien);
-            if (this.lien != null){
+            console.log(this.link);
+            if (this.link != null){
                 console.log('changement de page');
-                document.location.href = this.lien;
+                document.location.href = this.link;
             }
         });
 
@@ -143,7 +143,7 @@ export class Alert{
 
         const actionbutton = document.createElement('button');
         actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.motBouton;
+        actionbutton.innerHTML = this.labelButton;
 
         // css :
         actionbutton.style.background = '#0048ff';
@@ -160,13 +160,13 @@ export class Alert{
             overlay.style.display ='none';
 
             console.log(actionbutton.innerText);
-            console.log(this.lien);
+            console.log(this.link);
             console.log(inputField.value);
-            if (this.lien != null){
+            if (this.link != null){
                 console.log(inputField.value);
                 console.log('changement de page');
                 localStorage.setItem('inputField', inputField.value);
-                document.location.href = this.lien;
+                document.location.href = this.link;
             }
         });
 
@@ -223,7 +223,7 @@ export class Alert{
 
         const actionbutton = document.createElement('button');
         actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.motBouton;
+        actionbutton.innerHTML = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
@@ -240,10 +240,10 @@ export class Alert{
             overlay.style.display ='none';
 
             console.log(closebutton.innerText);
-            console.log(this.lien);
-            if (this.lien != null){
+            console.log(this.link);
+            if (this.link != null){
                 console.log('changement de page');
-                document.location.href = this.lien;
+                document.location.href = this.link;
             }
         });
 
@@ -254,7 +254,7 @@ export class Alert{
         overlay.style.display = 'block';
     }
 
-    alertStartCircuit(createur, temps){
+    alertStartCircuit(creator, temps){
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
@@ -285,7 +285,7 @@ export class Alert{
         pMessage.style.fontSize = '30px';
 
         const pCreateur = document.createElement('p');
-        pCreateur.innerText = 'Créateur : ' + createur;
+        pCreateur.innerText = 'Créateur : ' + creator;
         alertCustom.appendChild(pCreateur);
 
         const pTemps = document.createElement('p');
@@ -299,7 +299,7 @@ export class Alert{
 
         const actionbutton = document.createElement('button');
         actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.motBouton;
+        actionbutton.innerHTML = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
@@ -316,10 +316,10 @@ export class Alert{
             overlay.style.display ='none';
 
             console.log(actionbutton.innerText);
-            console.log(this.lien);
-            if (this.lien != null){
+            console.log(this.link);
+            if (this.link != null){
                 console.log('changement de page');
-                document.location.href = this.lien;
+                document.location.href = this.link;
             }
         });
 
