@@ -254,7 +254,7 @@ export class Alert{
         overlay.style.display = 'block';
     }
 
-    alertStartCircuit(nbTour){
+    alertStartCircuit(createur, temps){
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
@@ -284,9 +284,13 @@ export class Alert{
         alertCustom.appendChild(pMessage);
         pMessage.style.fontSize = '30px';
 
-        const pNbTour = document.createElement('p');
-        pNbTour.innerText = 'Nombre de tour : ' + nbTour;
-        alertCustom.appendChild(pNbTour);
+        const pCreateur = document.createElement('p');
+        pCreateur.innerText = 'Créateur : ' + createur;
+        alertCustom.appendChild(pCreateur);
+
+        const pTemps = document.createElement('p');
+        pTemps.innerText = 'Temps à battre : ' + temps;
+        alertCustom.appendChild(pTemps);
 
         const pEncouragement = document.createElement('p');
         pEncouragement.innerText = 'Bonne Chance !';
@@ -311,7 +315,7 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display ='none';
 
-            console.log(closebutton.innerText);
+            console.log(actionbutton.innerText);
             console.log(this.lien);
             if (this.lien != null){
                 console.log('changement de page');
