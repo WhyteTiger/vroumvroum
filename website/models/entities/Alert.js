@@ -15,7 +15,7 @@ export class Alert{
 
     constructor(message, labelButton, link, type) {
         this.message = message;
-        this.labelButton = motBouton;
+        this.labelButton = labelButton;
         this.link = link;
         this.type = type;
         console.log(this.link);
