@@ -161,3 +161,10 @@ window.onload = function () {
             });
       });
    }
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/gameplayMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
