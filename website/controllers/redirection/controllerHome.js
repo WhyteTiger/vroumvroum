@@ -1,6 +1,19 @@
 import {Alert} from "../../models/entities/Alert.js";
 
-document.getElementsByTagName("audio")[0].volume = 0.0512;
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/Playa12-NobodyZ.mp3";
+audio.volume   = 0.12;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
+
+const mainLogo = document.getElementById("mainLogo");
+mainLogo.addEventListener("click", () => {
+	const vroumAudio = document.createElement("audio");
+	vroumAudio.src 	= "../../assets/soundtrack/vroum2.mp3";
+	vroumAudio.volume = 0.12;
+	vroumAudio.play();
+});
 
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
