@@ -11,12 +11,20 @@
 
         <script type="module" src="../controllers/redirection/controllerHome.js" defer></script>
         <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
+        <script type="module" src="../models/creation/loaderBar.js"></script>
     </head>
 
     <body id="welcomeBody">
 
+    <div id="loaderContainer">
+        <div id="loaderBar"></div>
+        <img src="../../assets/logo.png" alt="Image de voiture" id="carImage">
+    </div>
+
     <main id="welcome">
-        <img src="../../assets/logoLong.png" alt="logoLong">
+
+
+        <img src="../../assets/logoLong.png" alt="logoLong" id="logoLong">
 
         <section id="welcomeButtons">
             <button type="submit" id="create" class="menuJeu">CREER UN CIRCUIT</button>
