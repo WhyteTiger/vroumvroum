@@ -1,7 +1,7 @@
 import {Alert} from "../../models/entities/Alert.js";
 
 const audio = document.createElement("audio");
-audio.src 		= "../../assets/soundtrack/Playa12-NobodyZ.mp3";
+audio.src 		= "../../assets/soundtrack/homeMusic.mp3";
 audio.volume   = 0.12;
 audio.autoplay = true;
 audio.loop     = true;
