@@ -21,11 +21,11 @@ createCircuit.addEventListener("click", () => {
 console.log( window.localStorage.getItem("playerId"));
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
-	const player = window.localStorage.getItem("playerId");
-	if( player === '0'){
+	const playerId = window.localStorage.getItem("playerId");
+	if ( playerId === '0') {
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter","connection.html", 'warning');
 		newAlert.customAlert();
-	}else {
+	} else {
 		document.location.href = "choiceKart.html";
 	}
 });
