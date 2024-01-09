@@ -5,12 +5,22 @@ function fetchPage(nb, nbPages) {
 
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
+    let fetchParams;
+
     // fetch the circuits
-    let fetchParams = {
-        personnalCircuitIn: false,
-        pageNumberIn: nb
-    };
-    
+    if(localStorage.personal === "false") {
+        fetchParams = {
+            personnalCircuitIn: "false",
+            pageNumberIn: nb
+        };
+    } else if(localStorage.personal === "true") {
+        fetchParams = {
+            personnalCircuitIn: "true",
+            playerIdIn: +localStorage.playerId,
+            pageNumberIn: nb
+        };
+    }
+
     let params = {
         method: "POST",
         headers: {
@@ -23,6 +33,7 @@ function fetchPage(nb, nbPages) {
     .then((response) => response.json())
     .then((dataCircuits) => {
         console.log('PARTIE 2')
+        console.log(dataCircuits)
         console.log(dataCircuits.result.length)
         const circuits = dataCircuits.result;
 
@@ -97,17 +108,19 @@ function fetchPage(nb, nbPages) {
 function fetchCircuits() {
 
     // à retirer plus tard
-    localStorage.personal = "false";
+    // localStorage.personal = "false";
+    localStorage.personal = "true";
 
     let fetchParams;
 
     if(localStorage.personal === "true") {
         fetchParams = {
-            personnalCircuitIn: true
+            personnalCircuitIn: "true",
+            playerIdIn: +localStorage.playerId
         };
     } else if(localStorage.personal === "false") {
         fetchParams = {
-            personnalCircuitIn: false
+            personnalCircuitIn: "false"
         };
     }
     
