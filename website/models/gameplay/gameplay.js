@@ -92,8 +92,7 @@ window.onload = function () {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     
-                     console.log("dataKart : "+dataKart.kartId);
+                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
                      const kart = new Kart(3, dataKart.kartId-1, 0);
                      const controller = new ControllerDirection();
                      controller.init();
@@ -110,7 +109,6 @@ window.onload = function () {
                      // Définition du chemin de l'image
                      circuitTileset.src = '../../assets/tilesets/circuit.png';
                      
-                     const engine = new MoteurPhysique(new Point(canvas.width/2,canvas.height/2),20,0);
                      const carTileX             = kart.getColone();
                      const carTileY             = kart.getLigne();
                      const carTileSize = 160;
@@ -118,7 +116,9 @@ window.onload = function () {
                      
                      const carTilePixelX = carTileX * carTileSize;
                      const carTilePixelY = carTileY * carTileSize;
-                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
+                     const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
+                     
+                     
                       
                      // Attendre que l'image soit complètement chargée
                      
@@ -150,7 +150,7 @@ window.onload = function () {
                         engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
 
                         if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
-                           engine.resetCar(new Point(canvas.width/2,canvas.height/2),0)
+                           engine.resetCar(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),controllerCheckpoint.getOrientationLastCheckpoint());
                         }
                         // Dessine la voiture
                         ctx.save();

@@ -22,6 +22,9 @@ export class Map {
     getLargeur () {
         return this.terrain[0].length;
     }
+    getRotate () {
+        return this.rotate;
+    }
     
     dessinerMap(context){
         let i = 0, l = this.terrain.length;
