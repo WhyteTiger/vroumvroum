@@ -1,5 +1,7 @@
 import {Alert} from "../../models/entities/Alert.js";
 
+document.getElementsByTagName("audio")[0].volume = 0.0512;
+
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
 	document.location.href = "choiceCircuit.html";
@@ -15,6 +17,7 @@ createCircuit.addEventListener("click", () => {
 		document.location.href = "createCircuit.html";
 	}
 });
+
 console.log( window.localStorage.getItem("playerId"));
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
