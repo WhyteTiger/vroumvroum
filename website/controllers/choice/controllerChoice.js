@@ -5,6 +5,10 @@ function fetchPage(nb, nbPages) {
 
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
+    // for further classes
+    let filter = "";
+    if(localStorage.personal === "true") filter = "-2";
+
     let fetchParams;
 
     // fetch the circuits
@@ -57,14 +61,14 @@ function fetchPage(nb, nbPages) {
             boxList[i].appendChild(p1);
             boxList[i].appendChild(p2);
 
-            boxList[i].addEventListener('click', (evt) => {
+            boxList[i].addEventListener('click', () => {
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;
                 console.log(`le circuitId actuel est ${localStorage.circuitId}`)
 
-                document.querySelector('#empty').classList.add('invisible');
-                document.querySelector('#full').classList.remove('invisible');
+                document.querySelector('#empty' + filter).classList.add('invisible');
+                document.querySelector('#full' + filter).classList.remove('invisible');
                 
                 fetchParams = {
                     circuitIdIn: id
@@ -82,16 +86,19 @@ function fetchPage(nb, nbPages) {
                 .then((response) => response.json())
                 .then((dataCircuit) => {
                     console.log(dataCircuit)
-                    document.getElementById("circuit-name").innerText = dataCircuit.circuitName;
-                    document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
-                    document.getElementById("creator-score").innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
+
+                    if(localStorage.personal === "true") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+                    
+                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
 
                     // to manage the 5 (or less) best scores
                     if(dataCircuit.leaderBoard === null) {
-                        document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                        document.querySelector("#leaderboard-players" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
                         let i = 0;
-                        for (let player in document.querySelector('#leaderboard-players p')) {
+                        for (let player in document.querySelector('#leaderboard-players' + filter + ' p')) {
                             player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
                             i += 2;
                         }
