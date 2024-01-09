@@ -2,7 +2,7 @@ import {Alert} from "../../models/entities/Alert.js";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/homeMusic.mp3";
-audio.volume   = 0.12;
+audio.volume   = 0.0212;
 audio.autoplay = true;
 audio.loop     = true;
 audio.play();
@@ -11,7 +11,7 @@ const mainLogo = document.getElementById("mainLogo");
 mainLogo.addEventListener("click", () => {
 	const vroumAudio = document.createElement("audio");
 	vroumAudio.src 	= "../../assets/soundtrack/vroum2.mp3";
-	vroumAudio.volume = 0.12;
+	vroumAudio.volume = 0.0512;
 	vroumAudio.play();
 });
 
