@@ -43,13 +43,19 @@ window.onload = function () {
          creatorScore.innerText = "Médaille auteur : " + dataCircuit.creatorTime;
 
          // to manage the 5 (or less) best scores
-         if(dataCircuit.leaderBoard == null) {
+         const leaderBoard = dataCircuit.leaderBoard;
+         if(leaderBoard === null) {
             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
             let i = 0;
             for (let player in document.querySelector('#leaderboard-players p')) {
-               player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
-               i += 2;
+               
+               if (leaderBoard[i] !== null) {
+                  player.textContent = leaderBoard[i] + " : " + leaderBoard[i+1];
+                  i += 2;
+               } else {
+                  player.textContent = "";
+               }
             }
          }
 
