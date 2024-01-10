@@ -8,6 +8,7 @@ import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
 import {Color} from "../entities/Color.js";
 import {ControllerCheckpoint} from "../../controllers/gameplay/controllerCheckpoint.js";
+import {Timer} from "../entities/Timer.js";
 
 window.onload = function () {
     
@@ -92,7 +93,7 @@ window.onload = function () {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
+                     const controllerCheckpoint = new ControllerCheckpoint(map,2);
                      const kart = new Kart(3, dataKart.kartId-1, 0);
                      const controller = new ControllerDirection();
                      controller.init();
@@ -119,7 +120,7 @@ window.onload = function () {
                      const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
                      
                      
-                      
+                     const timer = new Timer();
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {
@@ -152,6 +153,7 @@ window.onload = function () {
                         if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
                            engine.resetCar(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),controllerCheckpoint.getOrientationLastCheckpoint());
                         }
+                        
                         // Dessine la voiture
                         ctx.save();
                         ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 2, engine.getCentreVehicule().getY() - carTileSize / 2);
@@ -162,6 +164,7 @@ window.onload = function () {
                         if(controllerCheckpoint.fini ===0){
                            requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
                         }else{
+                           console.log(timer.getElapsedTime());
                            console.log("La partie est terminée");
                         }
                      }
