@@ -7,10 +7,10 @@ export class ControllerDirection {
 	
 	constructor(){
 
-		this._up = 0;
-		this._down = 0;
-		this._left = 0;
-		this._right = 0;
+		this.up = 0;
+		this.down = 0;
+		this.left = 0;
+		this.right = 0;
 
 		const self = this;
 		
@@ -21,6 +21,13 @@ export class ControllerDirection {
 			self.handleKeyUp(event);
 		});
 
+	}
+	
+	init(){
+		this.up = 0;
+		this.down = 0;
+		this.left = 0;
+		this.right = 0;
 	}
 	
 	handleKeyDown(event) {
@@ -82,19 +89,11 @@ export class ControllerDirection {
 	}
 
 	get up() {
-		return this._up;
+		return this.up;
 	}
 
 	get down() {
-		return this._down;
-	}
-
-	get left() {
-		return this._left;
-	}
-
-	get right() {
-		return this._right;
+		return this.down;
 	}
 
 	getdirection(){

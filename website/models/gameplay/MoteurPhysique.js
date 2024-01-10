@@ -74,10 +74,10 @@ export class MoteurPhysique {
         this.inputFrein        = 0;
         this.inputDirection    = 0;
         this.vitesse           = 0;
-        this.roueArriereDroiteTypeRoute = new Color("545454",33,33,33);
-        this.roueArriereGaucheTypeRoute = new Color("545454",33,33,33);
-        this.roueAvantDroiteTypeRoute   = new Color("545454",33,33,33);
-        this.roueAvantGaucheTypeRoute   = new Color("545454",33,33,33);
+        this.roueArriereDroiteTypeRoute = [54,54,54];
+        this.roueArriereGaucheTypeRoute = [54,54,54];
+        this.roueAvantDroiteTypeRoute   = [54,54,54];
+        this.roueAvantGaucheTypeRoute   = [54,54,54];
     }
     
     /**
@@ -119,19 +119,21 @@ export class MoteurPhysique {
     
     
     rotate(){
-        if(this.inputDirection === -1){
-            if(this.orientationVehicule - 45/this.tickRate < 0){
-                this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate) +360;
-            }else {
-                this.orientationVehicule = (this.orientationVehicule - 45/this.tickRate);
+        if(this.vitesse !== 0){
+            if(this.inputDirection === -1){
+                if(this.orientationVehicule - (70/this.tickRate) <= 0){
+                    this.orientationVehicule = (this.orientationVehicule - 70/this.tickRate) +360;
+                }else {
+                    this.orientationVehicule = (this.orientationVehicule - 70/this.tickRate);
+                }
+                
             }
-            
-        }
-        if(this.inputDirection === 1){
-            if(this.orientationVehicule + 45/this.tickRate > 360){
-                this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate)-360;
-            }else {
-                this.orientationVehicule = (this.orientationVehicule + 45/this.tickRate);
+            if(this.inputDirection === 1){
+                if(this.orientationVehicule + 70/this.tickRate > 360){
+                    this.orientationVehicule = (this.orientationVehicule + 70/this.tickRate)-360;
+                }else {
+                    this.orientationVehicule = (this.orientationVehicule + 70/this.tickRate);
+                }
             }
         }
         
@@ -190,30 +192,25 @@ export class MoteurPhysique {
     }
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
-        if(this.isNotRoute(this.roueArriereDroiteTypeRoute) === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueArriereGaucheTypeRoute) === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueAvantDroiteTypeRoute)   === 1){
-            a = a * 5/6;
-        }
-        if(this.isNotRoute(this.roueAvantGaucheTypeRoute)   === 1){
-            a = a * 5/6;
+        //console.log(this.roueArriereDroiteTypeRoute.g +" " + this.roueArriereDroiteTypeRoute.r + " "+ this.roueArriereDroiteTypeRoute.g>=150 && this.roueArriereDroiteTypeRoute.r < 5 )
+        if(this.roueArriereDroiteTypeRoute[1]>=150 && this.roueArriereDroiteTypeRoute[0] < 5 && this.roueArriereGaucheTypeRoute[1]>=150 && this.roueArriereGaucheTypeRoute[0] < 5&&this.roueAvantDroiteTypeRoute[1]>=150 && this.roueAvantDroiteTypeRoute[0] < 5&&this.roueAvantGaucheTypeRoute[1]>=150 && this.roueAvantGaucheTypeRoute[0] < 5){
+            if(this.vitesse >= 3){
+                a = -10/this.tickRate
+            }else if(this.vitesse <= -3){
+                a = 10/this.tickRate
+            }
         }
         return a;
     }
     
     fonctionAcceleration() {
-        let incrementVitesse;
+        let incrementVitesse = 0;
         if(this.inputFrein === 1){
             if(this.inputAcceleration === 1){
-                if(this.vitesse < 2){
+                if(this.vitesse < 0.5){
                     incrementVitesse = 2/this.tickRate;
-                }if(this.vitesse<2 && this.vitesse >0){
+                }else if(this.vitesse<0.5 && this.vitesse >-0.5){
                     this.vitesse = 0;
-                    incrementVitesse = 0/this.tickRate;
                 } else {
                     incrementVitesse =-3/this.tickRate;
                 }
@@ -229,27 +226,21 @@ export class MoteurPhysique {
                 if(this.inputDirection === 0){
                     if(this.vitesse < 0){
                         incrementVitesse = 3/this.tickRate;
-                    }else {
-                        if(this.vitesse < 100){
-                            incrementVitesse = 5/this.tickRate;
-                        }else{
-                            incrementVitesse = 0/this.tickRate;
-                        }
-                        
-                    }
+                    }else if(this.vitesse < 6){
+                        incrementVitesse = 2/this.tickRate;
+                    } 
                 }else{
                     if(this.vitesse < 0){
                         incrementVitesse = 2/this.tickRate;
-                    } else {
-                        incrementVitesse = 3/this.tickRate;
-                    }
+                    }else if(this.vitesse < 7){
+                        incrementVitesse = 2/this.tickRate;
+                    } 
                 }
             }else{
-                if(this.vitesse < -3){
+                if(this.vitesse < -0.5){
                     incrementVitesse = 1/this.tickRate;
-                }if(this.vitesse >-3 && this.vitesse < 3){
+                }else if(this.vitesse >-0.5 && this.vitesse < 0.5){
                     this.vitesse = 0 ;
-                    incrementVitesse = 0/this.tickRate;
                 } else {
                     incrementVitesse =-1/this.tickRate;
                 }
