@@ -93,7 +93,7 @@ window.onload = function () {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     const controllerCheckpoint = new ControllerCheckpoint(map,2);
+                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
                      const kart = new Kart(3, dataKart.kartId-1, 0);
                      const controller = new ControllerDirection();
                      controller.init();
@@ -118,9 +118,10 @@ window.onload = function () {
                      const carTilePixelX = carTileX * carTileSize;
                      const carTilePixelY = carTileY * carTileSize;
                      const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
-                     
-                     
                      const timer = new Timer();
+
+                     timer.start();
+                     setInterval(function(){timer.updateCompteur();}, 1);
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {
@@ -165,6 +166,7 @@ window.onload = function () {
                            requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
                         }else{
                            console.log(timer.getElapsedTime());
+                           timer.stop();
                            console.log("La partie est terminée");
                         }
                      }
