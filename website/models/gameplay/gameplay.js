@@ -46,12 +46,12 @@ window.onload = function () {
 
          // to manage the 5 (or less) best scores
          const leaderBoard = dataCircuit.leaderBoard;
-         if(leaderBoard === null) {
+         if(leaderBoard[0] === null) {
             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
             for (let i = 0; i < 5; i++) {
                
-               if (leaderBoard[2*i] !== null) {
+               if (leaderBoard[2*i] !== undefined) {
                   const leaderboardPlayer = document.getElementById("leaderboard-players");
                   const player = document.createElement("p");
                   player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
