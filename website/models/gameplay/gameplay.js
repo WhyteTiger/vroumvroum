@@ -7,6 +7,8 @@ import {ControllerDirection} from "../../controllers/gameplay/controllerDirectio
 import {MoteurPhysique} from "./MoteurPhysique.js";
 import {Point} from "../entities/Point.js";
 import {Color} from "../entities/Color.js";
+import {ControllerCheckpoint} from "../../controllers/gameplay/controllerCheckpoint.js";
+import {Timer} from "../entities/Timer.js";
 
 window.onload = () => {
     
@@ -43,13 +45,21 @@ window.onload = () => {
          creatorScore.innerText = "Médaille auteur : " + dataCircuit.creatorTime;
 
          // to manage the 5 (or less) best scores
-         if(dataCircuit.leaderBoard == null) {
+         const leaderBoard = dataCircuit.leaderBoard;
+         if(leaderBoard === null) {
             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
-            let i = 0;
-            for (let player in document.querySelector('#leaderboard-players p')) {
-               player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
-               i += 2;
+            for (let i = 0; i < 5; i++) {
+               
+               if (leaderBoard[2*i] !== null) {
+                  const leaderboardPlayer = document.getElementById("leaderboard-players");
+                  const player = document.createElement("p");
+                  player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                  leaderboardPlayer.appendChild(player);
+               } else {
+                  //Pour skip la fin du for
+                  i = 12;
+               }
             }
          }
 
@@ -91,10 +101,10 @@ window.onload = () => {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     
-                     console.log("dataKart : "+dataKart.kartId);
+                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
                      const kart = new Kart(3, dataKart.kartId-1, 0);
                      const controller = new ControllerDirection();
+                     controller.init();
                      
                      const canvas = document.getElementById('canvas');
                      const ctx = canvas.getContext('2d');
@@ -108,7 +118,6 @@ window.onload = () => {
                      // Définition du chemin de l'image
                      circuitTileset.src = '../../assets/tilesets/circuit.png';
                      
-                     const engine = new MoteurPhysique(new Point(canvas.width/2,canvas.height/2),20,0);
                      const carTileX             = kart.getColone();
                      const carTileY             = kart.getLigne();
                      const carTileSize = 160;
@@ -116,8 +125,11 @@ window.onload = () => {
                      
                      const carTilePixelX = carTileX * carTileSize;
                      const carTilePixelY = carTileY * carTileSize;
-                     
-                     
+                     const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
+                     const timer = new Timer();
+
+                     timer.start();
+                     setInterval(function(){timer.updateCompteur();}, 1);
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {
@@ -137,22 +149,37 @@ window.onload = () => {
                               map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
                            }
                         }
+                                          
+                        //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
                         
-                        engine.next(controller.up , controller.down, controller.getdirection(),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33),new Color("545454",33,33,33));
-                        // Dessine la voiture
-                        if(canvas.width < engine.getCentreVehicule().getX()  || canvas.height < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
-                           engine.resetCar(new Point(canvas.width/2,canvas.height/2),0)
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60);
+                        controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
+                        //deplacement de la voiture
+                        engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
+
+                        if(canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()){
+                           engine.resetCar(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),controllerCheckpoint.getOrientationLastCheckpoint());
                         }
+                        
+                        // Dessine la voiture
                         ctx.save();
                         ctx.translate(engine.getCentreVehicule().getX()-carTileSize / 2, engine.getCentreVehicule().getY() - carTileSize / 2);
                         ctx.rotate(Maths.degToRad(engine.getOrientationVehicule()));
                         ctx.drawImage(circuitTileset, carTilePixelX, carTilePixelY, carTileSize, carTileSize, -carTileSize / 4, -carTileSize / 4, carTileSize / 2, carTileSize / 2);
-                        ctx.restore();
                         
-                        requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+                        ctx.restore();
+                        if(controllerCheckpoint.fini ===0){
+                           requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+                        }else{
+                           console.log(timer.getElapsedTime());
+                           timer.stop();
+                           console.log("La partie est terminée");
+                        }
                      }
-                     
                      updateCar(); // Appel initial de la fonction updateCar
+                     
                   });
                
             })
@@ -161,3 +188,10 @@ window.onload = () => {
             });
       });
    }
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/gameplayMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();

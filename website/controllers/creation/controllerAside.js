@@ -1,5 +1,3 @@
-import {API} from "../../models/API.js";
-
 console.log('aside')
 console.log(localStorage)
 console.log(localStorage.isConnected)
@@ -31,3 +29,8 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 
 
 
+
+
+// récupération du nom entré dans la pop-up
+const nameCircuit = window.localStorage.inputField;
+console.log(nameCircuit);
