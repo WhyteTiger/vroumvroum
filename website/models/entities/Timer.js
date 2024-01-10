@@ -22,6 +22,9 @@ export class Timer {
             let min = Math.floor(seconde/60);
             seconde = seconde%60;
             let milliseconds = temps%1000;
+            if(seconde<10){
+                seconde = "0"+seconde;
+            }
             if(milliseconds<10){
                 milliseconds = "00"+milliseconds;
             }

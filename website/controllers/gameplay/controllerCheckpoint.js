@@ -91,6 +91,7 @@ export class ControllerCheckpoint {
                 if(passed === 1){
                     this.nbCheckPointRestant--;
                     this.checkPointPassed.push([Math.floor(y/160),Math.floor(x/160)]);
+                    this.updateCheckpoint();
                 }
             }
 
@@ -118,7 +119,9 @@ export class ControllerCheckpoint {
             return this.checkPointPassed[this.checkPointPassed.length-1];
         }
     }
-
+    updateCheckpoint(){
+        document.getElementsByClassName("compteurCheckpoint")[0].textContent = this.nbCheckPoint-this.nbCheckPointRestant +"/"+this.nbCheckPoint; ;
+    }
     getOrientationLastCheckpoint(){
         let tuile   = this.getLastCheckpoint();
         let terrain = this.circuit.getTerrain();
