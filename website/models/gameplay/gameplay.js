@@ -47,14 +47,16 @@ window.onload = function () {
          if(leaderBoard === null) {
             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
-            let i = 0;
-            for (let player in document.querySelector('#leaderboard-players p')) {
+            for (let i = 0; i < 5; i++) {
                
-               if (leaderBoard[i] !== null) {
-                  player.textContent = leaderBoard[i] + " : " + leaderBoard[i+1];
-                  i += 2;
+               if (leaderBoard[2*i] !== null) {
+                  const leaderboardPlayer = document.getElementById("leaderboard-players");
+                  const player = document.createElement("p");
+                  player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                  leaderboardPlayer.appendChild(player);
                } else {
-                  player.textContent = "";
+                  //Pour skip la fin du for
+                  i = 12;
                }
             }
          }
