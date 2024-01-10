@@ -43,13 +43,21 @@ window.onload = function () {
          creatorScore.innerText = "Médaille auteur : " + dataCircuit.creatorTime;
 
          // to manage the 5 (or less) best scores
-         if(dataCircuit.leaderBoard == null) {
+         const leaderBoard = dataCircuit.leaderBoard;
+         if(leaderBoard === null) {
             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
-            let i = 0;
-            for (let player in document.querySelector('#leaderboard-players p')) {
-               player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
-               i += 2;
+            for (let i = 0; i < 5; i++) {
+               
+               if (leaderBoard[2*i] !== null) {
+                  const leaderboardPlayer = document.getElementById("leaderboard-players");
+                  const player = document.createElement("p");
+                  player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                  leaderboardPlayer.appendChild(player);
+               } else {
+                  //Pour skip la fin du for
+                  i = 12;
+               }
             }
          }
 
@@ -161,3 +169,10 @@ window.onload = function () {
             });
       });
    }
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/gameplayMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
