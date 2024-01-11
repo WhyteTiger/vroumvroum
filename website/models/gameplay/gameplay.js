@@ -107,7 +107,7 @@ window.onload = function () {
                      controller.init();
                      
                      const canvas = document.getElementById('canvas');
-                     const ctx = canvas.getContext('2d');
+                     const ctx = canvas.getContext('2d',{willReadFrequently: true});
                      
                      canvas.width  = map.getLargeur() * 160;
                      canvas.height = map.getHauteur() * 160;
@@ -127,9 +127,9 @@ window.onload = function () {
                      const carTilePixelY = carTileY * carTileSize;
                      const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
                      const timer = new Timer();
-
+                     controllerCheckpoint.updateCheckpoint();
                      timer.start();
-                     setInterval(function(){timer.updateCompteur();}, 1);
+                     setInterval(function(){timer.updateCompteur();}, 100);
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {
