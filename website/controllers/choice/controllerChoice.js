@@ -84,13 +84,16 @@ function fetchPage(nb, nbPages) {
             
 
             boxList[i].addEventListener('click', () => {
+                console.log("penis")
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;
                 console.log(`le circuitId actuel est ${localStorage.circuitId}`)
+                console.log("penis2")
 
                 document.querySelector('#empty' + filter).classList.add('invisible');
                 document.querySelector('#full' + filter).classList.remove('invisible');
+                console.log("penis3")
                 
                 fetchParams = {
                     circuitIdIn: id
@@ -104,9 +107,12 @@ function fetchPage(nb, nbPages) {
                     body: JSON.stringify(fetchParams)
                 };
 
+                console.log("penis4")
+
                 fetch(API.getURLgetCircuitInformation(), params)
                 .then((response) => response.json())
                 .then((dataCircuit) => {
+                    console.log("merde")
                     console.log(dataCircuit)
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
@@ -114,6 +120,7 @@ function fetchPage(nb, nbPages) {
                     if(localStorage.personal === "true") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+                    console.log('oups')
 
                     // to manage the 5 (or less) best scores
                     if(dataCircuit.leaderBoard === null) {
@@ -141,18 +148,21 @@ function fetchCircuits() {
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
     let creatorFilterValue = document.getElementById('creator-filter').value;
+    console.log("filtersssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+    console.log(circuitFilterValue)
+    console.log(creatorFilterValue)
     if(circuitFilterValue !== '' || circuitFilterValue !== undefined || circuitFilterValue !== null) circuitFilterValue = undefined;
     if(creatorFilterValue !== '' || creatorFilterValue !== undefined || creatorFilterValue !== null) creatorFilterValue = undefined;
 
     // fetch the number of circuits
-    if(localStorage.personal === "true") {
+    if(localStorage.getItem("personal") === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
-            playerIdIn: +localStorage.playerId,
+            playerIdIn: +localStorage.getItem("playerId"),
             circuitNameIn: circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
-    } else if(localStorage.personal === "false") {
+    } else if(localStorage.getItem("personal") === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
             circuitNameIn: circuitFilterValue,
@@ -208,14 +218,7 @@ function fetchCircuits() {
        // }
 
 
-       // eventListener for the filters
-       document.getElementById('name-filter').addEventListener('keydown', (evt) => {
-            fetchCircuits();
-       });
-
-       document.getElementById('creator-filter').addEventListener('keydown', (evt) => {
-            fetchCircuits();
-       });
+       
 
     })
     .catch((error) => console.log(`error : circuits : ${error}`));
@@ -235,6 +238,15 @@ if(localStorage.personal === "false") {
     document.querySelectorAll('.true').forEach((elt) => { elt.classList.remove('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
+
+// eventListener for the filters
+document.getElementById('name-filter').addEventListener('keydown', (evt) => {
+    fetchCircuits();
+});
+
+document.getElementById('creator-filter').addEventListener('keydown', (evt) => {
+    fetchCircuits();
+});
 
 fetchCircuits();
 
