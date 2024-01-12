@@ -26,13 +26,10 @@
             <section>
                 <h2 class="true" id="true">Mes circuits</h2>
                 <div id="filter" class="false">
-                    <h2>Filtrer par : </h2>
-                    <select>
-                        <option>Rien</option>
-                        <option>Créateur</option>
-                        <option>Nom de circuit</option>
-                    </select>
-                    <input type="text">
+                    <h2>Filtrer par nom </h2>
+                    <input type="text" id="name-filter">
+                    <h2 id="creator-title">Filtrer par créateur </h2>
+                    <input type="text" id="creator-filter">
                 </div>
                 <section id="circuits"></section>
             </section>
@@ -40,7 +37,7 @@
             <section id="page-selector">
                 <i class="fa-solid fa-backward-step"></i>
                 <i class="fa-solid fa-backward"></i>
-                <p>texte</p>
+                <p>numéro de page</p>
                 <i class="fa-solid fa-forward"></i>
                 <i class="fa-solid fa-forward-step"></i>
             </section>

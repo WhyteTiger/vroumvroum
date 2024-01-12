@@ -235,3 +235,7 @@ aside p {
 #page-selector i:hover {
     color: white;
 }
+
+#creator-title {
+    margin-left: 2em;
+}

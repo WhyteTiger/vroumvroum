@@ -9,19 +9,29 @@ function fetchPage(nb, nbPages) {
     let filter = "";
     if(localStorage.personal === "true") filter = "-2";
 
+    // if filters then filter
+    let circuitFilterValue = document.getElementById('name-filter').value;
+    let creatorFilterValue = document.getElementById('creator-filter').value;
+    if(circuitFilterValue !== '' || circuitFilterValue !== undefined || circuitFilterValue !== null) circuitFilterValue = undefined;
+    if(creatorFilterValue !== '' || creatorFilterValue !== undefined || creatorFilterValue !== null) creatorFilterValue = undefined;
+
     let fetchParams;
 
     // fetch the circuits
     if(localStorage.personal === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
-            pageNumberIn: nb
+            pageNumberIn: nb,
+            circuitNameIn: circuitFilterValue,
+            creatorUsernameIn: creatorFilterValue
         };
     } else if(localStorage.personal === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
-            playerIdIn: +localStorage.playerId,
-            pageNumberIn: nb
+            playerIdIn: +localStorage.getItem("playerId"),
+            pageNumberIn: nb,
+            circuitNameIn: circuitFilterValue,
+            creatorUsernameIn: creatorFilterValue
         };
     }
 
@@ -40,6 +50,10 @@ function fetchPage(nb, nbPages) {
         console.log(dataCircuits)
         console.log(dataCircuits.result.length)
         const circuits = dataCircuits.result;
+        const boxZone = document.querySelector('#circuits');
+
+        // delete the boxes
+        while(boxZone.firstChild) boxZone.removeChild(boxZone.firstChild);
 
         // let's create the boxes
         for(let i = 0; i < circuits.length; i++) {
@@ -49,6 +63,8 @@ function fetchPage(nb, nbPages) {
         }
 
         const boxList = document.querySelectorAll('.circuit-box');
+
+        console.log('DEBUT')
 
         for(let i = 0; i < boxList.length; i++) {
             boxList[i].setAttribute("name", circuits[i].circuitid);
@@ -60,6 +76,12 @@ function fetchPage(nb, nbPages) {
 
             boxList[i].appendChild(p1);
             boxList[i].appendChild(p2);
+
+            
+
+            console.log(boxList[i])
+
+            
 
             boxList[i].addEventListener('click', () => {
                 const id = boxList[i].getAttribute("name");
@@ -116,14 +138,25 @@ function fetchCircuits() {
 
     let fetchParams;
 
+    // if filters then filter
+    let circuitFilterValue = document.getElementById('name-filter').value;
+    let creatorFilterValue = document.getElementById('creator-filter').value;
+    if(circuitFilterValue !== '' || circuitFilterValue !== undefined || circuitFilterValue !== null) circuitFilterValue = undefined;
+    if(creatorFilterValue !== '' || creatorFilterValue !== undefined || creatorFilterValue !== null) creatorFilterValue = undefined;
+
+    // fetch the number of circuits
     if(localStorage.personal === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
-            playerIdIn: +localStorage.playerId
+            playerIdIn: +localStorage.playerId,
+            circuitNameIn: circuitFilterValue,
+            creatorUsernameIn: creatorFilterValue
         };
     } else if(localStorage.personal === "false") {
         fetchParams = {
-            personnalCircuitIn: "false"
+            personnalCircuitIn: "false",
+            circuitNameIn: circuitFilterValue,
+            creatorUsernameIn: creatorFilterValue
         };
     }
     
@@ -174,6 +207,16 @@ function fetchCircuits() {
             });
        // }
 
+
+       // eventListener for the filters
+       document.getElementById('name-filter').addEventListener('keydown', (evt) => {
+            fetchCircuits();
+       });
+
+       document.getElementById('creator-filter').addEventListener('keydown', (evt) => {
+            fetchCircuits();
+       });
+
     })
     .catch((error) => console.log(`error : circuits : ${error}`));
 
@@ -182,7 +225,7 @@ function fetchCircuits() {
 /* MAIN PART OF THE SCRIPT */
 
 // à retirer plus tard
-localStorage.personal = "true";
+localStorage.personal = "false";
 
 // display the correct elements depending on whether the page is personal or not
 if(localStorage.personal === "false") {
@@ -193,21 +236,5 @@ if(localStorage.personal === "false") {
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
 
-
-
-
-
 fetchCircuits();
-
-const filter = document.querySelector('#filter select');
-console.log('PARTIE FILTR')
-console.log(filter.value)
-
-filter.addEventListener('change', (evt) => {
-    console.log(filter.value)
-
-    if(filter.value === "Créateur") {
-        console.log('okkk')
-    }
-})
 
