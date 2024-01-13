@@ -1,9 +1,50 @@
 import {TileChooser} from "../../models/creation/TileChooser.js";
 
+let tileChooser;
+
 window.onload = () => {
-	console.log("CONTROLLER CREATION ONLOAD");
-	const tileChooser = new TileChooser();
-	console.log("CONTROLLER CREATION SUITE1");
+	tileChooser = new TileChooser();
+	
+	/*
+	//****************************************************************************************************************************
+	//test pour le chargement de la matrice principale (pour essdaayer de savoir pourquoi elle ne s'affiche pas au début)
+	//****************************************************************************************************************************
+	const localStorageMatrix = localStorage.getItem('matrix');
+		console.log("localStorageMatrix : "+ localStorageMatrix);
+		if(localStorageMatrix === null || localStorageMatrix === undefined || localStorageMatrix === "") {
+			this.newMatrix();
+		} else {
+			this._matrix = JSON.parse(localStorageMatrix);
+		}
+		
+		const div = document.querySelector('#choosers');
+		this._circuit = document.querySelector('#circuit');
+		
+		// empty circuit
+		this._map.dessinerTuiles(this._matrix[0], this._matrix[1], this._circuit, 80);
+		this._map.replaceTiles(  this._matrix[0], this._matrix[1], this._circuit, 80, this._matrix[1]);
+		
+		// 1st container with common tiles. Visible by default.
+		const cont1 = document.createElement('section');
+		cont1.classList.add('tile-selector');
+		this._map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1);
+		div.appendChild(cont1);
+		
+		// 2nd container with starts and ends. Invisible by default.
+		const cont2 = document.createElement('section');
+		cont2.classList.add('tile-selector');
+		cont2.classList.add('invisible');
+		this._map.dessinerTuiles([7, 12], [0, 0], cont2);
+		div.appendChild(cont2);
+		
+		// 3rd container with checkpoints. Invisible by default.
+		const cont3 = document.createElement('section');
+		cont3.classList.add('tile-selector');
+		cont3.classList.add('invisible');
+		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
+		div.appendChild(cont3);
+	//****************************************************************************************************************************
+	*/
 	
 	document.querySelector('#buttons-info').addEventListener('click', (evt) => {
 		const buttons = document.querySelectorAll('.chooser');
@@ -73,14 +114,12 @@ window.onload = () => {
 					if(sDivs[j].classList.contains('selected')) {
 						tileChooser.matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
 						tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
-						localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 					}
 				}
 			}
 			else if(evt.button === 2) { // right click listener (rotate)
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
-				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 			}
 		});
 	}
@@ -89,4 +128,8 @@ window.onload = () => {
 	document.querySelector('#reinitbutton').addEventListener('click', () => {
 		tileChooser.reset();
 	});
+}
+
+window.onunload = () => {
+	if (tileChooser !== undefined) window.localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 }

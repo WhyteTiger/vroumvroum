@@ -6,6 +6,7 @@ window.localStorage.setItem("username", 		  "anonymous");
 window.localStorage.setItem("playerId", 		  1);
 window.localStorage.setItem("alreadyRegister", "");
 window.localStorage.setItem("circuitId",       "1");
+window.localStorage.setItem("matrix",          "");
 
 window.localStorage.setItem("personal", "false");
 

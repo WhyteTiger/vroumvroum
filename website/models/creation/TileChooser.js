@@ -13,11 +13,16 @@ export class TileChooser {
 	
 	init(){
 		console.log("TileChooser début init");
-		if(localStorage.getItem('matrix') === null || localStorage.getItem('matrix') === '') this.newMatrix();
+		const localStorageMatrix = localStorage.getItem('matrix');
+		console.log("localStorageMatrix : "+ localStorageMatrix);
+		if(localStorageMatrix === null || localStorageMatrix === undefined || localStorageMatrix === "") {
+			this.newMatrix();
+		} else {
+			this._matrix = JSON.parse(localStorageMatrix);
+		}
 		
 		const div = document.querySelector('#choosers');
 		this._circuit = document.querySelector('#circuit');
-		this._matrix  = JSON.parse(localStorage.getItem('matrix'));
 		
 		// empty circuit
 		this._map.dessinerTuiles(this._matrix[0], this._matrix[1], this._circuit, 80);
@@ -57,6 +62,14 @@ export class TileChooser {
 		return this._matrix;
 	}
 	
+	setCircuit(value) {
+		this._circuit = value;
+	}
+	
+	setMatrix(value) {
+		this._matrix = value;
+	}
+	
 	newMatrix() {
 		let newMatrix = [[], []];
 		for(let i = 0; i < 96; i++) {
@@ -64,14 +77,11 @@ export class TileChooser {
 			newMatrix[1].push(0);
 		}
 		this._matrix = newMatrix;
-		localStorage.setItem('matrix', JSON.stringify(this._matrix));
 		console.log(this._matrix);
 	}
 	
 	reset() {
-		console.log("TileChooser début reset");
 		this.newMatrix();
 		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
-		console.log("TileChooser fin reset");
 	}
 }
