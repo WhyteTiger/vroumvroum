@@ -231,10 +231,10 @@ localStorage.personal = "false";
 
 // display the correct elements depending on whether the page is personal or not
 if(localStorage.personal === "false") {
-    document.querySelectorAll('.true').forEach((elt) => { elt.classList.add('invisible'); });
+    document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.add('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.remove('invisible'); });
 } else if(localStorage.personal === "true") {
-    document.querySelectorAll('.true').forEach((elt) => { elt.classList.remove('invisible'); });
+    document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.remove('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
 
