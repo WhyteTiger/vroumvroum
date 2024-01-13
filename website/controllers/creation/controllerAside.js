@@ -1,4 +1,5 @@
-import {API} from "../../models/API.js";
+import { API } from "../../models/API.js";
+import { Alert } from "../../models/entities/Alert.js";
 
 console.log('aside')
 console.log(localStorage)
@@ -18,6 +19,9 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 		
 		console.log(document.querySelector('aside input').value)
 		console.log(localStorage.playerId)
+		
+		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "", 'save');
+		popUp.customAlert();
 		
 		/*
 		const playerIdIn    = localStorage.playerId;

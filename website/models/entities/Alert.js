@@ -1,9 +1,10 @@
 /*
     different types :
-        - warning : lack of vroumCoin, need a connection...
-        - input : need to enter text
+        - warning      : lack of vroumCoin, need a connection...
+        - input        : need to enter text
         - startCircuit : before the start of the race
-        - endCircuit : after the end of the race
+        - endCircuit   : after the end of the race
+        - save         : to save circuit
  */
 window.localStorage.setItem("inputField", "");
 export class Alert{
@@ -14,10 +15,10 @@ export class Alert{
 
 
     constructor(message, labelButton, link, type) {
-        this.message = message;
+        this.message     = message;
         this.labelButton = labelButton;
-        this.link = link;
-        this.type = type;
+        this.link        = link;
+        this.type        = type;
         console.log(this.link);
     }
 
@@ -39,6 +40,9 @@ export class Alert{
                 break;
             case 'input' :
                 this.alertInput(alertCustom, overlay);
+                break;
+            case 'save' :
+                this.alertSave(alertCustom, overlay);
                 break;
             default:
                 console.log('Aucun cas ne correspond !');
@@ -328,5 +332,77 @@ export class Alert{
 
         alertCustom.style.display = 'block';
         overlay.style.display = 'block';
+    }
+    
+    alertSave(alertCustom, overlay){
+        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.color = '#ffffff';
+        alertCustom.style.border = '1px solid #d9323';
+        
+        
+        const closeButton = document.createElement('button');
+        closeButton.id        = 'closeAlert';
+        closeButton.innerText = 'X';
+        alertCustom.appendChild(closeButton);
+        
+        
+        // css :
+        closeButton.style.background = '#0048fd';
+        closeButton.style.color = '#ffffff';
+        
+        const pMessage = document.createElement('p');
+        pMessage.innerText = this.message;
+        pMessage.id        = 'pMessage';
+        alertCustom.appendChild(pMessage);
+        
+        const circuitNameInput = document.createElement('input');
+        circuitNameInput.type        = 'text';
+        circuitNameInput.className   = 'inputField';
+        circuitNameInput.placeholder = 'Nom du circuit...';
+        alertCustom.appendChild(circuitNameInput);
+        
+        const circuitLapsInput = document.createElement('input');
+        circuitLapsInput.type        = 'text';
+        circuitLapsInput.className   = 'inputField';
+        circuitLapsInput.placeholder = 'Nombre de tours...';
+        alertCustom.appendChild(circuitLapsInput);
+        
+        const actionbutton = document.createElement('button');
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
+        
+        // css :
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
+        
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+        });
+        
+        actionbutton.addEventListener('click', () => {
+            
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            
+            console.log(actionbutton.innerText);
+            console.log(this.link);
+            console.log("circuitNameInput.value : "+ circuitNameInput.value);
+            console.log("circuitLapsInput.value : "+ circuitLapsInput.value);
+            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[0-9]$/)) {
+                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
+                errorAlert.customAlert();
+            } else {
+                if (this.link != null){
+                    localStorage.setItem('circuitName', circuitNameInput.value);
+                    localStorage.setItem('circuitLaps', circuitLapsInput.value);
+                    console.log('changement de page');
+                    document.location.href = this.link;
+                }
+            }
+        });
+        
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
     }
 }
