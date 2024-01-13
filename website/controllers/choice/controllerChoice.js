@@ -127,6 +127,7 @@ function fetchPage(nb, nbPages) {
                     if(leaderBoard[0] === null) {
                         document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
+                        document.querySelector("#leaderboard-players").textContent = "";
                         for (let i = 0; i < 5; i++) {
                             
                             if (leaderBoard[2*i] !== undefined) {
