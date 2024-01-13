@@ -12,8 +12,8 @@ function fetchPage(nb, nbPages) {
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
     let creatorFilterValue = document.getElementById('creator-filter').value;
-    if(circuitFilterValue !== '' || circuitFilterValue !== undefined || circuitFilterValue !== null) circuitFilterValue = undefined;
-    if(creatorFilterValue !== '' || creatorFilterValue !== undefined || creatorFilterValue !== null) creatorFilterValue = undefined;
+    if(circuitFilterValue === '' || circuitFilterValue === undefined || circuitFilterValue === null) circuitFilterValue = undefined;
+    if(creatorFilterValue === '' || creatorFilterValue === undefined || creatorFilterValue === null) creatorFilterValue = undefined;
 
     let fetchParams;
 
