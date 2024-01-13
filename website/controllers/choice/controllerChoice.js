@@ -113,7 +113,7 @@ function fetchPage(nb, nbPages) {
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
 
-                    if(localStorage.personal === "true") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+                    if(localStorage.personal === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
                     console.log('oups')
@@ -156,8 +156,8 @@ function fetchCircuits() {
     console.log("filtersssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
     console.log(circuitFilterValue)
     console.log(creatorFilterValue)
-    if(circuitFilterValue === '' ||circuitFilterValue === null) circuitFilterValue = undefined;
-    if(creatorFilterValue === '' ||creatorFilterValue === null) creatorFilterValue = undefined;
+    if(circuitFilterValue === '' || circuitFilterValue === null) circuitFilterValue = undefined;
+    if(creatorFilterValue === '' || creatorFilterValue === null) creatorFilterValue = undefined;
 
     // fetch the number of circuits
     if(localStorage.getItem("personal") === "true") {
