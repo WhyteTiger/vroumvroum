@@ -1,4 +1,4 @@
-import {API} from "../../models/API.js";
+import { API } from "../../models/API.js";
 
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
@@ -12,8 +12,8 @@ function fetchPage(nb, nbPages) {
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
     let creatorFilterValue = document.getElementById('creator-filter').value;
-    if(circuitFilterValue === '' || circuitFilterValue === undefined || circuitFilterValue === null) circuitFilterValue = undefined;
-    if(creatorFilterValue === '' || creatorFilterValue === undefined || creatorFilterValue === null) creatorFilterValue = undefined;
+    if(circuitFilterValue === '' || circuitFilterValue === null) circuitFilterValue = undefined;
+    if(creatorFilterValue === '' || creatorFilterValue === null) creatorFilterValue = undefined;
 
     let fetchParams;
 
@@ -21,20 +21,19 @@ function fetchPage(nb, nbPages) {
     if(localStorage.personal === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
-            pageNumberIn: nb,
-            circuitNameIn: circuitFilterValue,
+            pageNumberIn:      nb,
+            circuitNameIn:     circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
     } else if(localStorage.personal === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
             playerIdIn: +localStorage.getItem("playerId"),
-            pageNumberIn: nb,
-            circuitNameIn: circuitFilterValue,
+            pageNumberIn:      nb,
+            circuitNameIn:     circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
     }
-
     let params = {
         method: "POST",
         headers: {
@@ -76,11 +75,9 @@ function fetchPage(nb, nbPages) {
 
             boxList[i].appendChild(p1);
             boxList[i].appendChild(p2);
-
             
 
             console.log(boxList[i])
-
             
 
             boxList[i].addEventListener('click', () => {
@@ -98,7 +95,6 @@ function fetchPage(nb, nbPages) {
                 fetchParams = {
                     circuitIdIn: id
                 };
-
                 const params = {
                     method: "POST",
                     headers: {
@@ -142,11 +138,11 @@ function fetchPage(nb, nbPages) {
                         }
                     }
                 })
-                .catch((err) => console.log(`error : dataCircuit : ${err}`));
+                .catch((err) => console.error(`error : dataCircuit : ${err}`));
             });
         }
     })
-    .catch((error) => console.log(`fetch error : nbCircuits : ${error}`));
+    .catch((error) => console.error(`fetch error : nbCircuits : ${error}`));
 
 }
 
@@ -160,8 +156,8 @@ function fetchCircuits() {
     console.log("filtersssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
     console.log(circuitFilterValue)
     console.log(creatorFilterValue)
-    if(circuitFilterValue !== '' || circuitFilterValue !== undefined || circuitFilterValue !== null) circuitFilterValue = undefined;
-    if(creatorFilterValue !== '' || creatorFilterValue !== undefined || creatorFilterValue !== null) creatorFilterValue = undefined;
+    if(circuitFilterValue === '' ||circuitFilterValue === null) circuitFilterValue = undefined;
+    if(creatorFilterValue === '' ||creatorFilterValue === null) creatorFilterValue = undefined;
 
     // fetch the number of circuits
     if(localStorage.getItem("personal") === "true") {
@@ -209,15 +205,12 @@ function fetchCircuits() {
                     fetchPage(1, nbPages);
                 }
             });
-            
             document.querySelector('.fa-backward').addEventListener('click', (evt) => {
                 if(currentPage > 1) fetchPage(--currentPage, nbPages);
             });
-            
             document.querySelector('.fa-forward').addEventListener('click', (evt) => {
                 if(currentPage < nbPages) fetchPage(++currentPage, nbPages);
             });
-            
             document.querySelector('.fa-forward-step').addEventListener('click', (evt) => {
                 if(currentPage < nbPages) {
                     currentPage = nbPages;
@@ -225,10 +218,7 @@ function fetchCircuits() {
                 }
             });
        // }
-
-
        
-
     })
     .catch((error) => console.log(`error : circuits : ${error}`));
 
