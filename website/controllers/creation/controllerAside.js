@@ -19,8 +19,41 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 		console.log(document.querySelector('aside input').value)
 		console.log(localStorage.playerId)
 		
-		// TODO API : enregistrer le fichier avec l'id de l'user et matrix (à transformer au passage pour que ça rentre dans la DB)
+		/*
+		const playerIdIn    = localStorage.playerId;
+		const matrixIn      = JSON.parse(localStorage.getItem('matrix'));
+		const circuitNameIn = localStorage.circuitName;
+		const creatorTimeIn = localStorage.creatorTime;
+		const circuitLapsIn = localStorage.circuitLaps;
 		
+		const url = API.getURLpostCircuitOfPlayerId();
+		const dataCircuit = {
+			playerIdIn,
+			matrixIn,
+			circuitNameIn,
+			creatorTimeIn,
+			circuitLapsIn
+		};
+		const params = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dataCircuit)
+		};
+		console.log(params);
 		
+		fetch(url, params)
+			.then((response) => response.json())
+			.then((dataCircuit) => {
+				console.log(dataCircuit);
+				if (dataCircuit[0].success === "true") {
+					console.log("saved successfully");
+				} else {
+					console.error("saved error");
+				}
+			});
+			
+		 */
 	});
 }

@@ -116,10 +116,12 @@ window.onload = () => {
 						tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 					}
 				}
-			}
-			else if(evt.button === 2) { // right click listener (rotate)
+				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+				
+			} else if (evt.button === 2) { // right click listener (rotate)
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
+				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 			}
 		});
 	}
@@ -127,9 +129,10 @@ window.onload = () => {
 	// GESTION DE LA REINITIALISATION
 	document.querySelector('#reinitbutton').addEventListener('click', () => {
 		tileChooser.reset();
+		localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix))
 	});
 }
 
 window.onunload = () => {
-	if (tileChooser !== undefined) window.localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+	if (tileChooser !== undefined) localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 }

@@ -7,7 +7,7 @@ export class TileChooser {
 	_matrix
 	
 	constructor() {
-		this._map = new Map(new Tileset("circuit.png"), [[]], [[]]);
+		this._map = new Map(new Tileset("circuit.png"), [[]], [[]]); //PB de chargement au début : pas test de bouger cette ligne
 		this.init();
 	}
 	
