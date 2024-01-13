@@ -12,15 +12,16 @@ export class TileChooser {
 	}
 	
 	init(){
+		console.log("TileChooser début init");
 		if(localStorage.getItem('matrix') === null || localStorage.getItem('matrix') === '') this.newMatrix();
 		
 		const div = document.querySelector('#choosers');
-		this._circuit  = document.querySelector('#circuit');
+		this._circuit = document.querySelector('#circuit');
 		this._matrix  = JSON.parse(localStorage.getItem('matrix'));
 		
 		// empty circuit
 		this._map.dessinerTuiles(this._matrix[0], this._matrix[1], this._circuit, 80);
-		this._map.replaceTiles(this._matrix[0], this._matrix[1], this._circuit, 80, this._matrix[1]);
+		this._map.replaceTiles(  this._matrix[0], this._matrix[1], this._circuit, 80, this._matrix[1]);
 		
 		// 1st container with common tiles. Visible by default.
 		const cont1 = document.createElement('section');
@@ -41,8 +42,8 @@ export class TileChooser {
 		cont3.classList.add('invisible');
 		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
 		div.appendChild(cont3);
+		console.log("TileChooser fin init");
 	}
-	
 	
 	get circuit() {
 		return this._circuit;
@@ -62,16 +63,15 @@ export class TileChooser {
 			newMatrix[0].push(1);
 			newMatrix[1].push(0);
 		}
-		localStorage.setItem('matrix', JSON.stringify(newMatrix));
+		this._matrix = newMatrix;
+		localStorage.setItem('matrix', JSON.stringify(this._matrix));
+		console.log(this._matrix);
+	}
+	
+	reset() {
+		console.log("TileChooser début reset");
+		this.newMatrix();
+		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
+		console.log("TileChooser fin reset");
 	}
 }
-
-
-
-
-
-
-
-
-
-

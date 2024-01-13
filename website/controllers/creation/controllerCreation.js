@@ -3,7 +3,7 @@ import {TileChooser} from "../../models/creation/TileChooser.js";
 window.onload = () => {
 	console.log("CONTROLLER CREATION ONLOAD");
 	const tileChooser = new TileChooser();
-	console.log("CONTROLLER CREATION SUITE");
+	console.log("CONTROLLER CREATION SUITE1");
 	
 	document.querySelector('#buttons-info').addEventListener('click', (evt) => {
 		const buttons = document.querySelectorAll('.chooser');
@@ -77,7 +77,7 @@ window.onload = () => {
 					}
 				}
 			}
-			else if(evt.button === 2) {     // right click listener (rotate)
+			else if(evt.button === 2) { // right click listener (rotate)
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
@@ -87,10 +87,6 @@ window.onload = () => {
 	
 	// GESTION DE LA REINITIALISATION
 	document.querySelector('#reinitbutton').addEventListener('click', () => {
-		tileChooser.newMatrix();
-		const newMatrix = JSON.parse(localStorage.getItem('matrix'));
-		console.log(newMatrix)
-		tileChooser.map.replaceTiles(newMatrix[0], newMatrix[1], tileChooser.circuit, 80, newMatrix[1]);
-		localStorage.setItem('matrix', JSON.stringify(newMatrix));
+		tileChooser.reset();
 	});
 }
