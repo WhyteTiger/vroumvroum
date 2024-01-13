@@ -199,19 +199,19 @@ function fetchCircuits() {
     
         // eventListeners for the page selector, only if there is more than 1 page
         //if(nbPages > 1) {
-            document.querySelector('.fa-backward-step').addEventListener('click', (evt) => {    // go back to the 1st page
+            document.querySelector('.fa-backward-step').addEventListener('click', () => {    // go back to the 1st page
                 if(currentPage > 1) {
                     currentPage = 1;
                     fetchPage(1, nbPages);
                 }
             });
-            document.querySelector('.fa-backward').addEventListener('click', (evt) => {
+            document.querySelector('.fa-backward').addEventListener('click', () => {
                 if(currentPage > 1) fetchPage(--currentPage, nbPages);
             });
-            document.querySelector('.fa-forward').addEventListener('click', (evt) => {
+            document.querySelector('.fa-forward').addEventListener('click', () => {
                 if(currentPage < nbPages) fetchPage(++currentPage, nbPages);
             });
-            document.querySelector('.fa-forward-step').addEventListener('click', (evt) => {
+            document.querySelector('.fa-forward-step').addEventListener('click', () => {
                 if(currentPage < nbPages) {
                     currentPage = nbPages;
                     fetchPage(nbPages, nbPages);
@@ -239,11 +239,11 @@ if(localStorage.personal === "false") {
 }
 
 // eventListener for the filters
-document.getElementById('name-filter').addEventListener('keydown', (evt) => {
+document.getElementById('name-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-document.getElementById('creator-filter').addEventListener('keydown', (evt) => {
+document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
