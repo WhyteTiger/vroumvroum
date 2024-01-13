@@ -4,7 +4,7 @@ console.log('aside')
 console.log(localStorage)
 console.log(localStorage.isConnected)
 
-/* NOTE : THIS SCRIPT APPLIES TO ALL ASIDES IN THE APP, EXPLAINING WHY THERE ARE SO MANY IF STATEMENTS */
+/* NOTE : THIS SCRIPT APPLIES TO ALL ASIDES IN THE APP, EXPLAINING WHY THERE ARE "SO MANY" IF STATEMENTS */
 
 if(document.querySelector('#savebutton') === null) {    // means we're on the choice page
 	

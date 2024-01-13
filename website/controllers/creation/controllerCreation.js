@@ -1,8 +1,9 @@
-import {TileChooser} from "../../models/creation/tileChooserWController.js";
+import {TileChooser} from "../../models/creation/TileChooser.js";
 
 window.onload = () => {
-	
+	console.log("CONTROLLER CREATION ONLOAD");
 	const tileChooser = new TileChooser();
+	console.log("CONTROLLER CREATION SUITE");
 	
 	document.querySelector('#buttons-info').addEventListener('click', (evt) => {
 		const buttons = document.querySelectorAll('.chooser');
