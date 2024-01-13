@@ -121,15 +121,23 @@ function fetchPage(nb, nbPages) {
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
                     console.log('oups')
-
+                    
                     // to manage the 5 (or less) best scores
-                    if(dataCircuit.leaderBoard === null) {
-                        document.querySelector("#leaderboard-players" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                    const leaderBoard = dataCircuit.leaderBoard;
+                    if(leaderBoard[0] === null) {
+                        document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
-                        let i = 0;
-                        for (let player in document.querySelector('#leaderboard-players' + filter + ' p')) {
-                            player.textContent = dataCircuit.leaderBoard[i] + " : " + dataCircuit.leaderBoard[i+1];
-                            i += 2;
+                        for (let i = 0; i < 5; i++) {
+                            
+                            if (leaderBoard[2*i] !== undefined) {
+                                const leaderboardPlayer = document.getElementById("leaderboard-players");
+                                const player = document.createElement("p");
+                                player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                                leaderboardPlayer.appendChild(player);
+                            } else {
+                                //Pour skip la fin du for
+                                i = 12;
+                            }
                         }
                     }
                 })
