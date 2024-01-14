@@ -122,60 +122,56 @@ export class Alert{
 
     alertInput(alertCustom, overlay){
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
-        alertCustom.style.border = '1px solid #d9323';
+        alertCustom.style.color      = '#ffffff';
+        alertCustom.style.border     = '1px solid #d9323';
 
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
-        pMessage.id = 'pMessage';
+        pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
         const inputField = document.createElement('input');
-        inputField.type = 'text';
-        inputField.className = 'inputField';
+        inputField.type        = 'text';
+        inputField.className   = 'inputField';
         inputField.placeholder = 'Entrez du texte...';
         alertCustom.appendChild(inputField);
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.labelButton;
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
 
         // css :
         actionbutton.style.background = '#0048ff';
-        actionbutton.style.color = '#ffffff';
+        actionbutton.style.color      = '#ffffff';
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
-
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
+            
+            localStorage.setItem('inputField', inputField.value);
 
             console.log(actionbutton.innerText);
             console.log(this.link);
             console.log(inputField.value);
-            if (localStorage.inputField !== localStorage.username && this.message === "Nouveau pseudo :"){
-                localStorage.setItem('username', inputField.value);
-                pseudo.innerText = inputField.value;
-            }
             if (this.link != null){
                 console.log(inputField.value);
                 console.log('changement de page');
-                localStorage.setItem('inputField', inputField.value);
                 document.location.href = this.link;
             }
         });
@@ -308,8 +304,8 @@ export class Alert{
 
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.labelButton;
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
@@ -317,7 +313,7 @@ export class Alert{
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
@@ -337,17 +333,17 @@ export class Alert{
         document.body.appendChild(alertCustom);
 
         alertCustom.style.display = 'block';
-        overlay.style.display = 'block';
+        overlay.style.display     = 'block';
     }
 
     alertImgProfile(alertCustom, overlay){
         // css :
         alertCustom.style.background = '#5fdaff';
-        alertCustom.style.color = '#000000';
-        alertCustom.style.border = '1px solid #d9323';
+        alertCustom.style.color      = '#000000';
+        alertCustom.style.border     = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
@@ -355,7 +351,7 @@ export class Alert{
 
         // css :
         closeButton.style.background = '#2299b9';
-        closeButton.style.color = '#ffffff'
+        closeButton.style.color      = '#ffffff'
 
         closeButton.addEventListener('mouseenter', () => {
             closeButton.style.backgroundColor = '#000000';
@@ -368,7 +364,7 @@ export class Alert{
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
-        pMessage.id = 'pMessage';
+        pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
         let selectedCanvas = null;
@@ -379,7 +375,7 @@ export class Alert{
         tileset.onload = () => {
             for (let i = 0; i < 12; i++) {
                 const canvas = document.createElement('canvas');
-                canvas.width = 60;
+                canvas.width  = 60;
                 canvas.height = 60;
                 canvas.style.marginRight = '10px';
 
@@ -411,39 +407,34 @@ export class Alert{
                     if (selectedCanvas) {
                         selectedCanvas.style.border = 'none';
                     }
-
                     selectedCanvas = canvas;
-
                     canvas.style.border = '1px solid #000';
-
-
+                    
                     window.localStorage.setItem("imgProfilId", canvasId);
 
                     updateProfileImage(window.localStorage.imgProfilId);
                 });
-
-
                 alertCustom.appendChild(canvas);
             }
 
             const actionbutton = document.createElement('button');
-            actionbutton.id = 'buttonAlert';
-            actionbutton.innerHTML = this.labelButton;
+            actionbutton.id        = 'buttonAlert';
+            actionbutton.innerText = this.labelButton;
 
             // css :
             actionbutton.style.background = '#2299b9';
-            actionbutton.style.color = '#ffffff';
+            actionbutton.style.color      = '#ffffff';
 
             closeButton.addEventListener('click', () => {
                 alertCustom.style.display = 'none';
-                overlay.style.display = 'none';
+                overlay.style.display     = 'none';
                 updateProfileImage(window.localStorage.imgProfilId);
             });
 
             actionbutton.addEventListener('click', () => {
 
                 alertCustom.style.display = 'none';
-                overlay.style.display = 'none';
+                overlay.style.display     = 'none';
 
                 console.log(actionbutton.innerText);
                 console.log(this.link);
@@ -472,13 +463,12 @@ function updateProfileImage(imgProfilId) {
         const tileSize = 160;
 
         const tileX = imgProfilId * tileSize;
-        const tileY = 4*160;
+        const tileY = 4 * 160;
 
-        canvas.width = 150;
+        canvas.width  = 150;
         canvas.height = 150;
 
         ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
         previewImage.src = canvas.toDataURL('image/png');
     };
-
 }

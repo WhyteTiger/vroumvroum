@@ -24,11 +24,61 @@ input.addEventListener('click', () => {
 editButton.addEventListener('click', () => {
     const newAlert = new Alert("Nouveau pseudo :", "Enregistrer", null, "input");
     newAlert.customAlert();
+    
+    const playerId    = localStorage.getItem("playerId");
+    const newUsername = localStorage.getItem("inputField");
+    
+    const url         = API.getURLupdatePlayerUsername();
+    const dataUsername = {
+        playerIdIn:     playerId,
+        newUsernameIn:  newUsername
+    };
+    const params = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataUsername)
+    };
+    console.log(params);
+    
+    fetch(url, params)
+       .then((response) => response.json())
+       .then((result) => {
+           console.log(result);
+       });
+    
+    localStorage.setItem("username", newUsername);
 });
 
 editPassword.addEventListener('click', () => {
     const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "input");
     newAlert.customAlert();
+    
+    const playerId = localStorage.getItem("playerId");
+    const newPwd   = localStorage.getItem("inputField");
+    
+    const url             = API.getURLupdatePasswordOfPlayerId();
+    const dataPwd = {
+        playerIdIn: playerId,
+        newPwdIn:   newPwd
+    };
+    const params = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataPwd)
+    };
+    console.log(params);
+    
+    fetch(url, params)
+       .then((response) => response.json())
+       .then((result) => {
+           console.log(result);
+       });
+    
+    localStorage.setItem("inputField", "");
 });
 
 function updateProfileImage(imgProfilId) {
@@ -52,7 +102,8 @@ function updateProfileImage(imgProfilId) {
     };
     
     const playerId = localStorage.getItem("playerId");
-    const url = API.getURLupdatePPIdOfPlayerId();
+    
+    const url      = API.getURLupdatePPIdOfPlayerId();
     const dataPP = {
         playerIdIn: playerId,
         newPPIdIn:  imgProfilId

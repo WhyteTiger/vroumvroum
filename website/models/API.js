@@ -46,6 +46,11 @@ export class API {
       
       return 'http://'+API.server+'/personalize/updatePlayerUsername';
    }
+   
+   static getURLupdatePasswordOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/updatePasswordOfPlayerId';
+   }
 
    static getURLpostCircuitsNumber() {
 
