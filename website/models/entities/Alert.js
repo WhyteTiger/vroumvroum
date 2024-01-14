@@ -168,7 +168,7 @@ export class Alert{
             console.log(actionbutton.innerText);
             console.log(this.link);
             console.log(inputField.value);
-            if (localStorage.inputField !== localStorage.username){
+            if (localStorage.inputField !== localStorage.username && this.message === "Nouveau pseudo :"){
                 localStorage.setItem('username', inputField.value);
                 pseudo.innerText = inputField.value;
             }
