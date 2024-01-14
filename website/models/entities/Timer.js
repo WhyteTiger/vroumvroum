@@ -32,4 +32,18 @@ export class Timer {
             compteur.textContent = temps;
         }
     } 
+    timeToString(temps){
+        let seconde = Math.floor(temps/1000);
+        let min = Math.floor(seconde/60);
+        seconde = seconde%60;
+        let milliseconds = temps%1000;
+        if(milliseconds<10){
+            milliseconds = "00"+milliseconds;
+        }
+        if(milliseconds<100){
+            milliseconds = "0"+milliseconds;
+        }
+        temps = min+":"+seconde+":"+milliseconds;
+        return temps;
+    }
 }
