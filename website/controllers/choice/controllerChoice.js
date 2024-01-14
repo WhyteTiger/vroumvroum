@@ -113,6 +113,8 @@ function fetchPage(nb, nbPages) {
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
 
+                    document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
+
                     if(localStorage.personal === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
@@ -132,7 +134,7 @@ function fetchPage(nb, nbPages) {
                                 player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
                                 leaderboardPlayer.appendChild(player);
                             } else {
-                                //Pour skip la fin du for
+                                // to skip end of for loop
                                 i = 12;
                             }
                         }
