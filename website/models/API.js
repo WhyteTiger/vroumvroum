@@ -7,9 +7,9 @@ export class API {
       return 'http://'+API.server+'/connection/tryToConnect';
    }
    
-   static getURLWhantToRegistrate() {
+   static getURLWantToRegistrate() {
       
-      return 'http://'+API.server+'/connection/whantToRegistrate';
+      return 'http://'+API.server+'/connection/wantToRegistrate';
    }
    
    static getURLgetCircuitTileById() {

@@ -1,5 +1,5 @@
 import { Alert } from "../../models/entities/Alert.js";
-import {API} from "../../models/API";
+import { API }   from "../../models/API.js";
 
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
@@ -10,9 +10,30 @@ const pseudo       = document.getElementById('pseudo');
 pseudo.innerText = window.localStorage.username;
 const previewImage = document.getElementById('previewImage');
 
-//vroumcoin.innerText = 12;
+const playerId = localStorage.getItem("playerId");
+
+const url = API.getURLgetKartsAndCoinsByPlayerId();
+const dataVroumCoins = {
+    playerIdIn: playerId
+};
+const params = {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataVroumCoins)
+};
+console.log(params);
+fetch(url, params)
+   .then((response) => response.json())
+   .then((result) => {
+       console.log(result);
+       
+       vroumcoin.innerText = result.vroumCoins;
+   });
 
 updateProfileImage(window.localStorage.imgProfilId);
+
 input.addEventListener('click', () => {
     console.log(window.localStorage.imgProfilId);
 

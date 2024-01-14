@@ -1,8 +1,8 @@
 import {API} from "../../models/API.js";
 
-async function whantToRegistrate(nickname, password) {
+async function wantToRegistrate(nickname, password) {
 	
-	const url = API.getURLWhantToRegistrate();
+	const url = API.getURLWantToRegistrate();
 	const data = {
 		nicknameIn: nickname,
 		passwordIn: password
@@ -18,14 +18,13 @@ async function whantToRegistrate(nickname, password) {
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
+			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			
-			if (window.localStorage.alreadyRegister === "false") {
-				window.localStorage.isConnected = "true";
-				window.localStorage.playerId    = data.playerIdOut;
-				window.localStorage.username    = data.usernameOut;
-				
-				console.log("LLLAAAA"+data.playerIdOut);
+			if (localStorage.alreadyRegister === "false") {
+				localStorage.isConnected = "true";
+				localStorage.playerId    = data.playerIdOut;
+				localStorage.username    = data.usernameOut;
+				localStorage.imgProfilId = data.imgProfilIdOut;
 				
 				document.location.href="../views/home.html";
 			} else {
