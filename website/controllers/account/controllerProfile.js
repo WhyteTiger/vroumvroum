@@ -7,7 +7,7 @@ const editPassword = document.getElementById('editPassword');
 const vroumcoin    = document.getElementById('vroumcoin');
 const pseudo       = document.getElementById('pseudo');
 
-pseudo.innerText = window.localStorage.username;
+pseudo.innerText = localStorage.username;
 const previewImage = document.getElementById('previewImage');
 
 const playerId = localStorage.getItem("playerId");
@@ -32,14 +32,14 @@ fetch(url, params)
        vroumcoin.innerText = result.vroumCoins;
    });
 
-updateProfileImage(window.localStorage.imgProfilId);
+updateProfileImage(localStorage.imgProfilId);
 
 input.addEventListener('click', () => {
-    console.log(window.localStorage.imgProfilId);
+    console.log(localStorage.imgProfilId);
 
     const newAlert = new Alert("choisissez une image :", "valider", null, "imgProfile");
     newAlert.customAlert();
-    updateProfileImage(window.localStorage.imgProfilId);
+    updateProfileImage(localStorage.imgProfilId);
 });
 
 editButton.addEventListener('click', () => {
