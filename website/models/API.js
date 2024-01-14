@@ -46,7 +46,7 @@ export class API {
 
       return 'http://'+API.server+'/hubs/getCircuits';
    }
-
+   
    static getURLpostCircuitOfPlayerId() {
 
       return 'http://'+API.server+'/creation/postCircuitOfPlayerId';
