@@ -36,6 +36,16 @@ export class API {
       
       return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
    }
+   
+   static getURLupdatePPIdOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/updatePPIdOfPlayerId';
+   }
+   
+   static getURLupdatePlayerUsername() {
+      
+      return 'http://'+API.server+'/personalize/updatePlayerUsername';
+   }
 
    static getURLpostCircuitsNumber() {
 
