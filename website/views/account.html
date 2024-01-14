@@ -8,9 +8,10 @@
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/headerStyle.css">
         <link rel="stylesheet" href="styles/accountStyle.css">
+        <link rel="stylesheet" href="styles/alertStyle.css">
 
         <script src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script src="../controllers/account/controllerProfile.js" defer></script>
+        <script type="module" src="../controllers/account/controllerProfile.js" defer></script>
     </head>
 
     <body>
@@ -20,14 +21,18 @@
             <form id="formCompte">
 
                 <div id="previewContainer">
-                    <img id="previewImage" src="../../assets/logo.png" alt="Aperçu de la photo de profil">
+                    <img id="previewImage" src="" alt="Aperçu de la photo de profil">
                 </div>
-                <label for="compteImg" id="labelFile">Choisir une nouvelle photo</label>
-                <input type="file" name="compteImg" id="compteImg" accept="image/*">
+                <p id="labelFile">Choisir une nouvelle photo</p>
 
                 <div id="name">
-                    <label for="pseudo">Nom joueur :</label>
-                    <input type="text" name="pseudo" id="pseudo" value="NomJoueur" readonly>
+                    <p>Nom du joueur :</p>
+                    <p id="pseudo"></p>
+                </div>
+
+                <div id="vroumCoinDiv">
+                    <p>Nombre de VroumCoin :</p>
+                    <p id="vroumcoin"></p>
                 </div>
 
                 <button type="button" id="editButton">Modifier</button>

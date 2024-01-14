@@ -11,7 +11,7 @@
 }
 
 
-#pseudo{
+/*#pseudo{
     font-family:'Courier New', Courier, monospace;
     font-size: 25px;
     font-weight: bold;
@@ -22,9 +22,9 @@
     transition: all 0.3s;
     box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.2);
     border: rgb(128, 128, 128) solid 1px;
-}
+}*/
 
-label{
+label, p{
     color: #000000;
     font-weight: bold;
     font-size: 30px;
@@ -52,15 +52,13 @@ form {
     cursor: pointer;
     font-size: 20px;
     margin-bottom: 50px;
+    color: #000000;
+    font-weight: bold;
 }
 
 #labelFile:hover{
     color: #ff0000;
     font-size: 25px;
-}
-
-#compteImg {
-    display: none;
 }
 
 #previewContainer{
@@ -83,4 +81,9 @@ form {
 input{
     color: grey;
     margin-bottom: 30px;
+}
+
+#vroumCoinDiv, #name {
+    display: flex;
+    align-items: center;
 }
