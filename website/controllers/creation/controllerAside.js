@@ -22,15 +22,16 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 		
 		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "", 'save');
 		popUp.customAlert();
+
+		console.log("melvyn")
+		console.log(localStorage.getItem("creatorTime"))
 		
-		/*
-		const playerIdIn    = localStorage.playerId;
+		const playerIdIn    = localStorage.getItem("playerId");
 		const matrixIn      = JSON.parse(localStorage.getItem('matrix'));
-		const circuitNameIn = localStorage.circuitName;
-		const creatorTimeIn = localStorage.creatorTime;
-		const circuitLapsIn = localStorage.circuitLaps;
+		const circuitNameIn = localStorage.getItem("circuitName");
+		const creatorTimeIn = localStorage.getItem("creatorTime") === null ? 0 : localStorage.getItem("creatorTime");
+		const circuitLapsIn = localStorage.getItem("circuitLaps");
 		
-		const url = API.getURLpostCircuitOfPlayerId();
 		const dataCircuit = {
 			playerIdIn,
 			matrixIn,
@@ -47,17 +48,15 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 		};
 		console.log(params);
 		
-		fetch(url, params)
+		fetch(API.getURLpostCircuitOfPlayerId(), params)
 			.then((response) => response.json())
 			.then((dataCircuit) => {
 				console.log(dataCircuit);
-				if (dataCircuit[0].success === "true") {
+				if (dataCircuit.success === "true") {
 					console.log("saved successfully");
 				} else {
 					console.error("saved error");
 				}
 			});
-			
-		 */
 	});
 }

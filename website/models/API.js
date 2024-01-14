@@ -48,7 +48,8 @@ export class API {
    }
    
    static getURLpostCircuitOfPlayerId() {
-      return 'http://'+API.server+'/creation/postCircuitOfPlayerId/';
+
+      return 'http://'+API.server+'/creation/postCircuitOfPlayerId';
    }
 }
 
