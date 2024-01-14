@@ -1,9 +1,11 @@
-/* PARTIE GENERALE */
+/* GENERAL */
 
-#main-circuit {
+.circuit-main {
     display: grid;
-    grid-template: auto / 5fr 1fr;
+    grid-template: auto / 5fr 2fr;
 }
+
+/* FOR THE STARS */
 
 #mark p {
     display: inline;
@@ -19,21 +21,15 @@
     align-self: center;
 }
 
-#circuit-infos {
-    padding: 30px;
-    margin: 15px;
-}
-
-/* ZONE DU CIRCUIT */
+/* CIRCUIT ZONE */
 
 canvas {
     border: 1px solid black;
     overflow-x: scroll;
 }
 
-canvas:not(.tile-canvas) {
+canvas {
     display: flex;
-    width: 100%;
 }
 
 #tiles-to-select {
@@ -58,7 +54,7 @@ canvas:not(.tile-canvas) {
     text-align: center;
 }
 
-i {
+aside i {
     color: rgb(190, 168, 0);
 }
 
@@ -68,7 +64,13 @@ i {
 
 /* SELECTEUR DE TUILES */
 
-.tile-selector, #circuit-infos, #choosers button {
+.tile-selector,
+aside,
+#choosers button,
+h1#choice-title,
+#filter,
+#page-selector,
+#true {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);
     border-radius: 16px;
@@ -90,17 +92,12 @@ i {
 }
 
 .tile-selector div {
-    height: 162px;
-    width: 165px;
+    height: 160px;
+    width: 160px;
 }
 
 .tile-selector div.selected {
     border: 2px solid red;
-}
-
-#create-main {
-    display: grid;
-    grid-template: auto / 5fr 2fr;
 }
 
 body {
@@ -152,14 +149,9 @@ body {
 /* ASIDE */
 
 aside {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #00be63;
-    padding: 6em 1em;
-    border-radius: 24px;
-    margin: 2em 5em 2em 1em;
+    padding: 30px;
+    margin: 15px;
+    max-width: 27em;
 }
 
 aside div {
@@ -180,4 +172,70 @@ aside section {
 
 aside p {
     margin: 0.5em 0em;
+}
+
+/* CIRCUIT CHOICE ZONE */
+
+#circuits {
+    display: grid;
+    grid-template: auto / 1fr 1fr 1fr 1fr;
+    row-gap: 60px;
+    column-gap: 50px;
+    margin-top: 2em;
+}
+
+.circuit-box {
+    border: 1px solid black;
+    border-radius: 16px;
+    background-color: #00be63;
+
+    height: 260px;
+    width: 260px;
+}
+
+#choice-section {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#choice-title {
+    padding: 0px 2em 0px 2em;
+}
+
+#filter, #true {
+    display: flex;
+    padding: 5px 0px 5px 20px;
+    
+}
+
+.circuit-box p.invisible {
+    display: none;
+}
+
+.circuit-box:hover {
+    background-color: red;
+}
+
+#page-selector {
+    margin : 3em 0px;
+    padding: 5px;
+}
+
+#page-selector * {
+    display: inline-block;
+    margin: 0px 10px;
+    font-size: 22px;
+}
+
+#page-selector :not(p) {
+    font-size: 36px;
+}
+
+#page-selector i:hover {
+    color: white;
+}
+
+#creator-title {
+    margin-left: 2em;
 }

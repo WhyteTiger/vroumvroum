@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>VroumVroum - Connexion</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Vroumvroum - Création de circuits</title>
 
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/circuitStyle.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="icon" href="../../assets/logo.png">
+    <link rel="stylesheet" href="styles/generalStyle.css">
+    <link rel="stylesheet" href="styles/canvasStyle.css">
+    <link rel="stylesheet" href="styles/circuitStyle.css">
+    <link rel="stylesheet" href="styles/formStyle.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script src="../controllers/redirection/controllerChoiceCircuit.js" defer></script>
-    </head>
 
-    <body>
+    <script src="../controllers/redirection/controllerHeader.js" defer></script>
+    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
+    <script type="module" src="../controllers/choice/controllerChoice.js" defer></script>
+</head>
 
-    <main>
-        <section id="mainCircuit">
+<body>
+    <main class="circuit-main">
 
-            <canvas></canvas>
+        <section id="choice-section">
+            <h1 id="choice-title">Choix du circuit</h1>
 
-            <section id="circuitInfos">
-                <h2>Nom de la carte</h2>
+            <section>
+                <h2 class="true" id="true">Mes circuits</h2>
+                <div id="filter" class="false">
+                    <h2>Filtrer par nom </h2>
+                    <input type="text" id="name-filter">
+                    <h2 id="creator-title">Filtrer par créateur </h2>
+                    <input type="text" id="creator-filter">
+                </div>
+                <section id="circuits"></section>
+            </section>
+
+            <section id="page-selector">
+                <i class="fa-solid fa-backward-step"></i>
+                <i class="fa-solid fa-backward"></i>
+                <p>numéro de page</p>
+                <i class="fa-solid fa-forward"></i>
+                <i class="fa-solid fa-forward-step"></i>
+            </section>
+
+        </section>
+
+        <aside class="false">
+            <section id="empty">
+                <p>Cliquez sur un circuit pour afficher ses informations !</p>
+            </section>
+            <section id="full" class="invisible">
+                <h2 id="circuit-name">Nom de la carte</h2>
 
                 <div id="mark">
                     <p>Note : </p>
@@ -32,39 +60,68 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
 
-                <p>Créateur : </p>
+                <p id="creator-name">Créateur : CreateurUsername</p>
+
+                <p id="creator-score">Médaille auteur : createurScore</p>
 
                 <div id="leaderboard">
-                    <div id="leaderboardTitle">Leaderboard</div>
-                    <div>
-                        <p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p>
+                    <div id="leaderboard-title">Leaderboard</div>
+                    <div id="leaderboard-players">
+
+                        <!--
+                        <p>Player1 : temp1</p>
+                        <p>Player2 : temp2</p>
+                        <p>Player3 : temp3</p>
+                        <p>Player4 : temp4</p>
+                        <p>Player5 : temp5</p>
+                        -->
                     </div>
                 </div>
-            </section>
-        </section>
 
-        <section id="items">
-
-            <section id="choosers">
-                <button></button>
-                <button></button>
-                <button></button>
-
-                <div id="pathChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="startEndChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="checkpointChooser" class="chooser">
-                    <div>test</div>
+                <div>
+                    <button id="playbutton">JOUER</button>
                 </div>
             </section>
+            
+        </aside>
 
-        </section>
+        <aside class="true">
+            <section id="empty-2">
+                <p>Cliquez sur un circuit pour afficher ses informations !</p>
+            </section>
+            <section id="full-2" class="invisible">
+                <h2 id="circuit-name-2">Nom de la carte</h2>
 
+                <div id="mark-2">
+                    <p>Note : </p>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+
+                <p id="creator-score-2">Médaille auteur : createurScore</p>
+
+                <div id="leaderboard-2">
+                    <div id="leaderboard-title-2">Leaderboard</div>
+                    <div id="leaderboard-players-2">
+                        <p>Player1 : temp1</p>
+                        <p>Player2 : temp2</p>
+                        <p>Player3 : temp3</p>
+                        <p>Player4 : temp4</p>
+                        <p>Player5 : temp5</p>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="modify-button">MODIFIER</button>
+                    <button id="delete-button">SUPPRIMER</button>
+                </div>
+            </section>
+            
+        </aside>
+            
     </main>
-    </body>
+</body>
 </html>

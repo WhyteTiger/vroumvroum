@@ -10,7 +10,7 @@ import {Color} from "../entities/Color.js";
 import {ControllerCheckpoint} from "../../controllers/gameplay/controllerCheckpoint.js";
 import {Timer} from "../entities/Timer.js";
 
-window.onload = function () {
+window.onload = () => {
     
    const circuitId = window.localStorage.circuitId;
    

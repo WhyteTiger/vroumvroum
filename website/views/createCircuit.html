@@ -9,16 +9,15 @@
     <link rel="stylesheet" href="styles/canvasStyle.css">
     <link rel="stylesheet" href="styles/circuitStyle.css">
     <link rel="stylesheet" href="styles/formStyle.css">
+    <link rel="stylesheet" href="styles/alertStyle.css">
 
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
-    <script type="module" src="../models/creation/tileChooser.js" defer></script>
+    <script type="module" src="../controllers/creation/controllerCreation.js" defer></script>
     <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
 </head>
 
 <body>
-    <main id="create-main">
-
-        
+    <main class="circuit-main">
 
         <section>
             <section id="circuit"></section>
@@ -37,7 +36,7 @@
 
         <aside>
             <section>
-                <p>Bienvenue dans le créateur de circuits !</p>
+                <h2>Bienvenue dans le créateur de circuits !</h2>
                 <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
                 <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
                 <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>

@@ -1,2 +1,2 @@
 
-document.location.href = "playCircuit.html";
+// document.location.href = "playCircuit.html";

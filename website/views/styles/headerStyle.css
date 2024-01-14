@@ -11,7 +11,7 @@ header {
     top: 0;
 }
 
-header img {
+#logo {
     text-align: left;
     width: 50%;
     transition: scale 0.2s ease 0s;
@@ -31,5 +31,47 @@ header button {
 /* img transition on hover */
 header img:hover {
     scale: 0.9;
+}
+
+#profileImg {
+    margin-right: 1rem;
+    text-align: right;
+    transition: scale 0.2s ease 0s;
+}
+
+/* DROPDOWN MENU */
+
+#burger-wrapper {
+    position: relative;
+    float: left;
+    cursor: pointer;
+}
+
+#burger {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#burger a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+#burger a:hover {
+    background: rgb(212, 212, 212);
+}
+
+#burger.visible {
+    display: block;
 }
 
