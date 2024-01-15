@@ -8,20 +8,40 @@
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/headerStyle.css">
         <link rel="stylesheet" href="styles/accountStyle.css">
-        
+        <link rel="stylesheet" href="styles/alertStyle.css">
+
         <script src="../controllers/redirection/controllerHeader.js" defer></script>
+        <script type="module" src="../controllers/account/controllerProfile.js" defer></script>
     </head>
 
     <body>
 
     <main>
-        <section id="info-display">
-            <div id="main-info">
-                <img src="" alt="Photo de profil">
-                <p>Nom du joueur ici</p>
-            </div>
-            
+        <section id="Formulaire">
+            <form id="formCompte">
+
+                <div id="previewContainer">
+                    <img id="previewImage" src="" alt="Aperçu de la photo de profil">
+                </div>
+                <p id="labelFile">Choisir une nouvelle photo</p>
+
+                <div id="name">
+                    <p>Nom du joueur :</p>
+                    <p id="pseudo"></p>
+                </div>
+
+                <div id="vroumCoinDiv">
+                    <p>Nombre de VroumCoin :</p>
+                    <p id="vroumcoin"></p>
+                </div>
+
+                <button type="button" id="editButton">Modifier Pseudo</button>
+                <button type="button" id="editPassword">Modifier Mot de passe</button>
+            </form>
+        </section>
     </main>
+
+
 
     </body>
 </html>

@@ -7,8 +7,8 @@ link.setAttribute('rel', 'stylesheet');
 link.setAttribute('href', 'styles/headerStyle.css');
 head.appendChild(link);
 
-// const isConnected = window.localStorage.isConnected;
-const isConnected = "true";
+const isConnected = window.localStorage.isConnected;
+//const isConnected = "true";
 const header = document.createElement("header");
 
 const a = document.createElement('a');
@@ -55,6 +55,25 @@ if (isConnected === "false") {
 	profileImg.id = "profileImg";
 	bigdiv.appendChild(profileImg);
 
+
+	const tileset = new Image();
+	tileset.src = "../../assets/tilesets/circuit.png";
+
+	tileset.onload = function () {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
+		const tileSize = 160;
+
+		const tileX = window.localStorage.imgProfilId * tileSize;
+		const tileY = 4*160;
+
+		canvas.width = 50;
+		canvas.height = 50;
+
+		ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
+		profileImg.src = canvas.toDataURL('image/png');
+	};
+
 	const div = document.createElement('div');
 	div.id = 'burger';
 
@@ -79,7 +98,11 @@ if (isConnected === "false") {
 	a3.textContent = 'Déconnexion';
 	a3.id = 'a-acc';
 	a3.addEventListener('click', () => {
-		localStorage.setItem('isConnected', 'false');
+		window.localStorage.setItem("isConnected",     "false");
+		window.localStorage.setItem("rightPassword",   "false");
+		window.localStorage.setItem("username", 		  "anonymous");
+		window.localStorage.setItem("playerId", 		  "0");
+		window.localStorage.setItem("alreadyRegister", "");
 		document.location.href = 'home.html';
 	});
 	div.appendChild(a3);
