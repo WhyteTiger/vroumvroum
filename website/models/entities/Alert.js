@@ -412,41 +412,47 @@ export class Alert{
                 
                 Alert.updateProfileImage(localStorage.imgProfilId);
             });
+
             alertCustom.appendChild(canvas);
+
+
         }
-        
-        const actionbutton = document.createElement('button');
-        actionbutton.id        = 'buttonAlert';
-        actionbutton.innerText = this.labelButton;
-        
-        // css :
-        actionbutton.style.background = '#2299b9';
-        actionbutton.style.color      = '#ffffff';
-        
-        closeButton.addEventListener('click', () => {
-            alertCustom.style.display = 'none';
-            overlay.style.display     = 'none';
-            Alert.updateProfileImage(localStorage.imgProfilId);
-        });
-        
-        actionbutton.addEventListener('click', () => {
-            
-            alertCustom.style.display = 'none';
-            overlay.style.display     = 'none';
-            
-            console.log(actionbutton.innerText);
-            console.log(this.link);
-            if (this.link != null) {
-                console.log('changement de page');
-                document.location.href = this.link;
-            }
-            Alert.updateProfileImage(localStorage.imgProfilId);
-        });
-        
-        alertCustom.appendChild(actionbutton);
-        document.body.appendChild(alertCustom);
-        
-        console.log("tileset.onload sans onload end");
+        setTimeout(() => {
+            const actionbutton = document.createElement('button');
+            actionbutton.id        = 'buttonAlert';
+            actionbutton.innerText = this.labelButton;
+
+            // css :
+            actionbutton.style.background = '#2299b9';
+            actionbutton.style.color      = '#ffffff';
+
+            closeButton.addEventListener('click', () => {
+                alertCustom.style.display = 'none';
+                overlay.style.display     = 'none';
+                Alert.updateProfileImage(localStorage.imgProfilId);
+            });
+
+            actionbutton.addEventListener('click', () => {
+
+                alertCustom.style.display = 'none';
+                overlay.style.display     = 'none';
+
+                console.log(actionbutton.innerText);
+                console.log(this.link);
+                if (this.link != null) {
+                    console.log('changement de page');
+                    document.location.href = this.link;
+                }
+                Alert.updateProfileImage(localStorage.imgProfilId);
+            });
+
+            alertCustom.appendChild(actionbutton);
+            document.body.appendChild(alertCustom);
+
+            console.log("tileset.onload sans onload end");
+        },200);
+
+
         
         //LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa
         /*
