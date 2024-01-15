@@ -7,6 +7,7 @@
         - imgProfile : choice the image of profile
  */
 
+import { API } from "../API.js";
 
 window.localStorage.setItem("inputField", "");
 export class Alert{
@@ -14,8 +15,7 @@ export class Alert{
     labelButton;
     link;
     type;
-
-
+    
     constructor(message, labelButton, link, type) {
         this.message = message;
         this.labelButton = labelButton;
@@ -121,6 +121,8 @@ export class Alert{
 
 
     alertInput(alertCustom, overlay){
+        console.log("alertInput start");
+        
         alertCustom.style.background = '#6ea5ef';
         alertCustom.style.color      = '#ffffff';
         alertCustom.style.border     = '1px solid #d9323';
@@ -130,8 +132,7 @@ export class Alert{
         closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
-
-
+        
         // css :
         closeButton.style.background = '#0048fd';
         closeButton.style.color      = '#ffffff';
@@ -166,18 +167,19 @@ export class Alert{
             
             localStorage.setItem('inputField', inputField.value);
 
-            console.log(actionbutton.innerText);
-            console.log(this.link);
-            console.log(inputField.value);
+            console.log("actionbutton.innerText : "+ actionbutton.innerText);
+            console.log("this.link : "+ this.link);
+            console.log("inputField.value : "+ inputField.value);
             if (this.link != null){
-                console.log(inputField.value);
+                console.log("inputField.value : "+ inputField.value);
                 console.log('changement de page');
                 document.location.href = this.link;
             }
         });
-
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
+        
+        console.log("alertInput start");
     }
 
 
@@ -229,21 +231,21 @@ export class Alert{
 
         const actionbutton = document.createElement('button');
         actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.labelButton;
+        actionbutton.innerText = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
-        actionbutton.style.color = '#ffffff';
+        actionbutton.style.color      = '#ffffff';
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
             console.log(closebutton.innerText);
             console.log(this.link);
@@ -270,18 +272,18 @@ export class Alert{
         alertCustom.className = 'custom-alert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color  = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
 
         // css :
         closeButton.style.background = '#44464a';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
 
         //alertCustom.innerHTML = this.message+'<br>';
@@ -337,6 +339,7 @@ export class Alert{
     }
 
     alertImgProfile(alertCustom, overlay){
+        console.log("alertImgProfile start");
         // css :
         alertCustom.style.background = '#5fdaff';
         alertCustom.style.color      = '#000000';
@@ -346,12 +349,10 @@ export class Alert{
         closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
-
-
-
+        
         // css :
         closeButton.style.background = '#2299b9';
-        closeButton.style.color      = '#ffffff'
+        closeButton.style.color      = '#ffffff';
 
         closeButton.addEventListener('mouseenter', () => {
             closeButton.style.backgroundColor = '#000000';
@@ -368,32 +369,105 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         let selectedCanvas = null;
-
+        
+        console.log("tileSet");
         const tileset = new Image();
         tileset.src = "../../../assets/tilesets/circuit.png";
-
+        console.log("tileset.src : "+ tileset.src);
+        
+        console.log("tileset.onload sans onload start");
+        
+        for (let i = 0; i < 12; i++) {
+            const canvas = document.createElement('canvas');
+            canvas.width  = 60;
+            canvas.height = 60;
+            canvas.style.marginRight = '10px';
+            
+            const ctx = canvas.getContext('2d');
+            
+            canvas.id = i;
+            const tileSize = 160;
+            const rotation = 0;
+            
+            const tileX = i * tileSize;
+            const tileY = 4 * 160;
+            
+            ctx.save();
+            ctx.translate(0, 0);
+            ctx.rotate(rotation * Math.PI / 180);
+            ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
+            ctx.restore();
+            
+            canvas.addEventListener('click', (event) => {
+                const canvasId = canvas.id;
+                console.log('Canvas cliqué, ID:', canvasId);
+                
+                if (selectedCanvas) {
+                    selectedCanvas.style.border = 'none';
+                }
+                selectedCanvas = canvas;
+                canvas.style.border = '1px solid #000';
+                
+                localStorage.setItem("imgProfilId", canvasId);
+                
+                Alert.updateProfileImage(localStorage.imgProfilId);
+            });
+            alertCustom.appendChild(canvas);
+        }
+        
+        const actionbutton = document.createElement('button');
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
+        
+        // css :
+        actionbutton.style.background = '#2299b9';
+        actionbutton.style.color      = '#ffffff';
+        
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            Alert.updateProfileImage(localStorage.imgProfilId);
+        });
+        
+        actionbutton.addEventListener('click', () => {
+            
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            
+            console.log(actionbutton.innerText);
+            console.log(this.link);
+            if (this.link != null) {
+                console.log('changement de page');
+                document.location.href = this.link;
+            }
+            Alert.updateProfileImage(localStorage.imgProfilId);
+        });
+        
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
+        
+        console.log("tileset.onload sans onload end");
+        
+        //LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa
+        /*
         tileset.onload = () => {
+            console.log("tileset.onload start");
+            
             for (let i = 0; i < 12; i++) {
                 const canvas = document.createElement('canvas');
                 canvas.width  = 60;
                 canvas.height = 60;
                 canvas.style.marginRight = '10px';
-
-
+                
                 const ctx = canvas.getContext('2d');
 
                 canvas.id = i;
-                //console.log(canvas.id)
                 const tileSize = 160;
-
                 const rotation = 0;
 
                 const tileX = i * tileSize;
                 const tileY = 4 * 160;
-
-                /*console.log(tileY);
-
-                console.log(tileX);*/
+                
                 ctx.save();
                 ctx.translate(0, 0);
                 ctx.rotate(rotation * Math.PI / 180);
@@ -447,17 +521,66 @@ export class Alert{
 
             alertCustom.appendChild(actionbutton);
             document.body.appendChild(alertCustom);
+            
+            console.log("tileset.onload end");
         }
+        
+         */
+        
+        console.log("alertImgProfile end");
     };
 
-
+    static updateProfileImage(imgProfilId) {
+        console.log('img : ' + imgProfilId);
+        const tileset = new Image();
+        tileset.src = "../../assets/tilesets/circuit.png";
+        
+        tileset.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const tileSize = 160;
+            
+            const tileX = imgProfilId * tileSize;
+            const tileY = 4 * 160;
+            
+            canvas.width  = 150;
+            canvas.height = 150;
+            
+            ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
+            previewImage.src = canvas.toDataURL('image/png');
+        };
+        
+        const playerId = localStorage.getItem("playerId");
+        
+        const url      = API.getURLupdatePPIdOfPlayerId();
+        const dataPP = {
+            playerIdIn: playerId,
+            newPPIdIn:  imgProfilId
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataPP)
+        };
+        console.log(params);
+        
+        fetch(url, params)
+           .then((response) => response.json())
+           .then((result) => {
+               console.log(result);
+           });
+    }
 }
+
+/*
 function updateProfileImage(imgProfilId) {
     console.log('img' + imgProfilId);
     const tileset = new Image();
     tileset.src = "../../assets/tilesets/circuit.png";
 
-    tileset.onload = function () {
+    tileset.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         const tileSize = 160;
@@ -472,3 +595,5 @@ function updateProfileImage(imgProfilId) {
         previewImage.src = canvas.toDataURL('image/png');
     };
 }
+
+ */
