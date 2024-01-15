@@ -126,7 +126,7 @@ export class ControllerCheckpoint {
         let tuile   = this.getLastCheckpoint();
         let terrain = this.circuit.getTerrain();
         let idtuile = terrain[tuile[0]][tuile[1]];
-        console.log(this.circuit.getRotate());
+
         if(idtuile === 13 || idtuile === 12 || idtuile === 7){
             const temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
             if(temp === 0){
@@ -134,16 +134,16 @@ export class ControllerCheckpoint {
             }else{
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-90;
             }
-        }else if(idtuile === 14 || idtuile === 16 || idtuile === 17 ){
+        } else if(idtuile === 14 || idtuile === 16 || idtuile === 17) {
             if(this.circuit.getRotate()[tuile[0]][tuile[1]] === 0){
                 return 315;
             }else{
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-45;
             }
-        }else if(idtuile === 15 || idtuile === 18){
+        } else if(idtuile === 15 || idtuile === 18) {
             return this.circuit.getRotate()[tuile[0]][tuile[1]];
         }
-        console.log(idtuile);
+
         return 0;
     }
     
