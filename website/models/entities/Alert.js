@@ -1,10 +1,11 @@
 /*
     different types :
-        - warning : lack of vroumCoin, need a connection...
-        - input : need to enter text
+        - warning      : lack of vroumCoin, need a connection...
+        - input        : need to enter text
         - startCircuit : before the start of the race
-        - endCircuit : after the end of the race
-        - imgProfile : choice the image of profile
+        - endCircuit   : after the end of the race
+        - save         : to save circuit
+        - imgProfile   : choice the image of profile
  */
 
 import { API } from "../API.js";
@@ -15,12 +16,12 @@ export class Alert{
     labelButton;
     link;
     type;
-    
+
     constructor(message, labelButton, link, type) {
-        this.message = message;
+        this.message     = message;
         this.labelButton = labelButton;
-        this.link = link;
-        this.type = type;
+        this.link        = link;
+        this.type        = type;
         console.log(this.link);
     }
 
@@ -45,6 +46,9 @@ export class Alert{
                 break;
             case 'imgProfile' :
                 this.alertImgProfile(alertCustom, overlay);
+                break;
+            case 'save' :
+                this.alertSave(alertCustom, overlay);
                 break;
             default:
                 console.log('Aucun cas ne correspond !');
@@ -122,7 +126,7 @@ export class Alert{
 
     alertInput(alertCustom, overlay){
         console.log("alertInput start");
-        
+
         alertCustom.style.background = '#6ea5ef';
         alertCustom.style.color      = '#ffffff';
         alertCustom.style.border     = '1px solid #d9323';
@@ -132,7 +136,7 @@ export class Alert{
         closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
-        
+
         // css :
         closeButton.style.background = '#0048fd';
         closeButton.style.color      = '#ffffff';
@@ -164,7 +168,7 @@ export class Alert{
         actionbutton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
-            
+
             localStorage.setItem('inputField', inputField.value);
 
             console.log("actionbutton.innerText : "+ actionbutton.innerText);
@@ -178,7 +182,7 @@ export class Alert{
         });
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
-        
+
         console.log("alertInput start");
     }
 
@@ -349,7 +353,7 @@ export class Alert{
         closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
-        
+
         // css :
         closeButton.style.background = '#2299b9';
         closeButton.style.color      = '#ffffff';
@@ -369,47 +373,47 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         let selectedCanvas = null;
-        
+
         console.log("tileSet");
         const tileset = new Image();
         tileset.src = "../../../assets/tilesets/circuit.png";
         console.log("tileset.src : "+ tileset.src);
-        
+
         console.log("tileset.onload sans onload start");
-        
+
         for (let i = 0; i < 12; i++) {
             const canvas = document.createElement('canvas');
             canvas.width  = 60;
             canvas.height = 60;
             canvas.style.marginRight = '10px';
-            
+
             const ctx = canvas.getContext('2d');
-            
+
             canvas.id = i;
             const tileSize = 160;
             const rotation = 0;
-            
+
             const tileX = i * tileSize;
             const tileY = 4 * 160;
-            
+
             ctx.save();
             ctx.translate(0, 0);
             ctx.rotate(rotation * Math.PI / 180);
             ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
             ctx.restore();
-            
+
             canvas.addEventListener('click', (event) => {
                 const canvasId = canvas.id;
                 console.log('Canvas cliqué, ID:', canvasId);
-                
+
                 if (selectedCanvas) {
                     selectedCanvas.style.border = 'none';
                 }
                 selectedCanvas = canvas;
                 canvas.style.border = '1px solid #000';
-                
+
                 localStorage.setItem("imgProfilId", canvasId);
-                
+
                 Alert.updateProfileImage(localStorage.imgProfilId);
             });
 
@@ -453,18 +457,18 @@ export class Alert{
         },200);
 
 
-        
+
         //LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa
         /*
         tileset.onload = () => {
             console.log("tileset.onload start");
-            
+
             for (let i = 0; i < 12; i++) {
                 const canvas = document.createElement('canvas');
                 canvas.width  = 60;
                 canvas.height = 60;
                 canvas.style.marginRight = '10px';
-                
+
                 const ctx = canvas.getContext('2d');
 
                 canvas.id = i;
@@ -473,7 +477,7 @@ export class Alert{
 
                 const tileX = i * tileSize;
                 const tileY = 4 * 160;
-                
+
                 ctx.save();
                 ctx.translate(0, 0);
                 ctx.rotate(rotation * Math.PI / 180);
@@ -489,7 +493,7 @@ export class Alert{
                     }
                     selectedCanvas = canvas;
                     canvas.style.border = '1px solid #000';
-                    
+
                     window.localStorage.setItem("imgProfilId", canvasId);
 
                     updateProfileImage(window.localStorage.imgProfilId);
@@ -527,12 +531,12 @@ export class Alert{
 
             alertCustom.appendChild(actionbutton);
             document.body.appendChild(alertCustom);
-            
+
             console.log("tileset.onload end");
         }
-        
+
          */
-        
+
         console.log("alertImgProfile end");
     };
 
@@ -540,24 +544,24 @@ export class Alert{
         console.log('img : ' + imgProfilId);
         const tileset = new Image();
         tileset.src = "../../assets/tilesets/circuit.png";
-        
+
         tileset.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const tileSize = 160;
-            
+
             const tileX = imgProfilId * tileSize;
             const tileY = 4 * 160;
-            
+
             canvas.width  = 150;
             canvas.height = 150;
-            
+
             ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
             previewImage.src = canvas.toDataURL('image/png');
         };
-        
+
         const playerId = localStorage.getItem("playerId");
-        
+
         const url      = API.getURLupdatePPIdOfPlayerId();
         const dataPP = {
             playerIdIn: playerId,
@@ -571,12 +575,84 @@ export class Alert{
             body: JSON.stringify(dataPP)
         };
         console.log(params);
-        
+
         fetch(url, params)
            .then((response) => response.json())
            .then((result) => {
                console.log(result);
            });
+    }
+
+    alertSave(alertCustom, overlay){
+        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.color = '#ffffff';
+        alertCustom.style.border = '1px solid #d9323';
+
+
+        const closeButton = document.createElement('button');
+        closeButton.id        = 'closeAlert';
+        closeButton.innerText = 'X';
+        alertCustom.appendChild(closeButton);
+
+
+        // css :
+        closeButton.style.background = '#0048fd';
+        closeButton.style.color = '#ffffff';
+
+        const pMessage = document.createElement('p');
+        pMessage.innerText = this.message;
+        pMessage.id        = 'pMessage';
+        alertCustom.appendChild(pMessage);
+
+        const circuitNameInput = document.createElement('input');
+        circuitNameInput.type        = 'text';
+        circuitNameInput.className   = 'inputField';
+        circuitNameInput.placeholder = 'Nom du circuit...';
+        alertCustom.appendChild(circuitNameInput);
+
+        const circuitLapsInput = document.createElement('input');
+        circuitLapsInput.type        = 'text';
+        circuitLapsInput.className   = 'inputField';
+        circuitLapsInput.placeholder = 'Nombre de tours...';
+        alertCustom.appendChild(circuitLapsInput);
+
+        const actionbutton = document.createElement('button');
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
+
+        // css :
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
+
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+        });
+
+        actionbutton.addEventListener('click', () => {
+
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+
+            console.log(actionbutton.innerText);
+            console.log(this.link);
+            console.log("circuitNameInput.value : "+ circuitNameInput.value);
+            console.log("circuitLapsInput.value : "+ circuitLapsInput.value);
+            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[0-9]$/)) {
+                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
+                errorAlert.customAlert();
+            } else {
+                if (this.link != null){
+                    localStorage.setItem('circuitName', circuitNameInput.value);
+                    localStorage.setItem('circuitLaps', circuitLapsInput.value);
+                    console.log('changement de page');
+                    document.location.href = this.link;
+                }
+            }
+        });
+
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
     }
 }
 

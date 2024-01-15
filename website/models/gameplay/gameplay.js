@@ -31,36 +31,32 @@ window.onload = () => {
    fetch(url, params)
       .then((response) => response.json())
       .then((dataCircuit) => {
-         console.log(dataCircuit);
-         
-         const circuitName = document.getElementById("circuitName");
-         circuitName.innerText = dataCircuit.circuitName;
-         
-         console.log("circuitScore : " + dataCircuit.circuitScore);
-         
-         const creatorName = document.getElementById("creatorName");
-         creatorName.innerText = "Créateur : " + dataCircuit.creatorUsername;
-         
-         const creatorScore = document.getElementById("creatorScore");
-         creatorScore.innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+         console.log("merde")
+         console.log(dataCircuit)
 
+         document.getElementById("circuit-name").innerText = dataCircuit.circuitName;
+         document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
+         document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+         document.getElementById("creator-score").innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+         
          // to manage the 5 (or less) best scores
          const leaderBoard = dataCircuit.leaderBoard;
-         if(leaderBoard === null) {
-            document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+         if(leaderBoard[0] === null) {
+             document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
          } else {
-            for (let i = 0; i < 5; i++) {
-               
-               if (leaderBoard[2*i] !== null) {
-                  const leaderboardPlayer = document.getElementById("leaderboard-players");
-                  const player = document.createElement("p");
-                  player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
-                  leaderboardPlayer.appendChild(player);
-               } else {
-                  //Pour skip la fin du for
-                  i = 12;
-               }
-            }
+             document.querySelector("#leaderboard-players").textContent = "";
+             for (let i = 0; i < 5; i++) {
+                 
+                 if (leaderBoard[2*i] !== undefined) {
+                     const leaderboardPlayer = document.getElementById("leaderboard-players");
+                     const player = document.createElement("p");
+                     player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                     leaderboardPlayer.appendChild(player);
+                 } else {
+                     // to skip end of for loop
+                     i = 12;
+                 }
+             }
          }
 
          const url = API.getURLgetCircuitTileById();
@@ -107,7 +103,7 @@ window.onload = () => {
                      controller.init();
                      
                      const canvas = document.getElementById('canvas');
-                     const ctx = canvas.getContext('2d');
+                     const ctx = canvas.getContext('2d',{willReadFrequently: true});
                      
                      canvas.width  = map.getLargeur() * 160;
                      canvas.height = map.getHauteur() * 160;
@@ -127,9 +123,9 @@ window.onload = () => {
                      const carTilePixelY = carTileY * carTileSize;
                      const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
                      const timer = new Timer();
-
+                     controllerCheckpoint.updateCheckpoint();
                      timer.start();
-                     setInterval(function(){timer.updateCompteur();}, 1);
+                     setInterval(function(){timer.updateCompteur();}, 100);
                      // Attendre que l'image soit complètement chargée
                      
                      function updateCar() {

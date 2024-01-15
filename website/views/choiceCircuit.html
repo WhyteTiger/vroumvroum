@@ -23,19 +23,13 @@
         <section id="choice-section">
             <h1 id="choice-title">Choix du circuit</h1>
 
-            <section class="true">
-                Mes circuits
-            </section>
-
-            <section class="false">
-                <div id="filter">
-                    <h2>Filtrer par : </h2>
-                    <select>
-                        <option>Rien</option>
-                        <option>Créateur</option>
-                        <option>Nom de circuit</option>
-                    </select>
-                    <input type="text">
+            <section>
+                <h2 class="true" id="true">Mes circuits</h2>
+                <div id="filter" class="false">
+                    <h2>Filtrer par nom </h2>
+                    <input type="text" id="name-filter">
+                    <h2 id="creator-title">Filtrer par créateur </h2>
+                    <input type="text" id="creator-filter">
                 </div>
                 <section id="circuits"></section>
             </section>
@@ -43,7 +37,7 @@
             <section id="page-selector">
                 <i class="fa-solid fa-backward-step"></i>
                 <i class="fa-solid fa-backward"></i>
-                <p>texte</p>
+                <p>numéro de page</p>
                 <i class="fa-solid fa-forward"></i>
                 <i class="fa-solid fa-forward-step"></i>
             </section>
@@ -57,28 +51,13 @@
             <section id="full" class="invisible">
                 <h2 id="circuit-name">Nom de la carte</h2>
 
-                <div id="mark">
-                    <p>Note : </p>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-
+                <p id="score">Score : Score</p>
                 <p id="creator-name">Créateur : CreateurUsername</p>
-
                 <p id="creator-score">Médaille auteur : createurScore</p>
 
                 <div id="leaderboard">
                     <div id="leaderboard-title">Leaderboard</div>
-                    <div id="leaderboard-players">
-                        <p>Player1 : temp1</p>
-                        <p>Player2 : temp2</p>
-                        <p>Player3 : temp3</p>
-                        <p>Player4 : temp4</p>
-                        <p>Player5 : temp5</p>
-                    </div>
+                    <div id="leaderboard-players">stuff is supposed to go there</div>
                 </div>
 
                 <div>
@@ -89,13 +68,13 @@
         </aside>
 
         <aside class="true">
-            <section id="empty">
+            <section id="empty-2">
                 <p>Cliquez sur un circuit pour afficher ses informations !</p>
             </section>
-            <section id="full" class="invisible">
-                <h2 id="circuit-name">Nom de la carte</h2>
+            <section id="full-2" class="invisible">
+                <h2 id="circuit-name-2">Nom de la carte</h2>
 
-                <div id="mark">
+                <div id="mark-2">
                     <p>Note : </p>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-regular fa-star"></i>
@@ -104,11 +83,11 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
 
-                <p id="creator-score">Médaille auteur : createurScore</p>
+                <p id="creator-score-2">Médaille auteur : createurScore</p>
 
-                <div id="leaderboard">
-                    <div id="leaderboard-title">Leaderboard</div>
-                    <div id="leaderboard-players">
+                <div id="leaderboard-2">
+                    <div id="leaderboard-title-2">Leaderboard</div>
+                    <div id="leaderboard-players-2">
                         <p>Player1 : temp1</p>
                         <p>Player2 : temp2</p>
                         <p>Player3 : temp3</p>
