@@ -46,7 +46,7 @@ form.addEventListener('submit', (event) => {
 	const confirmPassword = document.getElementById("confpwd").value;
 	
 	if (password === confirmPassword && password !== "") {
-		whantToRegistrate(nickname, password);
+		wantToRegistrate(nickname, password);
 		
 	} else {
 		console.log("confpwd is not equal to password");
