@@ -248,15 +248,13 @@ export class Alert{
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            document.location.href = "choiceCircuit.html";
         });
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
-
-            console.log(closebutton.innerText);
-            console.log(this.link);
             if (this.link != null){
                 console.log('changement de page');
                 document.location.href = this.link;
@@ -324,6 +322,7 @@ export class Alert{
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            document.location.href = this.link;
         });
 
         actionbutton.addEventListener('click', () => {
@@ -331,8 +330,6 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display ='none';
             this.buttonClick = 1;
-            console.log(actionbutton.innerText);
-            console.log(this.link);
             
         });
 

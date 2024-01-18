@@ -11,6 +11,7 @@ import {ControllerCheckpoint} from "../../controllers/gameplay/controllerCheckpo
 import {Timer} from "../entities/Timer.js";
 import { Alert } from "../entities/Alert.js";
 
+
 window.onload = () => {
     
    const circuitId = window.localStorage.circuitId;
@@ -32,7 +33,13 @@ window.onload = () => {
    fetch(url, params)
       .then((response) => response.json())
       .then((dataCircuit) => {
-         
+
+         var circuitName = dataCircuit.circuitName;
+         var creatorUsername = dataCircuit.creatorUsername;
+         var creatorTime = dataCircuit.creatorTime;
+         var circuitScore = dataCircuit.circuitScore;
+
+         console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore)
          document.getElementById("circuit-name").innerText = dataCircuit.circuitName;
          document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
          document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
@@ -49,7 +56,8 @@ window.onload = () => {
                  if (leaderBoard[2*i] !== undefined) {
                      const leaderboardPlayer = document.getElementById("leaderboard-players");
                      const player = document.createElement("p");
-                     player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                     let timer = new Timer();
+                     player.innerText = leaderBoard[2*i] + " : " + timer.timeToString(leaderBoard[2*i+1]);
                      leaderboardPlayer.appendChild(player);
                  } else {
                      // to skip end of for loop
@@ -124,8 +132,8 @@ window.onload = () => {
                      const timer = new Timer();
                      controllerCheckpoint.updateCheckpoint();
 
-                     let popUp = new Alert("message", "alert", "home.html" ,"type");
-                     popUp.alertStartCircuit("creator", "temps");
+                     let popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
+                     popUp.alertStartCircuit(creatorUsername, creatorTime);
                      
                      let started = 0;
                      
@@ -183,7 +191,7 @@ window.onload = () => {
                            console.log(timer.getElapsedTime());
                            timer.stop();
                            console.log("La partie est terminée");
-                           let popUpFin = new Alert("Bravo !", "Rejouer", "home.html" ,"type");
+                           let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
                            popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
                         }
                         
@@ -198,6 +206,7 @@ window.onload = () => {
             });
       });
    }
+
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/gameplayMusic.mp3";
