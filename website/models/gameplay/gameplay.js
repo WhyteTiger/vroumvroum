@@ -76,7 +76,7 @@ window.onload = () => {
                
                const map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
                
-               const playerIdIn = window.localStorage.playerId;
+               const playerIdIn = localStorage.playerId;
                
                const url = API.getURLgetOwnKartByPlayerId();
                const dataKart = {
@@ -119,7 +119,7 @@ window.onload = () => {
                      const carTilePixelX = carTileX * carTileSize;
                      const carTilePixelY = carTileY * carTileSize;
                      const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
-                     const timer = new Timer();
+                     const timer          = new Timer();
                      controllerCheckpoint.updateCheckpoint();
 
                      let popUp = new Alert("message", "alert", "home.html" ,"type");
@@ -163,7 +163,7 @@ function updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine
    }
    
    //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
-   if(started == 2){
+   if (started === 2) {
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60 );
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60 );
@@ -183,8 +183,8 @@ function updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine
       
       ctx.restore();
    }
-   if(controllerCheckpoint.fini === 0) {
-      requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+   if (controllerCheckpoint.fini === 0) {
+      updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine, controller, controllerCheckpoint, carTileSize, carTilePixelX, carTilePixelY, circuitTileset); // Appel récursif pour une animation fluide
    } else {
       console.log(timer.getElapsedTime());
       timer.stop();
