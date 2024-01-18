@@ -31,7 +31,6 @@ createCircuit.addEventListener("click", () => {
 	}
 });
 
-console.log( window.localStorage.getItem("playerId"));
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
 	const playerId = window.localStorage.getItem("playerId");

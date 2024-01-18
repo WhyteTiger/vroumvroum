@@ -8,7 +8,6 @@ link.setAttribute('href', 'styles/headerStyle.css');
 head.appendChild(link);
 
 const isConnected = window.localStorage.isConnected;
-//const isConnected = "true";
 const header = document.createElement("header");
 
 const a = document.createElement('a');

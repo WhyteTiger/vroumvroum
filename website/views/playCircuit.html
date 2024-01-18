@@ -8,31 +8,34 @@
     <link rel="stylesheet" href="styles/generalStyle.css">
     <link rel="stylesheet" href="styles/canvasStyle.css">
     <link rel="stylesheet" href="styles/circuitStyle.css">
+    <link rel="stylesheet" href="styles/alertStyle.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
     <script src="../controllers/redirection/controllerHeader.js" defer></script>
     <script type="module" src="../models/gameplay/gameplay.js"></script>
+    <script type="module" src="../models/entities/Alert.js"></script>
 </head>
 
 <body id="play-body">
 <main id="play-main">
     <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-    <section id="circuit-infos" >
-        <div id="leaderboard-title" class="chronometre">Time</div>
-        <div id="leaderboard-title" class="compteurCheckpoint">Checkpoint</div>
-    </section>
-    <section id="circuit-infos">
-        <h2 id="circuit-name">Nom de la carte</h2>
-
-        <p id="score">Score : Score</p>
-        <p id="creator-name">Créateur : CreateurUsername</p>
-        <p id="creator-score">Médaille auteur : createurScore</p>
-
-        <div id="leaderboard">
-            <div id="leaderboard-title">Leaderboard</div>
-            <div id="leaderboard-players">stuff is supposed to go here</div>
-        </div>
-
+    <section>
+        <aside>
+            <div id="leaderboard-title" class="chronometre">Time</div>
+            <div id="leaderboard-title" class="compteurCheckpoint">Checkpoint</div>
+        </aside>
+        <aside>
+            <h2 id="circuit-name">Nom de la carte</h2>
+    
+            <p id="score">Score : Score</p>
+            <p id="creator-name">Créateur : CreateurUsername</p>
+            <p id="creator-score">Médaille auteur : createurScore</p>
+    
+            <div id="leaderboard">
+                <div id="leaderboard-title">Leaderboard</div>
+                <div id="leaderboard-players">stuff is supposed to go here</div>
+            </div>
+        </aside>
     </section>
 </main>
 </body>

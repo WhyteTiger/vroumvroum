@@ -45,9 +45,6 @@ function fetchPage(nb, nbPages) {
     fetch(API.getURLpostCircuits(), params)
     .then((response) => response.json())
     .then((dataCircuits) => {
-        console.log('PARTIE 2')
-        console.log(dataCircuits)
-        console.log(dataCircuits.result.length)
         const circuits = dataCircuits.result;
         const boxZone = document.querySelector('#circuits');
 
@@ -63,8 +60,6 @@ function fetchPage(nb, nbPages) {
 
         const boxList = document.querySelectorAll('.circuit-box');
 
-        console.log('DEBUT')
-
         for(let i = 0; i < boxList.length; i++) {
             boxList[i].setAttribute("name", circuits[i].circuitid);
 
@@ -75,22 +70,14 @@ function fetchPage(nb, nbPages) {
 
             boxList[i].appendChild(p1);
             boxList[i].appendChild(p2);
-            
-
-            console.log(boxList[i])
-            
 
             boxList[i].addEventListener('click', () => {
-                console.log("penis")
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;
-                console.log(`le circuitId actuel est ${localStorage.circuitId}`)
-                console.log("penis2")
 
                 document.querySelector('#empty' + filter).classList.add('invisible');
                 document.querySelector('#full' + filter).classList.remove('invisible');
-                console.log("penis3")
                 
                 fetchParams = {
                     circuitIdIn: id
@@ -103,22 +90,18 @@ function fetchPage(nb, nbPages) {
                     body: JSON.stringify(fetchParams)
                 };
 
-                console.log("penis4")
+
 
                 fetch(API.getURLgetCircuitInformation(), params)
                 .then((response) => response.json())
                 .then((dataCircuit) => {
-                    console.log("merde")
-                    console.log(dataCircuit)
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
-
                     document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.personal === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
-                    console.log('oups')
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
@@ -155,9 +138,7 @@ function fetchCircuits() {
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
     let creatorFilterValue = document.getElementById('creator-filter').value;
-    console.log("filtersssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
-    console.log(circuitFilterValue)
-    console.log(creatorFilterValue)
+
     if(circuitFilterValue === '' || circuitFilterValue === null) circuitFilterValue = undefined;
     if(creatorFilterValue === '' || creatorFilterValue === null) creatorFilterValue = undefined;
 
@@ -188,7 +169,6 @@ function fetchCircuits() {
     fetch(API.getURLpostCircuitsNumber(), params)
     .then((response) => response.json())
     .then((dataNb) => {
-        console.log(dataNb)
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
     
@@ -222,7 +202,7 @@ function fetchCircuits() {
        // }
        
     })
-    .catch((error) => console.log(`error : circuits : ${error}`));
+    .catch((error) => console.error(`error : circuits : ${error}`));
 
 }
 

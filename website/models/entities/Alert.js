@@ -22,7 +22,11 @@ export class Alert{
         this.labelButton = labelButton;
         this.link        = link;
         this.type        = type;
+        this.buttonClick = 0;
         console.log(this.link);
+    }
+    getIsButtonClicked(){
+        return this.buttonClick;
     }
 
     customAlert() {
@@ -326,13 +330,10 @@ export class Alert{
 
             alertCustom.style.display = 'none';
             overlay.style.display ='none';
-
+            this.buttonClick = 1;
             console.log(actionbutton.innerText);
             console.log(this.link);
-            if (this.link != null){
-                console.log('changement de page');
-                document.location.href = this.link;
-            }
+            
         });
 
         alertCustom.appendChild(actionbutton);
