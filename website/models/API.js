@@ -7,9 +7,9 @@ export class API {
       return 'http://'+API.server+'/connection/tryToConnect';
    }
    
-   static getURLWhantToRegistrate() {
+   static getURLWantToRegistrate() {
       
-      return 'http://'+API.server+'/connection/whantToRegistrate';
+      return 'http://'+API.server+'/connection/wantToRegistrate';
    }
    
    static getURLgetCircuitTileById() {
@@ -35,6 +35,21 @@ export class API {
    static getURLpostKartsAndCoinsInformationOfPlayerId() {
       
       return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
+   }
+   
+   static getURLupdatePPIdOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/updatePPIdOfPlayerId';
+   }
+   
+   static getURLupdatePlayerUsername() {
+      
+      return 'http://'+API.server+'/personalize/updatePlayerUsername';
+   }
+   
+   static getURLupdatePasswordOfPlayerId() {
+      
+      return 'http://'+API.server+'/personalize/updatePasswordOfPlayerId';
    }
 
    static getURLpostCircuitsNumber() {

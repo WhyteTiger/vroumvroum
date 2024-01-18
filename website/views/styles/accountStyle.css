@@ -5,3 +5,85 @@
 #main-info p {
     display: inline;
 }
+
+#Formulaire{
+    margin: 20px;
+}
+
+
+/*#pseudo{
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    height: 35px;
+    border-radius: 40px;
+    padding: 20px;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.2);
+    border: rgb(128, 128, 128) solid 1px;
+}*/
+
+label, p{
+    color: #000000;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, #7c97f7, #00bf9c);
+    border-radius: 45px;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 50em;
+    text-align: left;
+    align-items: center;
+
+    /* source : le générateur de Neumorphism */
+    box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;
+}
+
+/* Affichage Image profils*/
+
+#labelFile{
+    cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 50px;
+    color: #000000;
+    font-weight: bold;
+}
+
+#labelFile:hover{
+    color: #ff0000;
+    font-size: 25px;
+}
+
+#previewContainer{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#previewImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#saveButton{
+    display: none;
+}
+
+input{
+    color: grey;
+    margin-bottom: 30px;
+}
+
+#vroumCoinDiv, #name {
+    display: flex;
+    align-items: center;
+}
