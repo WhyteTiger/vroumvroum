@@ -10,6 +10,8 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
+let started, popUp, timer, angleDegrees, canvas, map, ctx, engine, controller, controllerCheckpoint, carTileSize, carTilePixelX, carTilePixelY, circuitTileset;
+
 window.onload = () => {
    const circuitId = window.localStorage.circuitId;
    
@@ -94,13 +96,13 @@ window.onload = () => {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     const controllerCheckpoint = new ControllerCheckpoint(map,1);
-                     const kart = new Kart(3, dataKart.kartId-1, 0);
-                     const controller = new ControllerDirection();
+                     controllerCheckpoint = new ControllerCheckpoint(map,1);
+                     const kart     = new Kart(3, dataKart.kartId-1, 0);
+                     controller           = new ControllerDirection();
                      controller.init();
                      
                      const canvas = document.getElementById('canvas');
-                     const ctx = canvas.getContext('2d',{willReadFrequently: true});
+                     ctx = canvas.getContext('2d',{willReadFrequently: true});
                      
                      canvas.width  = map.getLargeur() * 160;
                      canvas.height = map.getHauteur() * 160;
@@ -114,21 +116,21 @@ window.onload = () => {
                      const carTileX             = kart.getColone();
                      const carTileY             = kart.getLigne();
                      const carTileSize = 160;
-                     const angleDegrees         = kart.getRotate();
+                     angleDegrees         = kart.getRotate();
                      
-                     const carTilePixelX = carTileX * carTileSize;
-                     const carTilePixelY = carTileY * carTileSize;
-                     const engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
-                     const timer          = new Timer();
+                     carTilePixelX = carTileX * carTileSize;
+                     carTilePixelY = carTileY * carTileSize;
+                     engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
+                     timer  = new Timer();
                      controllerCheckpoint.updateCheckpoint();
 
                      let popUp = new Alert("message", "alert", "home.html" ,"type");
                      popUp.alertStartCircuit("creator", "temps");
                      
-                     let started = 0;
+                     started = 0;
                      // Attendre que l'image soit complètement chargée
                      
-                     updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine, controller, controllerCheckpoint, carTileSize, carTilePixelX, carTilePixelY, circuitTileset); // Appel initial de la fonction updateCar
+                     updateCar(); // Appel initial de la fonction updateCar
                   });
             })
             .catch(() => {
@@ -137,7 +139,7 @@ window.onload = () => {
       });
    }
 
-function updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine, controller, controllerCheckpoint, carTileSize, carTilePixelX, carTilePixelY, circuitTileset) {
+function updateCar() {
    if(started === 0 && popUp.getIsButtonClicked() === 1) {
       started = 1;
    }
@@ -184,7 +186,7 @@ function updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine
       ctx.restore();
    }
    if (controllerCheckpoint.fini === 0) {
-      updateCar(started, popUp, timer, angleDegrees, canvas, map, ctx, engine, controller, controllerCheckpoint, carTileSize, carTilePixelX, carTilePixelY, circuitTileset); // Appel récursif pour une animation fluide
+      requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
    } else {
       console.log(timer.getElapsedTime());
       timer.stop();
