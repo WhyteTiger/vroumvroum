@@ -1,0 +1,41 @@
+const valBar = window.localStorage.barChargement;
+console.log(valBar);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const loaderBar = document.getElementById("loaderBar");
+    const carImage = document.getElementById("carImage");
+    const loaderContainer = document.getElementById("loaderContainer");
+    const main = document.getElementById("welcome");
+    const header = document.querySelector("header");
+
+    if (valBar === "0"){
+        header.style.display = "none";
+        let width = 0;
+        let interval = setInterval(function () {
+            if (width >=50){
+                setTimeout(function() {
+                    clearInterval(interval);
+                    loaderContainer.style.display = "none";
+                    main.style.display = 'grid';
+                    header.style.display = 'grid';
+                }, 500);
+            }
+            else{
+                width++;
+                loaderBar.style.width = width + "%";
+
+                let carPosition = (width * (loaderContainer.offsetWidth - carImage.offsetWidth) / 100);
+                carImage.style.left = carPosition + "px";
+
+                let carVerticalPosition = (loaderBar.offsetHeight - carImage.offsetHeight) / 2;
+                carImage.style.top = carVerticalPosition + "px";
+            }
+        }, 25);
+
+        window.localStorage.setItem("barChargement", "1");
+    }else{
+        loaderContainer.style.display = "none";
+        main.style.display = 'grid';
+
+    }
+});

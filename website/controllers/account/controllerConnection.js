@@ -5,6 +5,7 @@ window.localStorage.setItem("rightPassword",   "false");
 window.localStorage.setItem("isConnected",     "false");
 window.localStorage.setItem("playerId", 	 	  "0");
 window.localStorage.setItem("username", 	 	  "");
+window.localStorage.setItem("imgProfilId", 	  "");
 
 async function tryToConnect(username, password) {
 	
@@ -28,15 +29,16 @@ async function tryToConnect(username, password) {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			window.localStorage.alreadyRegister = data.alreadyRegisterOut;
-			window.localStorage.rightPassword   = data.rightPasswordOut;
-			window.localStorage.playerId 		   = data.playerIdOut;
-			window.localStorage.username 			= data.usernameOut;
+			console.log(data.alreadyRegisterOut +" "+ data.rightPasswordOut +" "+ data.playerIdOut +" "+ data.usernameOut +" "+ data.PPIdOut);
 			
-			console.log(data.alreadyRegisterOut+" "+data.rightPasswordOut+" "+data.playerIdOut+" "+data.usernameOut);
+			localStorage.alreadyRegister = data.alreadyRegisterOut;
+			localStorage.rightPassword   = data.rightPasswordOut;
+			localStorage.playerId 		  = data.playerIdOut;
+			localStorage.username 		  = data.usernameOut;
+			localStorage.imgProfilId     = data.PPIdOut;
 			
-			if (window.localStorage.alreadyRegister === "true" && window.localStorage.rightPassword === "true") {
-				window.localStorage.isConnected = true;
+			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
+				localStorage.isConnected = true;
 				
 				document.location.href="../views/home.html";
 			} else {
@@ -55,7 +57,6 @@ form.addEventListener('submit', (event) => {
 	
 	const username = document.getElementById("username").value;
 	const password = document.getElementById("pwd").value;
-	
 	console.log(username+" "+password);
 	
 	tryToConnect(username, password);

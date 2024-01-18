@@ -68,10 +68,18 @@ header img:hover {
 }
 
 #burger a:hover {
-    background: rgb(212, 212, 212);
+    background: #4183cc;
 }
 
 #burger.visible {
     display: block;
 }
 
+#a-circ, #a-acc{
+    border-radius: 10px;
+}
+
+#burger{
+    border-radius: 10px;
+    background: #5DE0E6;
+}
