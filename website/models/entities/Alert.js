@@ -379,82 +379,84 @@ export class Alert{
         tileset.src = "../../../assets/tilesets/circuit.png";
         console.log("tileset.src : "+ tileset.src);
 
-        console.log("tileset.onload sans onload start");
+        tileset.onload = () => {
+            console.log("tileset.onload sans onload start");
 
-        for (let i = 0; i < 12; i++) {
-            const canvas = document.createElement('canvas');
-            canvas.width  = 60;
-            canvas.height = 60;
-            canvas.style.marginRight = '10px';
+            for (let i = 0; i < 12; i++) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 60;
+                canvas.height = 60;
+                canvas.style.marginRight = '10px';
 
-            const ctx = canvas.getContext('2d');
+                const ctx = canvas.getContext('2d');
 
-            canvas.id = i;
-            const tileSize = 160;
-            const rotation = 0;
+                canvas.id = i;
+                const tileSize = 160;
+                const rotation = 0;
 
-            const tileX = i * tileSize;
-            const tileY = 4 * 160;
+                const tileX = i * tileSize;
+                const tileY = 4 * 160;
 
-            ctx.save();
-            ctx.translate(0, 0);
-            ctx.rotate(rotation * Math.PI / 180);
-            ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
-            ctx.restore();
+                ctx.save();
+                ctx.translate(0, 0);
+                ctx.rotate(rotation * Math.PI / 180);
+                ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
+                ctx.restore();
 
-            canvas.addEventListener('click', (event) => {
-                const canvasId = canvas.id;
-                console.log('Canvas cliqué, ID:', canvasId);
+                canvas.addEventListener('click', (event) => {
+                    const canvasId = canvas.id;
+                    console.log('Canvas cliqué, ID:', canvasId);
 
-                if (selectedCanvas) {
-                    selectedCanvas.style.border = 'none';
-                }
-                selectedCanvas = canvas;
-                canvas.style.border = '1px solid #000';
+                    if (selectedCanvas) {
+                        selectedCanvas.style.border = 'none';
+                    }
+                    selectedCanvas = canvas;
+                    canvas.style.border = '1px solid #000';
 
-                localStorage.setItem("imgProfilId", canvasId);
+                    localStorage.setItem("imgProfilId", canvasId);
 
-                Alert.updateProfileImage(localStorage.imgProfilId);
-            });
+                    Alert.updateProfileImage(localStorage.imgProfilId);
+                });
 
-            alertCustom.appendChild(canvas);
+                alertCustom.appendChild(canvas);
 
 
+            }
+            setTimeout(() => {
+                const actionbutton = document.createElement('button');
+                actionbutton.id = 'buttonAlert';
+                actionbutton.innerText = this.labelButton;
+
+                // css :
+                actionbutton.style.background = '#2299b9';
+                actionbutton.style.color = '#ffffff';
+
+                closeButton.addEventListener('click', () => {
+                    alertCustom.style.display = 'none';
+                    overlay.style.display = 'none';
+                    Alert.updateProfileImage(localStorage.imgProfilId);
+                });
+
+                actionbutton.addEventListener('click', () => {
+
+                    alertCustom.style.display = 'none';
+                    overlay.style.display = 'none';
+
+                    console.log(actionbutton.innerText);
+                    console.log(this.link);
+                    if (this.link != null) {
+                        console.log('changement de page');
+                        document.location.href = this.link;
+                    }
+                    Alert.updateProfileImage(localStorage.imgProfilId);
+                });
+
+                alertCustom.appendChild(actionbutton);
+                document.body.appendChild(alertCustom);
+
+                console.log("tileset.onload sans onload end");
+            }, 200);
         }
-        setTimeout(() => {
-            const actionbutton = document.createElement('button');
-            actionbutton.id        = 'buttonAlert';
-            actionbutton.innerText = this.labelButton;
-
-            // css :
-            actionbutton.style.background = '#2299b9';
-            actionbutton.style.color      = '#ffffff';
-
-            closeButton.addEventListener('click', () => {
-                alertCustom.style.display = 'none';
-                overlay.style.display     = 'none';
-                Alert.updateProfileImage(localStorage.imgProfilId);
-            });
-
-            actionbutton.addEventListener('click', () => {
-
-                alertCustom.style.display = 'none';
-                overlay.style.display     = 'none';
-
-                console.log(actionbutton.innerText);
-                console.log(this.link);
-                if (this.link != null) {
-                    console.log('changement de page');
-                    document.location.href = this.link;
-                }
-                Alert.updateProfileImage(localStorage.imgProfilId);
-            });
-
-            alertCustom.appendChild(actionbutton);
-            document.body.appendChild(alertCustom);
-
-            console.log("tileset.onload sans onload end");
-        },200);
 
 
 
