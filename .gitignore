@@ -3,3 +3,8 @@
 /package.json
 /tsconfig.json
 /node_modules/
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/sae-s3.01_vroumvroum.iml
+.idea/modules.xml
+.idea/misc.xml
