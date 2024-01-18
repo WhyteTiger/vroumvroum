@@ -76,7 +76,7 @@ window.onload = () => {
             .then((response) => response.json())
             .then((dataMap) => {
                
-               const map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
+               map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
                
                const playerIdIn = localStorage.playerId;
                
@@ -101,30 +101,31 @@ window.onload = () => {
                      controller           = new ControllerDirection();
                      controller.init();
                      
-                     const canvas = document.getElementById('canvas');
-                     ctx = canvas.getContext('2d',{willReadFrequently: true});
+                     canvas = document.getElementById('canvas');
+                     ctx    = canvas.getContext('2d',{willReadFrequently: true});
                      
                      canvas.width  = map.getLargeur() * 160;
                      canvas.height = map.getHauteur() * 160;
                      
                      // Création d'une image pour le tileset
-                     const circuitTileset = new Image();
+                     circuitTileset = new Image();
                      
                      // Définition du chemin de l'image
                      circuitTileset.src = '../../assets/tilesets/circuit.png';
                      
-                     const carTileX             = kart.getColone();
-                     const carTileY             = kart.getLigne();
-                     const carTileSize = 160;
-                     angleDegrees         = kart.getRotate();
+                     const carTileX = kart.getColone();
+                     const carTileY = kart.getLigne();
+                     angleDegrees   = kart.getRotate();
+                     carTileSize    = 160;
+                     
                      
                      carTilePixelX = carTileX * carTileSize;
                      carTilePixelY = carTileY * carTileSize;
                      engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
                      timer  = new Timer();
                      controllerCheckpoint.updateCheckpoint();
-
-                     let popUp = new Alert("message", "alert", "home.html" ,"type");
+                     
+                     popUp = new Alert("message", "alert", "home.html" ,"type");
                      popUp.alertStartCircuit("creator", "temps");
                      
                      started = 0;
