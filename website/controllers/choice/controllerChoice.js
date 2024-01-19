@@ -1,5 +1,6 @@
 import { API } from "../../models/API.js";
-
+import { Alert } from "../../models/entities/Alert.js";
+import { Timer } from "../../models/entities/Timer.js";
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
@@ -114,7 +115,8 @@ function fetchPage(nb, nbPages) {
                             if (leaderBoard[2*i] !== undefined) {
                                 const leaderboardPlayer = document.getElementById("leaderboard-players");
                                 const player = document.createElement("p");
-                                player.innerText = leaderBoard[2*i] + " : " + leaderBoard[2*i+1];
+                                let time = new Timer();
+                                player.innerText = leaderBoard[2*i] + " : " + time.timeToString(leaderBoard[2*i+1]);
                                 leaderboardPlayer.appendChild(player);
                             } else {
                                 // to skip end of for loop
