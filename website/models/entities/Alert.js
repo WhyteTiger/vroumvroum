@@ -637,7 +637,7 @@ export class Alert{
             console.log("circuitNameInput.value : "+ circuitNameInput.value);
             console.log("circuitLapsInput.value : "+ circuitLapsInput.value);
             
-            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[0-9]$/)) {
+            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
                 const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
                 errorAlert.customAlert();
                 
