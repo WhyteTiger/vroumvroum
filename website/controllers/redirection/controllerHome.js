@@ -17,6 +17,7 @@ mainLogo.addEventListener("click", () => {
 
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
+	localStorage.setItem("personal", false);
 	document.location.href = "choiceCircuit.html";
 });
 
