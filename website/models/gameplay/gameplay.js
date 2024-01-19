@@ -129,12 +129,56 @@ window.onload = () => {
       
       const matrix = JSON.parse(localStorage.getItem("matrix"));
       
-      console.log("matrix : "+ matrix);
-      console.log("***************************************************************************************************************");
-      console.log("matrix[0] : "+ matrix[0] +"   matrix[1] : "+ matrix[1]);
+      const circuitTiles = [
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      ];
+      const orientationTiles = [
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      ];
       
-      //LLLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA le pb
-      map  = new Map(new Tileset("circuit.png"), matrix[0], matrix[1]);
+      let columnCounter, rowCounter = -1, len = matrix[0].length - 1;
+      
+      console.log("=====================================================================================");
+      for (let matrixCurrentIndex = 0; matrixCurrentIndex < len; matrixCurrentIndex++) {
+         
+         if (matrixCurrentIndex%12 === 0) rowCounter += 1;
+         columnCounter = matrixCurrentIndex - 12*rowCounter;
+         
+         circuitTiles[rowCounter][columnCounter]     = matrix[0][matrixCurrentIndex];
+         orientationTiles[rowCounter][columnCounter] = matrix[1][matrixCurrentIndex];
+      }
+      let circuitTilesPrint     = "[\n";
+      let orientationTilesPrint = "[\n";
+      for (let i = 0; i < 8; i++) {
+         circuitTilesPrint     += "  [";
+         orientationTilesPrint += "  [";
+         for (let j = 0; j < 12; j++) {
+            circuitTilesPrint     += circuitTiles[i][j]     +", ";
+            orientationTilesPrint += orientationTiles[i][j] +", ";
+         }
+         circuitTilesPrint     += "]\n";
+         orientationTilesPrint += "]\n";
+      }
+      circuitTilesPrint     += "\n]\n";
+      orientationTilesPrint += "\n]\n";
+      console.log("circuitTilesPrint : \n"+ circuitTilesPrint +"orientationTilesPrint : \n"+ orientationTilesPrint);
+      console.log("=====================================================================================");
+      
+      map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
       const nbTour = localStorage.getItem("circuitLaps");
       console.log("nbTour : "+ nbTour);
       timer = new Timer();
@@ -145,7 +189,7 @@ window.onload = () => {
       setInterval(() => {timer.updateCompteur();}, 100);
       started = 2;
       
-      //updateCar();
+      updateCar();
    }
 }
 
