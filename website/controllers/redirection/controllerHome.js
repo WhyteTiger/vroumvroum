@@ -17,6 +17,7 @@ mainLogo.addEventListener("click", () => {
 
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
+	localStorage.setItem("personal", "false");
 	document.location.href = "choiceCircuit.html";
 });
 
@@ -27,6 +28,8 @@ createCircuit.addEventListener("click", () => {
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter", "connection.html" , 'warning');
 		newAlert.customAlert();
 	} else {
+		localStorage.setItem("personal", "true");
+		//document.location.href = "choiceCircuit.html";
 		document.location.href = "createCircuit.html";
 	}
 });
