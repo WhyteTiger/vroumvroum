@@ -187,30 +187,22 @@ function init(kartId, nbTour) {
    
 function updateCar() {
    if (started === 0 && popUp.getIsButtonClicked() === 1) {
-      console.log("NNNYYYYYAAAAAAAAAAAAAAAAAN");
       started = 1;
    }
    if (started === 1 && popUp.getIsButtonClicked() === 1) {
-      console.log("NNNYYYYYAAAAAAAAAAAAAAAAAN");
       timer.start();
       setInterval(() => {timer.updateCompteur();}, 100);
       started = 2;
    }
    
    //const angleRadians = Maths.degToRad(angleDegrees);
-   console.log("canvas.width  : "+ canvas.width);
-   console.log("canvas.height : "+ canvas.height);
    ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
    
    //dessin Circuit
    let i = 0, l = map.getHauteur();
-   console.log("map.getHauteur() : "+ map.getHauteur());
    for (; i < l; i++) {
       const ligne = map.terrain[i];
       const angle = map.rotate[i];
-      
-      console.log("ligne : "+  ligne);
-      console.log("angle : "+  angle);
       
       const y = i * 160;
       
