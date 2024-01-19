@@ -1,9 +1,10 @@
-import { API } from "../../models/API.js";
+import { API }   from "../../models/API.js";
 import { Alert } from "../../models/entities/Alert.js";
 
 /* NOTE : THIS SCRIPT APPLIES TO ALL ASIDES IN THE APP, EXPLAINING WHY THERE ARE "SO MANY" IF STATEMENTS */
 
 if (document.querySelector('#savebutton') === null) {    // means we're on the choice page
+	console.log("document.querySelector('#savebutton') === null");
 
 	document.querySelector('#playbutton').addEventListener('click', () => {
 		localStorage.setItem("personal", "false");
@@ -11,6 +12,8 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 	});
 
 } else if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
+	console.log("localStorage.getItem(\"isChecked\") === \"false\"");
+	
 	document.querySelector('#savebutton').addEventListener('click', () => {
 		
 		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
@@ -18,6 +21,8 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 	});
 	
 } else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
+	console.log("localStorage.getItem(\"isChecked\") === \"true\"");
+	
 	const matrixIn = JSON.parse(localStorage.getItem('matrix'));
 	const playerIdIn    = localStorage.getItem("playerId");
 	const circuitNameIn = localStorage.getItem("circuitName");
@@ -44,6 +49,8 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 		.then((dataCircuit) => {
 			if (dataCircuit.success === "true") {
 				console.log("saved successfully");
+				const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
+				popUpSuccess.customAlert();
 			} else {
 				console.error("saved error");
 			}
@@ -51,12 +58,8 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 			localStorage.setItem("circuitName", "");
 			localStorage.setItem("creatorTime", "");
 			localStorage.setItem("circuitLaps", "");
+			localStorage.setItem("isChecked", "false");
 		});
+} else {
+	console.log("Error controllerAside : Nothing good");
 }
-
-
-/*
-// récupération du nom entré dans la pop-up
-const nameCircuit = localStorage.inputField;
-console.log(nameCircuit);
- */

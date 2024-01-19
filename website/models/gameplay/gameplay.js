@@ -150,7 +150,7 @@ window.onload = () => {
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
       
-      let columnCounter, rowCounter = -1, len = matrix[0].length - 1;
+      let columnCounter, rowCounter = -1, len = matrix[0].length;
       
       console.log("=====================================================================================");
       for (let matrixCurrentIndex = 0; matrixCurrentIndex < len; matrixCurrentIndex++) {
@@ -285,11 +285,16 @@ function updateCar() {
       console.log("La partie est terminée");
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
       popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
-   } else if (localStorage.getItem("personal") === "true") { //Si la vérif est fini e
-      console.log(timer.getElapsedTime());
+   } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
       timer.stop();
-      console.log("La partie est terminée");
-      console.log("circuitEndCheck");
+      const creatorTime = timer.getElapsedTime();
+      console.log("creatorTime : "+ creatorTime);
+      
+      localStorage.setItem("creatorTime", creatorTime);
+      localStorage.setItem("isChecked", "true");
+      
+      console.log("La vérif est terminée");
+      location.href = "createCircuit.html";
    }
 }
 
