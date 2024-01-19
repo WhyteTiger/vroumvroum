@@ -25,6 +25,7 @@ form {
     display: flex;
     flex-direction: column;
     margin-top: 2em;
+    position: relative;
 }
 
 label {
@@ -75,3 +76,26 @@ select {
     margin: auto 0px auto 10px;
 }
 
+
+/* --- ICON --- */
+
+.field .password-icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 72%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 30px;
+    color: #000000;
+    transition: all 0.2s;
+}
+
+.field .password-icon:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.field .password-icon .feather-eye-off{
+    display: none;
+}
