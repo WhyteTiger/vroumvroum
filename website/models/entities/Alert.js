@@ -191,7 +191,7 @@ export class Alert{
     }
 
 
-    alertEndCircuit(point, nbTour, result){
+    alertEndCircuit(point, temps){
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
@@ -222,19 +222,13 @@ export class Alert{
         pMessage.style.fontSize = '30px';
 
         const pPoint = document.createElement('p');
-        pPoint.innerText = 'Nombre de points : ' + point;
+        pPoint.innerText = 'VroumCoin gagné : ' + point;
         alertCustom.appendChild(pPoint);
 
-        const pResultat = document.createElement('p');
-        pResultat.innerText = 'Resultat :';
-        alertCustom.appendChild(pResultat);
-
-        for (let i = 0;  i<nbTour ; i++){
-            const pTemps = document.createElement('p');
-            let numTemps = i+1;
-            pTemps.innerText = 'Temps n°' + numTemps + ' : ' + result[i];
-            alertCustom.appendChild(pTemps);
-        }
+        
+        const pTemps = document.createElement('p');
+        pTemps.innerText = "Temps : " + temps;
+        alertCustom.appendChild(pTemps);
 
 
         const actionbutton = document.createElement('button');
@@ -299,11 +293,11 @@ export class Alert{
         pMessage.style.fontSize = '30px';
 
         const pCreateur = document.createElement('p');
-        pCreateur.innerText = 'Créateur : ' + creator;
+        pCreateur.innerText = "Créateur : " + creator;
         alertCustom.appendChild(pCreateur);
 
         const pTemps = document.createElement('p');
-        pTemps.innerText = 'Temps à battre : ' + temps;
+        pTemps.innerText = "Temps à battre : " + temps;
         alertCustom.appendChild(pTemps);
 
         const pEncouragement = document.createElement('p');

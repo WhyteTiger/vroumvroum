@@ -10,7 +10,7 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
+let creatorTime,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
     
@@ -36,7 +36,7 @@ window.onload = () => {
 
          var circuitName     = dataCircuit.circuitName;
          var creatorUsername = dataCircuit.creatorUsername;
-         var creatorTime     = dataCircuit.creatorTime;
+         creatorTime     = dataCircuit.creatorTime;
          var circuitScore    = dataCircuit.circuitScore;
 
          console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
@@ -83,7 +83,7 @@ window.onload = () => {
             .then((response) => response.json())
             .then((dataMap) => {
                map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
-               
+               let nbTour = dataMap.laps;
                const playerIdIn = window.localStorage.playerId;
                
                const url = API.getURLgetOwnKartByPlayerId();
@@ -102,8 +102,8 @@ window.onload = () => {
                fetch(url, params)
                   .then((response) => response.json())
                   .then((dataKart) => {
-                     controllerCheckpoint = new ControllerCheckpoint(map,1);
-                     const kart     = new Kart(3, dataKart.kartId-1, 0);
+                     controllerCheckpoint = new ControllerCheckpoint(map,nbTour);
+                     const kart           = new Kart(3, dataKart.kartId-1, 0);
                      
                      controller = new ControllerDirection();
                      controller.init();
@@ -131,7 +131,7 @@ window.onload = () => {
                      engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
                      timer  = new Timer();
                      controllerCheckpoint.updateCheckpoint();
-
+                     controllerCheckpoint.updateTour();
                      popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
                      popUp.alertStartCircuit(creatorUsername, creatorTime);
                      
@@ -178,6 +178,7 @@ function updateCar() {
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
+      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-87, engine.getCentreVehicule().getY()-87, 1, 1).data,engine.getCentreVehicule().getX()-87, engine.getCentreVehicule().getY()-87);
       //deplacement de la voiture
       engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
       
@@ -196,11 +197,17 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) {
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
    } else {
-      console.log(timer.getElapsedTime());
+      let monTemps = timer.getElapsedTime();
       timer.stop();
-      console.log("La partie est terminée");
+      console.log(timer.timeToString(monTemps));
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
-      popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
+      let score;
+      if(monTemps < creatorTime){
+         score = 1;
+      }else{
+         score = 0;
+      }
+      popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
    }
 }
 
