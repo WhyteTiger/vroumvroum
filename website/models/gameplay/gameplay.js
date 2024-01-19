@@ -16,7 +16,9 @@ window.onload = () => {
    
    console.log("localStorage.getItem(\"personal\") : "+ localStorage.getItem("personal"));
    
-   if (localStorage.getItem("personal") === false) {
+   if (localStorage.getItem("personal") === "false") {
+      console.log("localStorage.getItem(\"personal\") === false START");
+      
       const circuitId = window.localStorage.circuitId;
       
       const url = API.getURLgetCircuitInformation();
@@ -148,8 +150,9 @@ window.onload = () => {
                   console.log("Fetch failed");
                });
          });
+      console.log("localStorage.getItem(\"personal\") === \"false\" END");
    } else {
-   
+      console.log("localStorage.getItem(\"personal\") === \"true\" START");
    }
 }
 

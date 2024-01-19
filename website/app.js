@@ -9,6 +9,8 @@ localStorage.setItem("alreadyRegister", "");
 localStorage.setItem("circuitId",       "1");
 localStorage.setItem("matrix",          "");
 
+localStorage.setItem('save', "false");
+
 localStorage.setItem("personal",        "false");
 localStorage.setItem("isChecked",       "false");
 

@@ -636,19 +636,19 @@ export class Alert{
             console.log(this.link);
             console.log("circuitNameInput.value : "+ circuitNameInput.value);
             console.log("circuitLapsInput.value : "+ circuitLapsInput.value);
+            
             if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[0-9]$/)) {
                 const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
                 errorAlert.customAlert();
+                
             } else {
-                if (this.link != null){
-                    localStorage.setItem('circuitName', circuitNameInput.value);
-                    localStorage.setItem('circuitLaps', circuitLapsInput.value);
-                    console.log('changement de page');
-                    document.location.href = this.link;
-                }
+                localStorage.setItem('circuitName', circuitNameInput.value);
+                localStorage.setItem('circuitLaps', circuitLapsInput.value);
+                localStorage.setItem("personal", "true");
+                console.log('changement de page');
+                document.location.href = this.link;
             }
         });
-
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
     }

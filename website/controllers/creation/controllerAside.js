@@ -10,16 +10,14 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 		location.href = 'playCircuit.html';
 	});
 
-} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit isn't checked
+} else if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
 	document.querySelector('#savebutton').addEventListener('click', () => {
 		
-		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "", 'save');
+		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 		popUp.customAlert();
-		
-		localStorage.setItem("personal", "true");
-		location.href = "playCircuit.html";
 	});
-} else if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit is checked
+	
+} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
 	const matrixIn = JSON.parse(localStorage.getItem('matrix'));
 	const playerIdIn    = localStorage.getItem("playerId");
 	const circuitNameIn = localStorage.getItem("circuitName");
@@ -49,6 +47,10 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 			} else {
 				console.error("saved error");
 			}
+			
+			localStorage.setItem("circuitName", "");
+			localStorage.setItem("creatorTime", "");
+			localStorage.setItem("circuitLaps", "");
 		});
 }
 
