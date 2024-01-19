@@ -17,12 +17,12 @@ mainLogo.addEventListener("click", () => {
 
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
-	localStorage.setItem("personal", false);
 	document.location.href = "choiceCircuit.html";
 });
 
 const createCircuit = document.getElementById("create");
 createCircuit.addEventListener("click", () => {
+	localStorage.setItem("personal", false);
 	const playerId = window.localStorage.getItem("playerId");
 	if( playerId === '0'){
 		const newAlert = new Alert("Vous ne pouvez pas accerder à cette page si vous n'êtes pas connecté !", "Se Connecter", "connection.html" , 'warning');
