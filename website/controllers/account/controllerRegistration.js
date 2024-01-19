@@ -24,7 +24,7 @@ async function wantToRegistrate(nickname, password) {
 				localStorage.isConnected = "true";
 				localStorage.playerId    = data.playerIdOut;
 				localStorage.username    = data.usernameOut;
-				localStorage.imgProfilId = data.imgProfilIdOut;
+				localStorage.imgProfilId = data.PPIdOut;
 				
 				document.location.href="../views/home.html";
 			} else {

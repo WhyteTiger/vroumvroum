@@ -9,6 +9,7 @@
  */
 
 import { API } from "../API.js";
+import { updateProfileImageInHeader  } from "../../controllers/redirection/controllerHeader.js"
 
 window.localStorage.setItem("inputField", "");
 export class Alert{
@@ -174,6 +175,7 @@ export class Alert{
             console.log("actionbutton.innerText : "+ actionbutton.innerText);
             console.log("this.link : "+ this.link);
             console.log("inputField.value : "+ inputField.value);
+            Alert.updateProfileName(inputField.value);
             if (this.link != null){
                 console.log("inputField.value : "+ inputField.value);
                 console.log('changement de page');
@@ -449,6 +451,7 @@ export class Alert{
                         document.location.href = this.link;
                     }
                     Alert.updateProfileImage(localStorage.imgProfilId);
+                    updateProfileImageInHeader(localStorage.imgProfilId);
                 });
 
                 alertCustom.appendChild(actionbutton);
@@ -583,6 +586,35 @@ export class Alert{
            .then((result) => {
                console.log(result);
            });
+    }
+
+    static updateProfileName(newUsername){
+        const pseudo= document.getElementById('pseudo');
+        const playerId    = localStorage.getItem("playerId");
+
+        pseudo.innerText = newUsername;
+
+        const url         = API.getURLupdatePlayerUsername();
+        const dataUsername = {
+            playerIdIn:    playerId,
+            newUsernameIn: newUsername
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataUsername)
+        };
+        console.log(params);
+
+        fetch(url, params)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+            });
+
+        localStorage.setItem("username", newUsername);
     }
 
     alertSave(alertCustom, overlay){
