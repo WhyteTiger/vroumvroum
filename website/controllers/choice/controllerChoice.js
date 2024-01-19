@@ -1,5 +1,6 @@
 import { API } from "../../models/API.js";
 import { Alert } from "../../models/entities/Alert.js";
+import { Timer } from "../../models/entities/Timer.js";
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
