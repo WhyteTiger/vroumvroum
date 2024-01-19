@@ -147,6 +147,7 @@ window.onload = () => {
       });
    }
 
+   
 function updateCar() {
    if (started === 0 && popUp.getIsButtonClicked() === 1) {
       started = 1;
