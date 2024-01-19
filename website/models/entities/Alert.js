@@ -400,7 +400,7 @@ export class Alert{
             ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
             ctx.restore();
 
-            canvas.addEventListener('click', (event) => {
+            canvas.addEventListener('click', () => {
                 const canvasId = canvas.id;
                 console.log('Canvas cliqué, ID:', canvasId);
 

@@ -13,7 +13,6 @@ import { Alert }                from "../entities/Alert.js";
 let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
-   
    console.log("localStorage.getItem(\"personal\") : "+ localStorage.getItem("personal"));
    
    if (localStorage.getItem("personal") === "false") {
@@ -61,7 +60,7 @@ window.onload = () => {
                   if (leaderBoard[2*i] !== undefined) {
                      const leaderboardPlayer = document.getElementById("leaderboard-players");
                      const player = document.createElement("p");
-                     let timer = new Timer();
+                     timer = new Timer();
                      player.innerText = leaderBoard[2*i] + " : " + timer.timeToString(leaderBoard[2*i+1]);
                      leaderboardPlayer.appendChild(player);
                   } else {
@@ -87,9 +86,11 @@ window.onload = () => {
             fetch(url, params)
                .then((response) => response.json())
                .then((dataMap) => {
+                  console.log("***************************************************************************************************************");
+                  console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
                   
-                  const playerIdIn = window.localStorage.playerId;
+                  const playerIdIn = localStorage.playerId;
                   
                   const url = API.getURLgetOwnKartByPlayerId();
                   const dataKart = {
@@ -107,41 +108,13 @@ window.onload = () => {
                   fetch(url, params)
                      .then((response) => response.json())
                      .then((dataKart) => {
-                        controllerCheckpoint = new ControllerCheckpoint(map,1);
-                        const kart     = new Kart(3, dataKart.kartId-1, 0);
                         
-                        controller = new ControllerDirection();
-                        controller.init();
+                        init(dataKart.kartId-1, 1);
                         
-                        canvas = document.getElementById('canvas');
-                        ctx    = canvas.getContext('2d',{willReadFrequently: true});
-                        
-                        canvas.width  = map.getLargeur() * 160;
-                        canvas.height = map.getHauteur() * 160;
-                        
-                        // Création d'une image pour le tileset
-                        circuitTileset = new Image();
-                        
-                        // Définition du chemin de l'image
-                        circuitTileset.src = '../../assets/tilesets/circuit.png';
-                        
-                        const carTileX = kart.getColone();
-                        const carTileY = kart.getLigne();
-                        carTileSize = 160;
-                        
-                        //const angleDegrees = kart.getRotate();
-                        
-                        carTilePixelX = carTileX * carTileSize;
-                        carTilePixelY = carTileY * carTileSize;
-                        engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
-                        timer  = new Timer();
-                        controllerCheckpoint.updateCheckpoint();
+                        started = 0;
                         
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
                         popUp.alertStartCircuit(creatorUsername, creatorTime);
-                        
-                        started = 0;
-                        // Attendre que l'image soit complètement chargée
                         
                         updateCar(); // Appel initial de la fonction updateCar
                      });
@@ -153,27 +126,92 @@ window.onload = () => {
       console.log("localStorage.getItem(\"personal\") === \"false\" END");
    } else {
       console.log("localStorage.getItem(\"personal\") === \"true\" START");
+      
+      const matrix = JSON.parse(localStorage.getItem("matrix"));
+      
+      console.log("matrix : "+ matrix);
+      console.log("***************************************************************************************************************");
+      console.log("matrix[0] : "+ matrix[0] +"   matrix[1] : "+ matrix[1]);
+      
+      //LLLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA le pb
+      map  = new Map(new Tileset("circuit.png"), matrix[0], matrix[1]);
+      const nbTour = localStorage.getItem("circuitLaps");
+      console.log("nbTour : "+ nbTour);
+      timer = new Timer();
+      
+      init(0, nbTour)
+      
+      timer.start();
+      setInterval(() => {timer.updateCompteur();}, 100);
+      started = 2;
+      
+      //updateCar();
    }
+}
+
+function init(kartId, nbTour) {
+   controllerCheckpoint = new ControllerCheckpoint(map,nbTour);
+   const kart     = new Kart(3, kartId, 0);
+   
+   controller = new ControllerDirection();
+   controller.init();
+   
+   canvas = document.getElementById('canvas');
+   ctx    = canvas.getContext('2d',{willReadFrequently: true});
+   
+   console.log("map.getLargeur() : "+ map.getLargeur());
+   console.log("map.getHauteur() : "+ map.getHauteur());
+   
+   canvas.width  = map.getLargeur() * 160;
+   canvas.height = map.getHauteur() * 160;
+   
+   // Création d'une image pour le tileset
+   circuitTileset = new Image();
+   
+   // Définition du chemin de l'image
+   circuitTileset.src = '../../assets/tilesets/circuit.png';
+   
+   const carTileX = kart.getColone();
+   const carTileY = kart.getLigne();
+   carTileSize = 160;
+   
+   //const angleDegrees = kart.getRotate();
+   
+   carTilePixelX = carTileX * carTileSize;
+   carTilePixelY = carTileY * carTileSize;
+   engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
+   timer  = new Timer();
+   controllerCheckpoint.updateCheckpoint();
 }
 
    
 function updateCar() {
    if (started === 0 && popUp.getIsButtonClicked() === 1) {
+      console.log("NNNYYYYYAAAAAAAAAAAAAAAAAN");
       started = 1;
    }
    if (started === 1 && popUp.getIsButtonClicked() === 1) {
+      console.log("NNNYYYYYAAAAAAAAAAAAAAAAAN");
       timer.start();
       setInterval(() => {timer.updateCompteur();}, 100);
       started = 2;
    }
+   
    //const angleRadians = Maths.degToRad(angleDegrees);
+   console.log("canvas.width  : "+ canvas.width);
+   console.log("canvas.height : "+ canvas.height);
    ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
    
    //dessin Circuit
    let i = 0, l = map.getHauteur();
+   console.log("map.getHauteur() : "+ map.getHauteur());
    for (; i < l; i++) {
       const ligne = map.terrain[i];
       const angle = map.rotate[i];
+      
+      console.log("ligne : "+  ligne);
+      console.log("angle : "+  angle);
+      
       const y = i * 160;
       
       let j = 0, k = ligne.length;
@@ -203,14 +241,19 @@ function updateCar() {
       
       ctx.restore();
    }
-   if (controllerCheckpoint.fini === 0) {
+   if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
-   } else {
+   } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
       console.log(timer.getElapsedTime());
       timer.stop();
       console.log("La partie est terminée");
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
       popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
+   } else if (localStorage.getItem("personal") === "true") { //Si la vérif est fini e
+      console.log(timer.getElapsedTime());
+      timer.stop();
+      console.log("La partie est terminée");
+      console.log("circuitEndCheck");
    }
 }
 
