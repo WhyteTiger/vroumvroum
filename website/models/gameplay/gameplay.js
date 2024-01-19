@@ -10,7 +10,7 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let creatorTime,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
+let playerIdIn,creatorTime,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
     
@@ -84,7 +84,7 @@ window.onload = () => {
             .then((dataMap) => {
                map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
                let nbTour = dataMap.laps;
-               const playerIdIn = window.localStorage.playerId;
+               playerIdIn = window.localStorage.playerId;
                
                const url = API.getURLgetOwnKartByPlayerId();
                const dataKart = {
@@ -202,12 +202,35 @@ function updateCar() {
       console.log(timer.timeToString(monTemps));
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
       let score;
+      if(playerTime > monTemps){
+         
+      }
       if(monTemps < creatorTime){
          score = 1;
+         let url = API.getURLaddVroumCoinToPlayerId();
+         const dataPlayer = {
+            playerIdIn: playerIdIn
+         };
+         const params = {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataPlayer)
+         };
+         console.log(params);
+         
+         fetch(url, params)
+            .then((response) => response.json())
+            .then((dataPlayer) => {
+               console.log(dataPlayer.success);
+            });
       }else{
          score = 0;
       }
+      if(monTemps < circuitScore){
       popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
+      
    }
 }
 

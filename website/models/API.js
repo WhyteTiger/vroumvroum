@@ -26,7 +26,16 @@ export class API {
 
       return 'http://'+API.server+'/gameplay/getCircuitInformation';
    }
-   
+
+   static getURLaddVroumCoinToPlayerId() {
+
+      return 'http://'+API.server+'/gameplay/addVroumCoinToPlayerId';
+   }
+   static getURLBestScoreAndNote() {
+         return 'http://'+API.server+'/gameplay/getBestScoreAndNote';
+      }
+
+
    static getURLgetKartsAndCoinsByPlayerId() {
       
       return 'http://'+API.server+'/personalize/getKartsAndCoinsByPlayerId';
