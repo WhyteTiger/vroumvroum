@@ -1,4 +1,5 @@
 import {API} from "../../models/API.js";
+import {Alert} from "../../models/entities/Alert.js";
 
 async function wantToRegistrate(nickname, password) {
 	
@@ -29,6 +30,8 @@ async function wantToRegistrate(nickname, password) {
 				document.location.href="../views/home.html";
 			} else {
 				console.log("nickname is already used");
+				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer !", null, "warning");
+				newAlert.customAlert();
 			}
 		})
 		.catch(() => {
@@ -50,5 +53,7 @@ form.addEventListener('submit', (event) => {
 		
 	} else {
 		console.log("confpwd is not equal to password");
+		const newAlert = new Alert("Attention, les mots de passe ne sont pas les mêmes !",  "Fermer !", null, "warning");
+		newAlert.customAlert();
 	}
 });
