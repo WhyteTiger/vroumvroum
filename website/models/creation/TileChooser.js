@@ -125,11 +125,13 @@ export class TileChooser {
 		setTimeout(() => {
 			// eventListener to choose the tile you want to place
 			const divList = document.querySelectorAll('.tile-selector div');
+
 			for(let i = 0 ; i < divList.length ; i++) {
 				divList[i].addEventListener('click', (evt) => {
 					
 					// to show the selected image
 					const children = divList[i].parentElement.children; // get siblings from the same selector
+					
 					for(let i = 0 ; i < children.length ; i++) {
 						
 						if (children[i] === evt.currentTarget && !children[i].classList.contains('selected')) {
@@ -143,18 +145,21 @@ export class TileChooser {
 			
 			// eventListener on the circuit divs
 			const cDivs = document.querySelectorAll('#circuit div');
+
 			for(let i = 0; i < cDivs.length; i++) {
 				cDivs[i].oncontextmenu = () => {return false;};
 				cDivs[i].addEventListener('mousedown', (evt) => {
 					if(evt.button === 0) {  // left click listener (place)
 						// if a selector tile is selected, please replace it
 						const sDivs = document.querySelectorAll('.tile-selector div');
+
 						for(let j = 0; j < sDivs.length; j++) {
 							if(sDivs[j].classList.contains('selected')) {
 								this._matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
 								this._map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
 							}
 						}
+
 						localStorage.setItem('matrix', JSON.stringify(this._matrix));
 						
 					}

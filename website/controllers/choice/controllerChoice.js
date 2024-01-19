@@ -1,6 +1,11 @@
 import { API } from "../../models/API.js";
 import { Alert } from "../../models/entities/Alert.js";
 import { Timer } from "../../models/entities/Timer.js";
+
+
+console.log(localStorage)
+
+
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
@@ -8,7 +13,7 @@ function fetchPage(nb, nbPages) {
 
     // for further classes
     let filter = "";
-    if(localStorage.personal === "true") filter = "-2";
+    if(localStorage.getItem("personal") === "true") filter = "-2";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
@@ -19,14 +24,14 @@ function fetchPage(nb, nbPages) {
     let fetchParams;
 
     // fetch the circuits
-    if(localStorage.personal === "false") {
+    if(localStorage.getItem("personal") === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
             pageNumberIn:      nb,
             circuitNameIn:     circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
-    } else if(localStorage.personal === "true") {
+    } else if(localStorage.getItem("personal") === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
             playerIdIn: +localStorage.getItem("playerId"),
@@ -100,7 +105,7 @@ function fetchPage(nb, nbPages) {
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
 
-                    if(localStorage.personal === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+                    if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
                     
@@ -211,13 +216,13 @@ function fetchCircuits() {
 /* MAIN PART OF THE SCRIPT */
 
 // à retirer plus tard
-localStorage.personal = "false";
+//localStorage.getItem("personal") = "false";
 
 // display the correct elements depending on whether the page is personal or not
-if(localStorage.personal === "false") {
+if(localStorage.getItem("personal") === "false") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.add('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.remove('invisible'); });
-} else if(localStorage.personal === "true") {
+} else if(localStorage.getItem("personal") === "true") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.remove('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
@@ -230,6 +235,12 @@ document.getElementById('name-filter').addEventListener('keydown', () => {
 document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
+
+if(localStorage.getItem('personal') === 'true') {
+    document.getElementById('modify-button').addEventListener('click', (evt) => {
+        document.location.href = 'createCircuit.html';
+    });
+}
 
 fetchCircuits();
 
