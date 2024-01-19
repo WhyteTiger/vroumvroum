@@ -13,9 +13,13 @@ export class TileChooser {
 	
 	init(){
 		console.log("TileChooser début init");
-		
-		const localStorageMatrix = localStorage.getItem('matrix');
-		if(localStorageMatrix === null || localStorageMatrix === undefined || localStorageMatrix === "") {
+
+		let localStorageMatrix;
+
+		if(localStorage.getItem('personal') === 'true') localStorageMatrix = localStorage.getItem('matrixPerso')
+		else if(localStorage.getItem('personal') === 'false') localStorageMatrix = localStorage.getItem('matrix')
+
+		if(localStorageMatrix === null || localStorageMatrix === "null" || localStorageMatrix === undefined || localStorageMatrix === "undefined" || localStorageMatrix === "") {
 			this.newMatrix();
 		} else {
 			this._matrix = JSON.parse(localStorageMatrix);
@@ -160,7 +164,8 @@ export class TileChooser {
 							}
 						}
 
-						localStorage.setItem('matrix', JSON.stringify(this._matrix));
+						if(localStorage.getItem('personal') === 'false') localStorage.setItem('matrix', JSON.stringify(this._matrix));
+						else if(localStorage.getItem('personal') === 'true') localStorage.setItem('matrixPerso', JSON.stringify(this._matrix));
 						
 					}
 				});
