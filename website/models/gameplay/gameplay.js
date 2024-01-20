@@ -124,6 +124,27 @@ window.onload = () => {
                .then((dataMap) => {
                   console.log("***************************************************************************************************************");
                   console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
+                  console.log("=====================================================================================");
+                  let circuitTilesPrint     = "[\n";
+                  let orientationTilesPrint = "[\n";
+                  for (let i = 0; i < 8; i++) {
+                     circuitTilesPrint     += "  [";
+                     orientationTilesPrint += "  [";
+                     for (let j = 0; j < 12; j++) {
+                        circuitTilesPrint     += dataMap.tileSet.circuit[i][j];
+                        orientationTilesPrint += dataMap.tileSet.rotation[i][j];
+                        if (j < 11) {
+                           circuitTilesPrint     += ", ";
+                           orientationTilesPrint += ", ";
+                        }
+                     }
+                     circuitTilesPrint     += "]\n";
+                     orientationTilesPrint += "]\n";
+                  }
+                  circuitTilesPrint     += "\n]\n";
+                  orientationTilesPrint += "\n]\n";
+                  console.log("circuitTilesPrint : \n"+ circuitTilesPrint +"orientationTilesPrint : \n"+ orientationTilesPrint);
+                  console.log("=====================================================================================");
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
 						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
@@ -152,7 +173,10 @@ window.onload = () => {
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
                         popUp.alertStartCircuit(creatorUsername, creatorTime);
                         
-                        updateCar(); // Appel initial de la fonction updateCar
+                        //dessin Circuit
+                        drawCircuit(map);
+                        
+                        //updateCar(); // Appel initial de la fonction updateCar
                      });
                })
                .catch(() => {
@@ -222,15 +246,21 @@ window.onload = () => {
       
       map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
       const nbTour = localStorage.getItem("circuitLaps");
+      console.log("nbTour : "+ nbTour);
       timer = new Timer();
       
-      init(0, nbTour)
+      init(0, nbTour);
       
+      //dessin Circuit
+      drawCircuit(map);
+      
+      /*
       timer.start();
       setInterval(() => {timer.updateCompteur();}, 100);
       started = 2;
       
       //updateCar();
+       */
    }
 }
 
