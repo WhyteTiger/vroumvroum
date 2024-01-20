@@ -16,8 +16,30 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 	
 	document.querySelector('#savebutton').addEventListener('click', () => {
 		
-		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
-		popUp.customAlert();
+		let circuitIsValid = "false";
+		const matrix = JSON.parse(localStorage.getItem("matrix"));
+		
+		console.log("matrix : "+ matrix);
+		
+		const len = matrix[0].length;
+		for (let i = 0; i < len; i++) {
+			console.log(matrix[0][i] +" ?== '7' || "+ matrix[0][i] +" ?== '12'");
+			if (matrix[0][i] === 7 || matrix[0][i] === 12) {
+				console.log("LLAAAAAAAAAAAAAAAA");
+				circuitIsValid = "true";
+				i = len; // break
+			}
+		}
+		
+		if (circuitIsValid === "true") {
+			console.log("Le circuit est valide");
+			const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
+			popUp.customAlert();
+		} else {
+			console.log("Le circuit n'est pas valide");
+			const popUp = new Alert("Votre circuit n'est pas valid, veuillez metre au moins un départ/arrivé", "OK", "", 'warning');
+			popUp.customAlert();
+		}
 	});
 	
 } else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
