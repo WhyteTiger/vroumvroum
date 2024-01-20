@@ -10,11 +10,11 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let playerIdIn,creatorTime,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
+let playerIdIn,creatorTime,circuitId ,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
     
-   const circuitId = window.localStorage.circuitId;
+   circuitId = window.localStorage.circuitId;
    
    const url = API.getURLgetCircuitInformation();
    const dataCircuit = {
@@ -202,8 +202,29 @@ function updateCar() {
       console.log(timer.timeToString(monTemps));
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
       let score;
+      let playerTime = localStorage.getItem("playerTime");
       if(playerTime > monTemps){
+         score = 1;
+         let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+         const dataPlayer = {
+            playerIdIn : playerIdIn,
+            circuitIdIn : circuitId ,
+            newBestTimeIn : monTemps
+         };
+         const params = {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataPlayer)
+         };
+         console.log(params);
          
+         fetch(url, params)
+            .then((response) => response.json())
+            .then((dataPlayer) => {
+               console.log(dataPlayer.success);
+            });
       }
       if(monTemps < creatorTime){
          score = 1;
@@ -228,7 +249,6 @@ function updateCar() {
       }else{
          score = 0;
       }
-      if(monTemps < circuitScore){
       popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
       
    }

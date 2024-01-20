@@ -22,6 +22,10 @@ export class API {
       return 'http://'+API.server+'/gameplay/getOwnKartByPlayerId';
    }
 
+   static getURLupdateBestTimeOfCircuitByPlayerId() {
+      return 'http://'+API.server+'/gameplay/updateBestTimeOfCircuitByPlayerId';
+   }
+
    static getURLgetCircuitInformation() {
 
       return 'http://'+API.server+'/gameplay/getCircuitInformation';
