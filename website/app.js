@@ -14,6 +14,7 @@ localStorage.setItem('save', "false");
 localStorage.setItem("personal",        "false");
 localStorage.setItem("isChecked",       "false");
 
+localStorage.setItem('test',            "false");
 localStorage.setItem("barChargement",   "0");
 
 document.location.href="./website/views/home.html";

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
 
-    <script src="../controllers/redirection/controllerHeader.js" defer></script>
+    <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
     <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
     <script type="module" src="../controllers/choice/controllerChoice.js" defer></script>
 </head>
@@ -24,7 +24,10 @@
             <h1 id="choice-title">Choix du circuit</h1>
 
             <section>
-                <h2 class="true" id="true">Mes circuits</h2>
+                <div id="true" class="true">
+                    <h2>Mes circuits</h2>
+                    <button>CREER UN NOUVEAU CIRCUIT</button>
+                </div>
                 <div id="filter" class="false">
                     <h2>Filtrer par nom </h2>
                     <input type="text" id="name-filter">
@@ -74,29 +77,16 @@
             <section id="full-2" class="invisible">
                 <h2 id="circuit-name-2">Nom de la carte</h2>
 
-                <div id="mark-2">
-                    <p>Note : </p>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-
+                <p id="score-2">Score : Score</p>
                 <p id="creator-score-2">Médaille auteur : createurScore</p>
 
                 <div id="leaderboard-2">
                     <div id="leaderboard-title-2">Leaderboard</div>
-                    <div id="leaderboard-players-2">
-                        <p>Player1 : temp1</p>
-                        <p>Player2 : temp2</p>
-                        <p>Player3 : temp3</p>
-                        <p>Player4 : temp4</p>
-                        <p>Player5 : temp5</p>
-                    </div>
+                    <div id="leaderboard-players-2">stuff is supposed to go there</div>
                 </div>
 
                 <div>
+                    <button id="play-button">JOUER</button>
                     <button id="modify-button">MODIFIER</button>
                     <button id="delete-button">SUPPRIMER</button>
                 </div>

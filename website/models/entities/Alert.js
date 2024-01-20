@@ -336,7 +336,7 @@ export class Alert{
         alertCustom.appendChild(pTemps);
 
         const pEncouragement = document.createElement('p');
-        pEncouragement.innerText = 'Bonne Chance !';
+        pEncouragement.innerText = 'Bonne chance !';
         alertCustom.appendChild(pEncouragement);
 
 

@@ -1,14 +1,18 @@
 import { API } from "../../models/API.js";
 import { Alert } from "../../models/entities/Alert.js";
 import { Timer } from "../../models/entities/Timer.js";
+
+
+console.log(localStorage)
+
+
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
     // for further classes
-    let filter = "";
-    if(localStorage.personal === "true") filter = "-2";
+    let filter = localStorage.getItem("personal") === "true" ? "-2" : "";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
@@ -19,14 +23,14 @@ function fetchPage(nb, nbPages) {
     let fetchParams;
 
     // fetch the circuits
-    if(localStorage.personal === "false") {
+    if(localStorage.getItem("personal") === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
             pageNumberIn:      nb,
             circuitNameIn:     circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
-    } else if(localStorage.personal === "true") {
+    } else if(localStorage.getItem("personal") === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
             playerIdIn: +localStorage.getItem("playerId"),
@@ -101,19 +105,21 @@ function fetchPage(nb, nbPages) {
                 .then((response) => response.json())
                 .then((dataCircuit) => {
 
-                    document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
-                    document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
+                    console.log(dataCircuit)
 
-                    if(localStorage.personal === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
+                    document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
+                    document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
+
+                    if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
                     document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
                     if(leaderBoard[0] === null) {
-                        document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                        document.querySelector("#leaderboard-players" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
-                        document.querySelector("#leaderboard-players").textContent = "";
+                        document.querySelector("#leaderboard-players" + filter).textContent = "";
                         for (let i = 0; i < 5; i++) {
                             
                             if (leaderBoard[2*i] !== undefined) {
@@ -215,13 +221,13 @@ function fetchCircuits() {
 /* MAIN PART OF THE SCRIPT */
 
 // à retirer plus tard
-localStorage.personal = "false";
+//localStorage.getItem("personal") = "false";
 
 // display the correct elements depending on whether the page is personal or not
-if(localStorage.personal === "false") {
+if(localStorage.getItem("personal") === "false") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.add('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.remove('invisible'); });
-} else if(localStorage.personal === "true") {
+} else if(localStorage.getItem("personal") === "true") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.remove('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
@@ -234,6 +240,17 @@ document.getElementById('name-filter').addEventListener('keydown', () => {
 document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
+
+document.getElementById('modify-button').addEventListener('click', (evt) => {
+    document.location.href = 'createCircuit.html';
+});
+
+document.querySelector('#true button').addEventListener('click', (evt) => {
+    localStorage.setItem("personal", false);
+    document.location.href = "createCircuit.html";
+});
+
+
 
 fetchCircuits();
 
