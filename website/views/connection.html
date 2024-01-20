@@ -7,10 +7,13 @@
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
+        <link rel="stylesheet" href="styles/alertStyle.css">
 
         <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
         <script type="module" src="../controllers/account/controllerConnection.js" defer></script>
         <script src="../controllers/redirection/controllerFooter.js" defer></script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script type="module" src="../controllers/account/controllerPwd.js"></script>
     </head>
 
     <body>
@@ -29,6 +32,10 @@
                 <div class="field">
                     <label for="pwd">Mot de passe</label>
                     <input type="password" name="pwd" id="pwd" required>
+                    <div class="password-icon">
+                        <i data-feather="eye" id="eye"></i>
+                        <i data-feather="eye-off" id="eye-off"></i>
+                    </div>
                 </div>
 
                 <button type="submit" id="validFormConnection">Se connecter</button>

@@ -10,6 +10,12 @@
     margin: 20px;
 }
 
+body{
+    background: url("../../../assets/circuitFond2.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
+}
 
 /*#pseudo{
     font-family:'Courier New', Courier, monospace;
@@ -34,8 +40,8 @@ label, p{
 form {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(90deg, #7c97f7, #00bf9c);
-    border-radius: 45px;
+    /*background: linear-gradient(90deg, #7c97f7, #00bf9c);*/
+    /*border-radius: 45px;*/
     margin: 50px auto;
     padding: 20px;
     max-width: 50em;
@@ -43,7 +49,14 @@ form {
     align-items: center;
 
     /* source : le générateur de Neumorphism */
-    box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;
+    /*box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;*/
+
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid black;
 }
 
 /* Affichage Image profils*/

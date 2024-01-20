@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let nbTour = 1;
 
     if (valBar === "0"){
+        loaderContainer.style.display = "flex";
         header.style.display = "none";
         let width = 0;
         let interval = setInterval(function () {
