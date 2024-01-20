@@ -13,10 +13,19 @@ import { Alert }                from "../entities/Alert.js";
 let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
+   
+   const audio = document.createElement("audio");
+   audio.volume   = 0.0312;
+   audio.autoplay = true;
+   audio.loop     = true;
+   
    console.log("localStorage.getItem(\"personal\") : "+ localStorage.getItem("personal"));
    
    if (localStorage.getItem("personal") === "false") {
       console.log("localStorage.getItem(\"personal\") === false START");
+      
+      audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
+      audio.play();
       
       const circuitId = window.localStorage.circuitId;
       
@@ -127,6 +136,9 @@ window.onload = () => {
    } else {
       console.log("localStorage.getItem(\"personal\") === \"true\" START");
       
+      audio.src = "../../assets/soundtrack/checkMusic.mp3";
+      audio.play();
+      
       const matrix = JSON.parse(localStorage.getItem("matrix"));
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -205,9 +217,6 @@ function init(kartId, nbTour) {
    canvas = document.getElementById('canvas');
    ctx    = canvas.getContext('2d',{willReadFrequently: true});
    
-   console.log("map.getLargeur() : "+ map.getLargeur());
-   console.log("map.getHauteur() : "+ map.getHauteur());
-   
    canvas.width  = map.getLargeur() * 160;
    canvas.height = map.getHauteur() * 160;
    
@@ -281,12 +290,14 @@ function updateCar() {
    }
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
+      
    } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
-      console.log(timer.getElapsedTime());
       timer.stop();
+      console.log(timer.getElapsedTime());
       console.log("La partie est terminée");
       let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
       popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
+      
    } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
       timer.stop();
       const creatorTime = timer.getElapsedTime();
@@ -299,10 +310,3 @@ function updateCar() {
       location.href = "createCircuit.html";
    }
 }
-
-const audio = document.createElement("audio");
-audio.src 		= "../../assets/soundtrack/gameplayMusic.mp3";
-audio.volume   = 0.0312;
-audio.autoplay = true;
-audio.loop     = true;
-audio.play();
