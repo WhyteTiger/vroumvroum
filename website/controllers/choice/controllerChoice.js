@@ -12,8 +12,7 @@ function fetchPage(nb, nbPages) {
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
     // for further classes
-    let filter = "";
-    if(localStorage.getItem("personal") === "true") filter = "-2";
+    let filter = localStorage.getItem("personal") === "true" ? "-2" : "";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
@@ -102,8 +101,10 @@ function fetchPage(nb, nbPages) {
                 .then((response) => response.json())
                 .then((dataCircuit) => {
 
+                    console.log(dataCircuit)
+
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
-                    document.getElementById("score").textContent = `Score : ${dataCircuit.circuitScore}`;
+                    document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
                     
@@ -112,9 +113,9 @@ function fetchPage(nb, nbPages) {
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
                     if(leaderBoard[0] === null) {
-                        document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                        document.querySelector("#leaderboard-players" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
-                        document.querySelector("#leaderboard-players").textContent = "";
+                        document.querySelector("#leaderboard-players" + filter).textContent = "";
                         for (let i = 0; i < 5; i++) {
                             
                             if (leaderBoard[2*i] !== undefined) {
