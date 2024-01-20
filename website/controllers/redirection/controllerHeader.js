@@ -112,7 +112,7 @@ if (isConnected === "false") {
 
 	profileImg.addEventListener('click', (evt) => {
 		document.querySelector('#burger').classList.toggle('visible');
-		updateProfileImageInHeader()
+		updateProfileImageInHeader(localStorage.getItem('imgProfilId'));
 	});
 
 	window.onclick = (evt) => {
