@@ -39,8 +39,9 @@ function drawCircuit(map) {
 }
 
 window.onload = () => {
-   circuitBackGround = undefined;
+   circuitBackGround = undefined; //C'est pas ça le pb
    
+   //C'est pas ça non plus
    const audio = document.createElement("audio");
    audio.volume   = 0.0312;
    audio.autoplay = true;
@@ -79,6 +80,7 @@ window.onload = () => {
             const circuitScore    = dataCircuit.circuitScore;
             creatorTime           = dataCircuit.creatorTime;
             
+            //C'est pas ça le problème non plus
             console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
             document.getElementById("circuit-name").innerText  =                       dataCircuit.circuitName;
             document.getElementById("score").innerText         = "Score : "+           dataCircuit.circuitScore;
