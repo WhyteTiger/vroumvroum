@@ -168,6 +168,7 @@ if(localStorage.getItem('personal') === 'true') {
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+				console.log(localStorage.getItem('matrix'))
 			}
 		});
 	}
