@@ -26,6 +26,7 @@ function drawCircuit(map) {
          
          let j = 0, k = row.length;
          for (; j < k; j++) {
+            console.log("map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]) : "+ row[j] +" | "+ ctx +" | "+ j * 160 +" | "+ y +" | "+ angle[j]);
             map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]);
          }
       }
@@ -229,7 +230,7 @@ window.onload = () => {
       setInterval(() => {timer.updateCompteur();}, 100);
       started = 2;
       
-      updateCar();
+      //updateCar();
    }
 }
 
