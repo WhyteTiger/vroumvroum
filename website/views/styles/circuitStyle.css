@@ -3,6 +3,7 @@
 .circuit-main {
     display: grid;
     grid-template: auto / 5fr 2fr;
+    margin-bottom: 5em;
 }
 
 /* FOR THE STARS */
@@ -48,7 +49,7 @@ canvas {
 
 /* LEADERBOARD */
 
-#leaderboard-title {
+#leaderboard-title, #leaderboard-title-2 {
     font-family: 'PlayPretend', Arial, Helvetica, sans-serif;
     font-size: 45px;
     text-align: center;
@@ -186,12 +187,21 @@ aside p {
 }
 
 .circuit-box {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
     border-radius: 16px;
     background-color: #00be63;
-
+    font-size: 30px;
     height: 260px;
     width: 260px;
+    overflow-x: scroll;
+}
+
+.circuit-box p:first-child {
+    font-weight: bold;
 }
 
 #choice-section {

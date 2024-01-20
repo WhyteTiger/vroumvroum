@@ -303,7 +303,7 @@ export class Alert{
         alertCustom.appendChild(pTemps);
 
         const pEncouragement = document.createElement('p');
-        pEncouragement.innerText = 'Bonne Chance !';
+        pEncouragement.innerText = 'Bonne chance !';
         alertCustom.appendChild(pEncouragement);
 
 
@@ -671,8 +671,41 @@ export class Alert{
                 if (this.link != null){
                     localStorage.setItem('circuitName', circuitNameInput.value);
                     localStorage.setItem('circuitLaps', circuitLapsInput.value);
-                    console.log('changement de page');
-                    document.location.href = this.link;
+
+                    const playerIdIn    = localStorage.getItem("playerId");
+                    const matrixIn      = JSON.parse(localStorage.getItem('matrix'));
+                    const circuitNameIn = localStorage.getItem("circuitName");
+                    const creatorTimeIn = localStorage.getItem("creatorTime") === null ? 0 : localStorage.getItem("creatorTime");
+                    const circuitLapsIn = localStorage.getItem("circuitLaps");
+
+                    const dataCircuit = {
+                        playerIdIn,
+                        matrixIn,
+                        circuitNameIn,
+                        creatorTimeIn,
+                        circuitLapsIn
+                    };
+                    const params = {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(dataCircuit)
+                    };
+                    
+                    fetch(API.getURLpostCircuitOfPlayerId(), params)
+                    .then((response) => response.json())
+                    .then((dataCircuit) => {
+                        if (dataCircuit.success === "true") {
+                            console.log("saved successfully");
+                            localStorage.setItem('test', 'false');
+                            console.log('changement de page');
+                            document.location.href = this.link;
+                        } else {
+                            console.error("saved error");
+                        }
+                    });
+ 
                 }
             }
         });

@@ -79,5 +79,10 @@ export class API {
 
       return 'http://'+API.server+'/creation/postCircuitOfPlayerId';
    }
+
+   static getURLDeleteCircuit() {
+
+      return 'http://'+API.server+'/hubs/deleteCircuit';
+   }
 }
 
