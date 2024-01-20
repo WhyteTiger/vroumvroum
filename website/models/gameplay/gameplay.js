@@ -311,9 +311,11 @@ function updateCar() {
       console.log(timer.timeToString(monTemps));
       console.log("La partie est terminée");
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
-		let score;
+  
+		let score = 0;
 		let playerTime = localStorage.getItem("playerTime");
-		if(playerTime > monTemps){
+  
+		if (playerTime > monTemps) {
 			score = 1;
 			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
 			const dataPlayer = {
@@ -356,8 +358,6 @@ function updateCar() {
 				.then((dataPlayer) => {
 					console.log(dataPlayer.success);
 				});
-		}else{
-			score = 0;
 		}
 		popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
 		
