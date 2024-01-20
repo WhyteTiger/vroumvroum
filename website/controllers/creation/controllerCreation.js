@@ -28,8 +28,8 @@ if(localStorage.getItem('personal') === 'true') {
 
 		let tab = data.tileSet;
 
-		let tempMatrix = [];
-		let tempTiles = [];
+		let tempMatrix    = [];
+		let tempTiles     = [];
 		let tempRotations = [];
 
 		console.log('HAHAHAHHHHAH')

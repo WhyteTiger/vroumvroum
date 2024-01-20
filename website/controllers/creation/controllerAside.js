@@ -51,6 +51,7 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 	document.querySelector('#savebutton').addEventListener('click', () => {
 		
 		let circuitIsValid = "false";
+		console.log("matrix to save: "+ localStorage.getItem("matrix"));
 		const matrix = JSON.parse(localStorage.getItem("matrix"));
 		
 		const len = matrix[0].length;
