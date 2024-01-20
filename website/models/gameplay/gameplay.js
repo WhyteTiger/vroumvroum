@@ -13,8 +13,6 @@ import { Alert }                from "../entities/Alert.js";
 let playerIdIn, creatorTime, circuitId, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
 
 function drawCircuit(map) {
-   console.log("drawCircuit START");
-   console.log(circuitBackGround +" === undefined");
    if (circuitBackGround === undefined) {
       
       let i = 0, l = map.getHauteur();
@@ -26,7 +24,6 @@ function drawCircuit(map) {
          
          let j = 0, k = row.length;
          for (; j < k; j++) {
-            console.log("map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]) : "+ row[j] +" | "+ ctx +" | "+ j * 160 +" | "+ y +" | "+ angle[j]);
             map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]);
          }
       }
@@ -35,7 +32,6 @@ function drawCircuit(map) {
    } else {
       ctx.putImageData(circuitBackGround, 0, 0);
    }
-   console.log("drawCircuit END");
 }
 
 window.onload = () => {
@@ -170,8 +166,9 @@ window.onload = () => {
                         
                         init(dataKart.kartId-1, nbTour);
                         
-                        started = 0;
+                        started = 0;//C'est pas ça
                         
+                        //Ni ça
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
                         popUp.alertStartCircuit(creatorUsername, creatorTime);
                         
