@@ -14,6 +14,7 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 	
 	// when personal
 	document.querySelector('#play-button').addEventListener('click', () => {
+		localStorage.setItem("personal", "false");
 		document.location.href = 'playCircuit.html';
 	});
 	
@@ -52,11 +53,13 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 		
 		let circuitIsValid = "false";
 		console.log("matrix to save: "+ localStorage.getItem("matrix"));
-		document.getElementById('aside-infos').classList.add('invisible');
+		//document.getElementById('aside-infos').classList.add('invisible');
 		
 		let matrix;
 		if(localStorage.getItem('personal') === 'true') matrix = JSON.parse(localStorage.getItem('matrixPerso'));
 		else matrix = JSON.parse(localStorage.getItem('matrix'));
+		
+		console.log("matrix : "+ matrix);
 		
 		const len = matrix[0].length;
 		for (let i = 0; i < len; i++) {
@@ -65,9 +68,9 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 				i = len; // break
 			}
 		}
-		
 		if (circuitIsValid === "true") {
 			console.log("Le circuit est valide");
+			localStorage.setItem("matrix", JSON.stringify(matrix));
 			const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 			popUp.customAlert();
 		} else {
