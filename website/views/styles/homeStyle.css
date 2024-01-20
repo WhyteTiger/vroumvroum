@@ -20,13 +20,13 @@
     max-width: 60em;
 
     grid-area: 2 / 2 / 3 / 3;
-    margin: auto;
+    margin: 50px auto auto auto;
 }
 
 #welcome img {
     display: grid;
     grid-area: 1 / 1 / 2 / 4;
-    margin: 100px auto;
+    margin: 60px auto 0px auto;
 
     scale: 1.8;
     transition: scale 0.2s ease 0s;
