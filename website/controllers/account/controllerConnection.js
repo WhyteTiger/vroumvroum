@@ -1,4 +1,5 @@
 import {API} from "../../models/API.js";
+import {Alert} from "../../models/entities/Alert.js";
 
 window.localStorage.setItem("alreadyRegister", "false");
 window.localStorage.setItem("rightPassword",   "false");
@@ -43,6 +44,15 @@ async function tryToConnect(username, password) {
 				document.location.href="../views/home.html";
 			} else {
 				console.log("Connection failed");
+				console.log(localStorage.rightPassword && localStorage.rightPassword === "true");
+				if (localStorage.alreadyRegister === "false"){
+					const newAlert = new Alert("Votre pseudo est incorrect !", "Fermer !", null , 'warning');
+					newAlert.customAlert();
+				}
+				else if(localStorage.rightPassword === "false" && localStorage.alreadyRegister === "true"){
+					const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer !", null , 'warning');
+					newAlert.customAlert();
+				}
 			}
 		})
 		.catch(() => {
