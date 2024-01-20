@@ -7,7 +7,7 @@ export class Map {
     constructor(tileset, terrain, rotate) {
         this.tileset = tileset;
         this.terrain = terrain;
-        this.rotate  = rotate;  
+        this.rotate  = rotate;
     };
 
     getHauteur () {

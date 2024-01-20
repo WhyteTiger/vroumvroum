@@ -4,7 +4,7 @@ import {TileChooser} from "../../models/creation/TileChooser.js";
 
 let tileChooser = new TileChooser();
 
-if(localStorage.getItem('personal') === 'true') {
+if (localStorage.getItem('personal') === 'true') {
 	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 	let fetchParams = {
 		circuitIdIn: localStorage.getItem('circuitId')
@@ -28,8 +28,8 @@ if(localStorage.getItem('personal') === 'true') {
 
 		let tab = data.tileSet;
 
-		let tempMatrix = [];
-		let tempTiles = [];
+		let tempMatrix    = [];
+		let tempTiles     = [];
 		let tempRotations = [];
 
 		console.log('HAHAHAHHHHAH')
@@ -166,7 +166,6 @@ if(localStorage.getItem('personal') === 'true') {
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
-				console.log(localStorage.getItem('matrix'))
 			}
 		});
 	}
@@ -181,7 +180,7 @@ if(localStorage.getItem('personal') === 'true') {
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		if(localStorage.getItem('personal') === "false") localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
-		else if(localStorage.getItem('personal') === "true") localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		if      (localStorage.getItem('personal') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
+		else if (localStorage.getItem('personal') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 }
