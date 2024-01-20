@@ -2,8 +2,6 @@ import { API } from "../../models/API.js";
 import {TileChooser} from "../../models/creation/TileChooser.js";
 
 
-console.log(localStorage)
-
 let tileChooser = new TileChooser();
 
 if(localStorage.getItem('personal') === 'true') {
