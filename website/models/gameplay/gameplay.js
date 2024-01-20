@@ -272,6 +272,7 @@ function updateCar() {
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
+      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-87, engine.getCentreVehicule().getY()-87, 1, 1).data,engine.getCentreVehicule().getX()-87, engine.getCentreVehicule().getY()-87);
       //deplacement de la voiture
       engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
       
@@ -292,7 +293,7 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) {
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
    } else {
-      console.log(timer.getElapsedTime());
+      let monTemps = timer.getElapsedTime();
       timer.stop();
       console.log("La partie est terminée");
 
