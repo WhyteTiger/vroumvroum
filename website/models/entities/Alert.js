@@ -403,7 +403,7 @@ export class Alert{
 
         console.log("tileSet");
         const tileset = new Image();
-        tileset.src = "../../../assets/tilesets/circuit.png";
+        tileset.src = "../../assets/tilesets/circuit.png";
         console.log("tileset.src : "+ tileset.src);
 
         tileset.onload = () => {
