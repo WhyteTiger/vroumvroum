@@ -237,11 +237,16 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-if(localStorage.getItem('personal') === 'true') {
-    document.getElementById('modify-button').addEventListener('click', (evt) => {
-        document.location.href = 'createCircuit.html';
-    });
-}
+document.getElementById('modify-button').addEventListener('click', (evt) => {
+    document.location.href = 'createCircuit.html';
+});
+
+document.querySelector('#true button').addEventListener('click', (evt) => {
+    localStorage.setItem("personal", false);
+    document.location.href = "createCircuit.html";
+});
+
+
 
 fetchCircuits();
 

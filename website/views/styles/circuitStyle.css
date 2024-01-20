@@ -3,6 +3,7 @@
 .circuit-main {
     display: grid;
     grid-template: auto / 5fr 2fr;
+    margin-bottom: 5em;
 }
 
 /* FOR THE STARS */
