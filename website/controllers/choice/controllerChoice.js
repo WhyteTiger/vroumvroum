@@ -73,6 +73,10 @@ function fetchPage(nb, nbPages) {
             boxList[i].appendChild(p2);
 
             boxList[i].addEventListener('click', () => {
+                // display player best time
+                
+
+
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;
@@ -232,4 +236,7 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
 });
 
 fetchCircuits();
+
+// Affichage meilleur temps joueur sur circuit
+
 
