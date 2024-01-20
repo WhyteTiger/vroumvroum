@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const main = document.getElementById("welcome");
     const header = document.querySelector("header");
 
+    let decrement = 1;
+    let nbTour = 1;
+
     if (valBar === "0"){
         header.style.display = "none";
         let width = 0;
@@ -21,10 +24,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 500);
             }
             else{
-                width++;
+                if (nbTour%18 === 0){
+                    decrement -= 0.21;
+                }
+
+                nbTour += 1;
+                width += decrement;
+                //width++;
                 loaderBar.style.width = width + "%";
 
-                let carPosition = (width * (loaderContainer.offsetWidth - carImage.offsetWidth) / 100);
+                let carPosition = (width * (loaderContainer.offsetWidth - carImage.offsetWidth) / 100 - carImage.offsetWidth/4);
                 carImage.style.left = carPosition + "px";
 
                 let carVerticalPosition = (loaderBar.offsetHeight - carImage.offsetHeight) / 2;

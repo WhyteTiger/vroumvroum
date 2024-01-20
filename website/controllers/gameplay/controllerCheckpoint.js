@@ -73,6 +73,9 @@ export class ControllerCheckpoint {
             if(couleur[0] >= 150 && couleur[1] >= 150 && this.nbCheckPointRestant === 0){
                 this.nbTourrestant--;
                 this.nbCheckPointRestant = this.nbCheckPoint; 
+                this.checkPointPassed = new Array();
+                this.updateTour();
+                this.updateCheckpoint();
                 if(this.nbTourrestant === 0){
                     this.fini = 1; 
                 }   
@@ -120,7 +123,10 @@ export class ControllerCheckpoint {
         }
     }
     updateCheckpoint(){
-        document.getElementsByClassName("compteurCheckpoint")[0].textContent = this.nbCheckPoint-this.nbCheckPointRestant +"/"+this.nbCheckPoint; ;
+        document.getElementsByClassName("compteurCheckpoint")[0].textContent = "CP : "+ (this.nbCheckPoint-this.nbCheckPointRestant) +"/"+this.nbCheckPoint; ;
+    }
+    updateTour(){
+        document.getElementsByClassName("compteurTour")[0].textContent = "Tour : "+(this.nbTour - this.nbTourrestant)+"/"+this.nbTour;
     }
     getOrientationLastCheckpoint(){
         let tuile   = this.getLastCheckpoint();

@@ -10,7 +10,7 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
+let playerIdIn,creatorTime,circuitId ,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
 
 function drawCircuit(map) {
    if (circuitBackGround === undefined) {
@@ -72,7 +72,7 @@ window.onload = () => {
             
             var circuitName     = dataCircuit.circuitName;
             var creatorUsername = dataCircuit.creatorUsername;
-            var creatorTime     = dataCircuit.creatorTime;
+            creatorTime     = dataCircuit.creatorTime;
             var circuitScore    = dataCircuit.circuitScore;
             
             console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
@@ -121,7 +121,7 @@ window.onload = () => {
                   console.log("***************************************************************************************************************");
                   console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
-                  
+						let nbTour = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
                   
                   const url = API.getURLgetOwnKartByPlayerId();
@@ -260,9 +260,10 @@ function init(kartId, nbTour) {
    engine = new MoteurPhysique(new Point(controllerCheckpoint.getLastCheckpoint()[1]*160+160,controllerCheckpoint.getLastCheckpoint()[0]*160+160),20,controllerCheckpoint.getOrientationLastCheckpoint());
    timer  = new Timer();
    controllerCheckpoint.updateCheckpoint();
+	controllerCheckpoint.updateTour();
 }
 
-   
+
 function updateCar() {
    if (started === 0 && popUp.getIsButtonClicked() === 1) {
       started = 1;
@@ -282,9 +283,10 @@ function updateCar() {
    //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
    if (started === 2) {
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115);
-      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60);
-      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60);
+      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60 );
+      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60 );
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
+      controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-87,  engine.getCentreVehicule().getY()-87,  1, 1).data,engine.getCentreVehicule().getX()-87,  engine.getCentreVehicule().getY()-87 );
       //deplacement de la voiture
       engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
       
@@ -304,12 +306,61 @@ function updateCar() {
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
    } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
+		let monTemps = timer.getElapsedTime();
       timer.stop();
-      console.log(timer.getElapsedTime());
+      console.log(timer.timeToString(monTemps));
       console.log("La partie est terminée");
-      let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
-      popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
-      
+		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
+		let score;
+		let playerTime = localStorage.getItem("playerTime");
+		if(playerTime > monTemps){
+			score = 1;
+			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+			const dataPlayer = {
+				playerIdIn : playerIdIn,
+				circuitIdIn : circuitId ,
+				newBestTimeIn : monTemps
+			};
+			const params = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(dataPlayer)
+			};
+			console.log(params);
+			
+			fetch(url, params)
+				.then((response) => response.json())
+				.then((dataPlayer) => {
+					console.log(dataPlayer.success);
+				});
+		}
+		if(monTemps < creatorTime){
+			score = 1;
+			let url = API.getURLaddVroumCoinToPlayerId();
+			const dataPlayer = {
+				playerIdIn: playerIdIn
+			};
+			const params = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(dataPlayer)
+			};
+			console.log(params);
+			
+			fetch(url, params)
+				.then((response) => response.json())
+				.then((dataPlayer) => {
+					console.log(dataPlayer.success);
+				});
+		}else{
+			score = 0;
+		}
+		popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
+		
    } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
       timer.stop();
       const creatorTime = timer.getElapsedTime();
