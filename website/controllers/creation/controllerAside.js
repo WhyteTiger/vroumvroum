@@ -11,12 +11,7 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 
 } else {    // means we're on the creation page
 	document.querySelector('#savebutton').addEventListener('click', (evt) => {
-		
-		const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "", 'save');
-		popUp.customAlert();
-
 		localStorage.setItem('test', true);
-
 		document.location.href = 'playCircuit.html';
 	});
 }

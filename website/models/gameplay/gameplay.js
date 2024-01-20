@@ -18,6 +18,8 @@ window.onload = () => {
 
    if(localStorage.getItem('test') === 'true') {
 
+      document.getElementById('aside-infos').classList.add('invisible');
+
       if(localStorage.getItem('personal') === 'true') mat = JSON.parse(localStorage.getItem('matrixPerso'));
       else mat = JSON.parse(localStorage.getItem('matrix'));
 
@@ -101,6 +103,8 @@ window.onload = () => {
 
 
    } else if(localStorage.getItem('test') === 'false') {
+
+      document.getElementById('aside-infos').classList.remove('invisible');
 
       const circuitId = window.localStorage.circuitId;
    
@@ -298,41 +302,12 @@ function updateCar() {
       timer.stop();
       console.log("La partie est terminée");
 
+      
+
       if(localStorage.getItem('test') === 'true') {
-         const playerIdIn    = localStorage.getItem("playerId");
-         const matrixIn      = JSON.parse(localStorage.getItem('matrix'));
-         const circuitNameIn = localStorage.getItem("circuitName");
-         const creatorTimeIn = localStorage.getItem("creatorTime") === null ? 0 : localStorage.getItem("creatorTime");
-         const circuitLapsIn = localStorage.getItem("circuitLaps");
-
-         const dataCircuit = {
-            playerIdIn,
-            matrixIn,
-            circuitNameIn,
-            creatorTimeIn,
-            circuitLapsIn
-         };
-         const params = {
-            method: "POST",
-            headers: {
-               "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataCircuit)
-         };
+         const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "createCircuit.html", 'save');
+		   popUp.customAlert();
          
-         fetch(API.getURLpostCircuitOfPlayerId(), params)
-            .then((response) => response.json())
-            .then((dataCircuit) => {
-               if (dataCircuit.success === "true") {
-                  console.log("saved successfully");
-               } else {
-                  console.error("saved error");
-               }
-            });
-
-         localStorage.setItem('test', 'false');
-
-         document.location.href = "createCircuit.html";
       } else if(localStorage.getItem('test') === 'false') {
          let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
          popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
