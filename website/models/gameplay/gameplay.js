@@ -141,7 +141,7 @@ window.onload = () => {
                      .then((response) => response.json())
                      .then((dataKart) => {
                         
-                        init(dataKart.kartId-1, 1);
+                        init(dataKart.kartId-1, nbTour);
                         
                         started = 0;
                         
