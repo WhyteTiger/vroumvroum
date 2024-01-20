@@ -52,7 +52,11 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 		
 		let circuitIsValid = "false";
 		console.log("matrix to save: "+ localStorage.getItem("matrix"));
-		const matrix = JSON.parse(localStorage.getItem("matrix"));
+		document.getElementById('aside-infos').classList.add('invisible');
+		
+		let matrix;
+		if(localStorage.getItem('personal') === 'true') matrix = JSON.parse(localStorage.getItem('matrixPerso'));
+		else matrix = JSON.parse(localStorage.getItem('matrix'));
 		
 		const len = matrix[0].length;
 		for (let i = 0; i < len; i++) {

@@ -18,7 +18,6 @@ mainLogo.addEventListener("click", () => {
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", () => {
 	localStorage.setItem("personal", "false");
-	localStorage.setItem("test",     "false");
 	document.location.href = "choiceCircuit.html";
 });
 
@@ -30,8 +29,7 @@ createCircuit.addEventListener("click", () => {
 		newAlert.customAlert();
 	} else {
 		localStorage.setItem("personal", "true");
-		//document.location.href = "choiceCircuit.html";
-		document.location.href = "createCircuit.html";
+		document.location.href = "choiceCircuit.html";
 	}
 });
 

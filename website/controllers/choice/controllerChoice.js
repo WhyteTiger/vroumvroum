@@ -78,8 +78,6 @@ function fetchPage(nb, nbPages) {
 
             boxList[i].addEventListener('click', () => {
                 // display player best time
-                
-
 
                 const id = boxList[i].getAttribute("name");
 
@@ -220,14 +218,11 @@ function fetchCircuits() {
 
 /* MAIN PART OF THE SCRIPT */
 
-// à retirer plus tard
-//localStorage.getItem("personal") = "false";
-
 // display the correct elements depending on whether the page is personal or not
-if(localStorage.getItem("personal") === "false") {
+if (localStorage.getItem("personal") === "false") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.add('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.remove('invisible'); });
-} else if(localStorage.getItem("personal") === "true") {
+} else if (localStorage.getItem("personal") === "true") {
     document.querySelectorAll('.true' ).forEach((elt) => { elt.classList.remove('invisible'); });
     document.querySelectorAll('.false').forEach((elt) => { elt.classList.add('invisible'); });
 }
@@ -241,16 +236,14 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-document.getElementById('modify-button').addEventListener('click', (evt) => {
+document.getElementById('modify-button').addEventListener('click', () => {
     document.location.href = 'createCircuit.html';
 });
 
-document.querySelector('#true button').addEventListener('click', (evt) => {
-    localStorage.setItem("personal", false);
+document.querySelector('#true button').addEventListener('click', () => {
+    localStorage.setItem("personal", "false");
     document.location.href = "createCircuit.html";
 });
-
-
 
 fetchCircuits();
 
