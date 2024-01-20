@@ -128,7 +128,6 @@ window.onload = () => {
       console.log("localStorage.getItem(\"personal\") === \"true\" START");
       
       const matrix = JSON.parse(localStorage.getItem("matrix"));
-      
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -149,10 +148,8 @@ window.onload = () => {
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       ];
-      
       let columnCounter, rowCounter = -1, len = matrix[0].length;
       
-      console.log("=====================================================================================");
       for (let matrixCurrentIndex = 0; matrixCurrentIndex < len; matrixCurrentIndex++) {
          
          if (matrixCurrentIndex%12 === 0) rowCounter += 1;
@@ -161,14 +158,20 @@ window.onload = () => {
          circuitTiles[rowCounter][columnCounter]     = matrix[0][matrixCurrentIndex];
          orientationTiles[rowCounter][columnCounter] = matrix[1][matrixCurrentIndex];
       }
+      
+      console.log("=====================================================================================");
       let circuitTilesPrint     = "[\n";
       let orientationTilesPrint = "[\n";
       for (let i = 0; i < 8; i++) {
          circuitTilesPrint     += "  [";
          orientationTilesPrint += "  [";
          for (let j = 0; j < 12; j++) {
-            circuitTilesPrint     += circuitTiles[i][j]     +", ";
-            orientationTilesPrint += orientationTiles[i][j] +", ";
+            circuitTilesPrint     += circuitTiles[i][j];
+            orientationTilesPrint += orientationTiles[i][j];
+            if (j < 11) {
+               circuitTilesPrint     += ", ";
+               orientationTilesPrint += ", ";
+            }
          }
          circuitTilesPrint     += "]\n";
          orientationTilesPrint += "]\n";
@@ -180,7 +183,6 @@ window.onload = () => {
       
       map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
       const nbTour = localStorage.getItem("circuitLaps");
-      console.log("nbTour : "+ nbTour);
       timer = new Timer();
       
       init(0, nbTour)
