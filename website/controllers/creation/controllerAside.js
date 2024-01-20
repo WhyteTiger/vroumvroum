@@ -5,7 +5,13 @@ import { Alert } from "../../models/entities/Alert.js";
 
 if(document.querySelector('#savebutton') === null) {    // means we're on the choice page
 
+	// when not personal
 	document.querySelector('#playbutton').addEventListener('click', (evt) => {
+		document.location.href = 'playCircuit.html';
+	});
+
+	// when personal
+	document.querySelector('#play-button').addEventListener('click', (evt) => {
 		document.location.href = 'playCircuit.html';
 	});
 

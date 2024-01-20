@@ -13,8 +13,6 @@ import { Alert }                from "../entities/Alert.js";
 let map, mat, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
 
 window.onload = () => {
-   console.log(localStorage.getItem('test'))
-   console.log(localStorage.getItem('personal'))
 
    if(localStorage.getItem('test') === 'true') {
 
@@ -239,11 +237,7 @@ window.onload = () => {
                   console.log("Fetch failed 2 " + err);
                });
          });
-
-
    }
-    
-   
 }
 
 function updateCar() {
@@ -302,8 +296,6 @@ function updateCar() {
       timer.stop();
       console.log("La partie est terminée");
 
-      
-
       if(localStorage.getItem('test') === 'true') {
          const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "createCircuit.html", 'save');
 		   popUp.customAlert();
@@ -312,11 +304,6 @@ function updateCar() {
          let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
          popUpFin.alertEndCircuit("creator", timer.timeToString(timer.getElapsedTime()));
       }
-
-
-
-
-      
    }
 }
 
