@@ -1,4 +1,3 @@
-/* cette partie est utile et définit le header pour toutes les pages, et le footer */
 header {
     display: grid;
     grid-template: auto / 1fr 3fr;
@@ -82,4 +81,32 @@ header img:hover {
 #burger{
     border-radius: 10px;
     background: #5DE0E6;
+}
+
+/* FOOTER */
+
+footer {
+    display: grid;
+    grid-template: auto / 1fr 8fr 1fr;
+    background: linear-gradient(90deg, #8b53fb, #00BF63);
+    text-align: center;
+    align-items: center;
+    padding: 0.4em;
+    margin-top: 2em;
+    font-size: 12px;
+}
+
+footer p {
+    margin: 0px;
+}
+
+footer img {
+    width: 50%;
+    
+}
+
+footer a {
+    display: flex;
+    margin: 0px auto;
+    text-align: start;
 }
