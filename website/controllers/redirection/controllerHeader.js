@@ -49,7 +49,6 @@ if (isConnected === "false") {
 	bigdiv.id = 'burger-wrapper';
 
 	const profileImg = document.createElement("img");
-	profileImg.setAttribute("src", "TODO");
 	profileImg.setAttribute("alt", "profile image");
 	profileImg.id = "profileImg";
 	bigdiv.appendChild(profileImg);

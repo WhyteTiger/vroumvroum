@@ -200,6 +200,10 @@ aside p {
     overflow-x: scroll;
 }
 
+.circuit-box:hover {
+    cursor: pointer;
+}
+
 .circuit-box p:first-child {
     font-weight: bold;
 }
