@@ -10,7 +10,30 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started;
+let map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
+
+function drawCircuit(map) {
+   if (circuitBackGround === undefined) {
+      
+      let i = 0, l = map.getHauteur();
+      for (; i < l; i++) {
+         const row = map.terrain[i];
+         const angle = map.rotate[i];
+         
+         const y = i * 160;
+         
+         let j = 0, k = row.length;
+         for (; j < k; j++) {
+            map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]);
+         }
+      }
+      
+      circuitBackGround = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      
+   } else {
+      ctx.putImageData(circuitBackGround, 0, 0);
+   }
+}
 
 window.onload = () => {
    
@@ -254,18 +277,7 @@ function updateCar() {
    ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
    
    //dessin Circuit
-   let i = 0, l = map.getHauteur();
-   for (; i < l; i++) {
-      const ligne = map.terrain[i];
-      const angle = map.rotate[i];
-      
-      const y = i * 160;
-      
-      let j = 0, k = ligne.length;
-      for (; j < k; j++) {
-         map.tileset.dessinerTile(ligne[j], ctx, j * 160, y, angle[j]);
-      }
-   }
+   drawCircuit(map);
    
    //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
    if (started === 2) {
@@ -309,4 +321,8 @@ function updateCar() {
       console.log("La vérif est terminée");
       location.href = "createCircuit.html";
    }
+}
+
+window.onunload = () => {
+   circuitBackGround = undefined;
 }
