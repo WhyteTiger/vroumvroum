@@ -10,14 +10,16 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let playerIdIn,creatorTime,circuitId ,map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
+let playerIdIn, creatorTime, circuitId, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
 
 function drawCircuit(map) {
+   console.log("drawCircuit START");
+   console.log(circuitBackGround +" === undefined");
    if (circuitBackGround === undefined) {
       
       let i = 0, l = map.getHauteur();
       for (; i < l; i++) {
-         const row = map.terrain[i];
+         const row   = map.terrain[i];
          const angle = map.rotate[i];
          
          const y = i * 160;
@@ -27,15 +29,16 @@ function drawCircuit(map) {
             map.tileset.dessinerTile(row[j], ctx, j * 160, y, angle[j]);
          }
       }
-      
       circuitBackGround = ctx.getImageData(0, 0, canvas.width, canvas.height);
       
    } else {
       ctx.putImageData(circuitBackGround, 0, 0);
    }
+   console.log("drawCircuit END");
 }
 
 window.onload = () => {
+   circuitBackGround = undefined;
    
    const audio = document.createElement("audio");
    audio.volume   = 0.0312;
@@ -70,10 +73,10 @@ window.onload = () => {
          .then((response) => response.json())
          .then((dataCircuit) => {
             
-            var circuitName     = dataCircuit.circuitName;
-            var creatorUsername = dataCircuit.creatorUsername;
-            creatorTime     = dataCircuit.creatorTime;
-            var circuitScore    = dataCircuit.circuitScore;
+            const circuitName     = dataCircuit.circuitName;
+            const creatorUsername = dataCircuit.creatorUsername;
+            const circuitScore    = dataCircuit.circuitScore;
+            creatorTime           = dataCircuit.creatorTime;
             
             console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
             document.getElementById("circuit-name").innerText  =                       dataCircuit.circuitName;
@@ -121,7 +124,7 @@ window.onload = () => {
                   console.log("***************************************************************************************************************");
                   console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
-						let nbTour = dataMap.laps;
+						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
                   
                   const url = API.getURLgetOwnKartByPlayerId();
@@ -231,7 +234,7 @@ window.onload = () => {
 }
 
 function init(kartId, nbTour) {
-   controllerCheckpoint = new ControllerCheckpoint(map,nbTour);
+   controllerCheckpoint = new ControllerCheckpoint(map, nbTour);
    const kart     = new Kart(3, kartId, 0);
    
    controller = new ControllerDirection();
@@ -274,7 +277,6 @@ function updateCar() {
       started = 2;
    }
    
-   //const angleRadians = Maths.degToRad(angleDegrees);
    ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
    
    //dessin Circuit
