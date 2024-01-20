@@ -35,9 +35,8 @@ function drawCircuit(map) {
 }
 
 window.onload = () => {
-   circuitBackGround = undefined; //C'est pas ça le pb
+   circuitBackGround = undefined;
    
-   //C'est pas ça non plus
    const audio = document.createElement("audio");
    audio.volume   = 0.0312;
    audio.autoplay = true;
@@ -76,7 +75,6 @@ window.onload = () => {
             const circuitScore    = dataCircuit.circuitScore;
             creatorTime           = dataCircuit.creatorTime;
             
-            //C'est pas ça le problème non plus
             console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
             document.getElementById("circuit-name").innerText  =                       dataCircuit.circuitName;
             document.getElementById("score").innerText         = "Score : "+           dataCircuit.circuitScore;
@@ -122,27 +120,6 @@ window.onload = () => {
                .then((dataMap) => {
                   console.log("***************************************************************************************************************");
                   console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
-                  console.log("=====================================================================================");
-                  let circuitTilesPrint     = "[\n";
-                  let orientationTilesPrint = "[\n";
-                  for (let i = 0; i < 8; i++) {
-                     circuitTilesPrint     += "  [";
-                     orientationTilesPrint += "  [";
-                     for (let j = 0; j < 12; j++) {
-                        circuitTilesPrint     += dataMap.tileSet.circuit[i][j];
-                        orientationTilesPrint += dataMap.tileSet.rotation[i][j];
-                        if (j < 11) {
-                           circuitTilesPrint     += ", ";
-                           orientationTilesPrint += ", ";
-                        }
-                     }
-                     circuitTilesPrint     += "]\n";
-                     orientationTilesPrint += "]\n";
-                  }
-                  circuitTilesPrint     += "\n]\n";
-                  orientationTilesPrint += "\n]\n";
-                  console.log("circuitTilesPrint : \n"+ circuitTilesPrint +"orientationTilesPrint : \n"+ orientationTilesPrint);
-                  console.log("=====================================================================================");
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
 						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
@@ -166,16 +143,12 @@ window.onload = () => {
                         
                         init(dataKart.kartId-1, nbTour);
                         
-                        started = 0;//C'est pas ça
+                        started = 0;
                         
-                        //Ni ça
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
                         popUp.alertStartCircuit(creatorUsername, creatorTime);
                         
-                        //dessin Circuit
-                        drawCircuit(map);
-                        
-                        //updateCar(); // Appel initial de la fonction updateCar
+                        updateCar(); // Appel initial de la fonction updateCar
                      });
                })
                .catch(() => {
@@ -222,28 +195,6 @@ window.onload = () => {
          orientationTiles[rowCounter][columnCounter] = matrix[1][matrixCurrentIndex];
       }
       
-      console.log("=====================================================================================");
-      let circuitTilesPrint     = "[\n";
-      let orientationTilesPrint = "[\n";
-      for (let i = 0; i < 8; i++) {
-         circuitTilesPrint     += "  [";
-         orientationTilesPrint += "  [";
-         for (let j = 0; j < 12; j++) {
-            circuitTilesPrint     += circuitTiles[i][j];
-            orientationTilesPrint += orientationTiles[i][j];
-            if (j < 11) {
-               circuitTilesPrint     += ", ";
-               orientationTilesPrint += ", ";
-            }
-         }
-         circuitTilesPrint     += "]\n";
-         orientationTilesPrint += "]\n";
-      }
-      circuitTilesPrint     += "\n]\n";
-      orientationTilesPrint += "\n]\n";
-      console.log("circuitTilesPrint : \n"+ circuitTilesPrint +"orientationTilesPrint : \n"+ orientationTilesPrint);
-      console.log("=====================================================================================");
-      
       map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
       const nbTour = localStorage.getItem("circuitLaps");
       console.log("nbTour : "+ nbTour);
@@ -251,7 +202,6 @@ window.onload = () => {
       
       init(0, nbTour);
       
-      //dessin Circuit
       setTimeout(() => {
          timer.start();
          
