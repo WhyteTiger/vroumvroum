@@ -15,6 +15,34 @@ if(document.querySelector('#savebutton') === null) {    // means we're on the ch
 		document.location.href = 'playCircuit.html';
 	});
 
+	// delete a circuit
+	document.getElementById('delete-button').addEventListener('click', (evt) => {
+
+		console.log(localStorage)
+		const fetchParams = {
+			circuitIdIn : localStorage.getItem('circuitId')
+		};
+		const params = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(fetchParams)
+		};
+		
+		fetch(API.getURLDeleteCircuit(), params)
+		.then((response) => response.json())
+		.then((dataDelete) => {
+			if (dataDelete.success === "true") {
+				console.log("deleted successfully");
+				document.location.href = 'choiceCircuit.html';
+			} else {
+				console.error("deletion error");
+			}
+		});
+
+	});
+
 } else {    // means we're on the creation page
 	document.querySelector('#savebutton').addEventListener('click', (evt) => {
 		localStorage.setItem('test', true);
