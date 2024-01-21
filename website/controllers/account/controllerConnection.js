@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {API} from "../../models/API.js";
 import {Alert} from "../../models/entities/Alert.js";
 
@@ -14,17 +16,15 @@ async function tryToConnect(username, password) {
 	const data = {
 		usernameIn: username,
 		passwordIn: password
-	}
-	console.log(data);
+	};
+
 	const params = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data)
-	}
-	
-	console.log(params);
+	};
 	
 	await fetch(url, params)
 		.then((response) => response.json())
@@ -40,11 +40,8 @@ async function tryToConnect(username, password) {
 			
 			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
 				localStorage.isConnected = true;
-				
 				document.location.href="../views/home.html";
 			} else {
-				console.log("Connection failed");
-				console.log(localStorage.rightPassword && localStorage.rightPassword === "true");
 				if (localStorage.alreadyRegister === "false"){
 					const newAlert = new Alert("Votre pseudo est incorrect !", "Fermer !", null , 'warning');
 					newAlert.customAlert();
@@ -56,8 +53,8 @@ async function tryToConnect(username, password) {
 			}
 		})
 		.catch(() => {
-			console.log("Fetch failed");
-		})
+			console.error("Fetch failed");
+		});
 }
 
 const form = document.getElementById("form");

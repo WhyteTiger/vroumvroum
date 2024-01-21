@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { Map }                  from "../entities/Map.js";
 import { API }                  from "../API.js";
 import { Tileset }              from "../entities/Tileset.js";
@@ -10,7 +12,7 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let playerIdIn, creatorTime, circuitId, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
+let creatorTime, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround;
 
 function drawCircuit(map) {
    if (circuitBackGround === undefined) {
@@ -42,10 +44,7 @@ window.onload = () => {
    audio.autoplay = true;
    audio.loop     = true;
    
-   console.log("localStorage.getItem(\"personal\") : "+ localStorage.getItem("personal"));
-   
    if (localStorage.getItem("personal") === "false") {
-      console.log("localStorage.getItem(\"personal\") === false START");
       
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
@@ -64,18 +63,14 @@ window.onload = () => {
          body: JSON.stringify(dataCircuit)
       };
       
-      console.log(params);
-      
       fetch(url, params)
          .then((response) => response.json())
          .then((dataCircuit) => {
             
             const circuitName     = dataCircuit.circuitName;
             const creatorUsername = dataCircuit.creatorUsername;
-            const circuitScore    = dataCircuit.circuitScore;
             creatorTime           = dataCircuit.creatorTime;
             
-            console.log(circuitName + " " + creatorUsername + " " + creatorTime + " " + circuitScore);
             document.getElementById("circuit-name").innerText  =                       dataCircuit.circuitName;
             document.getElementById("score").innerText         = "Score : "+           dataCircuit.circuitScore;
             document.getElementById("creator-name").innerText  = "Créateur : "+        dataCircuit.creatorUsername;
@@ -113,13 +108,10 @@ window.onload = () => {
                },
                body: JSON.stringify(dataMap)
             };
-            console.log(params);
             
             fetch(url, params)
                .then((response) => response.json())
                .then((dataMap) => {
-                  console.log("***************************************************************************************************************");
-                  console.log("dataMap.tileSet.circuit : "+ dataMap.tileSet.circuit +"   dataMap.tileSet.rotation : "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
 						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
@@ -135,7 +127,6 @@ window.onload = () => {
                      },
                      body: JSON.stringify(dataKart)
                   };
-                  console.log(params);
                   
                   fetch(url, params)
                      .then((response) => response.json())
@@ -151,14 +142,12 @@ window.onload = () => {
                         updateCar(); // Appel initial de la fonction updateCar
                      });
                })
-               .catch(() => {
-                  console.log("Fetch failed");
+               .catch((err) => {
+                  console.error("Fetch failed"+err);
                });
          });
-      console.log("localStorage.getItem(\"personal\") === \"false\" END");
+         
    } else {
-
-      console.log("localStorage.getItem(\"personal\") === \"true\" START");
       
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
@@ -197,7 +186,7 @@ window.onload = () => {
       
       map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
       const nbTour = localStorage.getItem("circuitLaps");
-      console.log("nbTour : "+ nbTour);
+      
       timer = new Timer();
       
       init(0, nbTour);
@@ -211,7 +200,7 @@ window.onload = () => {
          updateCar();
       }, 100);
    }
-}
+};
 
 function init(kartId, nbTour) {
    controllerCheckpoint = new ControllerCheckpoint(map, nbTour);
@@ -304,10 +293,9 @@ function updateCar() {
 		let score = 0;
 
 		let playerTime = localStorage.getItem("playerTime");
-      console.log("playerTime : "+ playerTime);
+      
       //Si le joueur a un meilleurs temps ou si il n'a pas de temps
 		if (playerTime > monTemps || playerTime === null) { 
-         console.log("playerTime : "+ playerTime);
 			score = 1;
 			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
 			const dataPlayer = {
@@ -322,13 +310,13 @@ function updateCar() {
 				},
 				body: JSON.stringify(dataPlayer)
 			};
-			console.log(params);
-			
+
 			fetch(url, params)
 				.then((response) => response.json())
-				.then((dataPlayer) => {
-					console.log(dataPlayer.success);
-				});
+				.then((dataPlayer) => {})
+            .catch((err) => {
+               console.error(err);
+            });
 		}
 		if(monTemps < creatorTime){
 			score = 1;
@@ -343,29 +331,27 @@ function updateCar() {
 				},
 				body: JSON.stringify(dataPlayer)
 			};
-			console.log(params);
 			
 			fetch(url, params)
 				.then((response) => response.json())
-				.then((dataPlayer) => {
-					console.log(dataPlayer.success);
-				});
+				.then((dataPlayer) => {})
+            .catch((err) => {
+               console.error(err);
+            });
 		}
 		popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
 		
    } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
       timer.stop();
       const creatorTime = timer.getElapsedTime();
-      console.log("creatorTime : "+ creatorTime);
       
       localStorage.setItem("creatorTime", creatorTime);
       localStorage.setItem("isChecked", "true");
-      
-      console.log("La vérif est terminée");
+
       location.href = "createCircuit.html";
    }
 }
 
 window.onunload = () => {
    circuitBackGround = undefined;
-}
+};

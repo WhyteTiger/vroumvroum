@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 const footer = document.createElement('footer');
 
 const a = document.createElement('a');
@@ -18,16 +20,3 @@ footer.appendChild(a);
 footer.appendChild(div);
 
 document.body.appendChild(footer);
-
-
-
-
-
-
-
-
-
-
-
-
-

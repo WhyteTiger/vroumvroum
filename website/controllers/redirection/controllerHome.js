@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Alert} from "../../models/entities/Alert.js";
 
 const audio = document.createElement("audio");

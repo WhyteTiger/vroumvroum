@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class Color {
     static  contrastFactor = 50;
     static  rBrightVal = 0.21;

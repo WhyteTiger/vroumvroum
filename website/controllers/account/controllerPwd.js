@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 feather.replace();
 
 const eyePwd = document.getElementById("eye");
