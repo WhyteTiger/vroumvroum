@@ -305,7 +305,8 @@ function updateCar() {
 
 		let playerTime = localStorage.getItem("playerTime");
       console.log("playerTime : "+ playerTime);
-		if (playerTime > monTemps || playerTime === null) {
+      //Si le joueur a un meilleurs temps ou si il n'a pas de temps
+		if (playerTime > monTemps || playerTime === null) { 
          console.log("playerTime : "+ playerTime);
 			score = 1;
 			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
