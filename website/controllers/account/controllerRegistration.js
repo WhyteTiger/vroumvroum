@@ -47,6 +47,8 @@ async function wantToRegistrate(nickname, password) {
 						.then((response) => response.json())
 						.then((dataPlayer) => {
 							console.log(dataPlayer.success);
+						}).catch(() => {
+								console.log("Fetch failed");
 						});
 				}
 				document.location.href="../views/home.html";
