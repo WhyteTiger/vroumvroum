@@ -39,6 +39,7 @@ if (isConnected === "false") {
 	registrationA.setAttribute("href", "registration.html");
 	registrationA.appendChild(registrationButton);
 	
+	divButtons.id = "header-buttons";
 	divButtons.appendChild(connectionA);
 	divButtons.appendChild(registrationA);
 	

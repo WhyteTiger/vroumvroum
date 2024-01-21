@@ -27,6 +27,12 @@ header button {
     font-size: 15px;
 }
 
+#header-buttons {
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+}
+
 /* img transition on hover */
 header img:hover {
     scale: 0.9;
@@ -36,6 +42,10 @@ header a {
     display: flex;
     text-align: left;
     margin-left: 1em;
+}
+
+#header-buttons a {
+    margin: auto 5px;
 }
 
 #profileImg {
