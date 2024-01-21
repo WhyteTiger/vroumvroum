@@ -22,14 +22,18 @@ eyeoffPwd.addEventListener("click", () =>{
     passwordField.type = "password";
 });
 
-eyeConfPwd.addEventListener("click", () => {
-    eyeConfPwd.style.display = "none";
-    eyeConfoffPwd.style.display = "block";
-    passwordConfField.type = "text";
-});
+if(eyeConfPwd) {
+    eyeConfPwd.addEventListener("click", () => {
+        eyeConfPwd.style.display = "none";
+        eyeConfoffPwd.style.display = "block";
+        passwordConfField.type = "text";
+    });
+}
 
-eyeConfoffPwd.addEventListener("click", () =>{
-    eyeConfoffPwd.style.display = "none";
-    eyeConfPwd.style.display = "block";
-    passwordConfField.type = "password";
-});
+if(eyeConfoffPwd) {
+    eyeConfoffPwd.addEventListener("click", () => {
+        eyeConfoffPwd.style.display = "none";
+        eyeConfPwd.style.display = "block";
+        passwordConfField.type = "password";
+    });
+}
