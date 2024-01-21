@@ -1,4 +1,4 @@
-# SAE S3.01 - G2S3A 2023/2024
+# SAE S3.01 - Melvyn BAUVENT, Mehdi BOURBON, Lucas DANIEL, Camille MORFIN - 2023/2024
 
 Ce dépôt Git contient les fichiers constituant VroumVroum, l'application web de circuits de voiture développée dans le cadre de la SAÉ
 de la deuxième année de BUT Informatique.
