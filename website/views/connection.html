@@ -8,42 +8,38 @@
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
         <link rel="stylesheet" href="styles/alertStyle.css">
-
-        <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script type="module" src="../controllers/account/controllerConnection.js" defer></script>
-        <script src="https://unpkg.com/feather-icons"></script>
-        <script type="module" src="../controllers/account/controllerPwd.js"></script>
     </head>
 
     <body>
+        <main id="mainForm">
+            <section id="toutForm">
+                <h1 id="form-title">Connexion au site</h1>
 
-    <main id="mainForm">
-
-        <section id="toutForm">
-            <h1 id="form-title">Connexion au site</h1>
-
-            <form id="form" method="post">
-                <div class="field">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
-
-                <div class="field">
-                    <label for="pwd">Mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" required>
-                    <div class="password-icon">
-                        <i data-feather="eye" id="eye"></i>
-                        <i data-feather="eye-off" id="eye-off"></i>
+                <form id="form" method="post">
+                    <div class="field">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" required>
                     </div>
-                </div>
 
-                <button type="submit" id="validFormConnection">Se connecter</button>
-            </form>
+                    <div class="field">
+                        <label for="pwd">Mot de passe</label>
+                        <input type="password" name="pwd" id="pwd" required>
+                        <div class="password-icon">
+                            <i data-feather="eye" id="eye"></i>
+                            <i data-feather="eye-off" id="eye-off"></i>
+                        </div>
+                    </div>
 
-            <h2>Vous n'avez pas de compte ? <a href="registration.html">Créer un compte</a></h2>
-        </section>
+                    <button type="submit" id="validFormConnection">Se connecter</button>
+                </form>
 
-    </main>
+                <h2>Vous n'avez pas de compte ? <a href="registration.html">Créer un compte</a></h2>
+            </section>
+        </main>
 
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/account/controllerConnection.js"></script>
+        <script type="module" src="../controllers/account/controllerPwd.js"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
     </body>
 </html>

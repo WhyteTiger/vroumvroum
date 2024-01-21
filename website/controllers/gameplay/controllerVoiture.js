@@ -1,6 +1,7 @@
-import {API} from "../../models/API.js";
-import {Alert} from "../../models/entities/Alert.js"
-export class ControllerVoiture{
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
+import {Alert} from "../../models/entities/Alert.js";
+export class ControllerVoiture {
 	constructor(valButton,vroumCoin) {
 		this.valButton = valButton;
 		this.vroumCoin = vroumCoin;

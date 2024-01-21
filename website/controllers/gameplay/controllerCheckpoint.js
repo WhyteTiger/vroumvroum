@@ -1,12 +1,14 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class ControllerCheckpoint {
-    circuit
-    nbTour
-    checkPointCircuit
-    ligne_de_depard
-    nbTourrestant
-    /*ligne_d_arrive*/
-    ligne_d_arrive
-    fini
+    circuit;
+    nbTour;
+    checkPointCircuit;
+    ligne_de_depard;
+    nbTourrestant;
+    ligne_d_arrive;
+    fini;
+
 
     constructor(circuit,nbTour) {
         // Constructor code goes here
@@ -22,10 +24,10 @@ export class ControllerCheckpoint {
         this.ligne_de_depard = [0,0];
         this.setLigneDepart();
         this.ligne_d_arrive = [0,0];
-        this.checkPointCircuit = new Array();
+        this.checkPointCircuit = [];
         this.setCheckPointCircuit();
        
-        this.checkPointPassed = new Array();
+        this.checkPointPassed = [];
     }
 
     
@@ -74,7 +76,7 @@ export class ControllerCheckpoint {
             if(couleur[0] >= 150 && couleur[1] >= 150 && this.nbCheckPointRestant === 0){
                 this.nbTourrestant--;
                 this.nbCheckPointRestant = this.nbCheckPoint; 
-                this.checkPointPassed = new Array();
+                this.checkPointPassed = [];
                 this.updateTour();
                 this.updateCheckpoint();
                 if(this.nbTourrestant === 0){
@@ -124,7 +126,7 @@ export class ControllerCheckpoint {
         }
     }
     updateCheckpoint(){
-        document.getElementsByClassName("compteurCheckpoint")[0].textContent = "CP : "+ (this.nbCheckPoint-this.nbCheckPointRestant) +"/"+this.nbCheckPoint; ;
+        document.getElementsByClassName("compteurCheckpoint")[0].textContent = "CP : "+ (this.nbCheckPoint-this.nbCheckPointRestant) +"/"+this.nbCheckPoint;
     }
     updateTour(){
         document.getElementsByClassName("compteurTour")[0].textContent = "Tour : "+(this.nbTour - this.nbTourrestant)+"/"+this.nbTour;
@@ -149,13 +151,13 @@ export class ControllerCheckpoint {
             }
         } else if(idtuile === 15 || idtuile === 18) {
             return this.circuit.getRotate()[tuile[0]][tuile[1]];
-        } else if(idtuile === 12){
-            temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
+        } else if(idtuile === 12) {
+            let temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
             if(temp === 0){
                 return 90;
-            }else if(temp === 90){
+            } else if(temp === 90) {
                 return 180;
-            }else{
+            } else {
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-180;
             }
         }

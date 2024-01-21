@@ -8,44 +8,29 @@
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/homeStyle.css">
         <link rel="stylesheet" href="styles/alertStyle.css">
-
-        <script type="module" src="../controllers/redirection/controllerHome.js"   defer></script>
-        <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script type="module" src="../models/creation/loaderBar.js"></script>
-        <script src="../controllers/redirection/controllerFooter.js" defer></script>
     </head>
 
     <body id="welcomeBody">
-
-    <div id="loaderContainer">
-        <div id="loaderBar">
-            <img src="../../assets/voiture.png" alt="Image de voiture" id="carImage">
+        <div id="loaderContainer">
+            <div id="loaderBar">
+                <img src="../../assets/voiture.png" alt="Image de voiture" id="carImage">
+            </div>
         </div>
 
-    </div>
+        <main id="welcome">
+            <img id="mainLogo" src="../../assets/logoLong.png" alt="logoLong">
 
-    <main id="welcome">
-        <img id="mainLogo" src="../../assets/logoLong.png" alt="logoLong">
+            <div id="welcomeButtons">
+                <button type="submit" id="create"      class="menuJeu">CREER UN CIRCUIT</button>
+                <button type="submit" id="play"        class="menuJeu">JOUER</button>
+                <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
+            </div>
+        </main>
 
-        <section id="welcomeButtons">
-            <button type="submit" id="create"      class="menuJeu">CREER UN CIRCUIT</button>
-            <button type="submit" id="play"        class="menuJeu">JOUER</button>
-            <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
-        </section>
-    </main>
-
-    <!-- <footer>
-
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-            <img src="../../assets/by-nc-sa.png" alt="VroumVroum © 2024 by Melvyn BAUVENT, Mehdi BOURBON, Lucas DANIEL and Camille MORFIN is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/">
-        </a>
-
-
-        <div>
-            <p><strong>Melvyn BAUVENT, Mehdi BOURBON, Lucas DANIEL, Camille MORFIN</strong> - &copy 2024</p>
-        </div>
-
-    </footer> -->
+        <script type="module" src="../controllers/redirection/controllerHome.js"></script>
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../models/creation/loaderBar.js"></script>
+        <script src="../controllers/redirection/controllerFooter.js"></script>
 
     </body>
 </html>

@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class Coin {
     tilesetPath = null;
     images = null;
@@ -8,6 +10,7 @@ export class Coin {
         this.tilesetPath = tilesetPath;
         this.images = images;
         this.rotations = rotations;
+        this.tilesPerRow = 12;
     }
 
     dessinerPiece(targetElement) {

@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Jeu - VroumVroum</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Jeu - VroumVroum</title>
 
-    <link rel="icon" href="../../assets/logo.png">
-    <link rel="stylesheet" href="styles/generalStyle.css">
-    <link rel="stylesheet" href="styles/canvasStyle.css">
-    <link rel="stylesheet" href="styles/circuitStyle.css">
-    <link rel="stylesheet" href="styles/alertStyle.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/canvasStyle.css">
+        <link rel="stylesheet" href="styles/circuitStyle.css">
+        <link rel="stylesheet" href="styles/alertStyle.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    </head>
 
-    <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-    <script type="module" src="../models/gameplay/gameplay.js"></script>
-    <script type="module" src="../models/entities/Alert.js"></script>
-</head>
+    <body id="play-body">
+        <main id="play-main">
+            <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
+            <div>
+                <aside id="time-infos">
+                    <div class="chronometre leaderboard-title">Time</div>
+                    <div class="compteurCheckpoint leaderboard-title">Checkpoint</div>
+                    <div class="compteurTour leaderboard-title">Tour</div>
+                </aside>
 
-<body id="play-body">
-<main id="play-main">
-    <canvas id="canvas">Votre navigateur ne supporte pas HTML5, veuillez le mettre à jour pour jouer.</canvas>
-    <section>
-        <aside id="time-infos">
-            <div id="leaderboard-title" class="chronometre">Time</div>
-            <div id="leaderboard-title" class="compteurCheckpoint">Checkpoint</div>
-            <div id="leaderboard-title" class="compteurTour">Tour</div>
-        </aside>
-        <aside id='aside-infos'>
-            <h2 id="circuit-name">Nom de la carte</h2>
-    
-            <p id="score">Score : Score</p>
-            <p id="creator-name">Créateur : CreateurUsername</p>
-            <p id="creator-score">Médaille auteur : createurScore</p>
-    
-            <div id="leaderboard">
-                <div id="leaderboard-title">Leaderboard</div>
-                <div id="leaderboard-players">stuff is supposed to go here</div>
+                <aside id='aside-infos'>
+                    <h2 id="circuit-name">Nom de la carte</h2>
+            
+                    <p id="score">Score : Score</p>
+                    <p id="creator-name">Créateur : CreateurUsername</p>
+                    <p id="creator-score">Médaille auteur : createurScore</p>
+            
+                    <div id="leaderboard">
+                        <div class="leaderboard-title">Leaderboard</div>
+                        <div id="leaderboard-players">stuff is supposed to go here</div>
+                    </div>
+                </aside>
             </div>
-        </aside>
-    </section>
-</main>
-</body>
+        </main>
+
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../models/gameplay/gameplay.js"></script>
+        <script type="module" src="../models/entities/Alert.js"></script>
+    </body>
 </html>
