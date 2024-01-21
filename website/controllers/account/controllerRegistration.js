@@ -21,12 +21,36 @@ async function wantToRegistrate(nickname, password) {
 		.then((data) => {
 			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			
-			if (localStorage.alreadyRegister === "false") {
+			if (localStorage.alreadyRegister === "false" || localStorage.alreadyRegister === undefined) {
 				localStorage.isConnected = "true";
 				localStorage.playerId    = data.playerIdOut;
 				localStorage.username    = data.usernameOut;
 				localStorage.imgProfilId = data.PPIdOut;
-				
+				if(localStorage.getItem("hasATime") !== undefined) {
+					score = 1;
+					let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+					const dataPlayer = {
+						playerIdIn : data.playerIdOut,
+						circuitIdIn : localStorage.getItem("circuitIdNoAccount"),
+						newBestTimeIn : localStorage.getItem("bestTimeNoAccount")
+					};
+					const params = {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(dataPlayer)
+					};
+					console.log(params);
+					
+					fetch(url, params)
+						.then((response) => response.json())
+						.then((dataPlayer) => {
+							console.log(dataPlayer.success);
+						}).catch(() => {
+								console.log("Fetch failed");
+						});
+				}
 				document.location.href="../views/home.html";
 			} else {
 				console.log("nickname is already used");

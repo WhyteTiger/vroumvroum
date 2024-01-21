@@ -285,22 +285,34 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
-   } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
+   }else if (localStorage.getItem("isConnected") === "false"){
+      let monTemps = timer.getElapsedTime();
+      timer.stop();
+      let popUpSeConnecter = new Alert("Enregistrer votre temps", "Se connecter", "registration.html" ,"type");
+      localStorage.setItem("hasATime", "true");
+      localStorage.setItem("bestTimeNoAccount", monTemps);
+      localStorage.setItem("circuitIdNoAccount", window.localStorage.circuitId);
+
+      popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
+
+
+   }else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
 		let monTemps = timer.getElapsedTime();
       timer.stop();
-      console.log(timer.timeToString(monTemps));
-      console.log("La partie est terminée");
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
   
 		let score = 0;
+
 		let playerTime = localStorage.getItem("playerTime");
-  
-		if (playerTime > monTemps) {
+      console.log("playerTime : "+ playerTime);
+      //Si le joueur a un meilleurs temps ou si il n'a pas de temps
+		if (playerTime > monTemps || playerTime === null) { 
+         console.log("playerTime : "+ playerTime);
 			score = 1;
 			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
 			const dataPlayer = {
-				playerIdIn : playerIdIn,
-				circuitIdIn : circuitId ,
+				playerIdIn : localStorage.playerId,
+				circuitIdIn :window.localStorage.circuitId ,
 				newBestTimeIn : monTemps
 			};
 			const params = {
@@ -322,7 +334,7 @@ function updateCar() {
 			score = 1;
 			let url = API.getURLaddVroumCoinToPlayerId();
 			const dataPlayer = {
-				playerIdIn: playerIdIn
+				playerIdIn: localStorage.playerId
 			};
 			const params = {
 				method: "POST",
