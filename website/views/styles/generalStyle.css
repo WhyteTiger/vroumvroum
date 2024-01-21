@@ -17,8 +17,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
+    
     background-color: rgb(71, 223, 215);
+}
+
+body {
+    background: url("../../../assets/circuitFond2.jpg") no-repeat fixed top left;
+    background-position: center bottom;
+    background-size: cover;
+    background-color: none;
+    font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
 }
 
 /* main page style */
@@ -96,5 +104,24 @@ a:hover {
     display: none;
 }
 
+.tile-selector,
+aside,
+#choosers button,
+h1#choice-title,
+#filter,
+#page-selector,
+#true,
+#circuit-infos,
+#divCanvas,
+h1#form-title,
+form {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid black;
+}
 
 

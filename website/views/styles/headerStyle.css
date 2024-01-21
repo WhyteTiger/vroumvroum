@@ -32,8 +32,14 @@ header img:hover {
     scale: 0.9;
 }
 
+header a {
+    display: flex;
+    text-align: left;
+    margin-left: 1em;
+}
+
 #profileImg {
-    margin-right: 1rem;
+    margin: 3.5px 0px 0px 0px;
     text-align: right;
     transition: scale 0.2s ease 0s;
 }
