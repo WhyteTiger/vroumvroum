@@ -46,7 +46,7 @@ npm i tslint
 
 Vous pouvez, pour accéder à la base de données, utiliser les fichiers SQL fournis dans le dossier `sqlbase` et les importer dans votre PhpMyAdmin.
 
-**N.B. : * Importez `DB_VroumVroum.sql` avant `dataSetTest.sql`.
+**N.B. :** Importez `DB_VroumVroum.sql` avant `dataSetTest.sql`.
 
 ## Auteurs et contributeurs
 
