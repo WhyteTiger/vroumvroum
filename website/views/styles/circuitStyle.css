@@ -159,6 +159,10 @@ aside p {
     margin: 0.5em 0em;
 }
 
+#aside-infos, #time-infos {
+    margin: 15px 0px 15px 0px;
+}
+
 /* CIRCUIT CHOICE ZONE */
 
 #circuits {
