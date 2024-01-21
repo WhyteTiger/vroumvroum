@@ -1,99 +1,95 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Choix du circuit - VroumVroum</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Choix du circuit - VroumVroum</title>
 
-    <link rel="icon" href="../../assets/logo.png">
-    <link rel="stylesheet" href="styles/generalStyle.css">
-    <link rel="stylesheet" href="styles/canvasStyle.css">
-    <link rel="stylesheet" href="styles/circuitStyle.css">
-    <link rel="stylesheet" href="styles/formStyle.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/canvasStyle.css">
+        <link rel="stylesheet" href="styles/circuitStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    </head>
 
+    <body>
+        <main class="circuit-main">
 
-    <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
-    <script type="module" src="../controllers/choice/controllerChoice.js" defer></script>
-</head>
+            <section id="choice-section">
+                <h1 id="choice-title">Choix du circuit</h1>
 
-<body>
-    <main class="circuit-main">
+                <section>
+                    <div id="true" class="true">
+                        <h2>Mes circuits</h2>
+                        <button>CREER UN NOUVEAU CIRCUIT</button>
+                    </div>
+                    <div id="filter" class="false">
+                        <h2>Filtrer par nom </h2>
+                        <input type="text" id="name-filter">
+                        <h2 id="creator-title">Filtrer par créateur </h2>
+                        <input type="text" id="creator-filter">
+                    </div>
+                    <div id="circuits"></div>
+                </section>
 
-        <section id="choice-section">
-            <h1 id="choice-title">Choix du circuit</h1>
-
-            <section>
-                <div id="true" class="true">
-                    <h2>Mes circuits</h2>
-                    <button>CREER UN NOUVEAU CIRCUIT</button>
-                </div>
-                <div id="filter" class="false">
-                    <h2>Filtrer par nom </h2>
-                    <input type="text" id="name-filter">
-                    <h2 id="creator-title">Filtrer par créateur </h2>
-                    <input type="text" id="creator-filter">
-                </div>
-                <section id="circuits"></section>
-            </section>
-
-            <section id="page-selector">
-                <i class="fa-solid fa-backward-step"></i>
-                <i class="fa-solid fa-backward"></i>
-                <p>numéro de page</p>
-                <i class="fa-solid fa-forward"></i>
-                <i class="fa-solid fa-forward-step"></i>
-            </section>
-
-        </section>
-
-        <aside class="false">
-            <section id="empty">
-                <p>Cliquez sur un circuit pour afficher ses informations !</p>
-            </section>
-            <section id="full" class="invisible">
-                <h2 id="circuit-name">Nom de la carte</h2>
-
-                <p id="score">Score : Score</p>
-                <p id="creator-name">Créateur : CreateurUsername</p>
-                <p id="creator-score">Médaille auteur : createurScore</p>
-
-                <div id="leaderboard">
-                    <div id="leaderboard-title">Leaderboard</div>
-                    <div id="leaderboard-players">stuff is supposed to go there</div>
-                </div>
-
-                <div>
-                    <button id="playbutton">JOUER</button>
+                <div id="page-selector">
+                    <i class="fa-solid fa-backward-step"></i>
+                    <i class="fa-solid fa-backward"></i>
+                    <p>numéro de page</p>
+                    <i class="fa-solid fa-forward"></i>
+                    <i class="fa-solid fa-forward-step"></i>
                 </div>
             </section>
-            
-        </aside>
 
-        <aside class="true">
-            <section id="empty-2">
-                <p>Cliquez sur un circuit pour afficher ses informations !</p>
-            </section>
-            <section id="full-2" class="invisible">
-                <h2 id="circuit-name-2">Nom de la carte</h2>
-
-                <p id="score-2">Score : Score</p>
-                <p id="creator-score-2">Médaille auteur : createurScore</p>
-
-                <div id="leaderboard-2">
-                    <div id="leaderboard-title-2">Leaderboard</div>
-                    <div id="leaderboard-players-2">stuff is supposed to go there</div>
+            <aside class="false">
+                <div id="empty">
+                    <p>Cliquez sur un circuit pour afficher ses informations !</p>
                 </div>
+                <section id="full" class="invisible">
+                    <h2 id="circuit-name">Nom de la carte</h2>
 
-                <div>
-                    <button id="play-button">JOUER</button>
-                    <button id="modify-button">MODIFIER</button>
-                    <button id="delete-button">SUPPRIMER</button>
+                    <p id="score">Score : Score</p>
+                    <p id="creator-name">Créateur : CreateurUsername</p>
+                    <p id="creator-score">Médaille auteur : createurScore</p>
+
+                    <div id="leaderboard">
+                        <div id="leaderboard-title">Leaderboard</div>
+                        <div id="leaderboard-players">stuff is supposed to go there</div>
+                    </div>
+
+                    <div>
+                        <button id="playbutton">JOUER</button>
+                    </div>
+                </section>
+            </aside>
+
+            <aside class="true">
+                <div id="empty-2">
+                    <p>Cliquez sur un circuit pour afficher ses informations !</p>
                 </div>
-            </section>
-            
-        </aside>
-            
-    </main>
-</body>
+                <section id="full-2" class="invisible">
+                    <h2 id="circuit-name-2">Nom de la carte</h2>
+
+                    <p id="score-2">Score : Score</p>
+                    <p id="creator-score-2">Médaille auteur : createurScore</p>
+
+                    <div id="leaderboard-2">
+                        <div id="leaderboard-title-2">Leaderboard</div>
+                        <div id="leaderboard-players-2">stuff is supposed to go there</div>
+                    </div>
+
+                    <div>
+                        <button id="play-button">JOUER</button>
+                        <button id="modify-button">MODIFIER</button>
+                        <button id="delete-button">SUPPRIMER</button>
+                    </div>
+                </section>
+            </aside>
+                
+        </main>
+
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/creation/controllerAside.js"></script>
+        <script type="module" src="../controllers/choice/controllerChoice.js"></script>
+    </body>
 </html>
