@@ -1,6 +1,14 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
 export class ControllerCheckpoint {
+    circuit;
+    nbTour;
+    checkPointCircuit;
+    ligne_de_depard;
+    nbTourrestant;
+    ligne_d_arrive;
+    fini;
+
 
     constructor(circuit,nbTour) {
         // Constructor code goes here

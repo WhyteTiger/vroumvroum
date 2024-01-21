@@ -29,8 +29,6 @@ async function tryToConnect(username, password) {
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
-			console.log(data.alreadyRegisterOut +" "+ data.rightPasswordOut +" "+ data.playerIdOut +" "+ data.usernameOut +" "+ data.PPIdOut);
 			
 			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			localStorage.rightPassword   = data.rightPasswordOut;
@@ -60,11 +58,9 @@ async function tryToConnect(username, password) {
 const form = document.getElementById("form");
 form.addEventListener('submit', (event) => {
 	event.preventDefault();
-	console.log("form submit\n");
 	
 	const username = document.getElementById("username").value;
 	const password = document.getElementById("pwd").value;
-	console.log(username+" "+password);
 	
 	tryToConnect(username, password);
 });
