@@ -51,6 +51,7 @@ export class ControllerCheckpoint {
                 if(this.circuit.getTerrain()[i][j] === 12 || this.circuit.getTerrain()[i][j] === 7 ){
                     this.ligne_de_depard[0] = i;
                     this.ligne_de_depard[1] = j;
+                    return 0;
                 }
             }
         }     
@@ -133,7 +134,7 @@ export class ControllerCheckpoint {
         let terrain = this.circuit.getTerrain();
         let idtuile = terrain[tuile[0]][tuile[1]];
 
-        if(idtuile === 13 || idtuile === 12 || idtuile === 7){
+        if(idtuile === 13 || idtuile === 7){
             const temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
             if(temp === 0){
                 return 270;
@@ -148,6 +149,15 @@ export class ControllerCheckpoint {
             }
         } else if(idtuile === 15 || idtuile === 18) {
             return this.circuit.getRotate()[tuile[0]][tuile[1]];
+        } else if(idtuile === 12){
+            temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
+            if(temp === 0){
+                return 90;
+            }else if(temp === 90){
+                return 180;
+            }else{
+                return this.circuit.getRotate()[tuile[0]][tuile[1]]-180;
+            }
         }
 
         return 0;
