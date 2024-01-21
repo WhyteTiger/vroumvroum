@@ -32,7 +32,7 @@ header img:hover {
     scale: 0.9;
 }
 
-header a {
+header a:not(#burger a) {
     display: flex;
     text-align: left;
     margin-left: 1em;
