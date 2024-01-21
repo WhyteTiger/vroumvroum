@@ -5,6 +5,13 @@ de la deuxième année de BUT Informatique.
 
 ## Sommaire
 
+- [Description générale du projet](#description-générale-du-projet)
+- [Pré-requis](#pré-requis)
+- [Utilisation](#utilisation)
+- [Auteurs et contributeurs](#auteurs-et-contributeurs)
+- [Licence](#licence)
+
+
 
 ## Description générale du projet
 
