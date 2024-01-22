@@ -20,7 +20,7 @@ function fetchPage(nb, nbPages) {
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
     // for further classes
-    let filter = localStorage.getItem("personal") === "true" ? "-2" : "";
+    let filter = localStorage.getItem("modify") === "true" ? "-2" : "";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
