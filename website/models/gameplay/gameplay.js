@@ -137,7 +137,7 @@ window.onload = () => {
                         started = 0;
                         
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
-                        popUp.alertStartCircuit(creatorUsername, creatorTime);
+                        popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime));
                         
                         updateCar(); // Appel initial de la fonction updateCar
                      });
@@ -283,7 +283,7 @@ function updateCar() {
    }else if (localStorage.getItem("isConnected") === "false"){
       let monTemps = timer.getElapsedTime();
       timer.stop();
-      let popUpSeConnecter = new Alert("Enregistrer votre temps", "Se connecter", "registration.html" ,"type");
+      let popUpSeConnecter = new Alert("Enregistrer votre temps", "S'inscrire", "registration.html" ,"type");
       localStorage.setItem("hasATime", "true");
       localStorage.setItem("bestTimeNoAccount", monTemps);
       localStorage.setItem("circuitIdNoAccount", window.localStorage.circuitId);
@@ -297,17 +297,10 @@ function updateCar() {
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
   
 		let score = 0;
-
-		let playerTime = localStorage.getItem("playerTime");
-      
-      //Si le joueur a un meilleurs temps ou si il n'a pas de temps
-		if (playerTime > monTemps || playerTime === null) { 
-			score = 1;
-			let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+      let url = API.getURLBestScoreAndNote(); 
 			const dataPlayer = {
 				playerIdIn : localStorage.playerId,
-				circuitIdIn :window.localStorage.circuitId ,
-				newBestTimeIn : monTemps
+				circuitIdIn :window.localStorage.circuitId 
 			};
 			const params = {
 				method: "POST",
@@ -319,34 +312,59 @@ function updateCar() {
 
 			fetch(url, params)
 				.then((response) => response.json())
-				.then((dataPlayer) => {})
+				.then((dataPlayer) => {
+               let playerTime = dataPlayer.playerScore;
+               //Si le joueur a un meilleurs temps ou si il n'a pas de temps
+               if (playerTime > monTemps || playerTime === null) { 
+                  score = 1;
+                  let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+                  const dataPlayer = {
+                     playerIdIn : localStorage.playerId,
+                     circuitIdIn :window.localStorage.circuitId ,
+                     newBestTimeIn : monTemps
+                  };
+                  const params = {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/json",
+                     },
+                     body: JSON.stringify(dataPlayer)
+                  };
+
+                  fetch(url, params)
+                     .then((response) => response.json())
+                     .then((dataPlayer) => {})
+                     .catch((err) => {
+                        console.error(err);
+                     });
+               }
+               if(monTemps < creatorTime){
+                  score = 1;
+                  let url = API.getURLaddVroumCoinToPlayerId();
+                  const dataPlayer = {
+                     playerIdIn: localStorage.playerId
+                  };
+                  const params = {
+                     method: "POST",
+                     headers: {
+                        "Content-Type": "application/json",
+                     },
+                     body: JSON.stringify(dataPlayer)
+                  };
+                  
+                  fetch(url, params)
+                     .then((response) => response.json())
+                     .then((dataPlayer) => {})
+                     .catch((err) => {
+                        console.error(err);
+                     });
+               }
+               popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
+            })
             .catch((err) => {
                console.error(err);
             });
-		}
-		if(monTemps < creatorTime){
-			score = 1;
-			let url = API.getURLaddVroumCoinToPlayerId();
-			const dataPlayer = {
-				playerIdIn: localStorage.playerId
-			};
-			const params = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(dataPlayer)
-			};
-			
-			fetch(url, params)
-				.then((response) => response.json())
-				.then((dataPlayer) => {})
-            .catch((err) => {
-               console.error(err);
-            });
-		}
-		popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
-		
+
    } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
       timer.stop();
       const creatorTime = timer.getElapsedTime();
