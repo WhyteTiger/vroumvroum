@@ -1,7 +1,8 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import { API } from "../../models/API.js";
-import {TileChooser} from "../../models/creation/TileChooser.js";
+import { API } 		  from "../../models/API.js";
+import { TileChooser } from "../../models/creation/TileChooser.js";
+import { Alert } 		  from "../../models/entities/Alert.js";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -110,13 +111,12 @@ if (localStorage.getItem('modify') === 'true') {
 		});
 	})
 	.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
+	
 } else {
-
 	setTimeout(() => {
 		tileChooser.reload();
 	}, 200);
-
-
+	
 	document.querySelector('#buttons-info').addEventListener('click', (evt) => {
 		const buttons = document.querySelectorAll('.chooser');
 		
@@ -176,9 +176,87 @@ if (localStorage.getItem('modify') === 'true') {
 }
 
 
+
+
 window.onunload = () => {
 	if (tileChooser !== undefined) {
 		if      (localStorage.getItem('modify') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
 		else if (localStorage.getItem('modify') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+	}
+	
+	
+	console.log("PUTE");
+	if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
+		console.log("isChecked === false");
+		
+		document.querySelector('#savebutton').addEventListener('click', () => {
+			
+			let circuitIsValid = "false";
+			
+			let matrix;
+			if (localStorage.getItem('modify') === 'true') matrix = JSON.parse(localStorage.getItem('matrixPerso'));
+			else matrix = JSON.parse(localStorage.getItem('matrix'));
+			
+			const len = matrix[0].length;
+			for (let i = 0; i < len; i++) {
+				if (matrix[0][i] === 7 || matrix[0][i] === 12) {
+					circuitIsValid = "true";
+					i = len; // break
+				}
+			}
+			if (circuitIsValid === "true") {
+				localStorage.setItem("matrix", JSON.stringify(matrix));
+				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
+				popUp.customAlert();
+			} else {
+				const popUp = new Alert("Votre circuit n'est pas valid, veuillez metre au moins un départ/arrivé", "OK", "", 'warning');
+				popUp.customAlert();
+			}
+		});
+		
+	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
+		console.log("isChecked === true");
+		
+		const matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		const playerIdIn = localStorage.getItem("playerId");
+		const circuitNameIn = localStorage.getItem("circuitName");
+		const creatorTimeIn = localStorage.getItem("creatorTime");
+		const circuitLapsIn = localStorage.getItem("circuitLaps");
+		
+		const dataCircuit = {
+			playerIdIn,
+			matrixIn,
+			circuitNameIn,
+			creatorTimeIn,
+			circuitLapsIn
+		};
+		const params = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(dataCircuit)
+		};
+		
+		let url;
+		localStorage.getItem("modify") === "false" ? url = API.getURLpostCircuitOfPlayerId() : url = API.getURLmodifyCircuitOfPlayerId();
+		
+		fetch(url, params)
+			.then((response) => response.json())
+			.then((dataCircuit) => {
+				if (dataCircuit.success === "true") {
+					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
+					popUpSuccess.customAlert();
+				} else {
+					console.error("saved error");
+				}
+				
+				localStorage.setItem("circuitName", "");
+				localStorage.setItem("creatorTime", "");
+				localStorage.setItem("circuitLaps", "");
+				localStorage.setItem("isChecked", "false");
+			});
+	} else {
+		console.error("Error controllerAside : Nothing good");
 	}
 };

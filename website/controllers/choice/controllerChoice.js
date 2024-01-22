@@ -2,6 +2,7 @@
 
 import { API } from "../../models/API.js";
 import { Timer } from "../../models/entities/Timer.js";
+import { Alert } from "../../models/entities/Alert.js";
 
 console.log(localStorage);
 
@@ -241,9 +242,53 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
+// boutton créer nouveau circuit
 document.querySelector('#true button').addEventListener('click', () => {
     localStorage.setItem("modify", "false");
     document.location.href = "createCircuit.html";
+});
+
+document.querySelector('#playbutton').addEventListener('click', () => {
+    localStorage.setItem("personal", "false");
+    location.href = 'playCircuit.html';
+});
+
+document.getElementById('modify-button').addEventListener('click', () => {
+    console.log("modify-button clicked");
+    localStorage.setItem("modify", "true");
+    document.location.href = 'createCircuit.html';
+});
+document.querySelector('#play-button').addEventListener('click', () => {
+    console.log("#play-button clicked");
+    localStorage.setItem("personal", "false");
+    document.location.href = 'playCircuit.html';
+});
+
+document.getElementById('delete-button').addEventListener('click', () => {
+    console.log("delete-button clicked");
+    
+    const fetchParams = {
+        circuitIdIn: localStorage.getItem('circuitId')
+    };
+    const params = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fetchParams)
+    };
+    
+    fetch(API.getURLDeleteCircuit(), params)
+       .then((response) => response.json())
+       .then((dataDelete) => {
+           if (dataDelete.success === "true") {
+               localStorage.setItem("modify", "false");
+               document.location.href = 'choiceCircuit.html';
+           } else {
+               console.error("deletion error");
+           }
+       });
+    
 });
 
 fetchCircuits();
