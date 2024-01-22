@@ -184,11 +184,13 @@ aside p {
     height: 200px;
     width: 240px;
     overflow-x: scroll;
+    transition: all 0.3s ease 0s;
 }
 
 .circuit-box:hover {
-    background-color: red;
+    background-color: rgb(4, 141, 4);
     cursor: pointer;
+    transform: translateY(-7px);
 }
 
 .circuit-box p:first-child {
@@ -197,6 +199,10 @@ aside p {
 
 .circuit-box p.invisible {
     display: none;
+}
+
+.circuit-box.selected{
+    background-color: rgb(4, 141, 4);
 }
 
 #choice-section {
