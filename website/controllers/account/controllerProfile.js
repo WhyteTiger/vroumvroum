@@ -46,6 +46,7 @@ input.addEventListener('click', () => {
 });
 
 editButton.addEventListener('click', () => {
+    window.localStorage.setItem('type', 'pseudo');
     const newAlert = new Alert("Nouveau pseudo :", "Enregistrer", null, "input");
     newAlert.customAlert();
     
@@ -76,10 +77,11 @@ editButton.addEventListener('click', () => {
 });
 
 editPassword.addEventListener('click', () => {
+    window.localStorage.setItem('type', 'password');
     const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "input");
     newAlert.customAlert();
     
-    const newPwd = localStorage.getItem("inputField");
+    /*const newPwd = localStorage.getItem("inputField");
     
     const url = API.getURLupdatePasswordOfPlayerId();
     const dataPwd = {
@@ -101,5 +103,5 @@ editPassword.addEventListener('click', () => {
            console.log(result);
        });
     
-    localStorage.setItem("inputField", "");
+    localStorage.setItem("inputField", "");*/
 });

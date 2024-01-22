@@ -532,33 +532,64 @@ export class Alert{
            });
     }
 
-    static updateProfileName(newUsername){
-        const pseudo= document.getElementById('pseudo');
-        const playerId    = localStorage.getItem("playerId");
+    static updateProfileName(newVal){
+        if (localStorage.type === 'pseudo') {
+            const pseudo = document.getElementById('pseudo');
+            const playerId = localStorage.getItem("playerId");
 
-        pseudo.innerText = newUsername;
+            pseudo.innerText = newVal;
 
-        const url         = API.getURLupdatePlayerUsername();
-        const dataUsername = {
-            playerIdIn:    playerId,
-            newUsernameIn: newUsername
-        };
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataUsername)
-        };
-        console.log(params);
+            const url         = API.getURLupdatePlayerUsername();
+            const dataUsername = {
+                playerIdIn:    playerId,
+                newUsernameIn: newVal
+            };
+            const params = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataUsername)
+            };
+            console.log(params);
 
-        fetch(url, params)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result);
-            });
+            fetch(url, params)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
+                });
 
-        localStorage.setItem("username", newUsername);
+            localStorage.setItem("username", newVal);
+        }
+        else if(localStorage.type === 'password'){
+            console.log('password')
+            //const password = document.getElementById('pseudo');
+            const playerId = localStorage.getItem("playerId");
+
+            //pseudo.innerText = newUsername;
+
+            const url = API.getURLupdatePasswordOfPlayerId();
+            const dataPwd = {
+                playerIdIn: playerId,
+                newPwdIn:   newVal
+            };
+            const params = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataPwd)
+            };
+            console.log(params);
+
+            fetch(url, params)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
+                });
+
+            localStorage.setItem("username", newVal);
+        }
     }
 
     alertSave(alertCustom, overlay){
