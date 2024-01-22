@@ -175,16 +175,7 @@ if (localStorage.getItem('modify') === 'true') {
 	});
 }
 
-
-
-
-window.onunload = () => {
-	if (tileChooser !== undefined) {
-		if      (localStorage.getItem('modify') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
-		else if (localStorage.getItem('modify') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
-	}
-	
-	
+window.onload = () => {
 	console.log("PUTE");
 	if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
 		console.log("isChecked === false");
@@ -218,13 +209,15 @@ window.onunload = () => {
 		console.log("isChecked === true");
 		
 		const matrixIn = JSON.parse(localStorage.getItem('matrix'));
-		const playerIdIn = localStorage.getItem("playerId");
+		const playerIdIn    = localStorage.getItem("playerId");
+		const circuitIdIn   = localStorage.getItem("circuitId");
 		const circuitNameIn = localStorage.getItem("circuitName");
 		const creatorTimeIn = localStorage.getItem("creatorTime");
 		const circuitLapsIn = localStorage.getItem("circuitLaps");
 		
 		const dataCircuit = {
 			playerIdIn,
+			circuitIdIn,
 			matrixIn,
 			circuitNameIn,
 			creatorTimeIn,
@@ -258,5 +251,13 @@ window.onunload = () => {
 			});
 	} else {
 		console.error("Error controllerAside : Nothing good");
+	}
+}
+
+
+window.onunload = () => {
+	if (tileChooser !== undefined) {
+		if      (localStorage.getItem('modify') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
+		else if (localStorage.getItem('modify') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 };

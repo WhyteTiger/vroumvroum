@@ -253,7 +253,7 @@ document.querySelector('#playbutton').addEventListener('click', () => {
     location.href = 'playCircuit.html';
 });
 
-document.getElementById('modify-button').addEventListener('click', () => {
+document.getElementById('modify-button').addEventListener('click', (evt) => {
     console.log("modify-button clicked");
     localStorage.setItem("modify", "true");
     document.location.href = 'createCircuit.html';
