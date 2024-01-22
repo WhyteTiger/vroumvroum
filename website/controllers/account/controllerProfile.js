@@ -70,3 +70,33 @@ editPassword.addEventListener('click', () => {
     
     localStorage.setItem("inputField", "");
 });
+
+document.querySelector('#Formulaire a').addEventListener('click', (evt) => {
+    console.log(localStorage.getItem('playerId'));
+    localStorage.setItem('delete', 'false');
+
+    const newAlert = new Alert("Souhaitez-vous supprimer votre compte ?", "Supprimer", "home.html", "delete");
+    newAlert.customAlert();
+
+    if(localStorage.getItem('delete') === 'true') {
+        const dataPwd = {
+            playerIdIn: playerId,
+            newPwdIn:   newPwd
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataPwd)
+        };
+        
+        fetch(API.getURLDeleteAccount, params)
+           .then((response) => response.json())
+           .then((result) => {})
+           .catch((err) => console.error(err));
+
+    }
+
+
+});

@@ -59,6 +59,9 @@ export class Alert{
             case 'save' :
                 this.alertSave(alertCustom, overlay);
                 break;
+            case 'delete' :
+                this.alertDeleteAccount(alertCustom, overlay);
+                break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
         }
@@ -606,5 +609,56 @@ export class Alert{
         });
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
+    }
+
+    alertDeleteAccount(alertCustom, overlay) {
+        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.color = '#ffffff';
+        alertCustom.style.border = '1px solid #d9323';
+
+        const closeButton = document.createElement('button');
+        closeButton.id        = 'closeAlert';
+        closeButton.innerText = 'X';
+        alertCustom.appendChild(closeButton);
+
+        // css :
+        closeButton.style.background = '#0048fd';
+        closeButton.style.color = '#ffffff';
+
+        const pMessage = document.createElement('p');
+        pMessage.innerText = this.message;
+        pMessage.id        = 'pMessage';
+        alertCustom.appendChild(pMessage);
+
+        const actionbutton = document.createElement('button');
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
+
+        // css :
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
+
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+        });
+
+        actionbutton.addEventListener('click', () => {
+
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            
+            localStorage.setItem("delete", "true");
+            document.location.href = this.link;
+        });
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
+
+
+
+
+
+
+
     }
 }
