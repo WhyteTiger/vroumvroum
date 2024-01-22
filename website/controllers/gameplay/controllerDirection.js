@@ -1,5 +1,6 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class ControllerDirection {
-	
 	up;
 	down;
 	left;
@@ -33,28 +34,28 @@ export class ControllerDirection {
 	handleKeyDown(event) {
 		switch (event.key) {
 			case 'ArrowUp':
-				this.up = 1
+				this.up = 1;
 				break;
 			case 'ArrowDown':
-				this.down = 1
+				this.down = 1;
 				break;
 			case 'ArrowLeft':
-				this.left = 1
+				this.left = 1;
 				break;
 			case 'ArrowRight':
-				this.right = 1
+				this.right = 1;
 				break;
 			case 'z':
-				this.up = 1
+				this.up = 1;
 				break;
 			case 's':
-				this.down = 1
+				this.down = 1;
 				break;
 			case 'q':
-				this.left = 1
+				this.left = 1;
 				break;
 			case 'd':
-				this.right = 1
+				this.right = 1;
 				break;
 		}
 	}
@@ -62,28 +63,28 @@ export class ControllerDirection {
 	handleKeyUp(event) {
 		switch (event.key) {
 			case 'ArrowUp':
-				this.up = 0
+				this.up = 0;
 				break;
 			case 'ArrowDown':
-				this.down = 0
+				this.down = 0;
 				break;
 			case 'ArrowLeft':
-				this.left = 0
+				this.left = 0;
 				break;
 			case 'ArrowRight':
-				this.right = 0
+				this.right = 0;
 				break;
 			case 'z':
-				this.up = 0
+				this.up = 0;
 				break;
 			case 's':
-				this.down = 0
+				this.down = 0;
 				break;
 			case 'q':
-				this.left = 0
+				this.left = 0;
 				break;
 			case 'd':
-				this.right = 0
+				this.right = 0;
 				break;
 		}
 	}

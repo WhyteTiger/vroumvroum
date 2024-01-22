@@ -1,5 +1,6 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 const valBar = window.localStorage.barChargement;
-console.log(valBar);
 
 document.addEventListener("DOMContentLoaded", function() {
     const loaderBar = document.getElementById("loaderBar");

@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Tileset} from "./entities/Tileset.js";
 import {Map} from "./entities/Map.js";
 import {ControllerVoiture} from "../controllers/gameplay/controllerVoiture.js";
@@ -7,6 +9,13 @@ import {API} from "./API.js";
 
 let listeButton;
 let vroumCoin;
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/personalizeMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
 
 window.onload = () => {
 	
@@ -39,12 +48,10 @@ window.onload = () => {
 		},
 		body: JSON.stringify(dataPlayer)
 	};
-	console.log(params);
 	
 	fetch(url, params)
 		.then((response) => response.json())
 		.then((dataKarts) => {
-			console.log(dataKarts);
 			
 			const valButtonInit = dataKarts.resultPrice;
 			vroumCoin = dataKarts.vroumCoins;
@@ -201,16 +208,13 @@ window.onload = () => {
 				}
 			}
 		});
-}
+};
 
 window.onunload = () => {
-	console.log("Quittance de la page personalisation");
 	
 	const tabInfo = [];
 	for (let i = 0; i < listeButton.length; i++) {
-		
 		tabInfo.push(listeButton[i].getValue());
-		console.log(listeButton[i].getValue());
 	}
 	
 	const url = API.getURLpostKartsAndCoinsInformationOfPlayerId();
@@ -228,15 +232,15 @@ window.onunload = () => {
 		},
 		body: JSON.stringify(dataKarts)
 	};
-	console.log(params);
 	
 	fetch(url, params)
 		.then((response) => response.json())
 		.then((result) => {
-			if (result.success === "true") {
-				console.log("postKartsAndCoinsInformationOfPlayerId Success");
-			} else {
-				console.log("postKartsAndCoinsInformationOfPlayerId Failed");
+			if (result.success !== "true"){
+				console.error("postKartsAndCoinsInformationOfPlayerId Failed");
 			}
-		});
-}
+		})
+		.catch((err) => {
+			console.error(err);
+		})
+};

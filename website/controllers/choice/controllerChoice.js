@@ -1,9 +1,16 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { API } from "../../models/API.js";
-import { Alert } from "../../models/entities/Alert.js";
 import { Timer } from "../../models/entities/Timer.js";
 
+console.log(localStorage);
 
-console.log(localStorage)
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/hubsMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
 
 
 function fetchPage(nb, nbPages) {
@@ -103,14 +110,13 @@ function fetchPage(nb, nbPages) {
                 .then((response) => response.json())
                 .then((dataCircuit) => {
 
-                    console.log(dataCircuit)
-
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
-                    
-                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    let temp = new Timer().timeToString(dataCircuit.creatorTime);
+                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + temp;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
@@ -246,7 +252,3 @@ document.querySelector('#true button').addEventListener('click', () => {
 });
 
 fetchCircuits();
-
-// Affichage meilleur temps joueur sur circuit
-
-

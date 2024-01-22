@@ -49,7 +49,7 @@ canvas {
 
 /* LEADERBOARD */
 
-#leaderboard-title, #leaderboard-title-2 {
+.leaderboard-title, .leaderboard-title-2 {
     font-family: 'PlayPretend', Arial, Helvetica, sans-serif;
     font-size: 45px;
     text-align: center;
@@ -89,7 +89,6 @@ body {
     background: url("../../../assets/circuitFond1.jpg") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
-    background-color: none;
 }
 
 #items {
@@ -145,9 +144,9 @@ aside div {
     padding: 10px;
 }
 
-aside h1 {
-    font-size: 55px;
-    margin-bottom: 0em;
+aside h2 {
+    font-size: 40px;
+    margin: 00.5em 1px;
 }
 
 aside section {

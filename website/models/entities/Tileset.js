@@ -1,7 +1,8 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Maths} from "../gameplay/Maths.js";
 
 export class Tileset {
-    
     image   = null;
     largeur = null;
     
@@ -15,7 +16,7 @@ export class Tileset {
             this.referenceDuTileset.largeur = this.width / 160;
             if (!this.complete)
                 throw new Error("Erreur de chargement du tileset nommé\"" + tilesetName + "\".");
-        }
+        };
         this.image.src = "../../assets/tilesets/" + tilesetName;
     }
     

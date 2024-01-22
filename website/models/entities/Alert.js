@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 /*
     different types :
         - warning      : lack of vroumCoin, need a connection...
@@ -7,10 +9,10 @@
         - endCircuit   : after the end of the race
         - save         : to save circuit
         - imgProfile   : choice the image of profile
- */
+*/
 
 import { API } from "../API.js";
-import { updateProfileImageInHeader  } from "../../controllers/redirection/controllerHeader.js"
+import { updateProfileImageInHeader  } from "../../controllers/redirection/controllerHeader.js";
 
 window.localStorage.setItem("inputField", "");
 export class Alert{
@@ -25,15 +27,13 @@ export class Alert{
         this.link        = link;
         this.type        = type;
         this.buttonClick = 0;
-        console.log(this.link);
     }
+
     getIsButtonClicked(){
         return this.buttonClick;
     }
 
     customAlert() {
-        //console.log(this.lien);
-        console.log("type = \'"+ this.type +"\'");
 
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
@@ -60,8 +60,7 @@ export class Alert{
                 this.alertSave(alertCustom, overlay);
                 break;
             default:
-                console.log("type = \'"+ this.type +"\'");
-                console.log('Aucun cas ne correspond !');
+                console.error('Aucun cas ne correspond pour Alert !');
         }
 
         alertCustom.style.display = 'block';
@@ -80,11 +79,9 @@ export class Alert{
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
-
-
         // css :
         closeButton.style.background = '#d83232';
-        closeButton.style.color = '#ffffff'
+        closeButton.style.color = '#ffffff';
 
         closeButton.addEventListener('mouseenter', () => {
             closeButton.style.backgroundColor = '#000000';
@@ -118,10 +115,7 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display ='none';
 
-            console.log(actionbutton.innerText);
-            console.log(this.link);
-            if (this.link != null){
-                console.log('changement de page');
+            if (this.link !== null){
                 document.location.href = this.link;
             }
         });
@@ -158,17 +152,14 @@ export class Alert{
         
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
-        console.log("alertInfo start");
     }
 
 
     alertInput(alertCustom, overlay){
-        console.log("alertInput start");
 
         alertCustom.style.background = '#6ea5ef';
         alertCustom.style.color      = '#ffffff';
         alertCustom.style.border     = '1px solid #d9323';
-
 
         const closeButton = document.createElement('button');
         closeButton.id        = 'closeAlert';
@@ -208,21 +199,14 @@ export class Alert{
             overlay.style.display     = 'none';
 
             localStorage.setItem('inputField', inputField.value);
-
-            console.log("actionbutton.innerText : "+ actionbutton.innerText);
-            console.log("this.link : "+ this.link);
-            console.log("inputField.value : "+ inputField.value);
             Alert.updateProfileName(inputField.value);
+
             if (this.link != null){
-                console.log("inputField.value : "+ inputField.value);
-                console.log('changement de page');
                 document.location.href = this.link;
             }
         });
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
-
-        console.log("alertInput start");
     }
 
 
@@ -285,7 +269,6 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
             if (this.link != null){
-                console.log('changement de page');
                 document.location.href = this.link;
             }
         });
@@ -370,7 +353,6 @@ export class Alert{
     }
 
     alertImgProfile(alertCustom, overlay){
-        console.log("alertImgProfile start");
         // css :
         alertCustom.style.background = '#5fdaff';
         alertCustom.style.color      = '#000000';
@@ -400,14 +382,10 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         let selectedCanvas = null;
-
-        console.log("tileSet");
         const tileset = new Image();
         tileset.src = "../../assets/tilesets/circuit.png";
-        console.log("tileset.src : "+ tileset.src);
 
         tileset.onload = () => {
-            console.log("tileset.onload sans onload start");
 
             for (let i = 0; i < 12; i++) {
                 const canvas = document.createElement('canvas');
@@ -432,7 +410,6 @@ export class Alert{
 
             canvas.addEventListener('click', () => {
                 const canvasId = canvas.id;
-                console.log('Canvas cliqué, ID:', canvasId);
 
                     if (selectedCanvas) {
                         selectedCanvas.style.border = 'none';
@@ -468,9 +445,6 @@ export class Alert{
 
                     alertCustom.style.display = 'none';
                     overlay.style.display = 'none';
-
-                    console.log(actionbutton.innerText);
-                    console.log(this.link);
                     if (this.link != null) {
                         console.log('changement de page');
                         document.location.href = this.link;
@@ -481,16 +455,11 @@ export class Alert{
 
                 alertCustom.appendChild(actionbutton);
                 document.body.appendChild(alertCustom);
-
-                console.log("tileset.onload sans onload end");
             }, 200);
         }
-
-        console.log("alertImgProfile end");
     };
 
     static updateProfileImage(imgProfilId) {
-        console.log('img : ' + imgProfilId);
         const tileset = new Image();
         tileset.src = "../../assets/tilesets/circuit.png";
 
@@ -523,12 +492,13 @@ export class Alert{
             },
             body: JSON.stringify(dataPP)
         };
-        console.log(params);
 
         fetch(url, params)
            .then((response) => response.json())
            .then((result) => {
-               console.log(result);
+           })
+           .catch((err) => {
+                console.error(err);
            });
     }
 
@@ -642,11 +612,6 @@ export class Alert{
 
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
-
-            console.log(actionbutton.innerText);
-            console.log(this.link);
-            console.log("circuitNameInput.value : "+ circuitNameInput.value);
-            console.log("circuitLapsInput.value : "+ circuitLapsInput.value);
             
             if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
                 const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
@@ -656,7 +621,6 @@ export class Alert{
                 localStorage.setItem('circuitName', circuitNameInput.value);
                 localStorage.setItem('circuitLaps', circuitLapsInput.value);
                 localStorage.setItem("personal", "true");
-                console.log('changement de page');
                 document.location.href = this.link;
             }
         });

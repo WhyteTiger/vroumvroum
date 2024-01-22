@@ -1,5 +1,6 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class Map {
-    
     tileset = null;
     terrain = null;
     rotate  = null;
@@ -8,7 +9,7 @@ export class Map {
         this.tileset = tileset;
         this.terrain = terrain;
         this.rotate  = rotate;
-    };
+    }
 
     getHauteur () {
         return this.terrain.length;
@@ -47,8 +48,6 @@ export class Map {
         const angle = rotation[0];
         
         for(let j = 0, k = ligne.length; j<k; j++){
-            let y = j*160;
-            
             this.tileset.dessinerTile(ligne[j], context, j*160, 0, angle[j]);
         }
     }
@@ -78,7 +77,6 @@ export class Map {
         if (size === undefined) size = 160;
 
         if (carte.length !== 96 || rotation.length !== 96 || container.querySelectorAll('div').length !== 96) {
-           console.log('error : not 96');
            return -12;
         }
 
