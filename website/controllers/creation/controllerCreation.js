@@ -13,42 +13,108 @@ audio.play();
 
 let tileChooser = new TileChooser();
 
-if (localStorage.getItem('modify') === 'true') {
-	let fetchParams = {
-		circuitIdIn: localStorage.getItem('circuitId')
-	};
-
-	let params = {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(fetchParams)
-	};
-
-	fetch(API.getURLgetCircuitTileById(), params)
-	.then((response) => response.json())
-	.then((data) => {
-
-		let tab = data.tileSet;
-
-		let tempMatrix    = [];
-		let tempTiles     = [];
-		let tempRotations = [];
-
-		for(let i = 0 ; i < tab.circuit.length ; i++) {	// all arrays are the same length
-			for(let j = 0 ; j < tab.circuit[i].length ; j++) {
-				tempTiles.push(tab.circuit[i][j]);
-				tempRotations.push(tab.rotation[i][j]);
-			} 
-		}
-
-		tempMatrix.push(tempTiles);
-		tempMatrix.push(tempRotations);
-
-		tileChooser.setMatrix(tempMatrix);
-		tileChooser.reload();
-
+window.onload = () => {
+	
+	if (localStorage.getItem('modify') === 'true') {
+		let fetchParams = {
+			circuitIdIn: localStorage.getItem('circuitId')
+		};
+		
+		let params = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(fetchParams)
+		};
+		
+		fetch(API.getURLgetCircuitTileById(), params)
+			.then((response) => response.json())
+			.then((data) => {
+				
+				let tab = data.tileSet;
+				
+				let tempMatrix    = [];
+				let tempTiles     = [];
+				let tempRotations = [];
+				
+				for(let i = 0 ; i < tab.circuit.length ; i++) {	// all arrays are the same length
+					for(let j = 0 ; j < tab.circuit[i].length ; j++) {
+						tempTiles.push(tab.circuit[i][j]);
+						tempRotations.push(tab.rotation[i][j]);
+					}
+				}
+				
+				tempMatrix.push(tempTiles);
+				tempMatrix.push(tempRotations);
+				
+				tileChooser.setMatrix(tempMatrix);
+				tileChooser.reload();
+				
+				setTimeout(() => {
+					tileChooser.reload();
+				}, 200);
+				
+				document.querySelector('#buttons-info').addEventListener('click', (evt) => {
+					const buttons = document.querySelectorAll('.chooser');
+					
+					for(let i = 0 ; i < buttons.length ; i++) {
+						// to modify the class
+						if(buttons[i] === evt.target) {
+							buttons[i].classList.add('selected');
+							
+							const sectionList = document.querySelectorAll('section.tile-selector');
+							
+							switch(buttons[i].id) {
+								case 'b1' :
+									sectionList[0].classList.remove('invisible');
+									sectionList[1].classList.add('invisible');
+									sectionList[2].classList.add('invisible');
+									break;
+								case 'b2' :
+									sectionList[0].classList.add('invisible');
+									sectionList[1].classList.remove('invisible');
+									sectionList[2].classList.add('invisible');
+									break;
+								case 'b3' :
+									sectionList[0].classList.add('invisible');
+									sectionList[1].classList.add('invisible');
+									sectionList[2].classList.remove('invisible');
+									break;
+							}
+						}
+						else buttons[i].classList.remove('selected');
+					}
+					
+					// need to de-select every div
+					const divList = document.querySelectorAll('.tile-selector div');
+					for(let i = 0; i < divList.length; i++) {
+						divList[i].classList.remove('selected');
+					}
+				});
+				
+				// eventListener on the circuit divs
+				const cDivs = document.querySelectorAll('#circuit div');
+				for(let i = 0; i < cDivs.length; i++) {
+					cDivs[i].oncontextmenu = () => {return false;};
+					cDivs[i].addEventListener('mousedown', (evt) => {
+						if (evt.button === 2) { // right click listener (rotate)
+							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
+							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
+							localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+						}
+					});
+				}
+				
+				// GESTION DE LA REINITIALISATION
+				document.querySelector('#reinitbutton').addEventListener('click', () => {
+					tileChooser.reset();
+					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+				});
+			})
+			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
+		
+	} else {
 		setTimeout(() => {
 			tileChooser.reload();
 		}, 200);
@@ -99,7 +165,7 @@ if (localStorage.getItem('modify') === 'true') {
 				if (evt.button === 2) { // right click listener (rotate)
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
-					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+					localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 				}
 			});
 		}
@@ -107,76 +173,10 @@ if (localStorage.getItem('modify') === 'true') {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
-			localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
-		});
-	})
-	.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
-	
-} else {
-	setTimeout(() => {
-		tileChooser.reload();
-	}, 200);
-	
-	document.querySelector('#buttons-info').addEventListener('click', (evt) => {
-		const buttons = document.querySelectorAll('.chooser');
-		
-		for(let i = 0 ; i < buttons.length ; i++) {
-			// to modify the class
-			if(buttons[i] === evt.target) {
-				buttons[i].classList.add('selected');
-				
-				const sectionList = document.querySelectorAll('section.tile-selector');
-				
-				switch(buttons[i].id) {
-					case 'b1' :
-						sectionList[0].classList.remove('invisible');
-						sectionList[1].classList.add('invisible');
-						sectionList[2].classList.add('invisible');
-						break;
-					case 'b2' :
-						sectionList[0].classList.add('invisible');
-						sectionList[1].classList.remove('invisible');
-						sectionList[2].classList.add('invisible');
-						break;
-					case 'b3' :
-						sectionList[0].classList.add('invisible');
-						sectionList[1].classList.add('invisible');
-						sectionList[2].classList.remove('invisible');
-						break;
-				}
-			}
-			else buttons[i].classList.remove('selected');
-		}
-		
-		// need to de-select every div
-		const divList = document.querySelectorAll('.tile-selector div');
-		for(let i = 0; i < divList.length; i++) {
-			divList[i].classList.remove('selected');
-		}
-	});
-	
-	// eventListener on the circuit divs
-	const cDivs = document.querySelectorAll('#circuit div');
-	for(let i = 0; i < cDivs.length; i++) {
-		cDivs[i].oncontextmenu = () => {return false;};
-		cDivs[i].addEventListener('mousedown', (evt) => {
-			if (evt.button === 2) { // right click listener (rotate)
-				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
-				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
-			}
+			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 		});
 	}
 	
-	// GESTION DE LA REINITIALISATION
-	document.querySelector('#reinitbutton').addEventListener('click', () => {
-		tileChooser.reset();
-		localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
-	});
-}
-
-window.onload = () => {
-	console.log("PUTE");
 	if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
 		console.log("isChecked === false");
 		
@@ -210,6 +210,8 @@ window.onload = () => {
 		
 		let matrixIn;
 		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixPerso')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		console.log("matrixIn : "+ matrixIn);
+		
 		const playerIdIn    = localStorage.getItem("playerId");
 		const circuitIdIn   = localStorage.getItem("circuitId");
 		const circuitNameIn = localStorage.getItem("circuitName");
@@ -233,12 +235,14 @@ window.onload = () => {
 		};
 		
 		let url;
-		localStorage.getItem("modify") === "false" ? url = API.getURLpostCircuitOfPlayerId() : url = API.getURLmodifyCircuitOfPlayerId();
+		localStorage.getItem("modify") === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
+		console.log("url : "+ url);
 		
 		fetch(url, params)
 			.then((response) => response.json())
 			.then((dataCircuit) => {
 				if (dataCircuit.success === "true") {
+					console.log("circuit sauvegardé");
 					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
 					popUpSuccess.customAlert();
 				} else {
@@ -258,7 +262,6 @@ window.onload = () => {
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		if      (localStorage.getItem('modify') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
-		else if (localStorage.getItem('modify') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 };

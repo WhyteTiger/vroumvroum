@@ -552,17 +552,22 @@ export class Alert{
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
-        //TODO récup le nom du circuit + laps
         const circuitNameInput = document.createElement('input');
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
+        console.log("localStorage.getItem(\"circuitName\") : "+ localStorage.getItem("circuitName"));
+        if (localStorage.getItem("modify") === "true") circuitNameInput.value = localStorage.getItem("circuitName");
+        
         alertCustom.appendChild(circuitNameInput);
 
         const circuitLapsInput = document.createElement('input');
         circuitLapsInput.type        = 'text';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
+        console.log("localStorage.getItem(\"circuitLaps\") : "+ localStorage.getItem("circuitLaps"));
+        if (localStorage.getItem("modify") === "true") circuitLapsInput.value = localStorage.getItem("circuitLaps");
+        
         alertCustom.appendChild(circuitLapsInput);
 
         const actionbutton = document.createElement('button');

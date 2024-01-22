@@ -110,6 +110,9 @@ function fetchPage(nb, nbPages) {
                 fetch(API.getURLgetCircuitInformation(), params)
                 .then((response) => response.json())
                 .then((dataCircuit) => {
+                    
+                    localStorage.setItem("circuitName", dataCircuit.circuitName);
+                    localStorage.setItem("circuitLaps", dataCircuit.circuitLaps);
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
@@ -189,14 +192,14 @@ function fetchCircuits() {
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
     
-        if(nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
+        if (nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
     
         let currentPage = 1;
     
         fetchPage(1, nbPages);
     
         // eventListeners for the page selector, only if there is more than 1 page
-        //if(nbPages > 1) {
+        if(nbPages > 1) {
             document.querySelector('.fa-backward-step').addEventListener('click', () => {    // go back to the 1st page
                 if(currentPage > 1) {
                     currentPage = 1;
@@ -215,7 +218,7 @@ function fetchCircuits() {
                     fetchPage(nbPages, nbPages);
                 }
             });
-       // }
+       }
        
     })
     .catch((error) => console.error(`error : circuits : ${error}`));

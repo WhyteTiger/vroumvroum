@@ -152,7 +152,9 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
       
-      const matrix = JSON.parse(localStorage.getItem("matrix"));
+      let matrix;
+      localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+      
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
