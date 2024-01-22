@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { API } from "../../models/API.js";
 import { Timer } from "../../models/entities/Timer.js";
 
@@ -108,14 +110,13 @@ function fetchPage(nb, nbPages) {
                 .then((response) => response.json())
                 .then((dataCircuit) => {
 
-                    console.log(dataCircuit)
-
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
-                    
-                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    let temp = new Timer().timeToString(dataCircuit.creatorTime);
+                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + temp;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
@@ -251,7 +252,3 @@ document.querySelector('#true button').addEventListener('click', () => {
 });
 
 fetchCircuits();
-
-// Affichage meilleur temps joueur sur circuit
-
-

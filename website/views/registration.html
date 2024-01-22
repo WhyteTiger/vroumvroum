@@ -8,48 +8,47 @@
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
         <link rel="stylesheet" href="styles/alertStyle.css">
-
-        <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script type="module" src="../controllers/account/controllerRegistration.js"></script>
-        <script src="https://unpkg.com/feather-icons"></script>
-        <script type="module" src="../controllers/account/controllerPwd.js"></script>
     </head>
 
     <body>
-    <main id="mainForm">
+        <main id="mainForm">
+            <section id="toutForm">
+                <h1 id="form-title">Inscription au site</h1>
 
-        <section id="toutForm">
-            <h1 id="form-title">Inscription au site</h1>
-
-            <form id="form" action="" method="post">
-                <div class="field">
-                    <label for="nickname">Pseudo souhaité</label>
-                    <input type="text" name="nickname" id="nickname" minlength="2" maxlength="32" required>
-                </div>
-
-                <div class="field">
-                    <label for="pwd">Mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" minlength="12" maxlength="32" required>
-                    <div class="password-icon">
-                        <i data-feather="eye" id="eye"></i>
-                        <i data-feather="eye-off" id="eye-off"></i>
+                <form id="form" action="#" method="post">
+                    <div class="field">
+                        <label for="nickname">Pseudo souhaité</label>
+                        <input type="text" name="nickname" id="nickname" minlength="2" maxlength="32" required>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label for="pwd">Confirmation mot de passe</label>
-                    <input type="password" name="pwd" id="confpwd" minlength="12" maxlength="32" required>
-                    <div class="password-icon">
-                        <i data-feather="eye" id="confeye"></i>
-                        <i data-feather="eye-off" id="confeye-off"></i>
+                    <div class="field">
+                        <label for="pwd">Mot de passe</label>
+                        <input type="password" name="pwd" id="pwd" minlength="12" maxlength="32" required>
+                        <div class="password-icon">
+                            <i data-feather="eye" id="eye"></i>
+                            <i data-feather="eye-off" id="eye-off"></i>
+                        </div>
                     </div>
-                </div>
 
-                <button type="submit" id="validFormRegistration">S'inscrire</button>
-            </form>
+                    <div class="field">
+                        <label for="pwd">Confirmation mot de passe</label>
+                        <input type="password" name="pwd" id="confpwd" minlength="12" maxlength="32" required>
+                        <div class="password-icon">
+                            <i data-feather="eye" id="confeye"></i>
+                            <i data-feather="eye-off" id="confeye-off"></i>
+                        </div>
+                    </div>
 
-            <h2>Vous avez déjà un compte ? <a href="connection.html">Se connecter</a></h2>
-        </section>
-    </main>
+                    <button type="submit" id="validFormRegistration">S'inscrire</button>
+                </form>
+
+                <h2>Vous avez déjà un compte ? <a href="connection.html">Se connecter</a></h2>
+            </section>
+        </main>
+
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/account/controllerRegistration.js"></script>
+        <script type="module" src="../controllers/account/controllerPwd.js"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
     </body>
 </html>

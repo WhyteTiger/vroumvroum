@@ -3,10 +3,8 @@
     width: 100%;
     overflow-x: scroll;
     max-width: 90%;
-    /*border: 1px solid black;*/
     border-radius: 10px;
-
-    margin: 30px auto; /* Ajustez la valeur de la marge pour centrer verticalement */
+    margin: 30px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,12 +14,6 @@ body {
     background: url("../../../assets/circuitFond1.jpg") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
-    /*background-color: #00be63;*/
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0; */
 }
 
 #vroumCoinContainer, #pCoin{
@@ -29,19 +21,7 @@ body {
     display: flex;
     align-items: center;
 }
-/*pour mettre une scrollbar sur le canvas*/
-/*canvas {
-    overflow-x: scroll;
-    max-width: 90%;
-    border: 1px solid black;
-    border-radius: 10px;
 
-    margin: 10% auto; /* Ajustez la valeur de la marge pour centrer verticalement */
-/*display: flex;
-align-items: center;
-justify-content: center;
-}
-*/
 #divCanvas{
     overflow-x: scroll;
     max-width: 80%;
@@ -65,13 +45,12 @@ justify-content: center;
 #buttonsContainer {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px; /* Ajoutez un espacement entre le canvas et les boutons si nécessaire */
+    margin-top: 10px;
 }
 
 #buttonsContainer button {
     display: none;
     padding : 14px;
-
 }
 
 #buttonCarChoisi{
@@ -102,19 +81,16 @@ justify-content: center;
     flex-flow: column;
 }
 
-
 #canvasPiece{
     width: 50px;
     height: auto;
     margin-left: 5px;
-
 }
 
 #canvasPile{
     width: 30px;
     height: auto;
     margin-left: 5px;
-
 }
 
 #vroumCoinDiv{

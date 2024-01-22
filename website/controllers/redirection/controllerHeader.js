@@ -1,3 +1,4 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
 // ajout balises script et link en en-tête
 const head = document.querySelector('head');
@@ -53,27 +54,7 @@ if (isConnected === "false") {
 	profileImg.setAttribute("alt", "profile image");
 	profileImg.id = "profileImg";
 	bigdiv.appendChild(profileImg);
-
-	console.log(localStorage.imgProfilId);
 	updateProfileImageInHeader(localStorage.imgProfilId);
-
-	/*const tileset = new Image();
-	tileset.src = "../../assets/tilesets/circuit.png";
-
-	tileset.onload = function () {
-		const canvas = document.createElement('canvas');
-		const ctx = canvas.getContext('2d');
-		const tileSize = 160;
-
-		const tileX = window.localStorage.imgProfilId * tileSize;
-		const tileY = 4*160;
-
-		canvas.width = 50;
-		canvas.height = 50;
-
-		ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
-		profileImg.src = canvas.toDataURL('image/png');
-	};*/
 
 	const div = document.createElement('div');
 	div.id = 'burger';
@@ -117,7 +98,7 @@ if (isConnected === "false") {
 	});
 
 	window.onclick = (evt) => {
-		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible')
+		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible');
 	};
 
 

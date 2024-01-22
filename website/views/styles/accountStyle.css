@@ -14,7 +14,6 @@ body{
     background: url("../../../assets/circuitFond2.jpg") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
-    background-color: none;
 }
 
 label, p{
@@ -27,19 +26,14 @@ label, p{
 form {
     display: flex;
     flex-direction: column;
-    /*background: linear-gradient(90deg, #7c97f7, #00bf9c);*/
-    /*border-radius: 45px;*/
     margin: 50px auto;
     padding: 20px;
     max-width: 50em;
     text-align: left;
     align-items: center;
-
-    /* source : le générateur de Neumorphism */
-    /*box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;*/
 }
 
-/* Affichage Image profils*/
+/* PROFILE IMAGE DISPLAY */
 
 #labelFile{
     cursor: pointer;

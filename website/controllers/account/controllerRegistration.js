@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {API} from "../../models/API.js";
 import {Alert} from "../../models/entities/Alert.js";
 
@@ -15,14 +17,14 @@ async function wantToRegistrate(nickname, password) {
 	const data = {
 		nicknameIn: nickname,
 		passwordIn: password
-	}
+	};
 	const params = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data)
-	}
+	};
 	
 	await fetch(url, params)
 		.then((response) => response.json())
@@ -35,7 +37,6 @@ async function wantToRegistrate(nickname, password) {
 				localStorage.username    = data.usernameOut;
 				localStorage.imgProfilId = data.PPIdOut;
 				if(localStorage.getItem("hasATime") !== undefined) {
-					score = 1;
 					let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
 					const dataPlayer = {
 						playerIdIn : data.playerIdOut,
@@ -49,32 +50,28 @@ async function wantToRegistrate(nickname, password) {
 						},
 						body: JSON.stringify(dataPlayer)
 					};
-					console.log(params);
 					
 					fetch(url, params)
 						.then((response) => response.json())
 						.then((dataPlayer) => {
-							console.log(dataPlayer.success);
 						}).catch(() => {
-								console.log("Fetch failed");
+							console.error("Fetch failed");
 						});
 				}
 				document.location.href="../views/home.html";
 			} else {
-				console.log("nickname is already used");
 				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer !", null, "warning");
 				newAlert.customAlert();
 			}
 		})
 		.catch(() => {
-			console.log("Fetch failed");
-		})
+			console.error("Fetch failed");
+		});
 }
 
 const form = document.getElementById("form");
 form.addEventListener('submit', (event) => {
 	event.preventDefault();
-	console.log("form submit\n");
 	
 	const nickname   		 = document.getElementById("nickname").value;
 	const password 		 = document.getElementById("pwd").value;
@@ -84,8 +81,7 @@ form.addEventListener('submit', (event) => {
 		wantToRegistrate(nickname, password);
 		
 	} else {
-		console.log("confpwd is not equal to password");
-		const newAlert = new Alert("Attention, les mots de passe ne sont pas les mêmes !",  "Fermer !", null, "warning");
+		const newAlert = new Alert("Attention, les mots de passe ne sont pas les mêmes !",  "Fermer", null, "warning");
 		newAlert.customAlert();
 	}
 });

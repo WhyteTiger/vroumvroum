@@ -9,7 +9,6 @@
     src: url('fonts/OctoSquares.ttf');
 }
 
-
 /* the main body sticks to the window's frame */
 body {
     margin: 0px;
@@ -17,19 +16,15 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
     background-color: rgb(71, 223, 215);
-}
-
-body {
     background: url("../../../assets/circuitFond2.jpg") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
-    background-color: none;
     font-family: 'OctoSquares', Arial, Helvetica, sans-serif;
 }
 
-/* main page style */
+/* MAIN PAGE */
+
 main {
     justify-content: space-between;
     align-items: center;
@@ -46,9 +41,7 @@ h1 {
     font-size: 70px;
 }
 
-/*
-    STYLE DES BOUTONS
- */
+/* BUTTONS */
 
 button {
     font-family: 'OctoSquares', Arial, Helvetica, sans-serif, serif;
@@ -70,7 +63,6 @@ button {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-
 }
 
 button:not(#choosers button):hover {
@@ -84,10 +76,8 @@ button:active {
     transform: translateY(-1px);
 }
 
+/* LINKS */
 
-/*
- LINKS
-*/
 a, a:visited {
     text-decoration: none;
     color: blue;
@@ -120,7 +110,6 @@ form {
     border-radius: 16px;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid black;
 }
 

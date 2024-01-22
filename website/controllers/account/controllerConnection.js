@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {API} from "../../models/API.js";
 import {Alert} from "../../models/entities/Alert.js";
 
@@ -21,23 +23,19 @@ async function tryToConnect(username, password) {
 	const data = {
 		usernameIn: username,
 		passwordIn: password
-	}
-	console.log(data);
+	};
+
 	const params = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data)
-	}
-	
-	console.log(params);
+	};
 	
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
-			console.log(data.alreadyRegisterOut +" "+ data.rightPasswordOut +" "+ data.playerIdOut +" "+ data.usernameOut +" "+ data.PPIdOut);
 			
 			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			localStorage.rightPassword   = data.rightPasswordOut;
@@ -47,11 +45,8 @@ async function tryToConnect(username, password) {
 			
 			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
 				localStorage.isConnected = true;
-				
 				document.location.href="../views/home.html";
 			} else {
-				console.log("Connection failed");
-				console.log(localStorage.rightPassword && localStorage.rightPassword === "true");
 				if (localStorage.alreadyRegister === "false"){
 					const newAlert = new Alert("Votre pseudo est incorrect !", "Fermer !", null , 'warning');
 					newAlert.customAlert();
@@ -63,18 +58,16 @@ async function tryToConnect(username, password) {
 			}
 		})
 		.catch(() => {
-			console.log("Fetch failed");
-		})
+			console.error("Fetch failed");
+		});
 }
 
 const form = document.getElementById("form");
 form.addEventListener('submit', (event) => {
 	event.preventDefault();
-	console.log("form submit\n");
 	
 	const username = document.getElementById("username").value;
 	const password = document.getElementById("pwd").value;
-	console.log(username+" "+password);
 	
 	tryToConnect(username, password);
 });

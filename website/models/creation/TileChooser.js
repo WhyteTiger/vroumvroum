@@ -1,10 +1,12 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Map} from "../entities/Map.js";
 import {Tileset} from "../entities/Tileset.js";
 
 export class TileChooser {
-	_map
-	_circuit
-	_matrix
+	_map;
+	_circuit;
+	_matrix;
 	
 	constructor() {
 		this._map = new Map(new Tileset("circuit.png"), [[]], [[]]); //PB de chargement au début : pas test de bouger cette ligne
@@ -12,12 +14,10 @@ export class TileChooser {
 	}
 	
 	init(){
-		console.log("TileChooser début init");
-
 		let localStorageMatrix;
 
-		if(localStorage.getItem('personal') === 'true') localStorageMatrix = localStorage.getItem('matrixPerso')
-		else if(localStorage.getItem('personal') === 'false') localStorageMatrix = localStorage.getItem('matrix')
+		if(localStorage.getItem('personal') === 'true') localStorageMatrix = localStorage.getItem('matrixPerso');
+		else if(localStorage.getItem('personal') === 'false') localStorageMatrix = localStorage.getItem('matrix');
 
 		if(localStorageMatrix === null || localStorageMatrix === "null" || localStorageMatrix === undefined || localStorageMatrix === "undefined" || localStorageMatrix === "") {
 			this.newMatrix();
@@ -54,8 +54,6 @@ export class TileChooser {
 		cont3.id = "cont3";
 		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
 		div.appendChild(cont3);
-
-		console.log("TileChooser fin init");
 	}
 	
 	get circuit() {
@@ -85,7 +83,6 @@ export class TileChooser {
 			newMatrix[1].push(0);
 		}
 		this._matrix = newMatrix;
-		console.log(this._matrix);
 	}
 	
 	reset() {
@@ -100,7 +97,6 @@ export class TileChooser {
 		// reload the selectors
 		const div = document.getElementById("choosers");
 		for(let i = 0 ; i < 3 ; i++) {
-			console.log(div.lastChild)
 			div.removeChild(div.lastChild);
 		}
 

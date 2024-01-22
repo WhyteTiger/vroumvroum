@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class ScoreCalculator {
     static checkNumber(number, otherNumber) {
         if (number < otherNumber) {

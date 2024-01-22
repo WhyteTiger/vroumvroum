@@ -3,26 +3,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-    /*background-color: #ff5f5f;
-    color: #ffffff;
-    border: 1px solid #d93232;*/
     font-size: 20px;
-
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-
     flex-direction: column;
     align-items: center;
     text-align: center;
     max-width: 300px;
     min-width: 250px;
-
     z-index: 1001;
-
-
 }
 
 #buttonAlert{
@@ -30,9 +21,8 @@
     font-size: 20px;
     width: auto;
     height: auto;
-    /*background-color: #d93232;
-    color: #ffffff;*/
 }
+
 #buttonAlert:hover {
     background-color: #b82727;
 }
@@ -52,7 +42,6 @@
     font-size: 20px;
     width: auto;
     height: auto;
-
     border-radius: 15px;
 }
 
@@ -62,11 +51,9 @@
     height: 30px;
     font-size: 14px;
     font-weight: bold;
-
     position: absolute;
     top: 10px;
     right:10px;
-
     padding: 0 0 2px 2px;
 }
 

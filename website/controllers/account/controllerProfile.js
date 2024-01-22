@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { Alert } from "../../models/entities/Alert.js";
 import { API }   from "../../models/API.js";
 
@@ -16,7 +18,6 @@ audio.play();
 
 
 pseudo.innerText = localStorage.username;
-const previewImage = document.getElementById('previewImage');
 
 const playerId = localStorage.getItem("playerId");
 
@@ -31,54 +32,24 @@ const params = {
     },
     body: JSON.stringify(dataVroumCoins)
 };
-console.log(params);
+
 fetch(url, params)
    .then((response) => response.json())
    .then((result) => {
-       console.log(result);
-       
        vroumcoin.innerText = result.vroumCoins;
    });
 
 Alert.updateProfileImage(localStorage.imgProfilId);
 
 input.addEventListener('click', () => {
-    console.log(localStorage.imgProfilId);
-
-    const newAlert = new Alert("choisissez une image :", "valider", null, "imgProfile");
+    const newAlert = new Alert("Choisissez une image :", "Valider", null, "imgProfile");
     newAlert.customAlert();
     Alert.updateProfileImage(localStorage.imgProfilId);
-    
 });
 
 editButton.addEventListener('click', () => {
     const newAlert = new Alert("Nouveau pseudo :", "Enregistrer", null, "input");
     newAlert.customAlert();
-    
-    /*const newUsername = localStorage.inputField;
-    console.log("nouveau nom :" + newUsername);*/
-    
-    /*const url         = API.getURLupdatePlayerUsername();
-    const dataUsername = {
-        playerIdIn:    playerId,
-        newUsernameIn: newUsername
-    };
-    const params = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataUsername)
-    };
-    console.log(params);
-    
-    fetch(url, params)
-       .then((response) => response.json())
-       .then((result) => {
-           console.log(result);
-       });
-    
-    localStorage.setItem("username", newUsername);*/
 });
 
 editPassword.addEventListener('click', () => {
@@ -99,13 +70,11 @@ editPassword.addEventListener('click', () => {
         },
         body: JSON.stringify(dataPwd)
     };
-    console.log(params);
     
     fetch(url, params)
        .then((response) => response.json())
-       .then((result) => {
-           console.log(result);
-       });
+       .then((result) => {})
+       .catch((err) => console.error(err));
     
     localStorage.setItem("inputField", "");
 });

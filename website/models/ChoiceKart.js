@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Tileset} from "./entities/Tileset.js";
 import {Map} from "./entities/Map.js";
 import {ControllerVoiture} from "../controllers/gameplay/controllerVoiture.js";
@@ -46,12 +48,10 @@ window.onload = () => {
 		},
 		body: JSON.stringify(dataPlayer)
 	};
-	console.log(params);
 	
 	fetch(url, params)
 		.then((response) => response.json())
 		.then((dataKarts) => {
-			console.log(dataKarts);
 			
 			const valButtonInit = dataKarts.resultPrice;
 			vroumCoin = dataKarts.vroumCoins;
@@ -137,7 +137,7 @@ window.onload = () => {
 						for (let j = 0; j < map.getLargeur(); j++) {
 							const otherContainer        = buttonsContainer.children[j];
 							const otherButton = otherContainer.querySelector('button');
-							console.log(otherButton);
+
 							if (otherButton.id === 'buttonCarChoisi') {
 								otherButton.id 		 = 'buttonCar';
 								otherButton.innerText = 'choisir';
@@ -179,16 +179,13 @@ window.onload = () => {
 				}
 			}
 		});
-}
+};
 
 window.onunload = () => {
-	console.log("Quittance de la page personalisation");
 	
 	const tabInfo = [];
 	for (let i = 0; i < listeButton.length; i++) {
-		
 		tabInfo.push(listeButton[i].getValue());
-		console.log(listeButton[i].getValue());
 	}
 	
 	const url = API.getURLpostKartsAndCoinsInformationOfPlayerId();
@@ -206,15 +203,15 @@ window.onunload = () => {
 		},
 		body: JSON.stringify(dataKarts)
 	};
-	console.log(params);
 	
 	fetch(url, params)
 		.then((response) => response.json())
 		.then((result) => {
-			if (result.success === "true") {
-				console.log("postKartsAndCoinsInformationOfPlayerId Success");
-			} else {
-				console.log("postKartsAndCoinsInformationOfPlayerId Failed");
+			if (result.success !== "true"){
+				console.error("postKartsAndCoinsInformationOfPlayerId Failed");
 			}
-		});
-}
+		})
+		.catch((err) => {
+			console.error(err);
+		})
+};

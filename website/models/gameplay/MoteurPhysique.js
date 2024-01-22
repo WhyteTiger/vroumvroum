@@ -1,4 +1,5 @@
-import {Color} from "../entities/Color.js";
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class MoteurPhysique {
     /**
      * donne si le joueur appuit sur avancer ou pas
@@ -9,11 +10,11 @@ export class MoteurPhysique {
      * Donne si le joueur appuit sur le frein ou pas
      * @private
      */
-    inputFrein
+    inputFrein;
     /**
      * inputDirection -1 = gauche ,0 = toutDroid, 1 = droite
      */
-    inputDirection ;
+    inputDirection;
     /**
      * Orientation du véhicule entre 0 et 360
      * 0 = pointe vers le haut
@@ -22,37 +23,37 @@ export class MoteurPhysique {
      * 270 = pointe vers la gauche
      * @private
      */
-    orientationVehicule ;
+    orientationVehicule;
     
     /**
      * La couleur de la route sous la roue avant gauche
      * @private
      */
-    roueAvantGaucheTypeRoute ;
+    roueAvantGaucheTypeRoute;
     
     /**
      * La couleur de la route sous la roue avant droite
      * @private
      */
-    roueAvantDroiteTypeRoute ;
+    roueAvantDroiteTypeRoute;
     
     
     /**
      * La couleur de la route sous la roue Arriere droite
      * @private
      */
-    roueArriereDroiteTypeRoute ;
+    roueArriereDroiteTypeRoute;
     
-    roueArriereGaucheTypeRoute ;
+    roueArriereGaucheTypeRoute;
     /**
      * La vitessse en pixel par seconde.
      * @private
      */
-    vitesse ;
+    vitesse;
     /**
      * Le nombre de fois ou on va appeler la fonction next par seconde
      */
-    tickRate ;
+    tickRate;
     
     centreVehicule;
     
@@ -188,16 +189,17 @@ export class MoteurPhysique {
             monPoint.setX(monPoint.getX() + Math.cos( (360 - this.orientationVehicule) * Math.PI / 180)*this.vitesse);
             monPoint.setY(monPoint.getY() -  Math.cos((this.orientationVehicule - 270) * Math.PI / 180)*this.vitesse);
         }
-        return monPoint
+        return monPoint;
     }
+  
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
-        //console.log(this.roueArriereDroiteTypeRoute.g +" " + this.roueArriereDroiteTypeRoute.r + " "+ this.roueArriereDroiteTypeRoute.g>=150 && this.roueArriereDroiteTypeRoute.r < 5 )
+
         if(this.roueArriereDroiteTypeRoute[1]>=150 && this.roueArriereDroiteTypeRoute[0] < 5 && this.roueArriereGaucheTypeRoute[1]>=150 && this.roueArriereGaucheTypeRoute[0] < 5&&this.roueAvantDroiteTypeRoute[1]>=150 && this.roueAvantDroiteTypeRoute[0] < 5&&this.roueAvantGaucheTypeRoute[1]>=150 && this.roueAvantGaucheTypeRoute[0] < 5){
             if(this.vitesse >= 3){
-                a = -10/this.tickRate
+                a = -10/this.tickRate;
             }else if(this.vitesse <= -3){
-                a = 10/this.tickRate
+                a = 10/this.tickRate;
             }
         }
         return a;
@@ -247,5 +249,8 @@ export class MoteurPhysique {
             }
         }
         return incrementVitesse;
+    }
+    setTickRate(tickRate){
+        this.tickRate = tickRate;
     }
 }
