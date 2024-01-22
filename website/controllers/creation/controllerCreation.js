@@ -3,6 +3,12 @@
 import { API } from "../../models/API.js";
 import {TileChooser} from "../../models/creation/TileChooser.js";
 
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/createMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
 
 let tileChooser = new TileChooser();
 

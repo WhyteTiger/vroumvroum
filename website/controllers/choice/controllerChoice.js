@@ -3,6 +3,16 @@
 import { API } from "../../models/API.js";
 import { Timer } from "../../models/entities/Timer.js";
 
+console.log(localStorage);
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/hubsMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
+
+
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
