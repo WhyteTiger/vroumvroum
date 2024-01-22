@@ -137,7 +137,7 @@ window.onload = () => {
                         started = 0;
                         
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
-                        popUp.alertStartCircuit(creatorUsername, creatorTime);
+                        popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime));
                         
                         updateCar(); // Appel initial de la fonction updateCar
                      });
@@ -283,7 +283,7 @@ function updateCar() {
    }else if (localStorage.getItem("isConnected") === "false"){
       let monTemps = timer.getElapsedTime();
       timer.stop();
-      let popUpSeConnecter = new Alert("Enregistrer votre temps", "Se connecter", "registration.html" ,"type");
+      let popUpSeConnecter = new Alert("Enregistrer votre temps", "S'inscrire", "registration.html" ,"type");
       localStorage.setItem("hasATime", "true");
       localStorage.setItem("bestTimeNoAccount", monTemps);
       localStorage.setItem("circuitIdNoAccount", window.localStorage.circuitId);

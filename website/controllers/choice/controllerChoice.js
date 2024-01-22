@@ -104,8 +104,9 @@ function fetchPage(nb, nbPages) {
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
-                    
-                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    let temp = new Timer().timeToString(dataCircuit.creatorTime);
+                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + temp;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
