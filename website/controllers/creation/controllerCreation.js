@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { API } from "../../models/API.js";
 import {TileChooser} from "../../models/creation/TileChooser.js";
 
@@ -5,7 +7,6 @@ import {TileChooser} from "../../models/creation/TileChooser.js";
 let tileChooser = new TileChooser();
 
 if (localStorage.getItem('personal') === 'true') {
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 	let fetchParams = {
 		circuitIdIn: localStorage.getItem('circuitId')
 	};
@@ -21,10 +22,6 @@ if (localStorage.getItem('personal') === 'true') {
 	fetch(API.getURLgetCircuitTileById(), params)
 	.then((response) => response.json())
 	.then((data) => {
-		console.log("YIPPEE")
-		console.log(data)
-		console.log(data.tileSet.circuit)
-		console.log(data.tileSet.rotation)
 
 		let tab = data.tileSet;
 
@@ -32,17 +29,12 @@ if (localStorage.getItem('personal') === 'true') {
 		let tempTiles     = [];
 		let tempRotations = [];
 
-		console.log('HAHAHAHHHHAH')
-
 		for(let i = 0 ; i < tab.circuit.length ; i++) {	// all arrays are the same length
 			for(let j = 0 ; j < tab.circuit[i].length ; j++) {
 				tempTiles.push(tab.circuit[i][j]);
 				tempRotations.push(tab.rotation[i][j]);
 			} 
 		}
-
-		console.log(tempTiles)
-		console.log(tempRotations)
 
 		tempMatrix.push(tempTiles);
 		tempMatrix.push(tempRotations);
@@ -108,7 +100,7 @@ if (localStorage.getItem('personal') === 'true') {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
-			localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix))
+			localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 		});
 	})
 	.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
@@ -173,7 +165,7 @@ if (localStorage.getItem('personal') === 'true') {
 	// GESTION DE LA REINITIALISATION
 	document.querySelector('#reinitbutton').addEventListener('click', () => {
 		tileChooser.reset();
-		localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix))
+		localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 	});
 }
 
@@ -183,4 +175,4 @@ window.onunload = () => {
 		if      (localStorage.getItem('personal') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
 		else if (localStorage.getItem('personal') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
-}
+};

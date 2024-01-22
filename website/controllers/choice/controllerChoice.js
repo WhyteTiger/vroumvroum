@@ -1,10 +1,7 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import { API } from "../../models/API.js";
-import { Alert } from "../../models/entities/Alert.js";
 import { Timer } from "../../models/entities/Timer.js";
-
-
-console.log(localStorage)
-
 
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
@@ -102,8 +99,6 @@ function fetchPage(nb, nbPages) {
                 fetch(API.getURLgetCircuitInformation(), params)
                 .then((response) => response.json())
                 .then((dataCircuit) => {
-
-                    console.log(dataCircuit)
 
                     document.getElementById("circuit-name" + filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
@@ -246,7 +241,3 @@ document.querySelector('#true button').addEventListener('click', () => {
 });
 
 fetchCircuits();
-
-// Affichage meilleur temps joueur sur circuit
-
-

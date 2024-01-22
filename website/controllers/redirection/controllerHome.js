@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 import {Alert} from "../../models/entities/Alert.js";
 
 const audio = document.createElement("audio");
@@ -28,8 +30,8 @@ createCircuit.addEventListener("click", () => {
 		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter", "connection.html" , 'warning');
 		newAlert.customAlert();
 	} else {
-		localStorage.setItem("personal", "true");
-		document.location.href = "choiceCircuit.html";
+		localStorage.setItem("personal", "false");
+		document.location.href = "createCircuit.html";
 	}
 });
 

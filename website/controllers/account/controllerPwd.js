@@ -1,3 +1,5 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 feather.replace();
 
 const eyePwd = document.getElementById("eye");
@@ -22,14 +24,18 @@ eyeoffPwd.addEventListener("click", () =>{
     passwordField.type = "password";
 });
 
-eyeConfPwd.addEventListener("click", () => {
-    eyeConfPwd.style.display = "none";
-    eyeConfoffPwd.style.display = "block";
-    passwordConfField.type = "text";
-});
+if(eyeConfPwd) {
+    eyeConfPwd.addEventListener("click", () => {
+        eyeConfPwd.style.display = "none";
+        eyeConfoffPwd.style.display = "block";
+        passwordConfField.type = "text";
+    });
+}
 
-eyeConfoffPwd.addEventListener("click", () =>{
-    eyeConfoffPwd.style.display = "none";
-    eyeConfPwd.style.display = "block";
-    passwordConfField.type = "password";
-});
+if(eyeConfoffPwd) {
+    eyeConfoffPwd.addEventListener("click", () => {
+        eyeConfoffPwd.style.display = "none";
+        eyeConfPwd.style.display = "block";
+        passwordConfField.type = "password";
+    });
+}

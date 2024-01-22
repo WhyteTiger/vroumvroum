@@ -1,63 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Création de circuit - VroumVroum</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Création de circuit - VroumVroum</title>
 
-    <link rel="icon" href="../../assets/logo.png">
-    <link rel="stylesheet" href="styles/generalStyle.css">
-    <link rel="stylesheet" href="styles/canvasStyle.css">
-    <link rel="stylesheet" href="styles/circuitStyle.css">
-    <link rel="stylesheet" href="styles/formStyle.css">
-    <link rel="stylesheet" href="styles/alertStyle.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/canvasStyle.css">
+        <link rel="stylesheet" href="styles/circuitStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
+        <link rel="stylesheet" href="styles/alertStyle.css">
+    </head>
 
-    <script type="module" src="../controllers/redirection/controllerHeader.js" defer></script>
-    <script type="module" src="../controllers/creation/controllerCreation.js" defer></script>
-    <script type="module" src="../controllers/creation/controllerAside.js" defer></script>
-</head>
-
-<body>
-    <main class="circuit-main">
-
-        <section>
-            <section id="circuit"></section>
-
-            <section id="items">
-                <div id="choosers">
-                    <section id="buttons-info">
-                        <button id="b1" class="chooser selected">Tuiles</button>
-                        <button id="b2" class="chooser">Départs / Arrivées</button>
-                        <button id="b3" class="chooser">Checkpoints</button>
-                    </section>
+    <body>
+        <main class="circuit-main">
+            <div>
+                <div id="circuit"></div>
+                <div id="items">
+                    <div id="choosers">
+                        <div id="buttons-info">
+                            <button id="b1" class="chooser selected">Tuiles</button>
+                            <button id="b2" class="chooser">Départs / Arrivées</button>
+                            <button id="b3" class="chooser">Checkpoints</button>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
 
-        </section>
+            <aside>
+                <section>
+                    <h2>Bienvenue dans le créateur de circuits !</h2>
+                    <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
+                    <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
+                    <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>
+                </section>
 
-        <aside>
-            <section>
-                <h2>Bienvenue dans le créateur de circuits !</h2>
-                <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
-                <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
-                <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>
-            </section>
+                <section>
+                    <h2>SAUVEGARDE</h2>
+                    <div>
+                        <label for="savebutton">Sauvegarder le circuit ?</label>
+                        <button id="savebutton">SAUVEGARDER</button>
+                    </div>
 
-            <section>
-                <h1>SAUVEGARDE</h1>
-                <div>
-                    <label for="savebutton">Sauvegarder le circuit ?</label>
-                    <button id="savebutton">SAUVEGARDER</button>
-                </div>
-
-                <div>
-                    <label>Effacer le circuit ?</label>
-                    <button id="reinitbutton">EFFACER</button>
-                </div>
-
-            </section>
-            
-        </aside>
-            
-    </main>
-</body>
+                    <div>
+                        <label>Effacer le circuit ?</label>
+                        <button id="reinitbutton">EFFACER</button>
+                    </div>
+                </section>
+            </aside>
+        </main>
+        
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/creation/controllerCreation.js"></script>
+        <script type="module" src="../controllers/creation/controllerAside.js"></script>
+    </body>
 </html>
