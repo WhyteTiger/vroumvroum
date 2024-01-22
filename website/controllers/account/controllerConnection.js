@@ -8,6 +8,13 @@ window.localStorage.setItem("playerId", 	 	  "0");
 window.localStorage.setItem("username", 	 	  "");
 window.localStorage.setItem("imgProfilId", 	  "");
 
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/connectionMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
+
 async function tryToConnect(username, password) {
 	
 	const url = API.getURLTryToConnect();
