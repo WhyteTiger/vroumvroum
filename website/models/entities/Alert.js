@@ -552,6 +552,7 @@ export class Alert{
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
+        //TODO récup le nom du circuit + laps
         const circuitNameInput = document.createElement('input');
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';

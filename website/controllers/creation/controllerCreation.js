@@ -185,8 +185,7 @@ window.onload = () => {
 			let circuitIsValid = "false";
 			
 			let matrix;
-			if (localStorage.getItem('modify') === 'true') matrix = JSON.parse(localStorage.getItem('matrixPerso'));
-			else matrix = JSON.parse(localStorage.getItem('matrix'));
+			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 			
 			const len = matrix[0].length;
 			for (let i = 0; i < len; i++) {
@@ -196,7 +195,8 @@ window.onload = () => {
 				}
 			}
 			if (circuitIsValid === "true") {
-				localStorage.setItem("matrix", JSON.stringify(matrix));
+				localStorage.getItem('modify') === 'true' ? localStorage.setItem('matrixPerso', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
+				
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
 			} else {
@@ -208,7 +208,8 @@ window.onload = () => {
 	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
 		console.log("isChecked === true");
 		
-		const matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		let matrixIn;
+		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixPerso')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
 		const playerIdIn    = localStorage.getItem("playerId");
 		const circuitIdIn   = localStorage.getItem("circuitId");
 		const circuitNameIn = localStorage.getItem("circuitName");
