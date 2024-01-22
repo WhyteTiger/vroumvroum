@@ -176,9 +176,16 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const inputField = document.createElement('input');
-        inputField.type        = 'text';
+
+        if(this.message !== "Nouveau mot de passe :") {
+            inputField.type = 'text';
+            inputField.placeholder = 'Entrez du texte...';
+        } else {
+            inputField.type = 'password';
+            inputField.placeholder = '';
+        }
+
         inputField.className   = 'inputField';
-        inputField.placeholder = 'Entrez du texte...';
         alertCustom.appendChild(inputField);
 
         const actionbutton = document.createElement('button');

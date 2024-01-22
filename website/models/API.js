@@ -37,10 +37,11 @@ export class API {
 
       return 'http://'+API.server+'/gameplay/addVroumCoinToPlayerId';
    }
+   
    static getURLBestScoreAndNote() {
-         return 'http://'+API.server+'/gameplay/getBestScoreAndNote';
-      }
-
+         
+      return 'http://'+API.server+'/gameplay/getBestScoreAndNote';
+   }
 
    static getURLgetKartsAndCoinsByPlayerId() {
       
@@ -85,6 +86,11 @@ export class API {
    static getURLDeleteCircuit() {
 
       return 'http://'+API.server+'/hubs/deleteCircuit';
+   }
+
+   static getURLDeleteAccount() {
+
+      return 'http://'+API.server+'/connection/tryToDeleteCircuit';
    }
 }
 
