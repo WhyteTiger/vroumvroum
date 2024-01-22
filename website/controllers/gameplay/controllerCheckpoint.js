@@ -157,8 +157,10 @@ export class ControllerCheckpoint {
                 return 90;
             } else if(temp === 90) {
                 return 180;
+            }else if( temp === 180){
+                return 270
             } else {
-                return this.circuit.getRotate()[tuile[0]][tuile[1]]-180;
+                return this.circuit.getRotate()[tuile[0]][tuile[1]]-270;
             }
         }
 
