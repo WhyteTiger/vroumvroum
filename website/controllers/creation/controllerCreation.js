@@ -3,7 +3,6 @@
 import { API } from "../../models/API.js";
 import {TileChooser} from "../../models/creation/TileChooser.js";
 
-
 let tileChooser = new TileChooser();
 
 if (localStorage.getItem('personal') === 'true') {

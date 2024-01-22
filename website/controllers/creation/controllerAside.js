@@ -67,7 +67,7 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 			const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 			popUp.customAlert();
 		} else {
-			const popUp = new Alert("Votre circuit n'est pas valid, veuillez metre au moins un départ/arrivé", "OK", "", 'warning');
+			const popUp = new Alert("Votre circuit n'est pas valide, veuillez metre au moins un départ / une arrivée", "OK", "", 'warning');
 			popUp.customAlert();
 		}
 	});
@@ -99,7 +99,7 @@ if (document.querySelector('#savebutton') === null) {    // means we're on the c
 		.then((response) => response.json())
 		.then((dataCircuit) => {
 			if (dataCircuit.success === "true") {
-				const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
+				const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé.", "OK", "", 'info');
 				popUpSuccess.customAlert();
 			} else {
 				console.error("saved error");

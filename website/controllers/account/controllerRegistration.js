@@ -52,7 +52,7 @@ async function wantToRegistrate(nickname, password) {
 				}
 				document.location.href="../views/home.html";
 			} else {
-				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer !", null, "warning");
+				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer", null, "warning");
 				newAlert.customAlert();
 			}
 		})

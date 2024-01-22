@@ -553,13 +553,17 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const circuitNameInput = document.createElement('input');
+        circuitNameInput.setAttribute('maxlength', '15');
+        circuitNameInput.setAttribute('minlength', '1');
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
         alertCustom.appendChild(circuitNameInput);
 
         const circuitLapsInput = document.createElement('input');
-        circuitLapsInput.type        = 'text';
+        circuitLapsInput.setAttribute('min', '1');
+        circuitLapsInput.setAttribute('max', '9');
+        circuitLapsInput.type        = 'number';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
         alertCustom.appendChild(circuitLapsInput);
@@ -583,7 +587,7 @@ export class Alert{
             overlay.style.display     = 'none';
             
             if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
-                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
+                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième.", "OK", "", "warning");
                 errorAlert.customAlert();
                 
             } else {
