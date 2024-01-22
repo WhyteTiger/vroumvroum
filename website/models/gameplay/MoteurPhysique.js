@@ -250,4 +250,7 @@ export class MoteurPhysique {
         }
         return incrementVitesse;
     }
+    setTickRate(tickRate){
+        this.tickRate = tickRate;
+    }
 }
