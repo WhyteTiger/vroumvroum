@@ -188,8 +188,7 @@ function fetchCircuits() {
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
     
-        // à décommenter plus tard
-        //if(nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
+        if(nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
     
         let currentPage = 1;
     
@@ -242,12 +241,8 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-document.getElementById('modify-button').addEventListener('click', () => {
-    document.location.href = 'createCircuit.html';
-});
-
 document.querySelector('#true button').addEventListener('click', () => {
-    localStorage.setItem("personal", "false");
+    localStorage.setItem("modify", "false");
     document.location.href = "createCircuit.html";
 });
 

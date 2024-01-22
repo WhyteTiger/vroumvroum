@@ -12,7 +12,7 @@ audio.play();
 
 let tileChooser = new TileChooser();
 
-if (localStorage.getItem('personal') === 'true') {
+if (localStorage.getItem('modify') === 'true') {
 	let fetchParams = {
 		circuitIdIn: localStorage.getItem('circuitId')
 	};
@@ -178,7 +178,7 @@ if (localStorage.getItem('personal') === 'true') {
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		if      (localStorage.getItem('personal') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
-		else if (localStorage.getItem('personal') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		if      (localStorage.getItem('modify') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
+		else if (localStorage.getItem('modify') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 };

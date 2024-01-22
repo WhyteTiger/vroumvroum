@@ -30,8 +30,8 @@ createCircuit.addEventListener("click", () => {
 		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter", "connection.html" , 'warning');
 		newAlert.customAlert();
 	} else {
-		localStorage.setItem("personal", "false");
-		document.location.href = "createCircuit.html";
+		localStorage.setItem("personal", "true");
+		document.location.href = "choiceCircuit.html";
 	}
 });
 
