@@ -20,7 +20,7 @@ function fetchPage(nb, nbPages) {
     document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
 
     // for further classes
-    let filter = localStorage.getItem("modify") === "true" ? "-2" : "";
+    let filter = localStorage.getItem("personal") === "true" ? "-2" : "";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('name-filter').value;
@@ -31,14 +31,14 @@ function fetchPage(nb, nbPages) {
     let fetchParams;
 
     // fetch the circuits
-    if(localStorage.getItem("personal") === "false") {
+    if (localStorage.getItem("personal") === "false") {
         fetchParams = {
             personnalCircuitIn: "false",
             pageNumberIn:      nb,
             circuitNameIn:     circuitFilterValue,
             creatorUsernameIn: creatorFilterValue
         };
-    } else if(localStorage.getItem("personal") === "true") {
+    } else if (localStorage.getItem("personal") === "true") {
         fetchParams = {
             personnalCircuitIn: "true",
             playerIdIn: +localStorage.getItem("playerId"),
@@ -62,10 +62,10 @@ function fetchPage(nb, nbPages) {
         const boxZone = document.querySelector('#circuits');
 
         // delete the boxes
-        while(boxZone.firstChild) boxZone.removeChild(boxZone.firstChild);
+        while (boxZone.firstChild) boxZone.removeChild(boxZone.firstChild);
 
         // let's create the boxes
-        for(let i = 0; i < circuits.length; i++) {
+        for (let i = 0; i < circuits.length; i++) {
             const box = document.createElement('div');
             box.classList.add('circuit-box');
             document.querySelector('#circuits').appendChild(box);
@@ -90,7 +90,7 @@ function fetchPage(nb, nbPages) {
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;
-
+                
                 document.querySelector('#empty' + filter).classList.add('invisible');
                 document.querySelector('#full' + filter).classList.remove('invisible');
                 
@@ -104,7 +104,6 @@ function fetchPage(nb, nbPages) {
                     },
                     body: JSON.stringify(fetchParams)
                 };
-
 
 
                 fetch(API.getURLgetCircuitInformation(), params)
@@ -131,7 +130,7 @@ function fetchPage(nb, nbPages) {
                         for (let i = 0; i < 5; i++) {
                             
                             if (leaderBoard[2*i] !== undefined) {
-                                const leaderboardPlayer = document.getElementById("leaderboard-players");
+                                const leaderboardPlayer = document.getElementById("leaderboard-players" + filter);
                                 const player = document.createElement("p");
                                 let time = new Timer();
                                 player.innerText = leaderBoard[2*i] + " : " + time.timeToString(leaderBoard[2*i+1]);
@@ -248,10 +247,11 @@ document.getElementById('creator-filter').addEventListener('keydown', () => {
 // boutton créer nouveau circuit
 document.querySelector('#true button').addEventListener('click', () => {
     localStorage.setItem("modify", "false");
-    document.location.href = "createCircuit.html";
+    location.href = "createCircuit.html";
 });
 
 document.querySelector('#playbutton').addEventListener('click', () => {
+    localStorage.setItem("play", "true");
     localStorage.setItem("personal", "false");
     location.href = 'playCircuit.html';
 });
@@ -259,12 +259,12 @@ document.querySelector('#playbutton').addEventListener('click', () => {
 document.getElementById('modify-button').addEventListener('click', (evt) => {
     console.log("modify-button clicked");
     localStorage.setItem("modify", "true");
-    document.location.href = 'createCircuit.html';
+    location.href = 'createCircuit.html';
 });
 document.querySelector('#play-button').addEventListener('click', () => {
-    console.log("#play-button clicked");
+    localStorage.setItem("play", "false");
     localStorage.setItem("personal", "false");
-    document.location.href = 'playCircuit.html';
+    location.href = 'playCircuit.html';
 });
 
 document.getElementById('delete-button').addEventListener('click', () => {
@@ -291,7 +291,6 @@ document.getElementById('delete-button').addEventListener('click', () => {
                console.error("deletion error");
            }
        });
-    
 });
 
 fetchCircuits();

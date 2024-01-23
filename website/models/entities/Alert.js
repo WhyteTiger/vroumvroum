@@ -257,10 +257,14 @@ export class Alert{
         // css :
         actionbutton.style.background = '#414141';
         actionbutton.style.color      = '#ffffff';
+        
+        //Pour renvoyer sur le "bon" choiceCircuit, en fonction d'où l'on vient
+        localStorage.getItem("play") === "true" ? localStorage.setItem("personal", "false") : localStorage.setItem("personal", "true");
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            
             document.location.href = "choiceCircuit.html";
         });
 
