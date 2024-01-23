@@ -16,7 +16,7 @@ body{
     background-size: cover;
 }
 
-label, p{
+label, .pAccount{
     color: #000000;
     font-weight: bold;
     font-size: 30px;

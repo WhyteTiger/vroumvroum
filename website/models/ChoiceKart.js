@@ -69,13 +69,13 @@ window.onload = () => {
 			}
 			listeButton = creationButton();
 			
-			const canvas = document.getElementById('canvasChoix');
+			/*const canvas = document.getElementById('canvasChoix');
 			const ctx = canvas.getContext('2d');
 			
 			canvas.width  = map.getLargeur()*160;
 			canvas.height = map.getHauteur()*160;
 			
-			map.dessinerKart(ctx, carte, rotation);
+			map.dessinerKart(ctx, carte, rotation);*/
 			
 			const vroumCoinContainer = document.getElementById('vroumCoinContainer');
 			const vroumCoinDiv 		= document.getElementById('vroumCoinDiv');
@@ -103,79 +103,108 @@ window.onload = () => {
 			const buttonsContainer = document.getElementById('buttonsContainer');
 			
 			let chosenButtonIndex = null;
-			
-			for (let i = 0; i < map.getLargeur(); i++) {
-				const container  = document.createElement('div');
-				container.id ='divChoixCar';
-				const button  = document.createElement('button');
-				const prix = document.createElement('p');
-				prix.id = 'pCoin';
-				if (listeButton[i].getValue() === -1){
-					button.id 		  = 'buttonCarChoisi';
-					button.innerText = 'utilise';
-				}
-				if (listeButton[i].getValue() === 0){
-					button.id 		  = 'buttonCar';
-					button.innerText = 'choisir';
-					
-				}
-				if (listeButton[i].getValue() > 0 ){
-					button.id 		  = 'buttonCarAchat';
-					button.innerText = 'Acheter';
-					prix.innerText   = listeButton[i].getValue();
-					const coin = new Coin('../../assets/tilesets/circuit.png', pileVroum, rotationVroum);
-					coin.dessinerPiece(prix);
-				}
-				
-				button.onclick = () => {
-					if(button.id === 'buttonCarChoisi'){
-						return;
-					}
-					
-					if(button.id === 'buttonCar'){
-						//mise a jour des bouton utilise en choisir
-						for (let j = 0; j < map.getLargeur(); j++) {
-							const otherContainer        = buttonsContainer.children[j];
-							const otherButton = otherContainer.querySelector('button');
 
-							if (otherButton.id === 'buttonCarChoisi') {
-								otherButton.id 		 = 'buttonCar';
-								otherButton.innerText = 'choisir';
-								listeButton[j].setValue(0);
+			const tileset = new Image();
+			tileset.src = "../../assets/tilesets/circuit.png";
+			console.log("tileset.src : "+ tileset.src);
+
+			tileset.onload = () => {
+				console.log("tileset.onload sans onload start");
+
+				for (let i = 0; i < map.getLargeur(); i++) {
+					const canvas = document.createElement('canvas');
+					canvas.width = 160//map.getLargeur()*160;
+					canvas.height = 160//map.getHauteur()*160;
+					//canvas.style.marginLeft = '2px';
+
+					const ctx = canvas.getContext('2d');
+
+					canvas.id = "canvasVoiture";
+					const tileSize = 160;
+					//const rotation = 0;
+
+					const tileX = i * tileSize;
+					const tileY = 3 * 160;
+
+					ctx.save();
+					ctx.translate(0, 0);
+					ctx.rotate(/*rotation[0][i]*/270 * Math.PI / 180);
+					ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, -160, 0, canvas.width, canvas.height);
+					ctx.restore();
+					const container  = document.createElement('div');
+					container.id ='divChoixCar';
+					const button  = document.createElement('button');
+					const prix = document.createElement('p');
+					prix.id = 'pCoin';
+					if (listeButton[i].getValue() === -1){
+						button.id 		  = 'buttonCarChoisi';
+						button.innerText = 'utilise';
+					}
+					if (listeButton[i].getValue() === 0){
+						button.id 		  = 'buttonCar';
+						button.innerText = 'choisir';
+
+					}
+					if (listeButton[i].getValue() > 0 ){
+						button.id 		  = 'buttonCarAchat';
+						button.innerText = 'Acheter';
+						prix.innerText   = listeButton[i].getValue();
+						const coin = new Coin('../../assets/tilesets/circuit.png', pileVroum, rotationVroum);
+						coin.dessinerPiece(prix);
+					}
+
+					button.onclick = () => {
+						if(button.id === 'buttonCarChoisi'){
+							return;
+						}
+
+						if(button.id === 'buttonCar'){
+							//mise a jour des bouton utilise en choisir
+							for (let j = 0; j < map.getLargeur(); j++) {
+								const otherContainer        = buttonsContainer.children[j];
+								const otherButton = otherContainer.querySelector('button');
+								console.log(otherButton);
+								if (otherButton.id === 'buttonCarChoisi') {
+									otherButton.id 		 = 'buttonCar';
+									otherButton.innerText = 'choisir';
+									listeButton[j].setValue(0);
+								}
+							}
+							button.id 		   = 'buttonCarChoisi';
+							button.innerText  = 'utilise';
+							chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
+							listeButton[i].setValue(-1);
+						}
+
+						let result = 0;
+
+						if (button.id === "buttonCarAchat"){
+							const controller = new ControllerVoiture(listeButton[i].getValue(), vroumCoin);
+							result = controller.buttonPress();
+							// suprime le prix une fois la voiture achetée !
+
+							// Mise à jour du texte du bouton et de la quantité de vroumCoin
+							if (result === 1) {
+								button.id 		  = 'buttonCar';
+								button.innerText = 'choisir';
+								vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
+								updateVroumCoin();
+								prix.innerText="";
+								//prix.remove();
+								listeButton[i].setValue(0);
 							}
 						}
-						button.id 		   = 'buttonCarChoisi';
-						button.innerText  = 'utilise';
-						chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
-						listeButton[i].setValue(-1);
+					};
+					container.appendChild(canvas);
+					container.appendChild(button);
+					container.appendChild(prix);
+					buttonsContainer.appendChild(container);
+
+					if (map.isImagePresent(i)) {
+						button.style.display = 'block';
+					} else {
+						button.style.display = 'none';
 					}
-					
-					let result = 0;
-					
-					if (button.id === "buttonCarAchat"){
-						const controller = new ControllerVoiture(listeButton[i].getValue(), vroumCoin);
-						result = controller.buttonPress();
-						// suprime le prix une fois la voiture achetée !
-						
-						// Mise à jour du texte du bouton et de la quantité de vroumCoin
-						if (result === 1) {
-							button.id 		  = 'buttonCar';
-							button.innerText = 'choisir';
-							vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
-							updateVroumCoin();
-							prix.remove();
-							listeButton[i].setValue(0);
-						}
-					}
-				};
-				
-				container.appendChild(button);
-				container.appendChild(prix);
-				buttonsContainer.appendChild(container);
-				if (map.isImagePresent(i)) {
-					button.style.display = 'block';
-				} else {
-					button.style.display = 'none';
 				}
 			}
 		});

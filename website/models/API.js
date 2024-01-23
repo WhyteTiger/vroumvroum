@@ -91,5 +91,7 @@ export class API {
 
       return 'http://'+API.server+'/hubs/deleteCircuit';
    }
+
+   static getURL
 }
 

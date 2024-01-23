@@ -60,6 +60,7 @@ header a:not(#burger a) {
     position: relative;
     float: left;
     cursor: pointer;
+    margin-top: 2px;
 }
 
 #burger {

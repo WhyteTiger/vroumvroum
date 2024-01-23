@@ -23,6 +23,7 @@ body {
 }
 
 #divCanvas{
+    display: flex;
     overflow-x: scroll;
     max-width: 80%;
     border-radius: 10px;
@@ -78,7 +79,11 @@ body {
 #divChoixCar{
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-flow: column;
+    margin-top: 10px;
+
+    max-width: 160px;
 }
 
 #canvasPiece{
@@ -97,4 +102,13 @@ body {
     padding: 2px;
     border: solid 2px black;
     background-color: #A8D132;
+}
+
+#pCoin{
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+#canvasVoiture{
+    margin: 0;
 }
