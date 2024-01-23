@@ -68,8 +68,16 @@ export class MoteurPhysique {
         this.centreVehicule      = centreVehicule;
         this.tickRate            = tickRate;
         this.orientationVehicule = orientationVehicule;
-        this.setup();
+        this.inputAcceleration = 0;
+        this.inputFrein        = 0;
+        this.inputDirection    = 0;
+        this.vitesse           = 0;
+        this.roueArriereDroiteTypeRoute = [54,54,54];
+        this.roueArriereGaucheTypeRoute = [54,54,54];
+        this.roueAvantDroiteTypeRoute   = [54,54,54];
+        this.roueAvantGaucheTypeRoute   = [54,54,54];
     }
+    
     setup(){
         this.inputAcceleration = 0;
         this.inputFrein        = 0;
@@ -103,7 +111,9 @@ export class MoteurPhysique {
         this.inputDirection             = inputDirection;
         
         this.vitesse = this.accelerationCalculTypeRoute() + this.vitesse;
+        
         this.centreVehicule = this.forwardOnePoint(this.centreVehicule);
+        
         this.rotate();
     }
     
@@ -154,47 +164,43 @@ export class MoteurPhysique {
     }
     
     forwardOnePoint(monPoint){
+        let i = 0; 
+        
         if(this.orientationVehicule === 90){
             monPoint.setY(monPoint.getY() + this.vitesse);
-        }
-        
-        if(this.orientationVehicule === 0){
+            
+        } else if(this.orientationVehicule === 0){
             monPoint.setX(monPoint.getX() + this.vitesse);
-        }
-        
-        if(this.orientationVehicule === 270 ){
+            
+        } else if(this.orientationVehicule === 270 ){
             monPoint.setY(monPoint.getY() - this.vitesse);
-        }
-        
-        if(this.orientationVehicule === 180){
+            
+        }else if(this.orientationVehicule === 180){
             monPoint.setX(monPoint.getX() - this.vitesse);
-        }
-        
-        if(this.orientationVehicule > 0 && this.orientationVehicule < 90 ){
+            
+        }else if(this.orientationVehicule > 0 && this.orientationVehicule < 90 ){
             monPoint.setX(monPoint.getX() + Math.cos( this.orientationVehicule* Math.PI / 180)*this.vitesse);
             monPoint.setY(monPoint.getY() + Math.cos((90 - this.orientationVehicule) * Math.PI / 180)*this.vitesse);
-        }
-        
-        if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
+            
+        }else if(this.orientationVehicule > 90 && this.orientationVehicule < 180){
             monPoint.setX(monPoint.getX() - Math.cos((180 - this.orientationVehicule ) * Math.PI / 180)*this.vitesse);
             monPoint.setY(monPoint.getY() + Math.cos((this.orientationVehicule - 90)  * Math.PI / 180)*this.vitesse);
-        }
-        
-        if(this.orientationVehicule > 180 && this.orientationVehicule < 270){
+            
+        }else if(this.orientationVehicule > 180 && this.orientationVehicule < 270){
             monPoint.setX(monPoint.getX() - Math.cos((this.orientationVehicule - 180) * Math.PI / 180)*this.vitesse);
             monPoint.setY(monPoint.getY() - Math.cos( (270 - this.orientationVehicule) * Math.PI / 180)*this.vitesse);
-        }
-        
-        if(this.orientationVehicule > 270 && this.orientationVehicule < 360) {
+            
+        }else if(this.orientationVehicule > 270 && this.orientationVehicule < 360) {
             monPoint.setX(monPoint.getX() + Math.cos( (360 - this.orientationVehicule) * Math.PI / 180)*this.vitesse);
             monPoint.setY(monPoint.getY() -  Math.cos((this.orientationVehicule - 270) * Math.PI / 180)*this.vitesse);
+            
         }
+        
         return monPoint;
     }
   
     accelerationCalculTypeRoute(){
         let a = this.fonctionAcceleration();
-
         if(this.roueArriereDroiteTypeRoute[1]>=150 && this.roueArriereDroiteTypeRoute[0] < 5 && this.roueArriereGaucheTypeRoute[1]>=150 && this.roueArriereGaucheTypeRoute[0] < 5&&this.roueAvantDroiteTypeRoute[1]>=150 && this.roueAvantDroiteTypeRoute[0] < 5&&this.roueAvantGaucheTypeRoute[1]>=150 && this.roueAvantGaucheTypeRoute[0] < 5){
             if(this.vitesse >= 3){
                 a = -10/this.tickRate;
