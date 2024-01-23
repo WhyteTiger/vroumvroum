@@ -42,10 +42,21 @@ async function tryToConnect(username, password) {
 			localStorage.playerId 		  = data.playerIdOut;
 			localStorage.username 		  = data.usernameOut;
 			localStorage.imgProfilId     = data.PPIdOut;
+			localStorage.banne		= data.isBanned;
+
+			console.log(localStorage.banne);
 			
 			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
-				localStorage.isConnected = true;
-				document.location.href="../views/home.html";
+				console.log(localStorage.banne);
+				if(localStorage.banne === '1') {
+					const newAlert = new Alert("Vous ne pouvez plus accéder à ce compte !", "Fermer !", null, "warning");
+					newAlert.customAlert();
+					console.log('kajfdgnfsg');
+				}else {
+					localStorage.isConnected = true;
+					document.location.href = "../views/home.html";
+					console.log('kajfdgnfsg');
+				}
 			} else {
 				if (localStorage.alreadyRegister === "false"){
 					const newAlert = new Alert("Votre pseudo est incorrect !", "Fermer !", null , 'warning');

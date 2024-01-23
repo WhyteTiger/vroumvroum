@@ -9,6 +9,7 @@
         - endCircuit   : after the end of the race
         - save         : to save circuit
         - imgProfile   : choice the image of profile
+        - suppr        : to delete an account
 */
 
 import { API } from "../API.js";
@@ -58,6 +59,9 @@ export class Alert{
                 break;
             case 'save' :
                 this.alertSave(alertCustom, overlay);
+                break;
+            case 'suppr' :
+                this.alertSuppr(alertCustom, overlay);
                 break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
@@ -624,6 +628,65 @@ export class Alert{
                 document.location.href = this.link;
             }
         });
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
+    }
+
+
+    alertSuppr(alertCustom, overlay){
+        // css :
+        alertCustom.style.background = '#ff5f5f';
+        alertCustom.style.color = '#ffffff';
+        alertCustom.style.border = '1px solid #d9323';
+
+        const closeButton = document.createElement('button');
+        closeButton.id = 'closeAlert';
+        closeButton.innerText = 'X';
+        alertCustom.appendChild(closeButton);
+
+        // css :
+        closeButton.style.background = '#d83232';
+        closeButton.style.color = '#ffffff';
+
+        closeButton.addEventListener('mouseenter', () => {
+            closeButton.style.backgroundColor = '#000000';
+        });
+
+        closeButton.addEventListener('mouseleave', () => {
+
+            closeButton.style.backgroundColor = '#d83232'; // ou une autre couleur si nécessaire
+        });
+
+        const pMessage = document.createElement('p');
+        pMessage.innerText = this.message;
+        pMessage.id = 'pMessage';
+        alertCustom.appendChild(pMessage);
+
+        const actionbutton = document.createElement('button');
+        actionbutton.id = 'buttonAlert';
+        actionbutton.innerHTML = this.labelButton;
+
+        // css :
+        actionbutton.style.background = '#d93232';
+        actionbutton.style.color = '#ffffff';
+
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display ='none';
+        });
+
+        actionbutton.addEventListener('click', () => {
+
+            alertCustom.style.display = 'none';
+            overlay.style.display ='none';
+
+            console.log('suppression du compte');
+
+            if (this.link !== null){
+                document.location.href = this.link;
+            }
+        });
+
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
     }

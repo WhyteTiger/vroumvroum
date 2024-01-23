@@ -8,6 +8,7 @@ const editButton   = document.getElementById('editButton');
 const editPassword = document.getElementById('editPassword');
 const vroumcoin    = document.getElementById('vroumcoin');
 const pseudo       = document.getElementById('pseudo');
+const deleteAccount = document.getElementById('deleteAccount');
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/accountMusic.mp3";
@@ -57,26 +58,9 @@ editPassword.addEventListener('click', () => {
     window.localStorage.setItem('type', 'password');
     const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "input");
     newAlert.customAlert();
-    
-    /*const newPwd = localStorage.getItem("inputField");
-    
-    const url = API.getURLupdatePasswordOfPlayerId();
-    const dataPwd = {
-        playerIdIn: playerId,
-        newPwdIn:   newPwd
-    };
-    const params = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataPwd)
-    };
-    
-    fetch(url, params)
-       .then((response) => response.json())
-       .then((result) => {})
-       .catch((err) => console.error(err));
-    
-    localStorage.setItem("inputField", "");*/
 });
+
+deleteAccount.addEventListener('click', () =>{
+    const newAlert = new Alert("Etes-vous sur de vouloir supprimer ce compte ?", "OUI !", 'home.html', 'suppr');
+    newAlert.customAlert();
+})
