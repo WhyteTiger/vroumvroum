@@ -81,6 +81,11 @@ export class API {
 
       return 'http://'+API.server+'/creation/postCircuitOfPlayerId';
    }
+   
+   static getURLmodifyCircuitOfPlayerId() {
+      
+      return 'http://'+API.server+'/creation/modifyCircuitOfPlayerId';
+   }
 
    static getURLDeleteCircuit() {
 

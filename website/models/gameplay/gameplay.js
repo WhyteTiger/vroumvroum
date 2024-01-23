@@ -49,6 +49,8 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
       
+      document.querySelector('#aside-infos').classList.remove('invisible');
+      
       const circuitId = window.localStorage.circuitId;
       
       const url = API.getURLgetCircuitInformation();
@@ -152,7 +154,11 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
       
-      const matrix = JSON.parse(localStorage.getItem("matrix"));
+      document.querySelector('#aside-infos').classList.add('invisible');
+      
+      let matrix;
+      localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+      
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -281,7 +287,7 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
-   }else if (localStorage.getItem("isConnected") === "false"){
+   } else if (localStorage.getItem("isConnected") === "false"){
       let monTemps = timer.getElapsedTime();
       timer.stop();
       let popUpSeConnecter = new Alert("Enregistrer votre temps", "S'inscrire", "registration.html" ,"type");
@@ -292,7 +298,7 @@ function updateCar() {
       popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
 
 
-   }else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
+   } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
 		let monTemps = timer.getElapsedTime();
       timer.stop();
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
