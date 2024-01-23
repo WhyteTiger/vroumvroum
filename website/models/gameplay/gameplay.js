@@ -49,8 +49,6 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
       
-      document.querySelector('#aside-infos').classList.remove('invisible');
-      
       const circuitId = window.localStorage.circuitId;
       
       const url = API.getURLgetCircuitInformation();
@@ -154,11 +152,7 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
       
-      document.querySelector('#aside-infos').classList.add('invisible');
-      
-      let matrix;
-      localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
-      
+      const matrix = JSON.parse(localStorage.getItem("matrix"));
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -238,6 +232,7 @@ function init(kartId, nbTour) {
    timer  = new Timer();
    controllerCheckpoint.updateCheckpoint();
 	controllerCheckpoint.updateTour();
+   lastFrameTime= 0;
 }
 
 
@@ -258,18 +253,18 @@ function updateCar() {
    
    //Test de la couleur de la route sous chaque roue pour savoir si on passe sur un checkpoint
    if (started === 2) {
-
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-115);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60 );
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60,  1, 1).data,engine.getCentreVehicule().getX()-60,  engine.getCentreVehicule().getY()-60 );
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115);
       controllerCheckpoint.checkRoue(ctx.getImageData(engine.getCentreVehicule().getX()-87,  engine.getCentreVehicule().getY()-87,  1, 1).data,engine.getCentreVehicule().getX()-87,  engine.getCentreVehicule().getY()-87 );
       
-      //deplacement de la voiture
+      //calcul du temps de la dernière frame
       engine.setTickRate(tickRate/((timer.getElapsedTime()-lastFrameTime)/16.66));
       lastFrameTime = timer.getElapsedTime();
+
+      //deplacement de la voiture
       engine.next(controller.up , controller.down, controller.getdirection(),ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-60, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-60, engine.getCentreVehicule().getY()-115, 1, 1).data,ctx.getImageData(engine.getCentreVehicule().getX()-115, engine.getCentreVehicule().getY()-60, 1, 1).data);
-      
 
       // Si la voiture sort du circuit, on la replace au dernier checkpoint
       if (canvas.width+200 < engine.getCentreVehicule().getX()  || canvas.height+200 < engine.getCentreVehicule().getY() || 0 > engine.getCentreVehicule().getX() || 0 > engine.getCentreVehicule().getY()) {
@@ -287,7 +282,7 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
-   } else if (localStorage.getItem("isConnected") === "false"){
+   }else if (localStorage.getItem("isConnected") === "false"){
       let monTemps = timer.getElapsedTime();
       timer.stop();
       let popUpSeConnecter = new Alert("Enregistrer votre temps", "S'inscrire", "registration.html" ,"type");
@@ -298,7 +293,7 @@ function updateCar() {
       popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
 
 
-   } else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
+   }else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
 		let monTemps = timer.getElapsedTime();
       timer.stop();
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
