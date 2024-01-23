@@ -1,9 +1,8 @@
-import {CircuitOriginator} from "./CircuitOriginator";
-
 export class CircuitCareTaker {
+	history
 	
 	constructor() {
-		this._circuitHistory = [];
+		this.history = [];
 	}
 	
 	push(circuit) {
@@ -11,7 +10,7 @@ export class CircuitCareTaker {
 	}
 	
 	pop() {
-		if (this.state.length === 0) return null;
+		if (this.history.length === 0) return null;
 		return this.history.pop();
 	}
 }

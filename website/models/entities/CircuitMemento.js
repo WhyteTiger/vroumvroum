@@ -1,4 +1,5 @@
 export class CircuitMemento {
+	matrix
 	
 	constructor(matrix) {
 		this.matrix = matrix;

@@ -1,6 +1,7 @@
-import {CircuitMemento} from "../entities/CircuitMemento";
+import { CircuitMemento } from "../entities/CircuitMemento.js";
 
 export class CircuitOriginator {
+	matrix
 	
 	constructor(matrix) {
 		this.matrix = matrix;
@@ -17,5 +18,4 @@ export class CircuitOriginator {
 	restore(state) {
 		this.matrix = state.getMatrix();
 	}
-	
 }

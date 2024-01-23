@@ -2,8 +2,11 @@
 
 import { API } 				  from "../../models/API.js";
 import { TileChooser } 		  from "../../models/creation/TileChooser.js";
-import { CircuitOriginator } from "../../models/creation/CircuitOriginator";
-import { CircuitCareTaker }  from "../../models/creation/CircuitCareTaker";
+import { CircuitOriginator } from "../../models/creation/CircuitOriginator.js";
+import { CircuitCareTaker }  from "../../models/creation/CircuitCareTaker.js";
+import { CircuitMemento }  from "../../models/entities/CircuitMemento.js";
+
+console.log("AAAAAAAAAAAAAAAa");
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -26,6 +29,8 @@ function saveCurrentState() {
 }
 
 window.onload = () => {
+	
+	console.log("AAAAAAAAAAAAAAAa");
 	
 	if (localStorage.getItem('modify') === 'true') {
 		let fetchParams = {
