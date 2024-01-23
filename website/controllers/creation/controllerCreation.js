@@ -2,6 +2,8 @@
 
 import { API } from "../../models/API.js";
 import {TileChooser} from "../../models/creation/TileChooser.js";
+import {CircuitOriginator} from "../../models/creation/CircuitOriginator";
+import {CircuitCareTaker} from "../../models/creation/CircuitCareTaker";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -10,7 +12,18 @@ audio.autoplay = true;
 audio.loop     = true;
 audio.play();
 
-let tileChooser = new TileChooser();
+let tileChooser = new TileChooser(), originator, careTaker;
+
+function initMemento() {
+	originator = new CircuitOriginator(tileChooser.matrix);
+	careTaker  = new CircuitCareTaker();
+	careTaker.push(originator);
+}
+
+function saveCurrentState() {
+	originator.matrix = tileChooser.matrix;
+	careTaker.push(originator);
+}
 
 if (localStorage.getItem('personal') === 'true') {
 	let fetchParams = {
@@ -47,6 +60,8 @@ if (localStorage.getItem('personal') === 'true') {
 
 		tileChooser.setMatrix(tempMatrix);
 		tileChooser.reload();
+		
+		initMemento();
 
 		setTimeout(() => {
 			tileChooser.reload();
@@ -99,6 +114,8 @@ if (localStorage.getItem('personal') === 'true') {
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+					
+					saveCurrentState();
 				}
 			});
 		}
@@ -107,6 +124,8 @@ if (localStorage.getItem('personal') === 'true') {
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
 			localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+			
+			saveCurrentState();
 		});
 	})
 	.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
@@ -114,6 +133,8 @@ if (localStorage.getItem('personal') === 'true') {
 
 	setTimeout(() => {
 		tileChooser.reload();
+		
+		initMemento();
 	}, 200);
 
 
@@ -164,6 +185,8 @@ if (localStorage.getItem('personal') === 'true') {
 				tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 				tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 				localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+				
+				saveCurrentState();
 			}
 		});
 	}
@@ -172,13 +195,21 @@ if (localStorage.getItem('personal') === 'true') {
 	document.querySelector('#reinitbutton').addEventListener('click', () => {
 		tileChooser.reset();
 		localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+		
+		saveCurrentState();
 	});
 }
 
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		if      (localStorage.getItem('personal') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
-		else if (localStorage.getItem('personal') === "true")  localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		localStorage.getItem('personal') === "false" ? localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 };
+
+document.addEventListener('keydown', (event) => {
+	if (event.ctrlKey && event.key === 'z') {
+		const lastState = careTaker.pop();
+		lastState !== null ? originator.restore(lastState) : console.log("Faites une action avant de vouloir revenir en arrière");
+	}
+});

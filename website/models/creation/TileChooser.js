@@ -2,6 +2,9 @@
 
 import {Map} from "../entities/Map.js";
 import {Tileset} from "../entities/Tileset.js";
+import {CircuitMemento} from "../entities/CircuitMemento";
+import {CircuitCareTaker} from "./CircuitCareTaker";
+import {CircuitOriginator} from "./CircuitOriginator";
 
 export class TileChooser {
 	_map;
