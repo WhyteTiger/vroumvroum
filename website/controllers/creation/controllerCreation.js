@@ -249,9 +249,7 @@ window.onload = () => {
 					console.error("saved error");
 				}
 				
-				localStorage.setItem("circuitName", "");
 				localStorage.setItem("creatorTime", "");
-				localStorage.setItem("circuitLaps", "");
 				localStorage.setItem("isChecked", "false");
 			});
 	} else {
