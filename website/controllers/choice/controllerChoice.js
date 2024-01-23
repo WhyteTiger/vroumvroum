@@ -3,6 +3,16 @@
 import { API } from "../../models/API.js";
 import { Timer } from "../../models/entities/Timer.js";
 
+console.log(localStorage);
+
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/hubsMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
+
+
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
@@ -110,8 +120,9 @@ function fetchPage(nb, nbPages) {
                     document.getElementById("score" + filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
                     if(localStorage.getItem("personal") === "false") document.getElementById("creator-name").innerText = "Créateur : " + dataCircuit.creatorUsername;
-                    
-                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + dataCircuit.creatorTime;
+
+                    let temp = new Timer().timeToString(dataCircuit.creatorTime);
+                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : " + temp;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;

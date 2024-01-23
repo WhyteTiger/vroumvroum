@@ -9,6 +9,14 @@ const editPassword = document.getElementById('editPassword');
 const vroumcoin    = document.getElementById('vroumcoin');
 const pseudo       = document.getElementById('pseudo');
 
+const audio = document.createElement("audio");
+audio.src 		= "../../assets/soundtrack/accountMusic.mp3";
+audio.volume   = 0.0312;
+audio.autoplay = true;
+audio.loop     = true;
+audio.play();
+
+
 pseudo.innerText = localStorage.username;
 
 const playerId = localStorage.getItem("playerId");
