@@ -88,8 +88,7 @@ document.querySelector('#Formulaire a').addEventListener('click', (evt) => {
 
     if(localStorage.getItem('delete') === 'true') {
         const dataPwd = {
-            playerIdIn: playerId,
-            newPwdIn:   newPwd
+            playerIdIn: playerId
         };
         const params = {
             method: "POST",
@@ -99,10 +98,18 @@ document.querySelector('#Formulaire a').addEventListener('click', (evt) => {
             body: JSON.stringify(dataPwd)
         };
         
-        fetch(API.getURLDeleteAccount, params)
+        fetch(API.getURLDeleteAccount(), params)
            .then((response) => response.json())
-           .then((result) => {})
+           .then((result) => {
+            console.log(result)
+            
+           })
            .catch((err) => console.error(err));
+
+
+           setTimeout(() => {
+            document.location.href = "home.html";           }, 5000);
+        
 
     }
 

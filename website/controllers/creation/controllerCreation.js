@@ -174,7 +174,6 @@ if (localStorage.getItem('personal') === 'true') {
 	});
 }
 
-
 window.onunload = () => {
 	if (tileChooser !== undefined) {
 		if      (localStorage.getItem('personal') === "false") localStorage.setItem('matrix',      JSON.stringify(tileChooser.matrix));
