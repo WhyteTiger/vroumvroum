@@ -10,6 +10,7 @@
         - save         : to save circuit
         - imgProfile   : choice the image of profile
         - suppr        : to delete an account
+        - pwd          : to changer the password
 */
 
 import { API } from "../API.js";
@@ -62,6 +63,9 @@ export class Alert{
                 break;
             case 'suppr' :
                 this.alertSuppr(alertCustom, overlay);
+                break;
+            case 'pwd':
+                this.alertPwd(alertCustom, overlay);
                 break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
@@ -196,14 +200,96 @@ export class Alert{
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            localStorage.setItem('inputField', 'none');
         });
 
         actionbutton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
-
             localStorage.setItem('inputField', inputField.value);
             Alert.updateProfileName(inputField.value);
+
+            if (this.link != null){
+                document.location.href = this.link;
+            }
+        });
+        alertCustom.appendChild(actionbutton);
+        document.body.appendChild(alertCustom);
+    }
+
+
+    alertPwd(alertCustom, overlay){
+
+        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.color      = '#ffffff';
+        alertCustom.style.border     = '1px solid #d9323';
+
+        const closeButton = document.createElement('button');
+        closeButton.id        = 'closeAlert';
+        closeButton.innerText = 'X';
+        alertCustom.appendChild(closeButton);
+
+        // css :
+        closeButton.style.background = '#0048fd';
+        closeButton.style.color      = '#ffffff';
+
+        const pMessage = document.createElement('p');
+        pMessage.innerText = this.message;
+        pMessage.id        = 'pMessage';
+        alertCustom.appendChild(pMessage);
+
+        const pInstruction = document.createElement('p');
+        pInstruction.innerText = 'Ancien Mot de passe :';
+        pInstruction.className = 'changePwd';
+        pInstruction.id        = 'pInstruction';
+        alertCustom.appendChild(pInstruction);
+
+        const inputField = document.createElement('input');
+        inputField.type        = 'text';
+        inputField.className   = 'inputField';
+        inputField.id          = 'inputPwd';
+        inputField.placeholder = 'Entrez du texte...';
+        alertCustom.appendChild(inputField);
+
+        const pInstruction2 = document.createElement('p');
+        pInstruction2.innerText = 'Nouveau mot de passe :';
+        pInstruction.classList = 'changePwd';
+        pInstruction2.id        = 'pInstruction2';
+        alertCustom.appendChild(pInstruction2);
+
+        const inputField2 = document.createElement('input');
+        inputField2.type        = 'text';
+        inputField2.className   = 'inputField';
+        inputField2.id          = 'inputPwd2'
+        inputField2.placeholder = 'Entrez du texte...';
+        alertCustom.appendChild(inputField2);
+
+        const actionbutton = document.createElement('button');
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
+
+        // css :
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
+
+        closeButton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            localStorage.setItem('inputField', 'none');
+        });
+
+        actionbutton.addEventListener('click', () => {
+            alertCustom.style.display = 'none';
+            overlay.style.display     = 'none';
+            localStorage.setItem('inputChange', inputField.value);
+            localStorage.setItem('inputField', inputField2.value);
+            if(localStorage.password !== localStorage.inputChange){
+                const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer !", null , 'warning');
+                newAlert.customAlert();
+            }
+            else {
+                Alert.updateProfileName(inputField2.value);
+            }
 
             if (this.link != null){
                 document.location.href = this.link;
@@ -511,7 +597,7 @@ export class Alert{
     }
 
     static updateProfileName(newVal){
-        if (localStorage.type === 'pseudo') {
+        if (localStorage.type === 'pseudo' && newVal !== 'none') {
             const pseudo = document.getElementById('pseudo');
             const playerId = localStorage.getItem("playerId");
 
@@ -539,34 +625,35 @@ export class Alert{
 
             localStorage.setItem("username", newVal);
         }
-        else if(localStorage.type === 'password'){
+        else if(localStorage.type === 'password' && newVal !== 'none'){
             console.log('password')
             //const password = document.getElementById('pseudo');
-            const playerId = localStorage.getItem("playerId");
+            console.log(localStorage.password);
+                const playerId = localStorage.getItem("playerId");
 
-            //pseudo.innerText = newUsername;
+                //pseudo.innerText = newUsername;
 
-            const url = API.getURLupdatePasswordOfPlayerId();
-            const dataPwd = {
-                playerIdIn: playerId,
-                newPwdIn:   newVal
-            };
-            const params = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(dataPwd)
-            };
-            console.log(params);
+                const url = API.getURLupdatePasswordOfPlayerId();
+                const dataPwd = {
+                    playerIdIn: playerId,
+                    newPwdIn: newVal
+                };
+                const params = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(dataPwd)
+                };
+                console.log(params);
 
-            fetch(url, params)
-                .then((response) => response.json())
-                .then((result) => {
-                    console.log(result);
-                });
+                fetch(url, params)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        console.log(result);
+                    });
 
-            localStorage.setItem("username", newVal);
+                localStorage.setItem("password", newVal);
         }
     }
 

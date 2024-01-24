@@ -44,18 +44,15 @@ async function tryToConnect(username, password) {
 			localStorage.imgProfilId     = data.PPIdOut;
 			localStorage.banne		= data.isBanned;
 
-			console.log(localStorage.banne);
 			
 			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
-				console.log(localStorage.banne);
 				if(localStorage.banne === '1') {
 					const newAlert = new Alert("Vous ne pouvez plus accéder à ce compte !", "Fermer !", null, "warning");
 					newAlert.customAlert();
-					console.log('kajfdgnfsg');
 				}else {
 					localStorage.isConnected = true;
+					localStorage.setItem('password', password);
 					document.location.href = "../views/home.html";
-					console.log('kajfdgnfsg');
 				}
 			} else {
 				if (localStorage.alreadyRegister === "false"){
