@@ -595,8 +595,8 @@ export class Alert{
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
-        let circuitName = localStorage.getItem("circuitLaps");
-        if (circuitLaps === undefined) circuitName = "";
+        let circuitName = localStorage.getItem("circuitName");
+        if (circuitName === undefined) circuitName = "";
         if (localStorage.getItem("modify") === "true") circuitNameInput.value = circuitName;
         
         alertCustom.appendChild(circuitNameInput);
