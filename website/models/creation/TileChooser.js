@@ -1,10 +1,7 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import {Map} from "../entities/Map.js";
-import {Tileset} from "../entities/Tileset.js";
-import {CircuitMemento} from "../entities/CircuitMemento";
-import {CircuitCareTaker} from "./CircuitCareTaker";
-import {CircuitOriginator} from "./CircuitOriginator";
+import { Map }     from "../entities/Map.js";
+import { Tileset } from "../entities/Tileset.js";
 
 export class TileChooser {
 	_map;

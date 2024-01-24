@@ -1,12 +1,9 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import { API } 				  from "../../models/API.js";
-import { TileChooser } 		  from "../../models/creation/TileChooser.js";
-import { CircuitOriginator } from "../../models/creation/CircuitOriginator.js";
-import { CircuitCareTaker }  from "../../models/creation/CircuitCareTaker.js";
-import { CircuitMemento }  from "../../models/entities/CircuitMemento.js";
-
-console.log("AAAAAAAAAAAAAAAa");
+import { API } 		 	    from "../../models/API.js";
+import { TileChooser }  	 from "../../models/creation/TileChooser.js";
+import { Alert } 		  	    from "../../models/entities/Alert.js";
+import { CircuitCareTaker } from "../../models/creation/CircuitCareTaker.js";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -15,22 +12,10 @@ audio.autoplay = true;
 audio.loop     = true;
 audio.play();
 
-let tileChooser = new TileChooser(), originator, careTaker;
+let tileChooser = new TileChooser(), careTaker;
 
-function initMemento() {
-	originator = new CircuitOriginator(tileChooser.matrix);
-	careTaker  = new CircuitCareTaker();
-	careTaker.push(originator);
-}
-
-function saveCurrentState() {
-	originator.matrix = tileChooser.matrix;
-	careTaker.push(originator);
-}
 
 window.onload = () => {
-	
-	console.log("AAAAAAAAAAAAAAAa");
 	
 	if (localStorage.getItem('modify') === 'true') {
 		let fetchParams = {
@@ -68,7 +53,8 @@ window.onload = () => {
 				tileChooser.setMatrix(tempMatrix);
 				tileChooser.reload();
 				
-				initMemento();
+				console.log("init memento");
+				careTaker  = new CircuitCareTaker();
 				
 				setTimeout(() => {
 					tileChooser.reload();
@@ -117,12 +103,13 @@ window.onload = () => {
 				for(let i = 0; i < cDivs.length; i++) {
 					cDivs[i].oncontextmenu = () => {return false;};
 					cDivs[i].addEventListener('mousedown', (evt) => {
+						console.log("save memento");
+						careTaker.push(JSON.parse(localStorage.getItem('matrixPerso')));
+						
 						if (evt.button === 2) { // right click listener (rotate)
 							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 							localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
-							
-							saveCurrentState();
 						}
 					});
 				}
@@ -130,9 +117,11 @@ window.onload = () => {
 				// GESTION DE LA REINITIALISATION
 				document.querySelector('#reinitbutton').addEventListener('click', () => {
 					tileChooser.reset();
-					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 					
-					saveCurrentState();
+					console.log("save memento");
+					careTaker.push(JSON.parse(localStorage.getItem('matrixPerso')));
+					
+					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 				});
 			})
 			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
@@ -141,7 +130,8 @@ window.onload = () => {
 		setTimeout(() => {
 			tileChooser.reload();
 			
-			initMemento();
+			console.log("init memento");
+			careTaker  = new CircuitCareTaker();
 		}, 200);
 		
 		document.querySelector('#buttons-info').addEventListener('click', (evt) => {
@@ -187,12 +177,13 @@ window.onload = () => {
 		for(let i = 0; i < cDivs.length; i++) {
 			cDivs[i].oncontextmenu = () => {return false;};
 			cDivs[i].addEventListener('mousedown', (evt) => {
+				console.log("save memento");
+				careTaker.push(JSON.parse(localStorage.getItem('matrix')));
+				
 				if (evt.button === 2) { // right click listener (rotate)
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
 					localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
-					
-					saveCurrentState();
 				}
 			});
 		}
@@ -200,9 +191,11 @@ window.onload = () => {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
-			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 			
-			saveCurrentState();
+			console.log("save memento");
+			careTaker.push(JSON.parse(localStorage.getItem('matrix')));
+			
+			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 		});
 	}
 	
@@ -295,7 +288,17 @@ window.onunload = () => {
 
 document.addEventListener('keydown', (event) => {
 	if (event.ctrlKey && event.key === 'z') {
+		console.log("ctrl+z");
 		const lastState = careTaker.pop();
-		lastState !== null ? originator.restore(lastState) : console.log("Faites une action avant de vouloir revenir en arrière");
+		if (lastState !== null) {
+			console.log("lastState : "+ lastState);
+			console.log("matrix : "+ tileChooser.matrix);
+			tileChooser.setMatrix(lastState);
+			tileChooser.reload();
+			
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		} else {
+			console.log("Faites une action avant de vouloir revenir en arrière");
+		}
 	}
 });

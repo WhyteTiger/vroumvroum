@@ -5,8 +5,8 @@ export class CircuitCareTaker {
 		this.history = [];
 	}
 	
-	push(circuit) {
-		this.history.push(circuit.createMatrix());
+	push(matrix) {
+		this.history.push(matrix);
 	}
 	
 	pop() {
