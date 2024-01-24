@@ -643,22 +643,51 @@ export class Alert{
             overlay.style.display     = 'none';
         });
 
+        console.log(localStorage.getItem('playerId'))
+            console.log(parseInt(localStorage.getItem('playerId')))
+
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+
+            Alert.deleteAccount();
+
+            setTimeout(() => {
+                localStorage.setItem("delete", "true");
+                localStorage.setItem("playerId", 0);
+                localStorage.setItem("isConnected", false);
+                document.location.href = this.link;
+            }, 200);
             
-            localStorage.setItem("delete", "true");
-            document.location.href = this.link;
         });
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
+    }
 
+    static async deleteAccount() {
+        let res = 0;
+        const dataAcc = {
+            playerIdIn: parseInt(localStorage.getItem('playerId'))
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataAcc)
+        };
 
+        await fetch(API.getURLDeleteAccount(), params)
+           .then((response) => response.json())
+           .then((result) => {
+            console.log(result);
+            res = 12
+           })
+           .catch((err) => {
+                console.error(err);
+           });
 
-
-
-
-
+        return res
     }
 }

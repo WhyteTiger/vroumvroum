@@ -90,7 +90,7 @@ export class API {
 
    static getURLDeleteAccount() {
 
-      return 'http://'+API.server+'/connection/tryToDeleteCircuit';
+      return 'http://'+API.server+'/connection/tryToDeleteAccount';
    }
 }
 

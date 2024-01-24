@@ -3,6 +3,8 @@
 import { Alert } from "../../models/entities/Alert.js";
 import { API }   from "../../models/API.js";
 
+console.log(localStorage)
+
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
 const editPassword = document.getElementById('editPassword');
@@ -85,33 +87,5 @@ document.querySelector('#Formulaire a').addEventListener('click', (evt) => {
 
     const newAlert = new Alert("Souhaitez-vous supprimer votre compte ?", "Supprimer", "home.html", "delete");
     newAlert.customAlert();
-
-    if(localStorage.getItem('delete') === 'true') {
-        const dataPwd = {
-            playerIdIn: playerId
-        };
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataPwd)
-        };
-        
-        fetch(API.getURLDeleteAccount(), params)
-           .then((response) => response.json())
-           .then((result) => {
-            console.log(result)
-            
-           })
-           .catch((err) => console.error(err));
-
-
-           setTimeout(() => {
-            document.location.href = "home.html";           }, 5000);
-        
-
     }
-
-
-});
+);
