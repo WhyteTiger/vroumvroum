@@ -595,8 +595,9 @@ export class Alert{
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
-        console.log("localStorage.getItem(\"circuitName\") : "+ localStorage.getItem("circuitName"));
-        if (localStorage.getItem("modify") === "true") circuitNameInput.value = localStorage.getItem("circuitName");
+        let circuitName = localStorage.getItem("circuitLaps");
+        if (circuitLaps === undefined) circuitName = "";
+        if (localStorage.getItem("modify") === "true") circuitNameInput.value = circuitName;
         
         alertCustom.appendChild(circuitNameInput);
 
@@ -604,8 +605,9 @@ export class Alert{
         circuitLapsInput.type        = 'text';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
-        console.log("localStorage.getItem(\"circuitLaps\") : "+ localStorage.getItem("circuitLaps"));
-        if (localStorage.getItem("modify") === "true") circuitLapsInput.value = localStorage.getItem("circuitLaps");
+        let circuitLaps = localStorage.getItem("circuitLaps");
+        if (circuitLaps === undefined) circuitLaps = "";
+        if (localStorage.getItem("modify") === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
         
         alertCustom.appendChild(circuitLapsInput);
 
