@@ -2,6 +2,8 @@
 
 import {Alert} from "../../models/entities/Alert.js";
 
+console.log(localStorage)
+
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/homeMusic.mp3";
 audio.volume   = 0.0312;

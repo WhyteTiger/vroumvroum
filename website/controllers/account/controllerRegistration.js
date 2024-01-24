@@ -29,6 +29,7 @@ async function wantToRegistrate(nickname, password) {
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data);
 			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			
 			if (localStorage.alreadyRegister === "false" || localStorage.alreadyRegister === undefined) {
@@ -54,13 +55,13 @@ async function wantToRegistrate(nickname, password) {
 					fetch(url, params)
 						.then((response) => response.json())
 						.then((dataPlayer) => {
-						}).catch(() => {
-							console.error("Fetch failed");
+						}).catch((err) => {
+							console.error("Fetch failed / " + err);
 						});
 				}
 				document.location.href="../views/home.html";
 			} else {
-				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer !", null, "warning");
+				const newAlert = new Alert("Ce pseudo est déjà utilisé !",  "Fermer", null, "warning");
 				newAlert.customAlert();
 			}
 		})

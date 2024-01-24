@@ -87,6 +87,12 @@ function fetchPage(nb, nbPages) {
             boxList[i].addEventListener('click', () => {
                 // display player best time
 
+                for(let k = 0 ; k < boxList.length ; k++) {
+                    boxList[k].classList.remove('selected');
+                }
+
+                boxList[i].classList.add('selected');
+
                 const id = boxList[i].getAttribute("name");
 
                 localStorage.circuitId = id;

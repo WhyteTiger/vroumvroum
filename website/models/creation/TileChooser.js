@@ -28,14 +28,14 @@ export class TileChooser {
 		this._circuit = document.querySelector('#circuit');
 		
 		// empty circuit
-		this._map.dessinerTuiles(this._matrix[0], this._matrix[1], this._circuit, 80);
-		this._map.replaceTiles(  this._matrix[0], this._matrix[1], this._circuit, 80, this._matrix[1]);
+		this._map.dessinerTuiles(this._matrix[0], this._matrix[1], this._circuit, 60);
+		this._map.replaceTiles(  this._matrix[0], this._matrix[1], this._circuit, 60, this._matrix[1]);
 		
 		// 1st container with common tiles. Visible by default.
 		const cont1 = document.createElement('section');
 		cont1.classList.add('tile-selector');
 		cont1.id = "cont1";
-		this._map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1);
+		this._map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1, 80, 80);
 		div.appendChild(cont1);
 		
 		// 2nd container with starts and ends. Invisible by default.
@@ -43,7 +43,7 @@ export class TileChooser {
 		cont2.classList.add('tile-selector');
 		cont2.classList.add('invisible');
 		cont2.id = "cont2";
-		this._map.dessinerTuiles([7, 12], [0, 0], cont2);
+		this._map.dessinerTuiles([7, 12], [0, 0], cont2, 80, 80);
 		div.appendChild(cont2);
 		
 		// 3rd container with checkpoints. Invisible by default.
@@ -51,7 +51,7 @@ export class TileChooser {
 		cont3.classList.add('tile-selector');
 		cont3.classList.add('invisible');
 		cont3.id = "cont3";
-		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
+		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3, 80, 80);
 		div.appendChild(cont3);
 	}
 	
@@ -86,12 +86,12 @@ export class TileChooser {
 	
 	reset() {
 		this.newMatrix();
-		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
+		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 60, this._matrix[1]);
 	}
 
 	reload() {
 		// reload the tiles
-		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
+		this.map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 60, this._matrix[1]);
 
 		// reload the selectors
 		const div = document.getElementById("choosers");
@@ -102,7 +102,7 @@ export class TileChooser {
 		const cont1 = document.createElement('section');
 		cont1.classList.add('tile-selector');
 		cont1.id = "cont1";
-		this._map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1);
+		this._map.dessinerTuiles([1, 2, 3, 4, 5, 6, 8, 9, 10, 11], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], cont1, 80, 80);
 		div.appendChild(cont1);
 		
 		// 2nd container with starts and ends. Invisible by default.
@@ -110,7 +110,7 @@ export class TileChooser {
 		cont2.classList.add('tile-selector');
 		cont2.classList.add('invisible');
 		cont2.id = "cont2";
-		this._map.dessinerTuiles([7, 12], [0, 0], cont2);
+		this._map.dessinerTuiles([7, 12], [0, 0], cont2, 80, 80);
 		div.appendChild(cont2);
 		
 		// 3rd container with checkpoints. Invisible by default.
@@ -118,7 +118,7 @@ export class TileChooser {
 		cont3.classList.add('tile-selector');
 		cont3.classList.add('invisible');
 		cont3.id = "cont3";
-		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3);
+		this._map.dessinerTuiles([13, 14, 15, 16, 17, 18], [0, 0, 0, 0, 0, 0], cont3, 80, 80);
 		div.appendChild(cont3);
 
 		setTimeout(() => {
@@ -155,7 +155,7 @@ export class TileChooser {
 						for(let j = 0; j < sDivs.length; j++) {
 							if(sDivs[j].classList.contains('selected')) {
 								this._matrix[0][i] = parseInt(sDivs[j].getAttribute('name'));
-								this._map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 80, this._matrix[1]);
+								this._map.replaceTiles(this._matrix[0], this._matrix[1], this.circuit, 60, this._matrix[1]);
 							}
 						}
 

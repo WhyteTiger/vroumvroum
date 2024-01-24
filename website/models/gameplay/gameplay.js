@@ -286,7 +286,7 @@ function updateCar() {
    }else if (localStorage.getItem("isConnected") === "false"){
       let monTemps = timer.getElapsedTime();
       timer.stop();
-      let popUpSeConnecter = new Alert("Enregistrer votre temps", "S'inscrire", "registration.html" ,"type");
+      let popUpSeConnecter = new Alert("Enregistrer mon temps", "Se connecter", "connection.html" ,"type");
       localStorage.setItem("hasATime", "true");
       localStorage.setItem("bestTimeNoAccount", monTemps);
       localStorage.setItem("circuitIdNoAccount", window.localStorage.circuitId);

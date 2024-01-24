@@ -11,7 +11,6 @@ audio.volume   = 0.0312;
 audio.autoplay = true;
 audio.loop     = true;
 audio.play();
-
 let tileChooser = new TileChooser(), undoStack, redoStack;
 
 
@@ -279,7 +278,6 @@ window.onload = () => {
 		console.error("Error controllerAside : Nothing good");
 	}
 }
-
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {

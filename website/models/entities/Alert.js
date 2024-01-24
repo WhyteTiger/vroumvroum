@@ -61,11 +61,16 @@ export class Alert{
             case 'save' :
                 this.alertSave(alertCustom, overlay);
                 break;
+<<<<<<< HEAD
             case 'suppr' :
                 this.alertSuppr(alertCustom, overlay);
                 break;
             case 'pwd':
                 this.alertPwd(alertCustom, overlay);
+=======
+            case 'delete' :
+                this.alertDeleteAccount(alertCustom, overlay);
+>>>>>>> feature/petitsFixs
                 break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
@@ -184,9 +189,16 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const inputField = document.createElement('input');
-        inputField.type        = 'text';
+
+        if(this.message !== "Nouveau mot de passe :") {
+            inputField.type = 'text';
+            inputField.placeholder = 'Entrez du texte...';
+        } else {
+            inputField.type = 'password';
+            inputField.placeholder = '';
+        }
+
         inputField.className   = 'inputField';
-        inputField.placeholder = 'Entrez du texte...';
         alertCustom.appendChild(inputField);
 
         const actionbutton = document.createElement('button');
@@ -679,6 +691,8 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const circuitNameInput = document.createElement('input');
+        circuitNameInput.setAttribute('maxlength', '15');
+        circuitNameInput.setAttribute('minlength', '1');
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
@@ -689,7 +703,9 @@ export class Alert{
         alertCustom.appendChild(circuitNameInput);
 
         const circuitLapsInput = document.createElement('input');
-        circuitLapsInput.type        = 'text';
+        circuitLapsInput.setAttribute('min', '1');
+        circuitLapsInput.setAttribute('max', '9');
+        circuitLapsInput.type        = 'number';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
         let circuitLaps = localStorage.getItem("circuitLaps");
@@ -717,7 +733,7 @@ export class Alert{
             overlay.style.display     = 'none';
             
             if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
-                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
+                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième.", "OK", "", "warning");
                 errorAlert.customAlert();
                 
             } else {
@@ -731,10 +747,8 @@ export class Alert{
         document.body.appendChild(alertCustom);
     }
 
-
-    alertSuppr(alertCustom, overlay){
-        // css :
-        alertCustom.style.background = '#ff5f5f';
+    alertDeleteAccount(alertCustom, overlay) {
+        alertCustom.style.background = '#6ea5ef';
         alertCustom.style.color = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
@@ -744,49 +758,72 @@ export class Alert{
         alertCustom.appendChild(closeButton);
 
         // css :
-        closeButton.style.background = '#d83232';
+        closeButton.style.background = '#0048fd';
         closeButton.style.color = '#ffffff';
-
-        closeButton.addEventListener('mouseenter', () => {
-            closeButton.style.backgroundColor = '#000000';
-        });
-
-        closeButton.addEventListener('mouseleave', () => {
-
-            closeButton.style.backgroundColor = '#d83232'; // ou une autre couleur si nécessaire
-        });
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
-        pMessage.id = 'pMessage';
+        pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.labelButton;
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
 
         // css :
-        actionbutton.style.background = '#d93232';
-        actionbutton.style.color = '#ffffff';
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
+
+        console.log(localStorage.getItem('playerId'))
+            console.log(parseInt(localStorage.getItem('playerId')))
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
-            console.log('suppression du compte');
+            Alert.deleteAccount();
 
-            if (this.link !== null){
+            setTimeout(() => {
+                localStorage.setItem("delete", "true");
+                localStorage.setItem("playerId", 0);
+                localStorage.setItem("isConnected", false);
                 document.location.href = this.link;
-            }
+            }, 200);
+            
         });
-
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
+    }
+
+    static async deleteAccount() {
+        let res = 0;
+        const dataAcc = {
+            playerIdIn: parseInt(localStorage.getItem('playerId'))
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataAcc)
+        };
+
+        await fetch(API.getURLDeleteAccount(), params)
+           .then((response) => response.json())
+           .then((result) => {
+            console.log(result);
+            res = 12
+           })
+           .catch((err) => {
+                console.error(err);
+           });
+
+        return res
     }
 }
