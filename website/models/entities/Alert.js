@@ -61,16 +61,11 @@ export class Alert{
             case 'save' :
                 this.alertSave(alertCustom, overlay);
                 break;
-<<<<<<< HEAD
-            case 'suppr' :
-                this.alertSuppr(alertCustom, overlay);
                 break;
             case 'pwd':
                 this.alertPwd(alertCustom, overlay);
-=======
             case 'delete' :
                 this.alertDeleteAccount(alertCustom, overlay);
->>>>>>> feature/petitsFixs
                 break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
