@@ -56,7 +56,7 @@ editButton.addEventListener('click', () => {
 
 editPassword.addEventListener('click', () => {
     window.localStorage.setItem('type', 'password');
-    const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "input");
+    const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "pwd");
     newAlert.customAlert();
 });
 
