@@ -53,12 +53,12 @@ window.onload = () => {
 				tileChooser.setMatrix(tempMatrix);
 				tileChooser.reload();
 				
-				console.log("init memento");
-				undoStack = new CircuitCareTaker();
-				redoStack = new CircuitCareTaker();
-				
 				setTimeout(() => {
 					tileChooser.reload();
+					
+					console.log("init memento");
+					undoStack = new CircuitCareTaker();
+					redoStack = new CircuitCareTaker();
 				}, 200);
 				
 				document.querySelector('#buttons-info').addEventListener('click', (evt) => {
@@ -104,7 +104,6 @@ window.onload = () => {
 				for(let i = 0; i < cDivs.length; i++) {
 					cDivs[i].oncontextmenu = () => {return false;};
 					cDivs[i].addEventListener('mousedown', (evt) => {
-						console.log("save memento");
 						undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
 						redoStack.resetStack();
 						
@@ -120,7 +119,6 @@ window.onload = () => {
 				document.querySelector('#reinitbutton').addEventListener('click', () => {
 					tileChooser.reset();
 					
-					console.log("save memento");
 					undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
 					redoStack.resetStack();
 					
@@ -133,7 +131,6 @@ window.onload = () => {
 		setTimeout(() => {
 			tileChooser.reload();
 			
-			console.log("init memento");
 			undoStack = new CircuitCareTaker();
 			redoStack = new CircuitCareTaker();
 		}, 200);
@@ -181,7 +178,6 @@ window.onload = () => {
 		for(let i = 0; i < cDivs.length; i++) {
 			cDivs[i].oncontextmenu = () => {return false;};
 			cDivs[i].addEventListener('mousedown', (evt) => {
-				console.log("save memento");
 				undoStack.push(JSON.parse(localStorage.getItem('matrix')));
 				redoStack.resetStack();
 				
@@ -197,7 +193,6 @@ window.onload = () => {
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
 			
-			console.log("save memento");
 			undoStack.push(JSON.parse(localStorage.getItem('matrix')));
 			redoStack.resetStack();
 			
@@ -294,26 +289,20 @@ window.onunload = () => {
 
 document.addEventListener('keydown', (event) => {
 	if (event.ctrlKey && event.key === 'z') {
-		console.log("ctrl+z");
 		const lastState = undoStack.pop();
 		if (lastState !== null) {
-			console.log("lastState : "+ lastState);
-			console.log("matrix : "+ tileChooser.matrix);
+			redoStack.push(tileChooser.matrix);
 			tileChooser.setMatrix(lastState);
 			tileChooser.reload();
 			
 			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
-			
-			redoStack.push(lastState);
 		} else {
 			console.log("Faites une action avant de vouloir revenir en arrière");
 		}
 	} else if (event.ctrlKey && event.key === 'y') {
-		console.log("ctrl+y");
 		const nextState = redoStack.pop();
 		if (nextState !== null) {
-			console.log("matrix : "+ tileChooser.matrix);
-			console.log("nextState : "+ nextState);
+			undoStack.push(tileChooser.matrix);
 			tileChooser.setMatrix(nextState);
 			tileChooser.reload();
 			
