@@ -61,9 +61,9 @@ export class Alert{
             case 'save' :
                 this.alertSave(alertCustom, overlay);
                 break;
-                break;
             case 'pwd':
                 this.alertPwd(alertCustom, overlay);
+                break;
             case 'delete' :
                 this.alertDeleteAccount(alertCustom, overlay);
                 break;
@@ -242,14 +242,15 @@ export class Alert{
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
+        pMessage.className = 'changePwd';
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
-        const pInstruction = document.createElement('p');
-        pInstruction.innerText = 'Ancien Mot de passe :';
-        pInstruction.className = 'changePwd';
-        pInstruction.id        = 'pInstruction';
-        alertCustom.appendChild(pInstruction);
+        // const pInstruction = document.createElement('p');
+        // pInstruction.innerText = 'Ancien mot de passe :';
+        // pInstruction.className = 'changePwd';
+        // pInstruction.id        = 'pInstruction';
+        // alertCustom.appendChild(pInstruction);
 
         const inputField = document.createElement('input');
         inputField.type        = 'text';
@@ -260,7 +261,7 @@ export class Alert{
 
         const pInstruction2 = document.createElement('p');
         pInstruction2.innerText = 'Nouveau mot de passe :';
-        pInstruction.classList = 'changePwd';
+        pInstruction2.classList = 'changePwd';
         pInstruction2.id        = 'pInstruction2';
         alertCustom.appendChild(pInstruction2);
 

@@ -58,11 +58,11 @@ editButton.addEventListener('click', () => {
 
 editPassword.addEventListener('click', () => {
     window.localStorage.setItem('type', 'password');
-    const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "pwd");
+    const newAlert = new Alert("Ancien mot de passe : ", "Enregistrer", null, "pwd");
     newAlert.customAlert();
 });
 
-deleteAccount.addEventListener('click', () =>{
+document.querySelector('#Formulaire a').addEventListener('click', () =>{
     const newAlert = new Alert("Etes-vous sûr de vouloir supprimer ce compte ?", "Oui !", 'home.html', 'delete');
     newAlert.customAlert();
 })
