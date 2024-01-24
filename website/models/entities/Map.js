@@ -88,13 +88,13 @@ export class Map {
                     this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, 0, rotation[i], size);
                     break;
                 case 90 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, 0, rotation[i], size);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -100, 0, rotation[i], size);
                     break;
                 case 180 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -80, -80, rotation[i], size);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), -100, -100, rotation[i], size);
                     break;
                 case 270 :
-                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, -80, rotation[i], size);
+                    this.tileset.dessinerTile(carte[i], cDivs[i].firstChild.getContext('2d'), 0, -100, rotation[i], size);
                     break;
                 default :
                     break;
