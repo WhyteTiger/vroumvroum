@@ -203,7 +203,7 @@ window.onload = () => {
 };
 
 function init(kartId, nbTour) {
-   tickRate = 15;
+   tickRate = 25;
    controllerCheckpoint = new ControllerCheckpoint(map, nbTour);
    const kart     = new Kart(3, kartId, 0);
    
