@@ -37,6 +37,7 @@ async function wantToRegistrate(nickname, password) {
 				localStorage.playerId    = data.playerIdOut;
 				localStorage.username    = data.usernameOut;
 				localStorage.imgProfilId = data.PPIdOut;
+				//localStorage.password = password;
 				if(localStorage.getItem("hasATime") !== undefined) {
 					let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
 					const dataPlayer = {

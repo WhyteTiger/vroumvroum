@@ -253,7 +253,7 @@ export class Alert{
         // alertCustom.appendChild(pInstruction);
 
         const inputField = document.createElement('input');
-        inputField.type        = 'text';
+        inputField.type        = 'password';
         inputField.className   = 'inputField';
         inputField.id          = 'inputPwd';
         inputField.placeholder = 'Entrez du texte...';
@@ -261,15 +261,16 @@ export class Alert{
 
         const pInstruction2 = document.createElement('p');
         pInstruction2.innerText = 'Nouveau mot de passe :';
-        pInstruction2.classList = 'changePwd';
+        pInstruction2.classList = 'changePwd2';
         pInstruction2.id        = 'pInstruction2';
         alertCustom.appendChild(pInstruction2);
 
         const inputField2 = document.createElement('input');
-        inputField2.type        = 'text';
+        inputField2.type        = 'password';
         inputField2.className   = 'inputField';
         inputField2.id          = 'inputPwd2'
         inputField2.placeholder = 'Entrez du texte...';
+        inputField2.setAttribute("minlength", 12);
         alertCustom.appendChild(inputField2);
 
         const actionbutton = document.createElement('button');
@@ -339,12 +340,12 @@ export class Alert{
         pMessage.style.fontSize = '30px';
 
         const pPoint = document.createElement('p');
-        pPoint.innerText = 'VroumCoin gagné : ' + point;
+        pPoint.innerText = 'VroumCoin(s) gagné(s) : ' + point;
         alertCustom.appendChild(pPoint);
 
         
         const pTemps = document.createElement('p');
-        pTemps.innerText = "Temps : " + temps;
+        pTemps.innerText = "Votre temps : " + temps;
         alertCustom.appendChild(pTemps);
 
 
