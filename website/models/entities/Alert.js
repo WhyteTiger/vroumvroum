@@ -347,10 +347,14 @@ export class Alert{
         // css :
         actionbutton.style.background = '#414141';
         actionbutton.style.color      = '#ffffff';
+        
+        //Pour renvoyer sur le "bon" choiceCircuit, en fonction d'où l'on vient
+        localStorage.getItem("play") === "true" ? localStorage.setItem("personal", "false") : localStorage.setItem("personal", "true");
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            
             document.location.href = "choiceCircuit.html";
         });
 
@@ -678,12 +682,20 @@ export class Alert{
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
+        let circuitName = localStorage.getItem("circuitName");
+        if (circuitName === undefined) circuitName = "";
+        if (localStorage.getItem("modify") === "true") circuitNameInput.value = circuitName;
+        
         alertCustom.appendChild(circuitNameInput);
 
         const circuitLapsInput = document.createElement('input');
         circuitLapsInput.type        = 'text';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
+        let circuitLaps = localStorage.getItem("circuitLaps");
+        if (circuitLaps === undefined) circuitLaps = "";
+        if (localStorage.getItem("modify") === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
+        
         alertCustom.appendChild(circuitLapsInput);
 
         const actionbutton = document.createElement('button');
