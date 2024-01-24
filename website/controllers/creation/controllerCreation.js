@@ -1,8 +1,9 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import { API } 		  from "../../models/API.js";
-import { TileChooser } from "../../models/creation/TileChooser.js";
-import { Alert } 		  from "../../models/entities/Alert.js";
+import { API } 		 	    from "../../models/API.js";
+import { TileChooser }  	 from "../../models/creation/TileChooser.js";
+import { Alert } 		  	    from "../../models/entities/Alert.js";
+import { CircuitCareTaker } from "../../models/creation/CircuitCareTaker.js";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -11,7 +12,8 @@ audio.autoplay = true;
 audio.loop     = true;
 audio.play();
 
-let tileChooser = new TileChooser();
+let tileChooser = new TileChooser(), undoStack, redoStack;
+
 
 window.onload = () => {
 	
@@ -53,6 +55,10 @@ window.onload = () => {
 				
 				setTimeout(() => {
 					tileChooser.reload();
+					
+					console.log("init memento");
+					undoStack = new CircuitCareTaker();
+					redoStack = new CircuitCareTaker();
 				}, 200);
 				
 				document.querySelector('#buttons-info').addEventListener('click', (evt) => {
@@ -98,6 +104,9 @@ window.onload = () => {
 				for(let i = 0; i < cDivs.length; i++) {
 					cDivs[i].oncontextmenu = () => {return false;};
 					cDivs[i].addEventListener('mousedown', (evt) => {
+						undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+						redoStack.resetStack();
+						
 						if (evt.button === 2) { // right click listener (rotate)
 							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
@@ -109,6 +118,10 @@ window.onload = () => {
 				// GESTION DE LA REINITIALISATION
 				document.querySelector('#reinitbutton').addEventListener('click', () => {
 					tileChooser.reset();
+					
+					undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+					redoStack.resetStack();
+					
 					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 				});
 			})
@@ -117,6 +130,9 @@ window.onload = () => {
 	} else {
 		setTimeout(() => {
 			tileChooser.reload();
+			
+			undoStack = new CircuitCareTaker();
+			redoStack = new CircuitCareTaker();
 		}, 200);
 		
 		document.querySelector('#buttons-info').addEventListener('click', (evt) => {
@@ -162,6 +178,9 @@ window.onload = () => {
 		for(let i = 0; i < cDivs.length; i++) {
 			cDivs[i].oncontextmenu = () => {return false;};
 			cDivs[i].addEventListener('mousedown', (evt) => {
+				undoStack.push(JSON.parse(localStorage.getItem('matrix')));
+				redoStack.resetStack();
+				
 				if (evt.button === 2) { // right click listener (rotate)
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
@@ -173,6 +192,10 @@ window.onload = () => {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
+			
+			undoStack.push(JSON.parse(localStorage.getItem('matrix')));
+			redoStack.resetStack();
+			
 			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 		});
 	}
@@ -263,3 +286,29 @@ window.onunload = () => {
 		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 	}
 };
+
+document.addEventListener('keydown', (event) => {
+	if (event.ctrlKey && event.key === 'z') {
+		const lastState = undoStack.pop();
+		if (lastState !== null) {
+			redoStack.push(tileChooser.matrix);
+			tileChooser.setMatrix(lastState);
+			tileChooser.reload();
+			
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		} else {
+			console.log("Faites une action avant de vouloir revenir en arrière");
+		}
+	} else if (event.ctrlKey && event.key === 'y') {
+		const nextState = redoStack.pop();
+		if (nextState !== null) {
+			undoStack.push(tileChooser.matrix);
+			tileChooser.setMatrix(nextState);
+			tileChooser.reload();
+			
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		} else {
+			console.log("Faites un undo avant de faire un redo");
+		}
+	}
+});
