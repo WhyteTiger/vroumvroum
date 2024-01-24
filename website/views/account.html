@@ -2,26 +2,44 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>VroumVroum - Votre compte</title>
+        <title>Compte - VroumVroum</title>
 
-        <link rel="icon" href="../assets/logo.png">
+        <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/headerStyle.css">
         <link rel="stylesheet" href="styles/accountStyle.css">
-        
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
+        <link rel="stylesheet" href="styles/alertStyle.css">
     </head>
 
     <body>
+        <main>
+            <div id="Formulaire">
+                <form id="formCompte">
 
-    <main>
-        <section id="info-display">
-            <div id="main-info">
-                <img src="" alt="Photo de profil">
-                <p>Nom du joueur ici</p>
+                    <div id="previewContainer">
+                        <img id="previewImage" src="#" alt="Aperçu de la photo de profil">
+                    </div>
+                    <p id="labelFile" class="pAccount">Choisir une nouvelle photo</p>
+
+                    <div id="name">
+                        <p class="pAccount">Nom du joueur :</p>
+                        <p id="pseudo" class="pAccount"></p>
+                    </div>
+
+                    <div id="vroumCoinDiv">
+                        <p class="pAccount">Nombre de VroumCoins :</p>
+                        <p id="vroumcoin" class="pAccount"></p>
+                    </div>
+
+                    <button type="button" id="editButton">Modifier le pseudo</button>
+                    <button type="button" id="editPassword">Modifier le mot de passe</button>
+                </form>
+
+                <h2>Vous souhaitez supprimer votre compte ? <a href="#">Supprimer mon compte</a></h2>
             </div>
-            
-    </main>
+        </main>
 
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/account/controllerProfile.js"></script>
     </body>
 </html>

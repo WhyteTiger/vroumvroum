@@ -2,27 +2,35 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>VroumVroum - Accueil</title>
+        <title>Accueil - VroumVroum</title>
 
-        <link rel="icon" href="../../assets/logo.png">
+        <link rel="icon"       href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/homeStyle.css">
-
-        <script src="../controllers/redirection/controllerHome.js" defer></script>
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
+        <link rel="stylesheet" href="styles/alertStyle.css">
     </head>
 
     <body id="welcomeBody">
+        <div id="loaderContainer">
+            <div id="loaderBar">
+                <img src="../../assets/voiture.png" alt="Image de voiture" id="carImage">
+            </div>
+        </div>
 
-    <main id="welcome">
-        <img src="../../assets/logoLong.png">
+        <main id="welcome">
+            <img id="mainLogo" src="../../assets/logoLong.png" alt="logoLong">
 
-        <section id="welcomeButtons">
-            <button type="submit" id="create" class="menuJeu">CREER UN CIRCUIT</button>
-            <button type="submit" id="play" class="menuJeu">JOUER</button>
-            <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
-        </section>
-    </main>
+            <div id="welcomeButtons">
+                <button type="submit" id="create"      class="menuJeu">CRÉER UN CIRCUIT</button>
+                <button type="submit" id="play"        class="menuJeu">JOUER</button>
+                <button type="submit" id="personalize" class="menuJeu">PERSONNALISER</button>
+            </div>
+        </main>
+
+        <script type="module" src="../controllers/redirection/controllerHome.js"></script>
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../models/creation/loaderBar.js"></script>
+        <script src="../controllers/redirection/controllerFooter.js"></script>
 
     </body>
 </html>

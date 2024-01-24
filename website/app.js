@@ -1,11 +1,21 @@
-console.log("Welcome to VroumVroum !");
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-window.localStorage.setItem("isConnected",     "false");
-window.localStorage.setItem("rightPassword",   "false");
-window.localStorage.setItem("username", 		  "anonymous");
-window.localStorage.setItem("playerId", 		  "0");
-window.localStorage.setItem("alreadyRegister", "");
-window.localStorage.setItem("circuitId",       "1");
+localStorage.setItem("isConnected",     "false");
+localStorage.setItem("rightPassword",   "false");
+localStorage.setItem("username", 		 "anonymous");
+localStorage.setItem("playerId", 		 "0");
+localStorage.setItem("alreadyRegister", "");
+
+localStorage.setItem("circuitId",       "1");
+localStorage.setItem("matrix",          "");
+
+localStorage.setItem('save', "false");
+
+localStorage.setItem("personal",        "false");
+localStorage.setItem("isChecked",       "false");
+
+localStorage.setItem('test',            "false");
+localStorage.setItem("barChargement",   "0");
 
 document.location.href="./website/views/home.html";
 

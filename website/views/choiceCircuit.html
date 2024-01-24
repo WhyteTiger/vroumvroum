@@ -2,69 +2,93 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>VroumVroum - Connexion</title>
+        <title>Choix du circuit - VroumVroum</title>
 
-        <link rel="icon" href="../assets/logo.png">
-        <link rel="stylesheet" href="../styles/generalStyle.css">
-        <link rel="stylesheet" href="../styles/circuitStyle.css">
+        <link rel="icon" href="../../assets/logo.png">
+        <link rel="stylesheet" href="styles/generalStyle.css">
+        <link rel="stylesheet" href="styles/canvasStyle.css">
+        <link rel="stylesheet" href="styles/circuitStyle.css">
+        <link rel="stylesheet" href="styles/formStyle.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script src="../controllers/redirection/controllerChoiceCircuit.js" defer></script>
     </head>
 
     <body>
+        <main class="circuit-main">
 
-    <main>
-        <section id="mainCircuit">
+            <section id="choice-section">
+                <h1 id="choice-title">Choix du circuit</h1>
 
-            <canvas></canvas>
-
-            <section id="circuitInfos">
-                <h2>Nom de la carte</h2>
-
-                <div id="mark">
-                    <p>Note : </p>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-
-                <p>Créateur : </p>
-
-                <div id="leaderboard">
-                    <div id="leaderboardTitle">Leaderboard</div>
-                    <div>
-                        <p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p><p>Créateur : </p>
+                <section>
+                    <div id="true" class="true">
+                        <h2>Mes circuits</h2>
+                        <button>CREER UN NOUVEAU CIRCUIT</button>
                     </div>
-                </div>
-            </section>
-        </section>
+                    <div id="filter" class="false">
+                        <h2>Filtrer par nom : </h2>
+                        <input type="text" id="name-filter">
+                        <h2 id="creator-title">Filtrer par créateur : </h2>
+                        <input type="text" id="creator-filter">
+                    </div>
+                    <div id="circuits"></div>
+                </section>
 
-        <section id="items">
-
-            <section id="choosers">
-                <button></button>
-                <button></button>
-                <button></button>
-
-                <div id="pathChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="startEndChooser" class="chooser">
-                    <div>test</div>
-                </div>
-
-                <div id="checkpointChooser" class="chooser">
-                    <div>test</div>
+                <div id="page-selector">
+                    <i class="fa-solid fa-backward-step"></i>
+                    <i class="fa-solid fa-backward"></i>
+                    <p>numéro de page</p>
+                    <i class="fa-solid fa-forward"></i>
+                    <i class="fa-solid fa-forward-step"></i>
                 </div>
             </section>
 
-        </section>
+            <aside class="false">
+                <div id="empty">
+                    <p>Cliquez sur un circuit pour afficher ses informations !</p>
+                </div>
+                <section id="full" class="invisible">
+                    <h1 id="circuit-name">Nom de la carte</h1>
 
-    </main>
+                    <p id="score">Score : Score</p>
+                    <p id="creator-name">Créateur : CreateurUsername</p>
+                    <p id="creator-score">Médaille auteur : createurScore</p>
+
+                    <div id="leaderboard">
+                        <h2 id="leaderboard-title">Leaderboard</h2>
+                        <div id="leaderboard-players">stuff is supposed to go there</div>
+                    </div>
+
+                    <div>
+                        <button id="playbutton">JOUER</button>
+                    </div>
+                </section>
+            </aside>
+
+            <aside class="true">
+                <div id="empty-2">
+                    <p>Cliquez sur un circuit pour afficher ses informations !</p>
+                </div>
+                <section id="full-2" class="invisible">
+                    <h1 id="circuit-name-2">Nom de la carte</h1>
+
+                    <p id="score-2">Score : Score</p>
+                    <p id="creator-score-2">Médaille auteur : createurScore</p>
+
+                    <div id="leaderboard-2">
+                        <h2 id="leaderboard-title-2">Leaderboard</h2>
+                        <div id="leaderboard-players-2">stuff is supposed to go there</div>
+                    </div>
+
+                    <div>
+                        <button id="play-button">JOUER</button>
+                        <button id="modify-button">MODIFIER</button>
+                        <button id="delete-button">SUPPRIMER</button>
+                    </div>
+                </section>
+            </aside>
+                
+        </main>
+
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/choice/controllerChoice.js"></script>
     </body>
 </html>

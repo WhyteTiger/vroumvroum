@@ -2,7 +2,6 @@
     background: url("../../../assets/circuitFond2.jpg") no-repeat fixed top left;
     background-position: center bottom;
     background-size: cover;
-    background-color: none;
 }
 
 #welcome {
@@ -20,13 +19,13 @@
     max-width: 60em;
 
     grid-area: 2 / 2 / 3 / 3;
-    margin: auto;
+    margin: 50px auto auto auto;
 }
 
 #welcome img {
     display: grid;
     grid-area: 1 / 1 / 2 / 4;
-    margin: 100px auto;
+    margin: 60px auto 0px auto;
 
     scale: 1.8;
     transition: scale 0.2s ease 0s;
@@ -34,6 +33,7 @@
 
 #welcome img:hover {
     scale: 2;
+    cursor: pointer;
 }
 
 .menuJeu {
@@ -46,4 +46,41 @@
     align-self: center;
     justify-self: center;
     margin: 1em;
+}
+
+#welcome{
+    display: none;
+}
+
+/* LOADING BAR */
+
+#loaderContainer{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loaderBar{
+    width: 0;
+    height: 4px;
+    background: #3498db;
+    margin-bottom: 10px;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+}
+
+#carImage{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
 }

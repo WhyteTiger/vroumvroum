@@ -2,41 +2,44 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>VroumVroum - Connexion</title>
+        <title>Connexion - VroumVroum</title>
         
         <link rel="icon" href="../../assets/logo.png">
         <link rel="stylesheet" href="styles/generalStyle.css">
         <link rel="stylesheet" href="styles/formStyle.css">
-
-        <script src="../controllers/redirection/controllerHeader.js" defer></script>
-        <script type="module" src="../controllers/account/controllerConnection.js" defer></script>
+        <link rel="stylesheet" href="styles/alertStyle.css">
     </head>
 
     <body>
+        <main id="mainForm">
+            <section id="toutForm">
+                <h1 id="form-title">Connexion au site</h1>
 
-    <main id="mainForm">
+                <form id="form" method="post">
+                    <div class="field">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
 
-        <section id="toutForm">
-            <h1>Connexion au site</h1>
+                    <div class="field">
+                        <label for="pwd">Mot de passe</label>
+                        <input type="password" name="pwd" id="pwd" required>
+                        <div class="password-icon">
+                            <i data-feather="eye" id="eye"></i>
+                            <i data-feather="eye-off" id="eye-off"></i>
+                        </div>
+                    </div>
 
-            <form id="form" method="post">
-                <div class="field">
-                    <label for="username">Nom d'utilisateur ou adresse mail</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
+                    <button type="submit" id="validFormConnection">Se connecter</button>
+                </form>
 
-                <div class="field">
-                    <label for="pwd">Mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" required>
-                </div>
+                <h2>Vous n'avez pas de compte ? <a href="registration.html">Créer un compte</a></h2>
+            </section>
+        </main>
 
-                <button type="submit" id="validFormConnection">Se connecter</button>
-            </form>
-
-            <h2>Vous n'avez pas de compte ? <a href="registration.html">Créer un compte</a></h2>
-        </section>
-
-    </main>
-
+        <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
+        <script type="module" src="../controllers/account/controllerConnection.js"></script>
+        <script type="module" src="../controllers/account/controllerPwd.js"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
     </body>
 </html>

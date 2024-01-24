@@ -10,31 +10,28 @@
 form {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(90deg, #7c97f7, #00bf9c);
     border-radius: 45px;
     margin: 50px auto;
     padding: 20px;
     max-width: 50em;
     text-align: left;
-
-    /* source : le générateur de Neumorphism */
-    box-shadow:  20px 20px 60px #329e99, -20px -20px 60px #5cffff;
 }
 
 .field {
     display: flex;
     flex-direction: column;
     margin-top: 2em;
+    position: relative;
 }
 
-form label {
+label {
     color: #000000;
     font-weight: bold;
     font-size: 30px;
     margin: 10px;
 }
 
-form input {
+input {
     font-family:'Courier New', Courier, monospace;
     font-size: 25px;
     font-weight: bold;
@@ -47,7 +44,17 @@ form input {
     border: gray solid 1px;
 }
 
-form input:focus {
+#filter input {
+    padding: 5px;
+    margin: auto 0px auto 10px;
+}
+
+#true button {
+    padding: 10px;
+    margin-left: auto;
+}
+
+input:focus {
     background-color: rgb(221, 221, 221);
     box-shadow: inset 0 18px 10px rgba(0, 0, 0, 0.2);
 }
@@ -58,4 +65,38 @@ form button {
     justify-content: center;
     width: 12em;
     text-align: center;
+}
+
+select {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    font-weight: bold;
+    height: 45px;
+    border-radius: 40px;
+    padding: 0px 12px;
+    margin: auto 0px auto 10px;
+}
+
+
+/* --- ICON --- */
+
+.field .password-icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 72%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 30px;
+    color: #000000;
+    transition: all 0.2s;
+}
+
+.field .password-icon:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.field .password-icon .feather-eye-off{
+    display: none;
 }

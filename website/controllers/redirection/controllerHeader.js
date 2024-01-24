@@ -1,3 +1,4 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
 // ajout balises script et link en en-tête
 const head = document.querySelector('head');
@@ -15,6 +16,7 @@ a.setAttribute("href", "home.html");
 
 const img = document.createElement('img');
 img.setAttribute("src", "../../assets/logoLong.png");
+img.id = "logo";
 
 a.appendChild(img);
 header.appendChild(a);
@@ -38,18 +40,88 @@ if (isConnected === "false") {
 	registrationA.setAttribute("href", "registration.html");
 	registrationA.appendChild(registrationButton);
 	
+	divButtons.id = "header-buttons";
 	divButtons.appendChild(connectionA);
 	divButtons.appendChild(registrationA);
 	
 	header.appendChild(divButtons);
 	
 } else {
+	const bigdiv = document.createElement('div');
+	bigdiv.id = 'burger-wrapper';
+
 	const profileImg = document.createElement("img");
-	profileImg.setAttribute("src", "TODO");
 	profileImg.setAttribute("alt", "profile image");
 	profileImg.id = "profileImg";
-	
-	header.appendChild(profileImg);
+	bigdiv.appendChild(profileImg);
+	updateProfileImageInHeader(localStorage.imgProfilId);
+
+	const div = document.createElement('div');
+	div.id = 'burger';
+
+	const a1 = document.createElement('a');
+	a1.textContent = 'Mon compte';
+	a1.id = 'a-acc';
+	a1.addEventListener('click', () => {
+		document.location.href = 'account.html';
+	});
+	div.appendChild(a1);
+
+	const a2 = document.createElement('a');
+	a2.textContent = 'Mes circuits';
+	a2.id = 'a-circ';
+	a2.addEventListener('click', () => {
+		localStorage.setItem('personal', 'true');
+		document.location.href = 'choiceCircuit.html';
+	});
+	div.appendChild(a2);
+
+	const a3 = document.createElement('a');
+	a3.textContent = 'Déconnexion';
+	a3.id = 'a-acc';
+	a3.addEventListener('click', () => {
+		window.localStorage.setItem("isConnected",     "false");
+		window.localStorage.setItem("rightPassword",   "false");
+		window.localStorage.setItem("username", 		  "anonymous");
+		window.localStorage.setItem("playerId", 		  "0");
+		window.localStorage.setItem("alreadyRegister", "");
+		document.location.href = 'home.html';
+	});
+	div.appendChild(a3);
+
+	bigdiv.appendChild(div);
+	header.appendChild(bigdiv);
+
+	profileImg.addEventListener('click', (evt) => {
+		document.querySelector('#burger').classList.toggle('visible');
+		updateProfileImageInHeader(localStorage.getItem('imgProfilId'));
+	});
+
+	window.onclick = (evt) => {
+		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible');
+	};
+
+
+}
+
+export function updateProfileImageInHeader(imageId){
+	const tileset = new Image();
+	tileset.src = "../../assets/tilesets/circuit.png";
+
+	tileset.onload = function () {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
+		const tileSize = 160;
+
+		const tileX = imageId * tileSize;
+		const tileY = 4*160;
+
+		canvas.width = 50;
+		canvas.height = 50;
+
+		ctx.drawImage(tileset, tileX, tileY, tileSize, tileSize, 0, 0, canvas.width, canvas.height);
+		profileImg.src = canvas.toDataURL('image/png');
+	};
 }
 
 // ajout header

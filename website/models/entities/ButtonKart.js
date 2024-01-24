@@ -1,16 +1,17 @@
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
 export class ButtonKart{
+	value;
 	
-	valeur;
-	
-	constructor(valeur) {
-		this.valeur = valeur;
+	constructor(value) {
+		this.value = value;
 	}
 	
-	getVal(){
-		return this.valeur;
+	getValue(){
+		return this.value;
 	}
 	
-	changeVal(newVal){
-		this.valeur = newVal;
+	setValue(value){
+		this.value = value;
 	}
 }

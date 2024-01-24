@@ -1,10 +1,12 @@
-import {API} from "../../models/API.js";
-export class ControllerVoiture{
+// jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
+
+import {Alert} from "../../models/entities/Alert.js";
+export class ControllerVoiture {
 	constructor(valButton,vroumCoin) {
 		this.valButton = valButton;
 		this.vroumCoin = vroumCoin;
 	}
-	
+
 	buttonPress(){
 		if (this.valButton === -1){
 			this.valButton = 1;
@@ -15,7 +17,8 @@ export class ControllerVoiture{
 				this.valButton = 1;
 			}
 			else{
-				alert("Vous n'avez pas suffisament de vroumCoin !");
+				const newAlert = new Alert("Vous n'avez pas suffisamment de VroumCoins !", "Fermer", null, "warning");
+				newAlert.customAlert();
 				return 0;
 			}
 		}
@@ -24,9 +27,9 @@ export class ControllerVoiture{
 		}
 		return 1;
 	}
-	
+
 	getUpdatedVroumCoin(){
 		return this.vroumCoin;
 	}
-	
+
 }
