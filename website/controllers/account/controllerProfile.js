@@ -63,6 +63,6 @@ editPassword.addEventListener('click', () => {
 });
 
 deleteAccount.addEventListener('click', () =>{
-    const newAlert = new Alert("Etes-vous sûr de vouloir supprimer ce compte ?", "Oui !", 'home.html', 'suppr');
+    const newAlert = new Alert("Etes-vous sûr de vouloir supprimer ce compte ?", "Oui !", 'home.html', 'delete');
     newAlert.customAlert();
 })

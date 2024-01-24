@@ -291,7 +291,7 @@ export class Alert{
             localStorage.setItem('inputChange', inputField.value);
             localStorage.setItem('inputField', inputField2.value);
             if(localStorage.password !== localStorage.inputChange){
-                const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer !", null , 'warning');
+                const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer", null , 'warning');
                 newAlert.customAlert();
             }
             else {

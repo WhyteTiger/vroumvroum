@@ -222,7 +222,7 @@ window.onload = () => {
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
 			} else {
-				const popUp = new Alert("Votre circuit n'est pas valid, veuillez metre au moins un départ/arrivé", "OK", "", 'warning');
+				const popUp = new Alert("Votre circuit n'est pas valide : veuillez mettre au moins un départ et une arrivée.", "OK", "", 'warning');
 				popUp.customAlert();
 			}
 		});

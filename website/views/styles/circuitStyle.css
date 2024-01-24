@@ -217,7 +217,10 @@ aside p {
 #filter, #true {
     display: flex;
     padding: 5px 0px 5px 20px;
-    
+}
+
+#true h2 {
+    margin-right: 1em;
 }
 
 #page-selector {

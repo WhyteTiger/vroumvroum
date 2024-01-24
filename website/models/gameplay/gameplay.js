@@ -12,7 +12,9 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-let playerIdIn, creatorTime, circuitId, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround,tickRate, lastFrameTime;
+console.log(localStorage)
+
+let creatorTime, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround,tickRate, lastFrameTime;
 
 function drawCircuit(map) {
    if (circuitBackGround === undefined) {
@@ -148,6 +150,8 @@ window.onload = () => {
          });
          
    } else {
+
+      document.getElementById('aside-infos').classList.add('invisible');
       
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();

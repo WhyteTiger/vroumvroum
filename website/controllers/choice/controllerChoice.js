@@ -196,8 +196,10 @@ function fetchCircuits() {
     .then((dataNb) => {
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
+
+        console.log(nbPages)
     
-        if (nbPages === 1) document.querySelector('#page-selector').classList.add('invisible');
+        if (nbPages <= 1) document.querySelector('#page-selector').classList.add('invisible');
     
         let currentPage = 1;
     
