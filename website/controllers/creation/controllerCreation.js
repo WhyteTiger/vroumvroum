@@ -108,7 +108,7 @@ window.onload = () => {
 						
 						if (evt.button === 2) { // right click listener (rotate)
 							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
+							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
 							localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
 						}
 					});
@@ -182,7 +182,7 @@ window.onload = () => {
 				
 				if (evt.button === 2) { // right click listener (rotate)
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
+					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
 					localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 				}
 			});
