@@ -22,7 +22,7 @@ function fetchPage(nb, nbPages) {
     const isPersonalPage = localStorage.getItem("personal");
     
     // for further classes
-    let filter = isPersonalPage === "true" ? "-2" : "";
+    let filter = isPersonalPage === "true" ? "Personal" : "";
 
     // if filters then filter
     let circuitFilterValue = document.getElementById('nameFilter').value;
@@ -87,8 +87,7 @@ function fetchPage(nb, nbPages) {
             boxList[i].appendChild(p2);
 
             boxList[i].addEventListener('click', () => {
-                // display player best time
-
+                
                 for(let k = 0 ; k < boxList.length ; k++) {
                     boxList[k].classList.remove('selected');
                 }
