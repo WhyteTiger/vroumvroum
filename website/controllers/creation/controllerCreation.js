@@ -103,13 +103,13 @@ window.onload = () => {
 				for(let i = 0; i < cDivs.length; i++) {
 					cDivs[i].oncontextmenu = () => {return false;};
 					cDivs[i].addEventListener('mousedown', (evt) => {
-						undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+						undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
 						redoStack.resetStack();
 						
 						if (evt.button === 2) { // right click listener (rotate)
 							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
 							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
-							localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+							localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 						}
 					});
 				}
@@ -118,15 +118,15 @@ window.onload = () => {
 				document.querySelector('#reinitbutton').addEventListener('click', () => {
 					tileChooser.reset();
 					
-					undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+					undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
 					redoStack.resetStack();
 					
-					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+					localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 				});
 			})
 			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
 		
-	} else {
+	} else { // modify !== 'true'
 		setTimeout(() => {
 			tileChooser.reload();
 			
@@ -207,7 +207,7 @@ window.onload = () => {
 			let circuitIsValid = "false";
 			
 			let matrix;
-			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 			
 			const len = matrix[0].length;
 			for (let i = 0; i < len; i++) {
@@ -217,7 +217,7 @@ window.onload = () => {
 				}
 			}
 			if (circuitIsValid === "true") {
-				localStorage.getItem('modify') === 'true' ? localStorage.setItem('matrixPerso', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
+				localStorage.getItem('modify') === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
 				
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
@@ -231,7 +231,7 @@ window.onload = () => {
 		console.log("isChecked === true");
 		
 		let matrixIn;
-		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixPerso')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
 		console.log("matrixIn : "+ matrixIn);
 		
 		const playerIdIn    = localStorage.getItem("playerId");
@@ -281,7 +281,7 @@ window.onload = () => {
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 	}
 };
 
@@ -293,7 +293,7 @@ document.addEventListener('keydown', (event) => {
 			tileChooser.setMatrix(lastState);
 			tileChooser.reload();
 			
-			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 		} else {
 			console.log("Faites une action avant de vouloir revenir en arrière");
 		}
@@ -304,7 +304,7 @@ document.addEventListener('keydown', (event) => {
 			tileChooser.setMatrix(nextState);
 			tileChooser.reload();
 			
-			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 		} else {
 			console.log("Faites un undo avant de faire un redo");
 		}

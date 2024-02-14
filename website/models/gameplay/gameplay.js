@@ -156,7 +156,7 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
       
-      const matrix = JSON.parse(localStorage.getItem("matrixPerso"));
+      const matrix = JSON.parse(localStorage.getItem("matrixModify"));
       
       const circuitTiles = [
          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
