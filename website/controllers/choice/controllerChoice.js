@@ -201,7 +201,7 @@ function fetchCircuits() {
         const nbPages = Math.ceil(nbCircuits / 12);
         console.log(nbPages)
     
-        if (nbPages <= 1) document.querySelector('#page-selector').classList.add('invisible');
+        if (nbPages <= 1) document.querySelector('#pageSelector').classList.add('invisible');
         let currentPage = 1;
     
         fetchPage(1, nbPages);
@@ -256,7 +256,7 @@ document.getElementById('creatorFilter').addEventListener('keydown', () => {
 });
 
 // boutton créer nouveau circuit
-document.querySelector('.createNewCircuit button').addEventListener('click', () => {
+document.querySelector('#personalPage button').addEventListener('click', () => {
     localStorage.setItem("modify",   "false");
     localStorage.setItem("personal", "true");
     location.href = "createCircuit.html";
