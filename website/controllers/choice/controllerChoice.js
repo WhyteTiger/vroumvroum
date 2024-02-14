@@ -255,8 +255,8 @@ document.getElementById('creatorFilter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-// boutton créer nouveau circuit
-document.querySelector('#personalPage button').addEventListener('click', () => {
+// bouton créer nouveau circuit
+document.querySelector('#createNewCircuit button').addEventListener('click', () => {
     localStorage.setItem("modify",   "false");
     localStorage.setItem("personal", "true");
     location.href = "createCircuit.html";
