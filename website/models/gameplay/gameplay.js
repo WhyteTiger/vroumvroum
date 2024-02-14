@@ -46,7 +46,7 @@ window.onload = () => {
    audio.autoplay = true;
    audio.loop     = true;
    
-   if (localStorage.getItem("personal") === "false") {
+   if (localStorage.getItem("verifying") === "false") {
       
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
@@ -145,11 +145,11 @@ window.onload = () => {
                      });
                })
                .catch((err) => {
-                  console.error("Fetch failed"+err);
+                  console.error("Fetch failed "+err);
                });
          });
          
-   } else {
+   } else { // verifying !== "false"
 
       document.getElementById('aside-infos').classList.add('invisible');
       
@@ -287,7 +287,7 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
-   }else if (localStorage.getItem("isConnected") === "false"){
+   } else if (localStorage.getItem("isConnected") === "false") {
       let monTemps = timer.getElapsedTime();
       timer.stop();
       let popUpSeConnecter = new Alert("Enregistrer mon temps", "Se connecter", "connection.html" ,"type");
@@ -298,7 +298,7 @@ function updateCar() {
       popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
 
 
-   }else if (localStorage.getItem("personal") === "false") { //Si le jeu est fini
+   } else if (localStorage.getItem("verifying") === "false") { //Si le jeu est fini
 		let monTemps = timer.getElapsedTime();
       timer.stop();
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
@@ -372,12 +372,13 @@ function updateCar() {
                console.error(err);
             });
 
-   } else if (localStorage.getItem("personal") === "true") { //Si la vérif est finie
+   } else if (localStorage.getItem("verifying") === "true") { //Si la vérif est finie
       timer.stop();
       const creatorTime = timer.getElapsedTime();
       
       localStorage.setItem("creatorTime", creatorTime);
       localStorage.setItem("isChecked", "true");
+      localStorage.setItem("verifying", "false");
 
       location.href = "createCircuit.html";
    }

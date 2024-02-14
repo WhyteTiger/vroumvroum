@@ -90,7 +90,7 @@ a:hover {
 
 /* OTHER */
 
-.invisible, #filter.invisible, #true.invisible {
+.invisible, #filter.invisible, #personalPage.invisible {
     display: none;
 }
 
@@ -100,7 +100,7 @@ aside,
 h1#choice-title,
 #filter,
 #page-selector,
-#true,
+#personalPage,
 #circuit-infos,
 #divCanvas,
 h1#form-title,

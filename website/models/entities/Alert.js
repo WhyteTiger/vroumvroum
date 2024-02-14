@@ -246,12 +246,6 @@ export class Alert{
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
-        // const pInstruction = document.createElement('p');
-        // pInstruction.innerText = 'Ancien mot de passe :';
-        // pInstruction.className = 'changePwd';
-        // pInstruction.id        = 'pInstruction';
-        // alertCustom.appendChild(pInstruction);
-
         const inputField = document.createElement('input');
         inputField.type        = 'password';
         inputField.className   = 'inputField';
@@ -357,8 +351,7 @@ export class Alert{
         actionbutton.style.background = '#414141';
         actionbutton.style.color      = '#ffffff';
         
-        //Pour renvoyer sur le "bon" choiceCircuit, en fonction d'où l'on vient
-        localStorage.getItem("play") === "true" ? localStorage.setItem("personal", "false") : localStorage.setItem("personal", "true");
+        //localStorage.getItem("play") === "true" ? localStorage.setItem("verifying", "false") : localStorage.setItem("verifying", "true");
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
@@ -380,7 +373,7 @@ export class Alert{
         document.body.appendChild(alertCustom);
 
         alertCustom.style.display = 'block';
-        overlay.style.display = 'block';
+        overlay.style.display     = 'block';
     }
 
     alertStartCircuit(creator, temps){
@@ -670,7 +663,8 @@ export class Alert{
         alertCustom.style.background = '#6ea5ef';
         alertCustom.style.color = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
-
+        
+        const isModifying = localStorage.getItem("modify");
 
         const closeButton = document.createElement('button');
         closeButton.id        = 'closeAlert';
@@ -680,7 +674,7 @@ export class Alert{
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
@@ -695,7 +689,7 @@ export class Alert{
         circuitNameInput.placeholder = 'Nom du circuit...';
         let circuitName = localStorage.getItem("circuitName");
         if (circuitName === undefined) circuitName = "";
-        if (localStorage.getItem("modify") === "true") circuitNameInput.value = circuitName;
+        if (isModifying === "true") circuitNameInput.value = circuitName;
         
         alertCustom.appendChild(circuitNameInput);
 
@@ -705,9 +699,10 @@ export class Alert{
         circuitLapsInput.type        = 'number';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
+        
         let circuitLaps = localStorage.getItem("circuitLaps");
         if (circuitLaps === undefined) circuitLaps = "";
-        if (localStorage.getItem("modify") === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
+        if (isModifying === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
         
         alertCustom.appendChild(circuitLapsInput);
 
@@ -729,14 +724,17 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
             
-            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
+            let isCircuitValid = "false";
+            if (circuitNameInput.value !== "" && circuitLapsInput.value.match(/^[1-9]$/)) isCircuitValid = "true";
+            
+            if (isCircuitValid === "false") {
                 const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième.", "OK", "", "warning");
                 errorAlert.customAlert();
                 
             } else {
                 localStorage.setItem('circuitName', circuitNameInput.value);
                 localStorage.setItem('circuitLaps', circuitLapsInput.value);
-                localStorage.setItem("personal", "true");
+                localStorage.setItem("verifying", "true");
                 document.location.href = this.link;
             }
         });

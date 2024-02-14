@@ -205,13 +205,23 @@ window.onload = () => {
 		document.querySelector('#savebutton').addEventListener('click', () => {
 			
 			let circuitIsValid = "false";
+			let oneStartEnd   = 0;
+			let oneCheckPoint = 0;
 			
 			let matrix;
 			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 			
 			const len = matrix[0].length;
 			for (let i = 0; i < len; i++) {
-				if (matrix[0][i] === 7 || matrix[0][i] === 12) {
+				let currentTile = matrix[0][i];
+				
+				if (oneStartEnd !== 1 && (currentTile === 7 || currentTile === 12)) {
+					oneStartEnd = 1;
+				}
+				if (oneCheckPoint !== 1 && currentTile >= 13 && currentTile <= 18) {
+					oneCheckPoint = 1;
+				}
+				if (oneStartEnd === 1 && oneCheckPoint === 1) {
 					circuitIsValid = "true";
 					i = len; // break
 				}
@@ -222,23 +232,24 @@ window.onload = () => {
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
 			} else {
-				const popUp = new Alert("Votre circuit n'est pas valide : veuillez mettre au moins un départ et une arrivée.", "OK", "", 'warning');
+				const popUp = new Alert("Votre circuit n'est pas valide : veuillez mettre au moins un départ, une arrivée et un checkpoint.", "OK", "", 'warning');
 				popUp.customAlert();
 			}
 		});
 		
 	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
-		console.log("isChecked === true");
 		
 		let matrixIn;
 		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
-		console.log("matrixIn : "+ matrixIn);
 		
 		const playerIdIn    = localStorage.getItem("playerId");
 		const circuitIdIn   = localStorage.getItem("circuitId");
 		const circuitNameIn = localStorage.getItem("circuitName");
 		const creatorTimeIn = localStorage.getItem("creatorTime");
 		const circuitLapsIn = localStorage.getItem("circuitLaps");
+		
+		localStorage.setItem("isChecked", "false");
+		localStorage.setItem("creatorTime", "");
 		
 		const dataCircuit = {
 			playerIdIn,
@@ -263,6 +274,7 @@ window.onload = () => {
 		fetch(url, params)
 			.then((response) => response.json())
 			.then((dataCircuit) => {
+				
 				if (dataCircuit.success === "true") {
 					console.log("circuit sauvegardé");
 					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
@@ -270,9 +282,6 @@ window.onload = () => {
 				} else {
 					console.error("saved error");
 				}
-				
-				localStorage.setItem("creatorTime", "");
-				localStorage.setItem("isChecked", "false");
 			});
 	} else {
 		console.error("Error controllerAside : Nothing good");

@@ -214,12 +214,12 @@ aside p {
     padding: 0px 2em 0px 2em;
 }
 
-#filter, #true {
+#filter, #personalPage {
     display: flex;
     padding: 5px 0px 5px 20px;
 }
 
-#true h2 {
+#personalPage h2 {
     margin-right: 1em;
 }
 
