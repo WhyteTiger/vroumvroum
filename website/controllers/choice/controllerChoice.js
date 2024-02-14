@@ -25,8 +25,8 @@ function fetchPage(nb, nbPages) {
     let filter = isPersonalPage === "true" ? "-2" : "";
 
     // if filters then filter
-    let circuitFilterValue = document.getElementById('name-filter').value;
-    let creatorFilterValue = document.getElementById('creator-filter').value;
+    let circuitFilterValue = document.getElementById('nameFilter').value;
+    let creatorFilterValue = document.getElementById('creatorFilter').value;
     if(circuitFilterValue === '' || circuitFilterValue === null) circuitFilterValue = undefined;
     if(creatorFilterValue === '' || creatorFilterValue === null) creatorFilterValue = undefined;
 
@@ -69,7 +69,7 @@ function fetchPage(nb, nbPages) {
         // let's create the boxes
         for (let i = 0; i < circuits.length; i++) {
             const box = document.createElement('div');
-            box.classList.add('circuit-box');
+            box.classList.add('circuitBox');
             document.querySelector('#circuits').appendChild(box);
         }
 
@@ -100,7 +100,7 @@ function fetchPage(nb, nbPages) {
                 localStorage.circuitId = id;
                 
                 document.querySelector('#empty' + filter).classList.add('invisible');
-                document.querySelector('#full' + filter).classList.remove('invisible');
+                document.querySelector('#full'  + filter).classList.remove('invisible');
                 
                 fetchParams = {
                     circuitIdIn: id
@@ -121,24 +121,24 @@ function fetchPage(nb, nbPages) {
                     localStorage.setItem("circuitName", dataCircuit.circuitName);
                     localStorage.setItem("circuitLaps", dataCircuit.circuitLaps);
 
-                    document.getElementById("circuit-name"+ filter).innerText = dataCircuit.circuitName;
+                    document.getElementById("circuitName"+ filter).innerText = dataCircuit.circuitName;
                     document.getElementById("score"+ filter).textContent = `Score : ${dataCircuit.circuitScore}`;
 
-                    if (isPersonalPage === "false") document.getElementById("creator-name").innerText = "Créateur : "+ dataCircuit.creatorUsername;
+                    if (isPersonalPage === "false") document.getElementById("creatorName").innerText = "Créateur : "+ dataCircuit.creatorUsername;
 
                     let temp = new Timer().timeToString(dataCircuit.creatorTime);
-                    document.getElementById("creator-score" + filter).innerText = "Médaille auteur : "+ temp;
+                    document.getElementById("creatorScore" + filter).innerText = "Médaille auteur : "+ temp;
                     
                     // to manage the 5 (or less) best scores
                     const leaderBoard = dataCircuit.leaderBoard;
                     if(leaderBoard[0] === null) {
-                        document.querySelector("#leaderboard-players" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+                        document.querySelector("#leaderboardPlayers" + filter).textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
                     } else {
-                        document.querySelector("#leaderboard-players" + filter).textContent = "";
+                        document.querySelector("#leaderboardPlayers" + filter).textContent = "";
                         for (let i = 0; i < 5; i++) {
                             
                             if (leaderBoard[2*i] !== undefined) {
-                                const leaderboardPlayer = document.getElementById("leaderboard-players"+ filter);
+                                const leaderboardPlayer = document.getElementById("leaderboardPlayers"+ filter);
                                 const player = document.createElement("p");
                                 let time = new Timer();
                                 player.innerText = leaderBoard[2*i] +" : "+ time.timeToString(leaderBoard[2*i+1]);
@@ -164,8 +164,8 @@ function fetchCircuits() {
     const isPersonalPage = localStorage.getItem("personal");
 
     // if filters then filter
-    let circuitFilterValue = document.getElementById('name-filter').value;
-    let creatorFilterValue = document.getElementById('creator-filter').value;
+    let circuitFilterValue = document.getElementById('nameFilter').value;
+    let creatorFilterValue = document.getElementById('creatorFilter').value;
 
     if(circuitFilterValue === '' || circuitFilterValue === null) circuitFilterValue = undefined;
     if(creatorFilterValue === '' || creatorFilterValue === null) creatorFilterValue = undefined;
@@ -247,11 +247,11 @@ if (isPersonalPage === "false") {
 }
 
 // eventListener for the filters
-document.getElementById('name-filter').addEventListener('keydown', () => {
+document.getElementById('nameFilter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
-document.getElementById('creator-filter').addEventListener('keydown', () => {
+document.getElementById('creatorFilter').addEventListener('keydown', () => {
     fetchCircuits();
 });
 
@@ -262,23 +262,23 @@ document.querySelector('#personalPage button').addEventListener('click', () => {
     location.href = "createCircuit.html";
 });
 
-document.querySelector('#playbutton').addEventListener('click', () => {
+document.querySelector('#playButton').addEventListener('click', () => {
     localStorage.setItem("verifying", "false");
     localStorage.setItem("personal", "true");
     location.href = 'playCircuit.html';
 });
 
-document.getElementById('modify-button').addEventListener('click', (evt) => {
+document.getElementById('modifyButtonPersonal').addEventListener('click', (evt) => {
     localStorage.setItem("modify", "true");
     location.href = 'createCircuit.html';
 });
-document.querySelector('#play-button').addEventListener('click', () => {
+document.querySelector('#playButtonPersonal').addEventListener('click', () => {
     localStorage.setItem("verifying", "false");
     localStorage.setItem("personal", "false");
     location.href = 'playCircuit.html';
 });
 
-document.getElementById('delete-button').addEventListener('click', () => {
+document.getElementById('deleteButtonPersonal').addEventListener('click', () => {
     console.log("delete-button clicked");
     
     const fetchParams = {

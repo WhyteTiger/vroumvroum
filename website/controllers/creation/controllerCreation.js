@@ -60,7 +60,7 @@ window.onload = () => {
 					redoStack = new CircuitCareTaker();
 				}, 200);
 				
-				document.querySelector('#buttons-info').addEventListener('click', (evt) => {
+				document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
 					const buttons = document.querySelectorAll('.chooser');
 					
 					for(let i = 0 ; i < buttons.length ; i++) {
@@ -68,7 +68,7 @@ window.onload = () => {
 						if(buttons[i] === evt.target) {
 							buttons[i].classList.add('selected');
 							
-							const sectionList = document.querySelectorAll('section.tile-selector');
+							const sectionList = document.querySelectorAll('section.tileSelector');
 							
 							switch(buttons[i].id) {
 								case 'b1' :
@@ -92,7 +92,7 @@ window.onload = () => {
 					}
 					
 					// need to de-select every div
-					const divList = document.querySelectorAll('.tile-selector div');
+					const divList = document.querySelectorAll('.tileSelector div');
 					for(let i = 0; i < divList.length; i++) {
 						divList[i].classList.remove('selected');
 					}
@@ -134,7 +134,7 @@ window.onload = () => {
 			redoStack = new CircuitCareTaker();
 		}, 200);
 		
-		document.querySelector('#buttons-info').addEventListener('click', (evt) => {
+		document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
 			const buttons = document.querySelectorAll('.chooser');
 			
 			for(let i = 0 ; i < buttons.length ; i++) {
@@ -142,7 +142,7 @@ window.onload = () => {
 				if(buttons[i] === evt.target) {
 					buttons[i].classList.add('selected');
 					
-					const sectionList = document.querySelectorAll('section.tile-selector');
+					const sectionList = document.querySelectorAll('section.tileSelector');
 					
 					switch(buttons[i].id) {
 						case 'b1' :
@@ -166,7 +166,7 @@ window.onload = () => {
 			}
 			
 			// need to de-select every div
-			const divList = document.querySelectorAll('.tile-selector div');
+			const divList = document.querySelectorAll('.tileSelector div');
 			for(let i = 0; i < divList.length; i++) {
 				divList[i].classList.remove('selected');
 			}

@@ -43,7 +43,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         switch(this.type){
             case 'warning':
@@ -383,7 +383,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
         alertCustom.style.color  = '#ffffff';
@@ -632,8 +632,6 @@ export class Alert{
             //const password = document.getElementById('pseudo');
             console.log(localStorage.password);
                 const playerId = localStorage.getItem("playerId");
-
-                //pseudo.innerText = newUsername;
 
                 const url = API.getURLupdatePasswordOfPlayerId();
                 const dataPwd = {

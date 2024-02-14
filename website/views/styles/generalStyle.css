@@ -94,16 +94,16 @@ a:hover {
     display: none;
 }
 
-.tile-selector,
+.tileSelector,
 aside,
 #choosers button,
-h1#choice-title,
+h1#choiceTitle,
 #filter,
-#page-selector,
+#pageSelector,
 #personalPage,
-#circuit-infos,
+#circuitInfos,
 #divCanvas,
-h1#form-title,
+h1#formTitle,
 form {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);

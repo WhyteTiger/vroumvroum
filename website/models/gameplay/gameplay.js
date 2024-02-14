@@ -73,21 +73,21 @@ window.onload = () => {
             const creatorUsername = dataCircuit.creatorUsername;
             creatorTime           = dataCircuit.creatorTime;
             
-            document.getElementById("circuit-name").innerText  =                       dataCircuit.circuitName;
+            document.getElementById("circuitName").innerText  =                       dataCircuit.circuitName;
             document.getElementById("score").innerText         = "Score : "+           dataCircuit.circuitScore;
-            document.getElementById("creator-name").innerText  = "Créateur : "+        dataCircuit.creatorUsername;
-            document.getElementById("creator-score").innerText = "Médaille auteur : "+ dataCircuit.creatorTime;
+            document.getElementById("creatorName").innerText  = "Créateur : "+        dataCircuit.creatorUsername;
+            document.getElementById("creatorScore").innerText = "Médaille auteur : "+ dataCircuit.creatorTime;
             
             // to manage the 5 (or less) best scores
             const leaderBoard = dataCircuit.leaderBoard;
             if(leaderBoard[0] === null) {
-               document.querySelector("#leaderboard-players").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+               document.querySelector("#leaderboardPlayers").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
             } else {
-               document.querySelector("#leaderboard-players").textContent = "";
+               document.querySelector("#leaderboardPlayers").textContent = "";
                for (let i = 0; i < 5; i++) {
                   
                   if (leaderBoard[2*i] !== undefined) {
-                     const leaderboardPlayer = document.getElementById("leaderboard-players");
+                     const leaderboardPlayer = document.getElementById("leaderboardPlayers");
                      const player = document.createElement("p");
                      timer = new Timer();
                      player.innerText = leaderBoard[2*i] + " : " + timer.timeToString(leaderBoard[2*i+1]);
@@ -151,7 +151,7 @@ window.onload = () => {
          
    } else { // verifying !== "false"
 
-      document.getElementById('aside-infos').classList.add('invisible');
+      document.getElementById('asideInfos').classList.add('invisible');
       
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();

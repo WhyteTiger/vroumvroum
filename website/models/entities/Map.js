@@ -62,7 +62,7 @@ export class Map {
             div.setAttribute('name', ligne[j]);
             
             const miniCanvas = document.createElement('canvas');
-            miniCanvas.setAttribute('class', 'tile-canvas');
+            miniCanvas.setAttribute('class', 'tileCanvas');
             miniCanvas.width  = value;
             miniCanvas.height = value;
             

@@ -27,7 +27,7 @@ header button {
     font-size: 15px;
 }
 
-#header-buttons {
+#headerButtons {
     display: flex;
     justify-content: end;
     margin-right: 10px;
@@ -44,7 +44,7 @@ header a:not(#burger a) {
     margin-left: 1em;
 }
 
-#header-buttons a {
+#headerButtons a {
     margin: auto 5px;
 }
 
@@ -56,7 +56,7 @@ header a:not(#burger a) {
 
 /* DROPDOWN MENU */
 
-#burger-wrapper {
+#burgerWrapper {
     position: relative;
     float: left;
     cursor: pointer;
