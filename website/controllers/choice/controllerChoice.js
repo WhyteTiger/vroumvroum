@@ -17,7 +17,7 @@ audio.play();
 function fetchPage(nb, nbPages) {
     while(document.querySelector('#circuits').firstChild) document.querySelector('#circuits').removeChild(document.querySelector('#circuits').firstChild);
 
-    document.querySelector('#page-selector p').textContent = `Page ${nb} / ${nbPages}`;
+    document.querySelector('#pageSelector p').textContent = `Page ${nb} / ${nbPages}`;
 
     const isPersonalPage = localStorage.getItem("personal");
     
@@ -73,7 +73,7 @@ function fetchPage(nb, nbPages) {
             document.querySelector('#circuits').appendChild(box);
         }
 
-        const boxList = document.querySelectorAll('.circuit-box');
+        const boxList = document.querySelectorAll('.circuitBox');
 
         for(let i = 0; i < boxList.length; i++) {
             boxList[i].setAttribute("name", circuits[i].circuitid);
@@ -99,8 +99,8 @@ function fetchPage(nb, nbPages) {
 
                 localStorage.circuitId = id;
                 
-                document.querySelector('#empty' + filter).classList.add('invisible');
-                document.querySelector('#full'  + filter).classList.remove('invisible');
+                document.querySelector('#empty'+ filter).classList.add('invisible');
+                document.querySelector('#full'+  filter).classList.remove('invisible');
                 
                 fetchParams = {
                     circuitIdIn: id
@@ -256,30 +256,30 @@ document.getElementById('creatorFilter').addEventListener('keydown', () => {
 });
 
 // boutton créer nouveau circuit
-document.querySelector('#personalPage button').addEventListener('click', () => {
-    localStorage.setItem("modify", "false");
+document.querySelector('.createNewCircuit button').addEventListener('click', () => {
+    localStorage.setItem("modify",   "false");
     localStorage.setItem("personal", "true");
     location.href = "createCircuit.html";
 });
 
 document.querySelector('#playButton').addEventListener('click', () => {
     localStorage.setItem("verifying", "false");
-    localStorage.setItem("personal", "true");
+    localStorage.setItem("personal",  "false");
     location.href = 'playCircuit.html';
 });
 
 document.getElementById('modifyButtonPersonal').addEventListener('click', (evt) => {
-    localStorage.setItem("modify", "true");
+    localStorage.setItem("modify",   "true");
+    localStorage.setItem("personal", "true");
     location.href = 'createCircuit.html';
 });
 document.querySelector('#playButtonPersonal').addEventListener('click', () => {
     localStorage.setItem("verifying", "false");
-    localStorage.setItem("personal", "false");
+    localStorage.setItem("personal",  "true");
     location.href = 'playCircuit.html';
 });
 
 document.getElementById('deleteButtonPersonal').addEventListener('click', () => {
-    console.log("delete-button clicked");
     
     const fetchParams = {
         circuitIdIn: localStorage.getItem('circuitId')

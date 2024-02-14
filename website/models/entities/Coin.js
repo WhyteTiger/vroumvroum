@@ -20,7 +20,7 @@ export class Coin {
         if (this.images[0][0] === 33){
             canvas.id = 'canvasPiece';
         }else{
-            canvas.id = 'canvasPile';
+            canvas.id = 'canvasStack';
         }
 
         const tileSize = 160;

@@ -180,7 +180,7 @@ window.onload = () => {
 								vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
 								updateVroumCoin();
 								prix.innerText="";
-								//prix.remove();
+								
 								listeButton[i].setValue(0);
 							}
 						}
