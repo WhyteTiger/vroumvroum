@@ -51,7 +51,7 @@ window.onload = () => {
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
       
-      const circuitId = window.localStorage.circuitId;
+      const circuitId = localStorage.circuitId;
       
       const url = API.getURLgetCircuitInformation();
       const dataCircuit = {
@@ -71,12 +71,13 @@ window.onload = () => {
             
             const circuitName     = dataCircuit.circuitName;
             const creatorUsername = dataCircuit.creatorUsername;
+            const circuitScore    = dataCircuit.circuitScore
             creatorTime           = dataCircuit.creatorTime;
             
-            document.getElementById("circuitName").innerText  =                       dataCircuit.circuitName;
-            document.getElementById("score").innerText         = "Score : "+           dataCircuit.circuitScore;
-            document.getElementById("creatorName").innerText  = "Créateur : "+        dataCircuit.creatorUsername;
-            document.getElementById("creatorScore").innerText = "Médaille auteur : "+ dataCircuit.creatorTime;
+            document.getElementById("circuitName").innerText  =                       circuitName;
+            document.getElementById("score").innerText        = "Score : "+           circuitScore;
+            document.getElementById("creatorName").innerText  = "Créateur : "+        creatorUsername;
+            document.getElementById("creatorScore").innerText = "Médaille auteur : "+ creatorTime;
             
             // to manage the 5 (or less) best scores
             const leaderBoard = dataCircuit.leaderBoard;
@@ -114,6 +115,8 @@ window.onload = () => {
             fetch(url, params)
                .then((response) => response.json())
                .then((dataMap) => {
+                  console.log("LAA");
+                  console.log(dataMap.tileSet.circuit +"    "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
 						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
