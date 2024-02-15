@@ -115,13 +115,13 @@ export class Alert{
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
             if (this.link !== null){
                 document.location.href = this.link;
@@ -186,10 +186,10 @@ export class Alert{
         const inputField = document.createElement('input');
 
         if(this.message !== "Nouveau mot de passe :") {
-            inputField.type = 'text';
+            inputField.type        = 'text';
             inputField.placeholder = 'Entrez du texte...';
         } else {
-            inputField.type = 'password';
+            inputField.type        = 'password';
             inputField.placeholder = '';
         }
 
@@ -317,14 +317,14 @@ export class Alert{
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
 
         // css :
         closeButton.style.background = '#44464a';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
 
         //alertCustom.innerHTML = this.message+'<br>';
@@ -344,14 +344,12 @@ export class Alert{
 
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
+        actionbutton.id        = 'buttonAlert';
         actionbutton.innerText = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
         actionbutton.style.color      = '#ffffff';
-        
-        //localStorage.getItem("play") === "true" ? localStorage.setItem("verifying", "false") : localStorage.setItem("verifying", "true");
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
@@ -436,7 +434,7 @@ export class Alert{
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
             this.buttonClick = 1;
             
         });
@@ -533,14 +531,14 @@ export class Alert{
 
                 closeButton.addEventListener('click', () => {
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     Alert.updateProfileImage(localStorage.imgProfilId);
                 });
 
                 actionbutton.addEventListener('click', () => {
 
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     if (this.link != null) {
                         console.log('changement de page');
                         document.location.href = this.link;
@@ -629,7 +627,6 @@ export class Alert{
         }
         else if(localStorage.type === 'password' && newVal !== 'none'){
             console.log('password')
-            //const password = document.getElementById('pseudo');
             console.log(localStorage.password);
                 const playerId = localStorage.getItem("playerId");
 
@@ -659,7 +656,7 @@ export class Alert{
 
     alertSave(alertCustom, overlay){
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
         
         const isModifying = localStorage.getItem("modify");
@@ -742,17 +739,17 @@ export class Alert{
 
     alertDeleteAccount(alertCustom, overlay) {
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
@@ -773,7 +770,7 @@ export class Alert{
         });
 
         console.log(localStorage.getItem('playerId'))
-            console.log(parseInt(localStorage.getItem('playerId')))
+        console.log(parseInt(localStorage.getItem('playerId')))
 
         actionbutton.addEventListener('click', () => {
 
@@ -816,7 +813,6 @@ export class Alert{
            .catch((err) => {
                 console.error(err);
            });
-
         return res
     }
 }

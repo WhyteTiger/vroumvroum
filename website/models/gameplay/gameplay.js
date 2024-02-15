@@ -329,8 +329,8 @@ function updateCar() {
                   score = 1;
                   let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
                   const dataPlayer = {
-                     playerIdIn : localStorage.playerId,
-                     circuitIdIn :window.localStorage.circuitId ,
+                     playerIdIn :    localStorage.playerId,
+                     circuitIdIn :   localStorage.circuitId,
                      newBestTimeIn : monTemps
                   };
                   const params = {

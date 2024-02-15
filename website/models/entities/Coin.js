@@ -8,8 +8,8 @@ export class Coin {
 
     constructor(tilesetPath, images, rotations) {
         this.tilesetPath = tilesetPath;
-        this.images = images;
-        this.rotations = rotations;
+        this.images      = images;
+        this.rotations   = rotations;
         this.tilesPerRow = 12;
     }
 

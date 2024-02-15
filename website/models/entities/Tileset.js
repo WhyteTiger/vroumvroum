@@ -41,13 +41,6 @@ export class Tileset {
         
         context.restore();
     }
-    
-    dessinerVoiture (context, xDestination, yDestination, degrees) {
-        const numeroVoiture = 1;
-        
-        // Dessine la voiture
-        this.dessinerTile(numeroVoiture, context, xDestination, yDestination, degrees);
-    }
 }
 
 

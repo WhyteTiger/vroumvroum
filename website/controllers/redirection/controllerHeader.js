@@ -100,8 +100,6 @@ if (isConnected === "false") {
 	window.onclick = (evt) => {
 		if(evt.target.id !== "burgerWrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible');
 	};
-
-
 }
 
 export function updateProfileImageInHeader(imageId){
