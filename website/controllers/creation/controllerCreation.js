@@ -279,6 +279,8 @@ window.onload = () => {
 					console.log("circuit sauvegardé");
 					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
 					popUpSuccess.customAlert();
+					localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
+					localStorage.setItem("modify", "true");
 				} else {
 					console.error("saved error");
 				}
