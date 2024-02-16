@@ -16,7 +16,9 @@ let tileChooser = new TileChooser(), undoStack, redoStack;
 
 window.onload = () => {
 	
-	if (localStorage.getItem('modify') === 'true') {
+	const isModifying = localStorage.getItem('modify');
+	
+	if (isModifying === 'true') {
 		let fetchParams = {
 			circuitIdIn: localStorage.getItem('circuitId')
 		};
@@ -55,7 +57,6 @@ window.onload = () => {
 				setTimeout(() => {
 					tileChooser.reload();
 					
-					console.log("init memento");
 					undoStack = new CircuitCareTaker();
 					redoStack = new CircuitCareTaker();
 				}, 200);
@@ -126,7 +127,7 @@ window.onload = () => {
 			})
 			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
 		
-	} else { // modify !== 'true'
+	} else if (isModifying === "false") {
 		setTimeout(() => {
 			tileChooser.reload();
 			
@@ -199,17 +200,16 @@ window.onload = () => {
 		});
 	}
 	
-	if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
-		console.log("isChecked === false");
+	if (localStorage.getItem("isChecked") === "false") {
 		
 		document.querySelector('#savebutton').addEventListener('click', () => {
-			
 			let circuitIsValid = "false";
 			let oneStartEnd   = 0;
 			let oneCheckPoint = 0;
 			
 			let matrix;
-			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+			const isModifying = localStorage.getItem('modify');
+			isModifying === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 			
 			const len = matrix[0].length;
 			for (let i = 0; i < len; i++) {
@@ -227,7 +227,7 @@ window.onload = () => {
 				}
 			}
 			if (circuitIsValid === "true") {
-				localStorage.getItem('modify') === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
+				isModifying === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
 				
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
@@ -240,7 +240,8 @@ window.onload = () => {
 	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
 		
 		let matrixIn;
-		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		const isModifying = localStorage.getItem('modify');
+		isModifying === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
 		
 		const playerIdIn    = localStorage.getItem("playerId");
 		const circuitIdIn   = localStorage.getItem("circuitId");
@@ -268,7 +269,7 @@ window.onload = () => {
 		};
 		
 		let url;
-		localStorage.getItem("modify") === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
+		isModifying === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
 		console.log("url : "+ url);
 		
 		fetch(url, params)
@@ -277,10 +278,12 @@ window.onload = () => {
 				
 				if (dataCircuit.success === "true") {
 					console.log("circuit sauvegardé");
-					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
-					popUpSuccess.customAlert();
+					localStorage.setItem("circuitId", ""+dataCircuit.circuitIdOut);
 					localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
 					localStorage.setItem("modify", "true");
+					
+					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
+					popUpSuccess.customAlert();
 				} else {
 					console.error("saved error");
 				}
@@ -297,6 +300,7 @@ window.onunload = () => {
 };
 
 document.addEventListener('keydown', (event) => {
+	
 	if (event.ctrlKey && event.key === 'z') {
 		const lastState = undoStack.pop();
 		if (lastState !== null) {
