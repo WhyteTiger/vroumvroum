@@ -279,9 +279,12 @@ window.onload = () => {
 				
 				if (dataCircuit.success === "true") {
 					console.log("circuit sauvegardé");
-					localStorage.setItem("circuitId", ""+dataCircuit.circuitIdOut);
-					localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
-					localStorage.setItem("modify", "true");
+					
+					if (isModifying === "false") {
+						localStorage.setItem("circuitId", ""+ dataCircuit.circuitIdOut);
+						localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
+						localStorage.setItem("modify", "true");
+					}
 					
 					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
 					popUpSuccess.customAlert();
