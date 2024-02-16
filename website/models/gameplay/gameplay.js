@@ -12,8 +12,7 @@ import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheck
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
 
-console.log(localStorage)
-
+console.log(localStorage);
 let creatorTime, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround,tickRate, lastFrameTime;
 
 function drawCircuit(map) {
@@ -46,7 +45,8 @@ window.onload = () => {
    audio.autoplay = true;
    audio.loop     = true;
    
-   if (localStorage.getItem("verifying") === "false") {
+   const isVerifying = localStorage.getItem("verifying");
+   if (isVerifying === "false") {
       
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
@@ -91,7 +91,7 @@ window.onload = () => {
                      const leaderboardPlayer = document.getElementById("leaderboardPlayers");
                      const player = document.createElement("p");
                      timer = new Timer();
-                     player.innerText = leaderBoard[2*i] + " : " + timer.timeToString(leaderBoard[2*i+1]);
+                     player.innerText = leaderBoard[2*i] +" : "+ timer.timeToString(leaderBoard[2*i+1]);
                      leaderboardPlayer.appendChild(player);
                   } else {
                      // to skip end of for loop
@@ -115,8 +115,6 @@ window.onload = () => {
             fetch(url, params)
                .then((response) => response.json())
                .then((dataMap) => {
-                  console.log("LAA");
-                  console.log(dataMap.tileSet.circuit +"    "+ dataMap.tileSet.rotation);
                   map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
 						let nbTour       = dataMap.laps;
                   const playerIdIn = localStorage.playerId;
@@ -136,9 +134,7 @@ window.onload = () => {
                   fetch(url, params)
                      .then((response) => response.json())
                      .then((dataKart) => {
-                        
                         init(dataKart.kartId-1, nbTour);
-                        
                         started = 0;
                         
                         popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
@@ -152,8 +148,7 @@ window.onload = () => {
                });
          });
          
-   } else { // verifying !== "false"
-
+   } else if (isVerifying === "true") {
       document.getElementById('asideInfos').classList.add('invisible');
       
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
@@ -197,7 +192,6 @@ window.onload = () => {
       const nbTour = localStorage.getItem("circuitLaps");
       
       timer = new Timer();
-      
       init(0, nbTour);
       
       setTimeout(() => {
@@ -256,7 +250,6 @@ function updateCar() {
    }
    
    ctx.clearRect(0, 0, canvas.width, canvas.height); // Efface le canvas à chaque mise à jour
-   
    //dessin Circuit
    drawCircuit(map);
    
@@ -288,6 +281,7 @@ function updateCar() {
       
       ctx.restore();
    }
+   
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
@@ -297,12 +291,11 @@ function updateCar() {
       let popUpSeConnecter = new Alert("Enregistrer mon temps", "Se connecter", "connection.html" ,"type");
       localStorage.setItem("hasATime", "true");
       localStorage.setItem("bestTimeNoAccount", monTemps);
-      localStorage.setItem("circuitIdNoAccount", window.localStorage.circuitId);
+      localStorage.setItem("circuitIdNoAccount", localStorage.circuitId);
 
       popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
-
-
-   } else if (localStorage.getItem("verifying") === "false") { //Si le jeu est fini
+      
+   } else if (localStorage.getItem("verifying") === "false") {
 		let monTemps = timer.getElapsedTime();
       timer.stop();
 		let popUpFin = new Alert("Bravo !", "Rejouer", "playCircuit.html" ,"type");
@@ -310,8 +303,8 @@ function updateCar() {
 		let score = 0;
       let url = API.getURLBestScoreAndNote(); 
 			const dataPlayer = {
-				playerIdIn : localStorage.playerId,
-				circuitIdIn :window.localStorage.circuitId 
+				playerIdIn:  localStorage.playerId,
+				circuitIdIn: localStorage.circuitId
 			};
 			const params = {
 				method: "POST",

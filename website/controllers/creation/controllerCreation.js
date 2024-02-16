@@ -15,7 +15,6 @@ let tileChooser = new TileChooser(), undoStack, redoStack;
 
 
 window.onload = () => {
-	
 	const isModifying = localStorage.getItem('modify');
 	
 	if (isModifying === 'true') {
@@ -192,15 +191,17 @@ window.onload = () => {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
+			const isModifying = localStorage.getItem('modify');
 			
-			undoStack.push(JSON.parse(localStorage.getItem('matrix')));
+			isModifying === 'true' ? undoStack.push(JSON.parse(localStorage.getItem('matrixModify'))) : undoStack.push(JSON.parse(localStorage.getItem('matrix')));
 			redoStack.resetStack();
 			
-			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+			isModifying === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 		});
 	}
 	
-	if (localStorage.getItem("isChecked") === "false") {
+	const isChecked = localStorage.getItem("isChecked");
+	if (isChecked === "false") {
 		
 		document.querySelector('#savebutton').addEventListener('click', () => {
 			let circuitIsValid = "false";
@@ -237,7 +238,7 @@ window.onload = () => {
 			}
 		});
 		
-	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
+	} else if (isChecked === "true") {
 		
 		let matrixIn;
 		const isModifying = localStorage.getItem('modify');
@@ -288,8 +289,6 @@ window.onload = () => {
 					console.error("saved error");
 				}
 			});
-	} else {
-		console.error("Error controllerAside : Nothing good");
 	}
 }
 
