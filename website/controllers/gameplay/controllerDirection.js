@@ -97,6 +97,14 @@ export class ControllerDirection {
 		return this.down;
 	}
 
+	get left() {
+		return this.left;
+	}
+
+	get right() {
+		return this.right;
+	}
+
 	getdirection(){
 		return this.right - this.left;
 	}

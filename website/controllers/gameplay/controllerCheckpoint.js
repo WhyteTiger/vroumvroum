@@ -14,11 +14,11 @@ export class ControllerCheckpoint {
         // Constructor code goes here
         this.circuit = circuit;
 
-        this.nbTour = nbTour;
+        this.nbTour        = nbTour;
         this.nbTourrestant = nbTour;
 
         this.nbCheckPointRestant = 1;
-        this.nbCheckPoint = 0;
+        this.nbCheckPoint        = 0;
 
         this.fini = 0;
         this.ligne_de_depard = [0,0];
@@ -126,46 +126,43 @@ export class ControllerCheckpoint {
         }
     }
     updateCheckpoint(){
-        document.getElementsByClassName("compteurCheckpoint")[0].textContent = "CP : "+ (this.nbCheckPoint-this.nbCheckPointRestant) +"/"+this.nbCheckPoint;
+        document.getElementsByClassName("checkpointCountLeaderboardTitle")[0].textContent = "CP : "+ (this.nbCheckPoint-this.nbCheckPointRestant) +"/"+this.nbCheckPoint;
     }
     updateTour(){
-        document.getElementsByClassName("compteurTour")[0].textContent = "Tour : "+(this.nbTour - this.nbTourrestant)+"/"+this.nbTour;
+        document.getElementsByClassName("lapsCountLeaderboardTitle")[0].textContent = "Tour : "+(this.nbTour - this.nbTourrestant)+"/"+this.nbTour;
     }
     getOrientationLastCheckpoint(){
         let tuile   = this.getLastCheckpoint();
         let terrain = this.circuit.getTerrain();
         let idtuile = terrain[tuile[0]][tuile[1]];
 
-        if(idtuile === 13 || idtuile === 7){
+        if (idtuile === 13 || idtuile === 7) {
             const temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
-            if(temp === 0){
+            if (temp === 0) {
                 return 270;
-            }else{
+            } else {
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-90;
             }
-        } else if(idtuile === 14 || idtuile === 16 || idtuile === 17) {
-            if(this.circuit.getRotate()[tuile[0]][tuile[1]] === 0){
+        } else if (idtuile === 14 || idtuile === 16 || idtuile === 17) {
+            if (this.circuit.getRotate()[tuile[0]][tuile[1]] === 0) {
                 return 315;
-            }else{
+            } else {
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-45;
             }
-        } else if(idtuile === 15 || idtuile === 18) {
+        } else if (idtuile === 15 || idtuile === 18) {
             return this.circuit.getRotate()[tuile[0]][tuile[1]];
-        } else if(idtuile === 12) {
+        } else if (idtuile === 12) {
             let temp = this.circuit.getRotate()[tuile[0]][tuile[1]];
             if(temp === 0){
                 return 90;
-            } else if(temp === 90) {
+            } else if (temp === 90) {
                 return 180;
-            }else if( temp === 180){
+            } else if (temp === 180) {
                 return 270
             } else {
                 return this.circuit.getRotate()[tuile[0]][tuile[1]]-270;
             }
         }
-
         return 0;
     }
-    
-
 }

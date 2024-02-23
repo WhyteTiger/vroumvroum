@@ -146,8 +146,7 @@ export class MoteurPhysique {
                     this.orientationVehicule = (this.orientationVehicule + 70/this.tickRate);
                 }
             }
-        }
-        
+        }  
     }
     getCentreVehicule(){
         return this.centreVehicule;

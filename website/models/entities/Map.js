@@ -27,31 +27,6 @@ export class Map {
         return this.rotate;
     }
     
-    dessinerMap(context){
-        let i = 0, l = this.terrain.length;
-        for( ; i < l ; i++) {
-            const ligne = this.terrain[i];
-            const angle = this.rotate[i];
-            const y = i * 160;
-            let j = 0, k = ligne.length;
-            for(; j<k; j++){
-                this.tileset.dessinerTile(ligne[j], context, j*160, y, angle[j]);
-                if (this.isImagePresent(j)) {
-                    this.tileset.dessinerVoiture(context, j*160, y, angle[j]);
-                }
-            }
-        }
-    }
-    
-    dessinerKart(context, carte, rotation){
-        const ligne = carte[0];
-        const angle = rotation[0];
-        
-        for(let j = 0, k = ligne.length; j<k; j++){
-            this.tileset.dessinerTile(ligne[j], context, j*160, 0, angle[j]);
-        }
-    }
-    
     dessinerTuiles(ligne, angle, container, value, size) {
 
         if(value === undefined) value = 160;
@@ -62,7 +37,7 @@ export class Map {
             div.setAttribute('name', ligne[j]);
             
             const miniCanvas = document.createElement('canvas');
-            miniCanvas.setAttribute('class', 'tile-canvas');
+            miniCanvas.setAttribute('class', 'tileCanvas');
             miniCanvas.width  = value;
             miniCanvas.height = value;
             
@@ -104,25 +79,5 @@ export class Map {
     
     isImagePresent (index) {
         return this.terrain[0][index] !== undefined;
-    }
-    
-    getYDepart(){
-        for(let i = 0; i<this.getHauteur(); i++ ){
-            for (let j = 0; j<this.getLargeur(); j++){
-                if (this.terrain[i][j] === 7){
-                    return i;
-                }
-            }
-        }
-    }
-    
-    getXDepart(){
-        for(let i = 0; i<this.getHauteur(); i++ ){
-            for (let j = 0; j<this.getLargeur(); j++){
-                if (this.terrain[i][j] === 7){
-                    return j;
-                }
-            }
-        }
     }
 }
