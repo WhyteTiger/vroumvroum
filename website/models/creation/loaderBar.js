@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }, 25);
 
-        window.localStorage.setItem("barChargement", "1");
+        window.localStorage.setItem("loadingBar", "1");
     }else{
         loaderContainer.style.display = "none";
         main.style.display = 'grid';

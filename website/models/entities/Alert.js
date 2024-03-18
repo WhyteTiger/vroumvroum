@@ -43,7 +43,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         switch(this.type){
             case 'warning':
@@ -61,11 +61,11 @@ export class Alert{
             case 'save' :
                 this.alertSave(alertCustom, overlay);
                 break;
-            case 'suppr' :
-                this.alertSuppr(alertCustom, overlay);
-                break;
             case 'pwd':
                 this.alertPwd(alertCustom, overlay);
+                break;
+            case 'delete' :
+                this.alertDeleteAccount(alertCustom, overlay);
                 break;
             default:
                 console.error('Aucun cas ne correspond pour Alert !');
@@ -115,13 +115,13 @@ export class Alert{
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
             if (this.link !== null){
                 document.location.href = this.link;
@@ -184,9 +184,16 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const inputField = document.createElement('input');
-        inputField.type        = 'text';
+
+        if(this.message !== "Nouveau mot de passe :") {
+            inputField.type        = 'text';
+            inputField.placeholder = 'Entrez du texte...';
+        } else {
+            inputField.type        = 'password';
+            inputField.placeholder = '';
+        }
+
         inputField.className   = 'inputField';
-        inputField.placeholder = 'Entrez du texte...';
         alertCustom.appendChild(inputField);
 
         const actionbutton = document.createElement('button');
@@ -235,17 +242,12 @@ export class Alert{
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
+        pMessage.className = 'changePwd';
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
-        const pInstruction = document.createElement('p');
-        pInstruction.innerText = 'Ancien Mot de passe :';
-        pInstruction.className = 'changePwd';
-        pInstruction.id        = 'pInstruction';
-        alertCustom.appendChild(pInstruction);
-
         const inputField = document.createElement('input');
-        inputField.type        = 'text';
+        inputField.type        = 'password';
         inputField.className   = 'inputField';
         inputField.id          = 'inputPwd';
         inputField.placeholder = 'Entrez du texte...';
@@ -253,15 +255,16 @@ export class Alert{
 
         const pInstruction2 = document.createElement('p');
         pInstruction2.innerText = 'Nouveau mot de passe :';
-        pInstruction.classList = 'changePwd';
+        pInstruction2.classList = 'changePwd2';
         pInstruction2.id        = 'pInstruction2';
         alertCustom.appendChild(pInstruction2);
 
         const inputField2 = document.createElement('input');
-        inputField2.type        = 'text';
+        inputField2.type        = 'password';
         inputField2.className   = 'inputField';
         inputField2.id          = 'inputPwd2'
         inputField2.placeholder = 'Entrez du texte...';
+        inputField2.setAttribute("minlength", 12);
         alertCustom.appendChild(inputField2);
 
         const actionbutton = document.createElement('button');
@@ -284,7 +287,7 @@ export class Alert{
             localStorage.setItem('inputChange', inputField.value);
             localStorage.setItem('inputField', inputField2.value);
             if(localStorage.password !== localStorage.inputChange){
-                const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer !", null , 'warning');
+                const newAlert = new Alert("Votre mot de passe est incorrect !", "Fermer", null , 'warning');
                 newAlert.customAlert();
             }
             else {
@@ -314,14 +317,14 @@ export class Alert{
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
 
         // css :
         closeButton.style.background = '#44464a';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
 
         //alertCustom.innerHTML = this.message+'<br>';
@@ -331,17 +334,17 @@ export class Alert{
         pMessage.style.fontSize = '30px';
 
         const pPoint = document.createElement('p');
-        pPoint.innerText = 'VroumCoin gagné : ' + point;
+        pPoint.innerText = 'VroumCoin(s) gagné(s) : ' + point;
         alertCustom.appendChild(pPoint);
 
         
         const pTemps = document.createElement('p');
-        pTemps.innerText = "Temps : " + temps;
+        pTemps.innerText = "Votre temps : " + temps;
         alertCustom.appendChild(pTemps);
 
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
+        actionbutton.id        = 'buttonAlert';
         actionbutton.innerText = this.labelButton;
 
         // css :
@@ -351,6 +354,7 @@ export class Alert{
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            
             document.location.href = "choiceCircuit.html";
         });
 
@@ -367,7 +371,7 @@ export class Alert{
         document.body.appendChild(alertCustom);
 
         alertCustom.style.display = 'block';
-        overlay.style.display = 'block';
+        overlay.style.display     = 'block';
     }
 
     alertStartCircuit(creator, temps){
@@ -377,7 +381,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
         alertCustom.style.color  = '#ffffff';
@@ -430,7 +434,7 @@ export class Alert{
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
             this.buttonClick = 1;
             
         });
@@ -527,14 +531,14 @@ export class Alert{
 
                 closeButton.addEventListener('click', () => {
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     Alert.updateProfileImage(localStorage.imgProfilId);
                 });
 
                 actionbutton.addEventListener('click', () => {
 
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     if (this.link != null) {
                         console.log('changement de page');
                         document.location.href = this.link;
@@ -623,11 +627,8 @@ export class Alert{
         }
         else if(localStorage.type === 'password' && newVal !== 'none'){
             console.log('password')
-            //const password = document.getElementById('pseudo');
             console.log(localStorage.password);
                 const playerId = localStorage.getItem("playerId");
-
-                //pseudo.innerText = newUsername;
 
                 const url = API.getURLupdatePasswordOfPlayerId();
                 const dataPwd = {
@@ -655,9 +656,10 @@ export class Alert{
 
     alertSave(alertCustom, overlay){
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
-
+        
+        const isModifying = localStorage.getItem("modify");
 
         const closeButton = document.createElement('button');
         closeButton.id        = 'closeAlert';
@@ -667,7 +669,7 @@ export class Alert{
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
@@ -675,15 +677,28 @@ export class Alert{
         alertCustom.appendChild(pMessage);
 
         const circuitNameInput = document.createElement('input');
+        circuitNameInput.setAttribute('maxlength', '15');
+        circuitNameInput.setAttribute('minlength', '1');
         circuitNameInput.type        = 'text';
         circuitNameInput.className   = 'inputField';
         circuitNameInput.placeholder = 'Nom du circuit...';
+        let circuitName = localStorage.getItem("circuitName");
+        if (circuitName === undefined) circuitName = "";
+        if (isModifying === "true") circuitNameInput.value = circuitName;
+        
         alertCustom.appendChild(circuitNameInput);
 
         const circuitLapsInput = document.createElement('input');
-        circuitLapsInput.type        = 'text';
+        circuitLapsInput.setAttribute('min', '1');
+        circuitLapsInput.setAttribute('max', '9');
+        circuitLapsInput.type        = 'number';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
+        
+        let circuitLaps = localStorage.getItem("circuitLaps");
+        if (circuitLaps === undefined) circuitLaps = "";
+        if (isModifying === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
+        
         alertCustom.appendChild(circuitLapsInput);
 
         const actionbutton = document.createElement('button');
@@ -704,14 +719,17 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
             
-            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
-                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième", "OK", "", "warning");
+            let isCircuitValid = "false";
+            if (circuitNameInput.value !== "" && circuitLapsInput.value.match(/^[1-9]$/)) isCircuitValid = "true";
+            
+            if (isCircuitValid === "false") {
+                const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième.", "OK", "", "warning");
                 errorAlert.customAlert();
                 
             } else {
                 localStorage.setItem('circuitName', circuitNameInput.value);
                 localStorage.setItem('circuitLaps', circuitLapsInput.value);
-                localStorage.setItem("personal", "true");
+                localStorage.setItem("verifying", "true");
                 document.location.href = this.link;
             }
         });
@@ -719,62 +737,82 @@ export class Alert{
         document.body.appendChild(alertCustom);
     }
 
-
-    alertSuppr(alertCustom, overlay){
-        // css :
-        alertCustom.style.background = '#ff5f5f';
-        alertCustom.style.color = '#ffffff';
+    alertDeleteAccount(alertCustom, overlay) {
+        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
         // css :
-        closeButton.style.background = '#d83232';
-        closeButton.style.color = '#ffffff';
-
-        closeButton.addEventListener('mouseenter', () => {
-            closeButton.style.backgroundColor = '#000000';
-        });
-
-        closeButton.addEventListener('mouseleave', () => {
-
-            closeButton.style.backgroundColor = '#d83232'; // ou une autre couleur si nécessaire
-        });
+        closeButton.style.background = '#0048fd';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
-        pMessage.id = 'pMessage';
+        pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
-        actionbutton.innerHTML = this.labelButton;
+        actionbutton.id        = 'buttonAlert';
+        actionbutton.innerText = this.labelButton;
 
         // css :
-        actionbutton.style.background = '#d93232';
-        actionbutton.style.color = '#ffffff';
+        actionbutton.style.background = '#0048ff';
+        actionbutton.style.color      = '#ffffff';
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
+
+        console.log(localStorage.getItem('playerId'))
+        console.log(parseInt(localStorage.getItem('playerId')))
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
-            console.log('suppression du compte');
+            Alert.deleteAccount();
 
-            if (this.link !== null){
+            setTimeout(() => {
+                localStorage.setItem("delete", "true");
+                localStorage.setItem("playerId", 0);
+                localStorage.setItem("isConnected", false);
                 document.location.href = this.link;
-            }
+            }, 200);
+            
         });
-
         alertCustom.appendChild(actionbutton);
         document.body.appendChild(alertCustom);
+    }
+
+    static async deleteAccount() {
+        let res = 0;
+        const dataAcc = {
+            playerIdIn: parseInt(localStorage.getItem('playerId'))
+        };
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataAcc)
+        };
+
+        await fetch(API.getURLDeleteAccount(), params)
+           .then((response) => response.json())
+           .then((result) => {
+            console.log(result);
+            res = 12
+           })
+           .catch((err) => {
+                console.error(err);
+           });
+        return res
     }
 }

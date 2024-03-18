@@ -3,6 +3,8 @@
 import { Alert } from "../../models/entities/Alert.js";
 import { API }   from "../../models/API.js";
 
+console.log(localStorage)
+
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
 const editPassword = document.getElementById('editPassword');
@@ -56,11 +58,11 @@ editButton.addEventListener('click', () => {
 
 editPassword.addEventListener('click', () => {
     window.localStorage.setItem('type', 'password');
-    const newAlert = new Alert("Nouveau mot de passe :", "Enregistrer", null, "pwd");
+    const newAlert = new Alert("Ancien mot de passe : ", "Enregistrer", null, "pwd");
     newAlert.customAlert();
 });
 
-deleteAccount.addEventListener('click', () =>{
-    const newAlert = new Alert("Etes-vous sur de vouloir supprimer ce compte ?", "OUI !", 'home.html', 'suppr');
+document.querySelector('#Form a').addEventListener('click', () =>{
+    const newAlert = new Alert("Etes-vous sûr de vouloir supprimer ce compte ?", "Oui !", 'home.html', 'delete');
     newAlert.customAlert();
 })

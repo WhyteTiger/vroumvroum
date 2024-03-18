@@ -13,12 +13,12 @@
     </head>
 
     <body>
-        <main class="circuit-main">
+        <main class="circuitMain">
             <div>
                 <div id="circuit"></div>
                 <div id="items">
                     <div id="choosers">
-                        <div id="buttons-info">
+                        <div id="buttonsInfo">
                             <button id="b1" class="chooser selected">Tuiles</button>
                             <button id="b2" class="chooser">Départs / Arrivées</button>
                             <button id="b3" class="chooser">Checkpoints</button>
@@ -31,12 +31,11 @@
                 <section>
                     <h2>Bienvenue dans le créateur de circuits !</h2>
                     <p>Pour poser des tuiles, sélectionnez-en une dans le menu du bas, et cliquez sur les cases de la grille pour les placer.</p>
-                    <p>Vous pouvez faire clic droit sur une tuile pour la pivoter.</p>
-                    <p>Une fois votre circuit terminé, vous pouvez l'enregistrer.</p>
+                    <p id="attention">Vous pouvez faire <strong>clic droit</strong> sur une tuile pour la pivoter.</p>
+                    <p>Une fois votre circuit terminé, vous pouvez le sauvegarder.</p>
                 </section>
 
-                <section>
-                    <h2>SAUVEGARDE</h2>
+                <div>
                     <div>
                         <label for="savebutton">Sauvegarder le circuit ?</label>
                         <button id="savebutton">SAUVEGARDER</button>
@@ -46,12 +45,11 @@
                         <label>Effacer le circuit ?</label>
                         <button id="reinitbutton">EFFACER</button>
                     </div>
-                </section>
+                </div>
             </aside>
         </main>
         
         <script type="module" src="../controllers/redirection/controllerHeader.js"></script>
         <script type="module" src="../controllers/creation/controllerCreation.js"></script>
-        <script type="module" src="../controllers/creation/controllerAside.js"></script>
     </body>
 </html>

@@ -19,7 +19,7 @@ export class Timer {
 
     updateCompteur(){
         if(this.stoping === 0){
-            let compteur = document.getElementsByClassName("chronometre")[0];
+            let compteur = document.getElementsByClassName("chronometerLeaderboardTitle")[0];
             let temps = this.getElapsedTime();
             let seconde = Math.floor(temps/1000);
             let min = Math.floor(seconde/60);
