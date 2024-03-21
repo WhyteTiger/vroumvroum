@@ -5,6 +5,7 @@ import { API }   from "../../models/API.js";
 
 console.log(localStorage)
 
+const image        = document.getElementById('previewContainer');
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
 const editPassword = document.getElementById('editPassword');
@@ -45,6 +46,12 @@ fetch(url, params)
 Alert.updateProfileImage(localStorage.imgProfilId);
 
 input.addEventListener('click', () => {
+    const newAlert = new Alert("Choisissez une image :", "Valider", null, "imgProfile");
+    newAlert.customAlert();
+    Alert.updateProfileImage(localStorage.imgProfilId);
+});
+
+image.addEventListener('click', () => {
     const newAlert = new Alert("Choisissez une image :", "Valider", null, "imgProfile");
     newAlert.customAlert();
     Alert.updateProfileImage(localStorage.imgProfilId);
