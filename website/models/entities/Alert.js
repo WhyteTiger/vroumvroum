@@ -291,7 +291,13 @@ export class Alert{
                 newAlert.customAlert();
             }
             else {
-                Alert.updateProfileName(inputField2.value);
+                if(inputField2.value.length >= 12){
+                    Alert.updateProfileName(inputField2.value);
+                }else{
+                    const newAlert = new Alert("Votre nouveau mot de passe n'est pas suffisament long ! (12 caractères attendu)", "Fermer", null, 'warning');
+                    newAlert.customAlert();
+                }
+
             }
 
             if (this.link != null){
@@ -375,6 +381,7 @@ export class Alert{
     }
 
     alertStartCircuit(creator, temps){
+        console.log('hvjbk')
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
