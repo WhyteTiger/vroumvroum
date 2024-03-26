@@ -128,11 +128,11 @@ window.onload = () => {
 					prix.id = 'pCoin';
 					if (listeButton[i].getValue() === -1){
 						button.id 		  = 'buttonCarChosen';
-						button.innerText = 'utilise';
+						button.innerText = 'Utilisé';
 					}
 					if (listeButton[i].getValue() === 0){
 						button.id 		  = 'buttonCar';
-						button.innerText = 'choisir';
+						button.innerText = 'Choisir';
 
 					}
 					if (listeButton[i].getValue() > 0 ){
@@ -156,12 +156,12 @@ window.onload = () => {
 								console.log(otherButton);
 								if (otherButton.id === 'buttonCarChosen') {
 									otherButton.id 		 = 'buttonCar';
-									otherButton.innerText = 'choisir';
+									otherButton.innerText = 'Choisir';
 									listeButton[j].setValue(0);
 								}
 							}
 							button.id 		   = 'buttonCarChosen';
-							button.innerText  = 'utilise';
+							button.innerText  = 'Utilisé';
 							chosenButtonIndex = i;  // Stockez l'index du bouton "choisir"
 							listeButton[i].setValue(-1);
 						}
@@ -176,7 +176,7 @@ window.onload = () => {
 							// Mise à jour du texte du bouton et de la quantité de vroumCoin
 							if (result === 1) {
 								button.id 		  = 'buttonCar';
-								button.innerText = 'choisir';
+								button.innerText = 'Choisir';
 								vroumCoin = controller.getUpdatedVroumCoin(); // mise à jour la quantité de vroumCoin
 								updateVroumCoin();
 								prix.innerText="";
