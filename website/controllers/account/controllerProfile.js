@@ -5,6 +5,7 @@ import { API }   from "../../models/API.js";
 
 console.log(localStorage)
 
+const image        = document.getElementById('previewContainer');
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
 const editPassword = document.getElementById('editPassword');
@@ -50,6 +51,12 @@ input.addEventListener('click', () => {
     Alert.updateProfileImage(localStorage.imgProfilId);
 });
 
+image.addEventListener('click', () => {
+    const newAlert = new Alert("Choisissez une image :", "Valider", null, "imgProfile");
+    newAlert.customAlert();
+    Alert.updateProfileImage(localStorage.imgProfilId);
+});
+
 editButton.addEventListener('click', () => {
     window.localStorage.setItem('type', 'pseudo');
     const newAlert = new Alert("Nouveau pseudo :", "Enregistrer", null, "input");
@@ -62,7 +69,7 @@ editPassword.addEventListener('click', () => {
     newAlert.customAlert();
 });
 
-document.querySelector('#Formulaire a').addEventListener('click', () =>{
+document.querySelector('#Form a').addEventListener('click', () =>{
     const newAlert = new Alert("Etes-vous sûr de vouloir supprimer ce compte ?", "Oui !", 'home.html', 'delete');
     newAlert.customAlert();
 })

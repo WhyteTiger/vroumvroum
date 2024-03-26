@@ -54,7 +54,7 @@ body {
     padding : 14px;
 }
 
-#buttonCarChoisi{
+#buttonCarChosen{
     background:linear-gradient(145deg, #FFDE59, #FF914D);
     font-size: 15px;
     border: none;
@@ -68,7 +68,7 @@ body {
     margin: 20px 35px;
 }
 
-#buttonCarAchat{
+#buttonCarBuy{
     background:linear-gradient(145deg, #FF3131, #FF914D);
     font-size: 15px;
     border: none;
@@ -76,7 +76,7 @@ body {
 }
 
 
-#divChoixCar{
+#divChoiceCar{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +92,7 @@ body {
     margin-left: 5px;
 }
 
-#canvasPile{
+#canvasStack{
     width: 30px;
     height: auto;
     margin-left: 5px;
@@ -109,6 +109,6 @@ body {
     margin-bottom: 20px;
 }
 
-#canvasVoiture{
+#canvasKart{
     margin: 0;
 }

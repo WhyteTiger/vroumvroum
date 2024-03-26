@@ -1,6 +1,6 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-const valBar = window.localStorage.barChargement;
+const valBar = window.localStorage.LoadingBar;
 
 document.addEventListener("DOMContentLoaded", function() {
     const loaderBar = document.getElementById("loaderBar");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }, 25);
 
-        window.localStorage.setItem("barChargement", "1");
+        window.localStorage.setItem("LoadingBar", "1");
     }else{
         loaderContainer.style.display = "none";
         main.style.display = 'grid';

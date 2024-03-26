@@ -13,26 +13,26 @@
     </head>
 
     <body>
-        <main class="circuit-main">
+        <main class="circuitMain">
 
-            <section id="choice-section">
-                <h1 id="choice-title">Choix du circuit</h1>
+            <section id="choiceSection">
+                <h1 id="choiceTitle">Choix du circuit</h1>
 
                 <section>
-                    <div id="true" class="true">
+                    <div id="createNewCircuit" class="personalPage">
                         <h2>Mes circuits</h2>
-                        <button>CREER UN NOUVEAU CIRCUIT</button>
+                        <button id="createNewCircuitButton">CREER UN NOUVEAU CIRCUIT</button>
                     </div>
-                    <div id="filter" class="false">
+                    <div id="filter" class="universalPage">
                         <h2>Filtrer par nom : </h2>
-                        <input type="text" id="name-filter">
-                        <h2 id="creator-title">Filtrer par créateur : </h2>
-                        <input type="text" id="creator-filter">
+                        <input type="text" id="nameFilter">
+                        <h2 id="creatorTitle">Filtrer par créateur : </h2>
+                        <input type="text" id="creatorFilter">
                     </div>
                     <div id="circuits"></div>
                 </section>
 
-                <div id="page-selector">
+                <div id="pageSelector">
                     <i class="fa-solid fa-backward-step"></i>
                     <i class="fa-solid fa-backward"></i>
                     <p>numéro de page</p>
@@ -41,47 +41,47 @@
                 </div>
             </section>
 
-            <aside class="false">
+            <aside class="universalPage">
                 <div id="empty">
                     <p>Cliquez sur un circuit pour afficher ses informations !</p>
                 </div>
                 <section id="full" class="invisible">
-                    <h1 id="circuit-name">Nom de la carte</h1>
+                    <h1 id="circuitName">Nom de la carte</h1>
 
                     <p id="score">Score : Score</p>
-                    <p id="creator-name">Créateur : CreateurUsername</p>
-                    <p id="creator-score">Médaille auteur : createurScore</p>
+                    <p id="creatorName">Créateur : CreateurUsername</p>
+                    <p id="creatorScore">Médaille auteur : createurScore</p>
 
                     <div id="leaderboard">
-                        <h2 id="leaderboard-title">Leaderboard</h2>
-                        <div id="leaderboard-players">stuff is supposed to go there</div>
+                        <h2 id="leaderboardTitle">Leaderboard</h2>
+                        <div id="leaderboardPlayers">stuff is supposed to go there</div>
                     </div>
 
                     <div>
-                        <button id="playbutton">JOUER</button>
+                        <button id="playButton">JOUER</button>
                     </div>
                 </section>
             </aside>
 
-            <aside class="true">
-                <div id="empty-2">
+            <aside class="personalPage">
+                <div id="emptyPersonal">
                     <p>Cliquez sur un circuit pour afficher ses informations !</p>
                 </div>
-                <section id="full-2" class="invisible">
-                    <h1 id="circuit-name-2">Nom de la carte</h1>
+                <section id="fullPersonal" class="invisible">
+                    <h1 id="circuitNamePersonal">Nom de la carte</h1>
 
-                    <p id="score-2">Score : Score</p>
-                    <p id="creator-score-2">Médaille auteur : createurScore</p>
+                    <p id="scorePersonal">Score : Score</p>
+                    <p id="creatorScorePersonal">Médaille auteur : createurScore</p>
 
-                    <div id="leaderboard-2">
-                        <h2 id="leaderboard-title-2">Leaderboard</h2>
-                        <div id="leaderboard-players-2">stuff is supposed to go there</div>
+                    <div id="leaderboardPersonal">
+                        <h2 id="leaderboardTitlePersonal">Leaderboard</h2>
+                        <div id="leaderboardPlayersPersonal">stuff is supposed to go there</div>
                     </div>
 
                     <div>
-                        <button id="play-button">JOUER</button>
-                        <button id="modify-button">MODIFIER</button>
-                        <button id="delete-button">SUPPRIMER</button>
+                        <button id="playButtonPersonal"  >JOUER</button>
+                        <button id="modifyButtonPersonal">MODIFIER</button>
+                        <button id="deleteButtonPersonal">SUPPRIMER</button>
                     </div>
                 </section>
             </aside>

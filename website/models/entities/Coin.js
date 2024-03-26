@@ -8,8 +8,8 @@ export class Coin {
 
     constructor(tilesetPath, images, rotations) {
         this.tilesetPath = tilesetPath;
-        this.images = images;
-        this.rotations = rotations;
+        this.images      = images;
+        this.rotations   = rotations;
         this.tilesPerRow = 12;
     }
 
@@ -20,7 +20,7 @@ export class Coin {
         if (this.images[0][0] === 33){
             canvas.id = 'canvasPiece';
         }else{
-            canvas.id = 'canvasPile';
+            canvas.id = 'canvasStack';
         }
 
         const tileSize = 160;

@@ -43,7 +43,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         switch(this.type){
             case 'warning':
@@ -115,13 +115,13 @@ export class Alert{
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
         });
 
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
 
             if (this.link !== null){
                 document.location.href = this.link;
@@ -186,10 +186,10 @@ export class Alert{
         const inputField = document.createElement('input');
 
         if(this.message !== "Nouveau mot de passe :") {
-            inputField.type = 'text';
+            inputField.type        = 'text';
             inputField.placeholder = 'Entrez du texte...';
         } else {
-            inputField.type = 'password';
+            inputField.type        = 'password';
             inputField.placeholder = '';
         }
 
@@ -246,12 +246,6 @@ export class Alert{
         pMessage.id        = 'pMessage';
         alertCustom.appendChild(pMessage);
 
-        // const pInstruction = document.createElement('p');
-        // pInstruction.innerText = 'Ancien mot de passe :';
-        // pInstruction.className = 'changePwd';
-        // pInstruction.id        = 'pInstruction';
-        // alertCustom.appendChild(pInstruction);
-
         const inputField = document.createElement('input');
         inputField.type        = 'password';
         inputField.className   = 'inputField';
@@ -297,7 +291,13 @@ export class Alert{
                 newAlert.customAlert();
             }
             else {
-                Alert.updateProfileName(inputField2.value);
+                if(inputField2.value.length >= 12){
+                    Alert.updateProfileName(inputField2.value);
+                }else{
+                    const newAlert = new Alert("Votre nouveau mot de passe n'est pas suffisament long ! (12 caractères attendu)", "Fermer", null, 'warning');
+                    newAlert.customAlert();
+                }
+
             }
 
             if (this.link != null){
@@ -316,21 +316,21 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
         alertCustom.style.color = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
 
         // css :
         closeButton.style.background = '#44464a';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
 
         //alertCustom.innerHTML = this.message+'<br>';
@@ -350,15 +350,12 @@ export class Alert{
 
 
         const actionbutton = document.createElement('button');
-        actionbutton.id = 'buttonAlert';
+        actionbutton.id        = 'buttonAlert';
         actionbutton.innerText = this.labelButton;
 
         // css :
         actionbutton.style.background = '#414141';
         actionbutton.style.color      = '#ffffff';
-        
-        //Pour renvoyer sur le "bon" choiceCircuit, en fonction d'où l'on vient
-        localStorage.getItem("play") === "true" ? localStorage.setItem("personal", "false") : localStorage.setItem("personal", "true");
 
         closeButton.addEventListener('click', () => {
             alertCustom.style.display = 'none';
@@ -380,17 +377,18 @@ export class Alert{
         document.body.appendChild(alertCustom);
 
         alertCustom.style.display = 'block';
-        overlay.style.display = 'block';
+        overlay.style.display     = 'block';
     }
 
     alertStartCircuit(creator, temps){
+        console.log('hvjbk')
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
         alertCustom.style.color  = '#ffffff';
@@ -443,7 +441,7 @@ export class Alert{
         actionbutton.addEventListener('click', () => {
 
             alertCustom.style.display = 'none';
-            overlay.style.display ='none';
+            overlay.style.display     = 'none';
             this.buttonClick = 1;
             
         });
@@ -540,14 +538,14 @@ export class Alert{
 
                 closeButton.addEventListener('click', () => {
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     Alert.updateProfileImage(localStorage.imgProfilId);
                 });
 
                 actionbutton.addEventListener('click', () => {
 
                     alertCustom.style.display = 'none';
-                    overlay.style.display = 'none';
+                    overlay.style.display     = 'none';
                     if (this.link != null) {
                         console.log('changement de page');
                         document.location.href = this.link;
@@ -599,6 +597,7 @@ export class Alert{
         fetch(url, params)
            .then((response) => response.json())
            .then((result) => {
+               console.log(result);
            })
            .catch((err) => {
                 console.error(err);
@@ -636,11 +635,8 @@ export class Alert{
         }
         else if(localStorage.type === 'password' && newVal !== 'none'){
             console.log('password')
-            //const password = document.getElementById('pseudo');
             console.log(localStorage.password);
                 const playerId = localStorage.getItem("playerId");
-
-                //pseudo.innerText = newUsername;
 
                 const url = API.getURLupdatePasswordOfPlayerId();
                 const dataPwd = {
@@ -668,9 +664,10 @@ export class Alert{
 
     alertSave(alertCustom, overlay){
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
-
+        
+        const isModifying = localStorage.getItem("modify");
 
         const closeButton = document.createElement('button');
         closeButton.id        = 'closeAlert';
@@ -680,7 +677,7 @@ export class Alert{
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
@@ -695,7 +692,7 @@ export class Alert{
         circuitNameInput.placeholder = 'Nom du circuit...';
         let circuitName = localStorage.getItem("circuitName");
         if (circuitName === undefined) circuitName = "";
-        if (localStorage.getItem("modify") === "true") circuitNameInput.value = circuitName;
+        if (isModifying === "true") circuitNameInput.value = circuitName;
         
         alertCustom.appendChild(circuitNameInput);
 
@@ -705,9 +702,10 @@ export class Alert{
         circuitLapsInput.type        = 'number';
         circuitLapsInput.className   = 'inputField';
         circuitLapsInput.placeholder = 'Nombre de tours...';
+        
         let circuitLaps = localStorage.getItem("circuitLaps");
         if (circuitLaps === undefined) circuitLaps = "";
-        if (localStorage.getItem("modify") === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
+        if (isModifying === "true" && circuitLaps !== "") circuitLapsInput.value = circuitLaps;
         
         alertCustom.appendChild(circuitLapsInput);
 
@@ -729,14 +727,17 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
             
-            if (circuitNameInput.value === "" || !circuitLapsInput.value.match(/^[1-9]$/)) {
+            let isCircuitValid = "false";
+            if (circuitNameInput.value !== "" && circuitLapsInput.value.match(/^[1-9]$/)) isCircuitValid = "true";
+            
+            if (isCircuitValid === "false") {
                 const errorAlert = new Alert("Veuillez remplir la première entrée et \nmettre un chiffre dans la deuxième.", "OK", "", "warning");
                 errorAlert.customAlert();
                 
             } else {
                 localStorage.setItem('circuitName', circuitNameInput.value);
                 localStorage.setItem('circuitLaps', circuitLapsInput.value);
-                localStorage.setItem("personal", "true");
+                localStorage.setItem("verifying", "true");
                 document.location.href = this.link;
             }
         });
@@ -746,17 +747,17 @@ export class Alert{
 
     alertDeleteAccount(alertCustom, overlay) {
         alertCustom.style.background = '#6ea5ef';
-        alertCustom.style.color = '#ffffff';
+        alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
         const closeButton = document.createElement('button');
-        closeButton.id = 'closeAlert';
+        closeButton.id        = 'closeAlert';
         closeButton.innerText = 'X';
         alertCustom.appendChild(closeButton);
 
         // css :
         closeButton.style.background = '#0048fd';
-        closeButton.style.color = '#ffffff';
+        closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
         pMessage.innerText = this.message;
@@ -777,7 +778,7 @@ export class Alert{
         });
 
         console.log(localStorage.getItem('playerId'))
-            console.log(parseInt(localStorage.getItem('playerId')))
+        console.log(parseInt(localStorage.getItem('playerId')))
 
         actionbutton.addEventListener('click', () => {
 
@@ -820,7 +821,6 @@ export class Alert{
            .catch((err) => {
                 console.error(err);
            });
-
         return res
     }
 }

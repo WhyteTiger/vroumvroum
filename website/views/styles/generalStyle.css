@@ -90,20 +90,20 @@ a:hover {
 
 /* OTHER */
 
-.invisible, #filter.invisible, #true.invisible {
+.invisible, #filter.invisible, #personalPage.invisible {
     display: none;
 }
 
-.tile-selector,
+.tileSelector,
 aside,
 #choosers button,
-h1#choice-title,
+h1#choiceTitle,
 #filter,
-#page-selector,
-#true,
-#circuit-infos,
+#pageSelector,
+#personalPage,
+#circuitInfos,
 #divCanvas,
-h1#form-title,
+h1#formTitle,
 form {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.07);

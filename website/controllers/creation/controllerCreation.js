@@ -15,8 +15,9 @@ let tileChooser = new TileChooser(), undoStack, redoStack;
 
 
 window.onload = () => {
+	const isModifying = localStorage.getItem('modify');
 	
-	if (localStorage.getItem('modify') === 'true') {
+	if (isModifying === 'true') {
 		let fetchParams = {
 			circuitIdIn: localStorage.getItem('circuitId')
 		};
@@ -55,12 +56,11 @@ window.onload = () => {
 				setTimeout(() => {
 					tileChooser.reload();
 					
-					console.log("init memento");
 					undoStack = new CircuitCareTaker();
 					redoStack = new CircuitCareTaker();
 				}, 200);
 				
-				document.querySelector('#buttons-info').addEventListener('click', (evt) => {
+				document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
 					const buttons = document.querySelectorAll('.chooser');
 					
 					for(let i = 0 ; i < buttons.length ; i++) {
@@ -68,7 +68,7 @@ window.onload = () => {
 						if(buttons[i] === evt.target) {
 							buttons[i].classList.add('selected');
 							
-							const sectionList = document.querySelectorAll('section.tile-selector');
+							const sectionList = document.querySelectorAll('section.tileSelector');
 							
 							switch(buttons[i].id) {
 								case 'b1' :
@@ -92,7 +92,7 @@ window.onload = () => {
 					}
 					
 					// need to de-select every div
-					const divList = document.querySelectorAll('.tile-selector div');
+					const divList = document.querySelectorAll('.tileSelector div');
 					for(let i = 0; i < divList.length; i++) {
 						divList[i].classList.remove('selected');
 					}
@@ -103,13 +103,13 @@ window.onload = () => {
 				for(let i = 0; i < cDivs.length; i++) {
 					cDivs[i].oncontextmenu = () => {return false;};
 					cDivs[i].addEventListener('mousedown', (evt) => {
-						undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+						undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
 						redoStack.resetStack();
 						
 						if (evt.button === 2) { // right click listener (rotate)
 							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
-							localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
+							localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 						}
 					});
 				}
@@ -118,15 +118,15 @@ window.onload = () => {
 				document.querySelector('#reinitbutton').addEventListener('click', () => {
 					tileChooser.reset();
 					
-					undoStack.push(JSON.parse(localStorage.getItem('matrixPerso')));
+					undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
 					redoStack.resetStack();
 					
-					localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+					localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 				});
 			})
 			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
 		
-	} else {
+	} else if (isModifying === "false") {
 		setTimeout(() => {
 			tileChooser.reload();
 			
@@ -134,7 +134,7 @@ window.onload = () => {
 			redoStack = new CircuitCareTaker();
 		}, 200);
 		
-		document.querySelector('#buttons-info').addEventListener('click', (evt) => {
+		document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
 			const buttons = document.querySelectorAll('.chooser');
 			
 			for(let i = 0 ; i < buttons.length ; i++) {
@@ -142,7 +142,7 @@ window.onload = () => {
 				if(buttons[i] === evt.target) {
 					buttons[i].classList.add('selected');
 					
-					const sectionList = document.querySelectorAll('section.tile-selector');
+					const sectionList = document.querySelectorAll('section.tileSelector');
 					
 					switch(buttons[i].id) {
 						case 'b1' :
@@ -166,7 +166,7 @@ window.onload = () => {
 			}
 			
 			// need to de-select every div
-			const divList = document.querySelectorAll('.tile-selector div');
+			const divList = document.querySelectorAll('.tileSelector div');
 			for(let i = 0; i < divList.length; i++) {
 				divList[i].classList.remove('selected');
 			}
@@ -182,7 +182,7 @@ window.onload = () => {
 				
 				if (evt.button === 2) { // right click listener (rotate)
 					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 80, tileChooser.matrix[1]);
+					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
 					localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 				}
 			});
@@ -191,54 +191,67 @@ window.onload = () => {
 		// GESTION DE LA REINITIALISATION
 		document.querySelector('#reinitbutton').addEventListener('click', () => {
 			tileChooser.reset();
+			const isModifying = localStorage.getItem('modify');
 			
-			undoStack.push(JSON.parse(localStorage.getItem('matrix')));
+			isModifying === 'true' ? undoStack.push(JSON.parse(localStorage.getItem('matrixModify'))) : undoStack.push(JSON.parse(localStorage.getItem('matrix')));
 			redoStack.resetStack();
 			
-			localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
+			isModifying === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix));
 		});
 	}
 	
-	if (localStorage.getItem("isChecked") === "false") { // means we're on the creation page and circuit isn't checked
-		console.log("isChecked === false");
+	const isChecked = localStorage.getItem("isChecked");
+	if (isChecked === "false") {
 		
 		document.querySelector('#savebutton').addEventListener('click', () => {
-			
 			let circuitIsValid = "false";
+			let oneStartEnd   = 0;
+			let oneCheckPoint = 0;
 			
 			let matrix;
-			localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixPerso')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+			const isModifying = localStorage.getItem('modify');
+			isModifying === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 			
 			const len = matrix[0].length;
 			for (let i = 0; i < len; i++) {
-				if (matrix[0][i] === 7 || matrix[0][i] === 12) {
+				let currentTile = matrix[0][i];
+				
+				if (oneStartEnd !== 1 && (currentTile === 7 || currentTile === 12)) {
+					oneStartEnd = 1;
+				}
+				if (oneCheckPoint !== 1 && currentTile >= 13 && currentTile <= 18) {
+					oneCheckPoint = 1;
+				}
+				if (oneStartEnd === 1 && oneCheckPoint === 1) {
 					circuitIsValid = "true";
 					i = len; // break
 				}
 			}
 			if (circuitIsValid === "true") {
-				localStorage.getItem('modify') === 'true' ? localStorage.setItem('matrixPerso', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
+				isModifying === 'true' ? localStorage.setItem('matrixModify', JSON.stringify(matrix)) : localStorage.setItem('matrix', JSON.stringify(matrix));
 				
 				const popUp = new Alert("Voulez vous sauvegarder votre circuit ?", "Sauvegarder", "playCircuit.html", 'save');
 				popUp.customAlert();
 			} else {
-				const popUp = new Alert("Votre circuit n'est pas valide : veuillez mettre au moins un départ et une arrivée.", "OK", "", 'warning');
+				const popUp = new Alert("Votre circuit n'est pas valide : veuillez mettre au moins un départ, une arrivée et un checkpoint.", "OK", "", 'warning');
 				popUp.customAlert();
 			}
 		});
 		
-	} else if (localStorage.getItem("isChecked") === "true") { // means we're on the creation page and circuit is checked
-		console.log("isChecked === true");
+	} else if (isChecked === "true") {
 		
 		let matrixIn;
-		localStorage.getItem('modify') === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixPerso')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
-		console.log("matrixIn : "+ matrixIn);
+		const isModifying = localStorage.getItem('modify');
+		isModifying === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
 		
 		const playerIdIn    = localStorage.getItem("playerId");
 		const circuitIdIn   = localStorage.getItem("circuitId");
 		const circuitNameIn = localStorage.getItem("circuitName");
 		const creatorTimeIn = localStorage.getItem("creatorTime");
 		const circuitLapsIn = localStorage.getItem("circuitLaps");
+		
+		localStorage.setItem("isChecked", "false");
+		localStorage.setItem("creatorTime", "");
 		
 		const dataCircuit = {
 			playerIdIn,
@@ -257,35 +270,39 @@ window.onload = () => {
 		};
 		
 		let url;
-		localStorage.getItem("modify") === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
+		isModifying === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
 		console.log("url : "+ url);
 		
 		fetch(url, params)
 			.then((response) => response.json())
 			.then((dataCircuit) => {
+				
 				if (dataCircuit.success === "true") {
 					console.log("circuit sauvegardé");
+					
+					if (isModifying === "false") {
+						localStorage.setItem("circuitId", ""+ dataCircuit.circuitIdOut);
+						localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
+						localStorage.setItem("modify", "true");
+					}
+					
 					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
 					popUpSuccess.customAlert();
 				} else {
 					console.error("saved error");
 				}
-				
-				localStorage.setItem("creatorTime", "");
-				localStorage.setItem("isChecked", "false");
 			});
-	} else {
-		console.error("Error controllerAside : Nothing good");
 	}
 }
 
 window.onunload = () => {
 	if (tileChooser !== undefined) {
-		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+		localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 	}
 };
 
 document.addEventListener('keydown', (event) => {
+	
 	if (event.ctrlKey && event.key === 'z') {
 		const lastState = undoStack.pop();
 		if (lastState !== null) {
@@ -293,7 +310,7 @@ document.addEventListener('keydown', (event) => {
 			tileChooser.setMatrix(lastState);
 			tileChooser.reload();
 			
-			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 		} else {
 			console.log("Faites une action avant de vouloir revenir en arrière");
 		}
@@ -304,7 +321,7 @@ document.addEventListener('keydown', (event) => {
 			tileChooser.setMatrix(nextState);
 			tileChooser.reload();
 			
-			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixPerso', JSON.stringify(tileChooser.matrix));
+			localStorage.getItem('modify') === "false" ?  localStorage.setItem('matrix', JSON.stringify(tileChooser.matrix)) : localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
 		} else {
 			console.log("Faites un undo avant de faire un redo");
 		}

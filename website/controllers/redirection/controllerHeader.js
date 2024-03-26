@@ -40,7 +40,7 @@ if (isConnected === "false") {
 	registrationA.setAttribute("href", "registration.html");
 	registrationA.appendChild(registrationButton);
 	
-	divButtons.id = "header-buttons";
+	divButtons.id = "headerButtons";
 	divButtons.appendChild(connectionA);
 	divButtons.appendChild(registrationA);
 	
@@ -48,7 +48,7 @@ if (isConnected === "false") {
 	
 } else {
 	const bigdiv = document.createElement('div');
-	bigdiv.id = 'burger-wrapper';
+	bigdiv.id = 'burgerWrapper';
 
 	const profileImg = document.createElement("img");
 	profileImg.setAttribute("alt", "profile image");
@@ -98,10 +98,8 @@ if (isConnected === "false") {
 	});
 
 	window.onclick = (evt) => {
-		if(evt.target.id !== "burger-wrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible');
+		if(evt.target.id !== "burgerWrapper" && evt.target.id !== "profileImg") document.querySelector('#burger').classList.remove('visible');
 	};
-
-
 }
 
 export function updateProfileImageInHeader(imageId){
