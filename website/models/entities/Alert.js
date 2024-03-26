@@ -316,7 +316,7 @@ export class Alert{
 
         const alertCustom = document.createElement('div');
 
-        alertCustom.className = 'custom-alert';
+        alertCustom.className = 'customAlert';
 
         alertCustom.style.backgroundColor = 'rgba(84, 88, 91, 0.7)';
         alertCustom.style.color = '#ffffff';
