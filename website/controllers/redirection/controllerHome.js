@@ -6,7 +6,12 @@ import {API} from "../../models/API.js";
 console.log(localStorage)
 
 let params = {
-	method: "GET"
+	method: "GET",
+	headers: {
+		"Origin": "http://vroum-vroum.tech",
+		"Access-Control-Request-Method": "POST",
+		"Access-Control-Request-Headers": "Content-Type, Authorization"
+	},
 };
 
 fetch(API.getURL(), params)
