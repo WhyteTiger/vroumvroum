@@ -1,15 +1,12 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
 import {Alert} from "../../models/entities/Alert.js";
-import {API} from "../../models/API";
+import {API} from "../../models/API.js";
 
 console.log(localStorage)
 
 let params = {
-	method: "POST",
-	headers: {
-		"Content-Type": "application/json",
-	}
+	method: "GET"
 };
 
 fetch(API.getURL(), params)
