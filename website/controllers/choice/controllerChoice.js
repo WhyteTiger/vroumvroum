@@ -240,9 +240,10 @@ const isPersonalPage = localStorage.getItem("personal");
 if (isPersonalPage === "false") {
     document.querySelectorAll('.personalPage' ).forEach((elt) => { elt.classList.add('invisible'); });
     document.querySelectorAll('.universalPage').forEach((elt) => { elt.classList.remove('invisible'); });
+    document.querySelectorAll('#createNewCircuit').forEach((elt) => {elt.style.display = 'none'})
 } else if (isPersonalPage === "true") {
     document.querySelectorAll('.personalPage' ).forEach((elt) => { elt.classList.remove('invisible'); });
-    document.querySelectorAll('.universalPage').forEach((elt) => { elt.classList.add('invisible'); });
+    document.querySelectorAll('.universalPage').forEach((elt) => { elt.classList.add('invisible');});
 }
 
 // eventListener for the filters
