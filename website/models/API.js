@@ -2,7 +2,7 @@
 
 export class API {
    
-   static server = 'localhost:8080';
+   static server = '68.183.78.185:3000';
    
    static getURL() {
       
