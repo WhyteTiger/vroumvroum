@@ -53,6 +53,9 @@ function fetchPage(nb, nbPages) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Origin": "http://vroum-vroum.tech",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type, Authorization"
         },
         body: JSON.stringify(fetchParams)
     };
