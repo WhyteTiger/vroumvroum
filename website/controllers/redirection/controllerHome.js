@@ -9,7 +9,7 @@ let params = {
 	method: "GET",
 	headers: {
 		"Origin": "http://vroum-vroum.tech",
-		"Access-Control-Request-Method": "POST",
+		"Access-Control-Request-Method": "POST, GET, OPTIONS",
 		"Access-Control-Request-Headers": "Content-Type, Authorization"
 	},
 };
