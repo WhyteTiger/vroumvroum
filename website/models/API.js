@@ -2,7 +2,7 @@
 
 export class API {
    
-   static server = '164.90.210.179:3000';
+   static server = '164.90.210.179:3012';
    
    static getURL() {
       
