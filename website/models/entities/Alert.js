@@ -746,7 +746,7 @@ export class Alert{
     }
 
     alertDeleteAccount(alertCustom, overlay) {
-        alertCustom.style.background = '#6ea5ef';
+        alertCustom.style.background = '#ff5f5f';
         alertCustom.style.color      = '#ffffff';
         alertCustom.style.border = '1px solid #d9323';
 
@@ -756,7 +756,7 @@ export class Alert{
         alertCustom.appendChild(closeButton);
 
         // css :
-        closeButton.style.background = '#0048fd';
+        closeButton.style.background = '#d83232';
         closeButton.style.color      = '#ffffff';
 
         const pMessage = document.createElement('p');
@@ -769,7 +769,7 @@ export class Alert{
         actionbutton.innerText = this.labelButton;
 
         // css :
-        actionbutton.style.background = '#0048ff';
+        actionbutton.style.background = '#d83232';
         actionbutton.style.color      = '#ffffff';
 
         closeButton.addEventListener('click', () => {
