@@ -10,8 +10,10 @@ let params = {
 	headers: {
 		"Origin": "http://vroum-vroum.tech",
 		"Access-Control-Request-Method": "POST, GET, OPTIONS",
-		"Access-Control-Request-Headers": "Content-Type, Authorization"
-	},
+		"Access-Control-Request-Headers": "Content-Type, Authorization",
+		"Access-Control-Allow-Origin": "*"
+	
+},
 };
 
 fetch(API.getURL(), params)
