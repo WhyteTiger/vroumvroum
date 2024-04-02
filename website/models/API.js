@@ -80,22 +80,22 @@ export class API {
 
    static getURLpostCircuits() {
 
-      return 'http://'+API.server+'/hubs/getCircuits';
+      return API.server+'/hubs/getCircuits';
    }
    
    static getURLpostCircuitOfPlayerId() {
 
-      return 'http://'+API.server+'/creation/postCircuitOfPlayerId';
+      return API.server+'/creation/postCircuitOfPlayerId';
    }
    
    static getURLmodifyCircuitOfPlayerId() {
       
-      return 'http://'+API.server+'/creation/modifyCircuitOfPlayerId';
+      return API.server+'/creation/modifyCircuitOfPlayerId';
    }
 
    static getURLDeleteCircuit() {
 
-      return 'http://'+API.server+'/hubs/deleteCircuit';
+      return API.server+'/hubs/deleteCircuit';
    }
 
    static getURLDeleteAccount() {
