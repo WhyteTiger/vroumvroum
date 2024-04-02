@@ -2,80 +2,80 @@
 
 export class API {
    
-   static server = 'melvyn.super-sympa.fr';
+   static server = 'https://melvyn.super-sympa.fr';
    
    static getURL() {
       
-      return 'http://'+API.server+'/';
+      return API.server+'/';
    }
    
    static getURLTryToConnect() {
       
-      return 'http://'+API.server+'/connection/tryToConnect';
+      return API.server+'/connection/tryToConnect';
    }
    
    static getURLWantToRegistrate() {
       
-      return 'http://'+API.server+'/connection/wantToRegistrate';
+      return API.server+'/connection/wantToRegistrate';
    }
    
    static getURLgetCircuitTileById() {
       
-      return 'http://'+API.server+'/gameplay/getCircuitTileById';
+      return API.server+'/gameplay/getCircuitTileById';
    }
    
    static getURLgetOwnKartByPlayerId() {
       
-      return 'http://'+API.server+'/gameplay/getOwnKartByPlayerId';
+      return API.server+'/gameplay/getOwnKartByPlayerId';
    }
 
    static getURLupdateBestTimeOfCircuitByPlayerId() {
-      return 'http://'+API.server+'/gameplay/updateBestTimeOfCircuitByPlayerId';
+      return API.server+'/gameplay/updateBestTimeOfCircuitByPlayerId';
    }
 
    static getURLgetCircuitInformation() {
 
-      return 'http://'+API.server+'/gameplay/getCircuitInformation';
+      return API.server+'/gameplay/getCircuitInformation';
    }
 
    static getURLaddVroumCoinToPlayerId() {
 
-      return 'http://'+API.server+'/gameplay/addVroumCoinToPlayerId';
+      return API.server+'/gameplay/addVroumCoinToPlayerId';
    }
    
    static getURLBestScoreAndNote() {
          
-      return 'http://'+API.server+'/gameplay/getBestScoreAndNote';
+      return API.server+'/gameplay/getBestScoreAndNote';
    }
 
    static getURLgetKartsAndCoinsByPlayerId() {
       
-      return 'http://'+API.server+'/personalize/getKartsAndCoinsByPlayerId';
+      return API.server+'/personalize/getKartsAndCoinsByPlayerId';
    }
    
    static getURLpostKartsAndCoinsInformationOfPlayerId() {
       
-      return 'http://'+API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
+      return API.server+'/personalize/postKartsAndCoinsInformationOfPlayerId';
    }
    
    static getURLupdatePPIdOfPlayerId() {
       
-      return 'http://'+API.server+'/personalize/updatePPIdOfPlayerId';
+      return API.server+'/personalize/updatePPIdOfPlayerId';
    }
    
    static getURLupdatePlayerUsername() {
       
-      return 'http://'+API.server+'/personalize/updatePlayerUsername';
+      return API.server+'/personalize/updatePlayerUsername';
    }
    
    static getURLupdatePasswordOfPlayerId() {
       
-      return 'http://'+API.server+'/personalize/updatePasswordOfPlayerId';
+      return API.server+'/personalize/updatePasswordOfPlayerId';
    }
 
    static getURLpostCircuitsNumber() {
 
-      return 'http://'+API.server+'/hubs/getCircuitsNumber';
+      return API.server+'/hubs/getCircuitsNumber';
    }
 
    static getURLpostCircuits() {
@@ -100,7 +100,7 @@ export class API {
 
    static getURLDeleteAccount() {
 
-      return 'http://'+API.server+'/connection/tryToDeleteAccount';
+      return API.server+'/connection/tryToDeleteAccount';
    }
 }
 
