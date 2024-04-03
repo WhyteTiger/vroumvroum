@@ -1,19 +1,6 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
 import {Alert} from "../../models/entities/Alert.js";
-import {API} from "../../models/API.js";
-
-console.log(localStorage)
-
-let params = {
-	method: "GET",
-	mode : "cors"
-};
-
-fetch(API.getURL(), params)
-	.then((res) => {
-		console.log("API : " + API.getURL() + " renvoie " + res);
-	})
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/homeMusic.mp3";

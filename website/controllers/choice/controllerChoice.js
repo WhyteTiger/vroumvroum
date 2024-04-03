@@ -4,8 +4,6 @@ import { API } from "../../models/API.js";
 import { Timer } from "../../models/entities/Timer.js";
 import { Alert } from "../../models/entities/Alert.js";
 
-console.log(localStorage);
-
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/hubsMusic.mp3";
 audio.volume   = 0.0312;
@@ -201,7 +199,6 @@ function fetchCircuits() {
     .then((dataNb) => {
         const nbCircuits = dataNb.result.circuitnumber;
         const nbPages = Math.ceil(nbCircuits / 12);
-        console.log(nbPages)
     
         if (nbPages <= 1) document.querySelector('#pageSelector').classList.add('invisible');
         let currentPage = 1;

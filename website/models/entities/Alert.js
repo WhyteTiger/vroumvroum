@@ -381,7 +381,6 @@ export class Alert{
     }
 
     alertStartCircuit(creator, temps){
-        console.log('hvjbk')
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
@@ -623,7 +622,6 @@ export class Alert{
                 },
                 body: JSON.stringify(dataUsername)
             };
-            console.log(params);
 
             fetch(url, params)
                 .then((response) => response.json())
@@ -634,8 +632,6 @@ export class Alert{
             localStorage.setItem("username", newVal);
         }
         else if(localStorage.type === 'password' && newVal !== 'none'){
-            console.log('password')
-            console.log(localStorage.password);
                 const playerId = localStorage.getItem("playerId");
 
                 const url = API.getURLupdatePasswordOfPlayerId();
@@ -650,7 +646,6 @@ export class Alert{
                     },
                     body: JSON.stringify(dataPwd)
                 };
-                console.log(params);
 
                 fetch(url, params)
                     .then((response) => response.json())
@@ -776,9 +771,6 @@ export class Alert{
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
         });
-
-        console.log(localStorage.getItem('playerId'))
-        console.log(parseInt(localStorage.getItem('playerId')))
 
         actionbutton.addEventListener('click', () => {
 
