@@ -11,8 +11,6 @@ import { Point }                from "../entities/Point.js";
 import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheckpoint.js";
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
-
-console.log(localStorage);
 let creatorTime, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround,tickRate, lastFrameTime;
 
 function drawCircuit(map) {

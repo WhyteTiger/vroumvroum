@@ -29,7 +29,6 @@ async function wantToRegistrate(nickname, password) {
 	await fetch(url, params)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
 			localStorage.alreadyRegister = data.alreadyRegisterOut;
 			
 			if (localStorage.alreadyRegister === "false" || localStorage.alreadyRegister === undefined) {

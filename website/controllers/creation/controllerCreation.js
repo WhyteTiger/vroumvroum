@@ -271,8 +271,7 @@ window.onload = () => {
 		
 		let url;
 		isModifying === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
-		console.log("url : "+ url);
-		
+
 		fetch(url, params)
 			.then((response) => response.json())
 			.then((dataCircuit) => {

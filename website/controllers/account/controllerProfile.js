@@ -3,8 +3,6 @@
 import { Alert } from "../../models/entities/Alert.js";
 import { API }   from "../../models/API.js";
 
-console.log(localStorage)
-
 const image        = document.getElementById('previewContainer');
 const input        = document.getElementById('labelFile');
 const editButton   = document.getElementById('editButton');
