@@ -18,7 +18,7 @@ CREATE TABLE circuit (
    folderid             INT   NOT NULL,
    circuitname          TEXT  NOT NULL,
    creatortime          FLOAT NOT NULL,
-   laps			    INT   NOT NULL,
+   laps			        INT   NOT NULL,
    PRIMARY KEY (circuitid)
 );
 
@@ -36,8 +36,8 @@ CREATE TABLE bannedips (
 );
 
 CREATE TABLE play (
-   playerid             INT   NOT NULL,
-   circuitid            INT   NOT NULL,
+   playerid             INT  NOT NULL,
+   circuitid            INT  NOT NULL,
    playertime           INT,
    playernote           INT,
    PRIMARY KEY (playerid, circuitid)
@@ -47,7 +47,7 @@ CREATE TABLE player (
    playerid             INT  NOT NULL,
    username             TEXT NOT NULL,
    password             TEXT NOT NULL,
-   ppid			    INT  NOT NULL,
+   ppid			        INT  NOT NULL,
    vroumcoins           INT  NOT NULL,
    isbanned             BOOL,
    PRIMARY KEY (playerid)

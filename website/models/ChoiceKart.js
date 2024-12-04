@@ -98,7 +98,6 @@ window.onload = () => {
 
 			const tileset = new Image();
 			tileset.src = "../../assets/tilesets/circuit.png";
-			console.log("tileset.src : "+ tileset.src);
 
 			tileset.onload = () => {
 
@@ -153,7 +152,7 @@ window.onload = () => {
 							for (let j = 0; j < map.getLargeur(); j++) {
 								const otherContainer        = buttonsContainer.children[j];
 								const otherButton = otherContainer.querySelector('button');
-								console.log(otherButton);
+								
 								if (otherButton.id === 'buttonCarChosen') {
 									otherButton.id 		 = 'buttonCar';
 									otherButton.innerText = 'Choisir';

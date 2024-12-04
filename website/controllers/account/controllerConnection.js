@@ -42,16 +42,15 @@ async function tryToConnect(username, password) {
 			localStorage.playerId 		  = data.playerIdOut;
 			localStorage.username 		  = data.usernameOut;
 			localStorage.imgProfilId     = data.PPIdOut;
-			localStorage.banne		= data.isBanned;
+			localStorage.banne		     = data.isBanned;
 
 			
 			if (localStorage.alreadyRegister === "true" && localStorage.rightPassword === "true") {
-				if(localStorage.banne === '1') {
+				if (localStorage.banne === '1') {
 					const newAlert = new Alert("Vous ne pouvez plus accéder à ce compte !", "Fermer !", null, "warning");
 					newAlert.customAlert();
-				}else {
+				} else {
 					localStorage.isConnected = true;
-					localStorage.setItem('password', password);
 					document.location.href = "../views/home.html";
 				}
 			} else {
