@@ -16,115 +16,102 @@ let tileChooser = new TileChooser(), undoStack, redoStack;
 
 window.onload = () => {
 	const isModifying = localStorage.getItem('modify');
+	const circuitId   = localStorage.getItem('circuitId');
 	
 	if (isModifying === 'true') {
-		let fetchParams = {
-			circuitIdIn: localStorage.getItem('circuitId')
-		};
 		
-		let params = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(fetchParams)
-		};
+		let tab = JSON.parse(localStorage.getItem('circuit'+ circuitId));
 		
-		fetch(API.getURLgetCircuitTileById(), params)
-			.then((response) => response.json())
-			.then((data) => {
-				
-				let tab = data.tileSet;
-				
-				let tempMatrix    = [];
-				let tempTiles     = [];
-				let tempRotations = [];
-				
-				for(let i = 0 ; i < tab.circuit.length ; i++) {	// all arrays are the same length
-					for(let j = 0 ; j < tab.circuit[i].length ; j++) {
-						tempTiles.push(tab.circuit[i][j]);
-						tempRotations.push(tab.rotation[i][j]);
+		let tempMatrix    = [];
+		let tempTiles     = [];
+		let tempRotations = [];
+		
+		for(let i = 0 ; i < tab.circuit[0].length ; i++) {	// all arrays are the same length
+			for(let j = 0 ; j < tab.circuit[0][i].length ; j++) {
+				tempTiles.push(tab.circuit[0][i][j]);
+				tempRotations.push(tab.circuit[1][i][j]);
+			}
+		}
+		
+		tempMatrix.push(tempTiles);
+		tempMatrix.push(tempRotations);
+		
+		tileChooser.setMatrix(tempMatrix);
+		tileChooser.reload();
+		
+		
+		setTimeout(() => {
+			tileChooser.reload();
+			
+			undoStack = new CircuitCareTaker();
+			redoStack = new CircuitCareTaker();
+		}, 200);
+		
+		document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
+			const buttons = document.querySelectorAll('.chooser');
+			
+			for(let i = 0 ; i < buttons.length ; i++) {
+				// to modify the class
+				if(buttons[i] === evt.target) {
+					buttons[i].classList.add('selected');
+					
+					const sectionList = document.querySelectorAll('section.tileSelector');
+					
+					switch(buttons[i].id) {
+						case 'b1' :
+							sectionList[0].classList.remove('invisible');
+							sectionList[1].classList.add('invisible');
+							sectionList[2].classList.add('invisible');
+							break;
+						case 'b2' :
+							sectionList[0].classList.add('invisible');
+							sectionList[1].classList.remove('invisible');
+							sectionList[2].classList.add('invisible');
+							break;
+						case 'b3' :
+							sectionList[0].classList.add('invisible');
+							sectionList[1].classList.add('invisible');
+							sectionList[2].classList.remove('invisible');
+							break;
 					}
 				}
+				else buttons[i].classList.remove('selected');
+			}
+			
+			// need to de-select every div
+			const divList = document.querySelectorAll('.tileSelector div');
+			for(let i = 0; i < divList.length; i++) {
+				divList[i].classList.remove('selected');
+			}
+		});
+		
+		
+		
+		// eventListener on the circuit divs
+		const cDivs = document.querySelectorAll('#circuit div');
+		for(let i = 0; i < cDivs.length; i++) {
+			cDivs[i].oncontextmenu = () => {return false;};
+			cDivs[i].addEventListener('mousedown', (evt) => {
+				undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
+				redoStack.resetStack();
 				
-				tempMatrix.push(tempTiles);
-				tempMatrix.push(tempRotations);
-				
-				tileChooser.setMatrix(tempMatrix);
-				tileChooser.reload();
-				
-				setTimeout(() => {
-					tileChooser.reload();
-					
-					undoStack = new CircuitCareTaker();
-					redoStack = new CircuitCareTaker();
-				}, 200);
-				
-				document.querySelector('#buttonsInfo').addEventListener('click', (evt) => {
-					const buttons = document.querySelectorAll('.chooser');
-					
-					for(let i = 0 ; i < buttons.length ; i++) {
-						// to modify the class
-						if(buttons[i] === evt.target) {
-							buttons[i].classList.add('selected');
-							
-							const sectionList = document.querySelectorAll('section.tileSelector');
-							
-							switch(buttons[i].id) {
-								case 'b1' :
-									sectionList[0].classList.remove('invisible');
-									sectionList[1].classList.add('invisible');
-									sectionList[2].classList.add('invisible');
-									break;
-								case 'b2' :
-									sectionList[0].classList.add('invisible');
-									sectionList[1].classList.remove('invisible');
-									sectionList[2].classList.add('invisible');
-									break;
-								case 'b3' :
-									sectionList[0].classList.add('invisible');
-									sectionList[1].classList.add('invisible');
-									sectionList[2].classList.remove('invisible');
-									break;
-							}
-						}
-						else buttons[i].classList.remove('selected');
-					}
-					
-					// need to de-select every div
-					const divList = document.querySelectorAll('.tileSelector div');
-					for(let i = 0; i < divList.length; i++) {
-						divList[i].classList.remove('selected');
-					}
-				});
-				
-				// eventListener on the circuit divs
-				const cDivs = document.querySelectorAll('#circuit div');
-				for(let i = 0; i < cDivs.length; i++) {
-					cDivs[i].oncontextmenu = () => {return false;};
-					cDivs[i].addEventListener('mousedown', (evt) => {
-						undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
-						redoStack.resetStack();
-						
-						if (evt.button === 2) { // right click listener (rotate)
-							tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
-							tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
-							localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
-						}
-					});
-				}
-				
-				// GESTION DE LA REINITIALISATION
-				document.querySelector('#reinitbutton').addEventListener('click', () => {
-					tileChooser.reset();
-					
-					undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
-					redoStack.resetStack();
-					
+				if (evt.button === 2) { // right click listener (rotate)
+					tileChooser.matrix[1][i] = (tileChooser.matrix[1][i] + 90) % 360;
+					tileChooser.map.replaceTiles(tileChooser.matrix[0], tileChooser.matrix[1], tileChooser.circuit, 60, tileChooser.matrix[1]);
 					localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
-				});
-			})
-			.catch((err) => console.error(`PROBLEME FETCH PERSO : ${err}`));
+				}
+			});
+		}
+		
+		// GESTION DE LA REINITIALISATION
+		document.querySelector('#reinitbutton').addEventListener('click', () => {
+			tileChooser.reset();
+			
+			undoStack.push(JSON.parse(localStorage.getItem('matrixModify')));
+			redoStack.resetStack();
+			
+			localStorage.setItem('matrixModify', JSON.stringify(tileChooser.matrix));
+		});
 		
 	} else if (isModifying === "false") {
 		setTimeout(() => {
@@ -240,57 +227,77 @@ window.onload = () => {
 		
 	} else if (isChecked === "true") {
 		
-		let matrixIn;
+		let matrix;
 		const isModifying = localStorage.getItem('modify');
-		isModifying === 'true' ? matrixIn = JSON.parse(localStorage.getItem('matrixModify')) : matrixIn = JSON.parse(localStorage.getItem('matrix'));
+		isModifying === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
 		
-		const playerIdIn    = localStorage.getItem("playerId");
-		const circuitIdIn   = localStorage.getItem("circuitId");
-		const circuitNameIn = localStorage.getItem("circuitName");
-		const creatorTimeIn = localStorage.getItem("creatorTime");
-		const circuitLapsIn = localStorage.getItem("circuitLaps");
+		const playerName    = localStorage.getItem("playerName");
+		const circuitId   = localStorage.getItem("circuitId");
+		const circuitName = localStorage.getItem("circuitName");
+		const creatorTime = localStorage.getItem("creatorTime");
+		const circuitLaps = localStorage.getItem("circuitLaps");
+		
+		let circuit = "[\n";
+		for (let h = 0; h < 2; h++) {
+			if (h === 1) {
+				circuit += "\t";
+			}
+			circuit += "[\n";
+			for (let i = 0; i < matrix[h].length; i++) {
+				if (i%8 === 0) {
+					circuit += "\t\t["
+				}
+				circuit += ""+matrix[h][i];
+				if (i%8 === 7) {
+					circuit += "]";
+					if (i < matrix[h].length-8) {
+						circuit += ",";
+					}
+					circuit += "\n";
+				} else {
+					circuit += ", ";
+				}
+			}
+			circuit += "\t]";
+			if (h === 0) {
+				circuit += ",";
+			}
+			circuit += "\n";
+		}
+		circuit += "\n]";
+		
+		const newCircuit = "{\n" +
+			"\t\"circuitName\": \""+ circuitName +"\",\n"+
+			"\t\"circuitId\":   \""+ circuitId   +"\",\n"+
+			"\t\"creatorName\": \""+ playerName  +"\",\n"+
+			"\t\"creatorTime\": \""+ creatorTime +"\",\n"+
+			"\t\"circuitLaps\": \""+ circuitLaps +"\",\n"+
+			"\t\"circuit\":       "+ circuit     +"\n" +
+		"}";
+		
+		console.log("JSON");
+		console.log(newCircuit);
+		console.log("JSON fin");
 		
 		localStorage.setItem("isChecked", "false");
 		localStorage.setItem("creatorTime", "");
 		
-		const dataCircuit = {
-			playerIdIn,
-			circuitIdIn,
-			matrixIn,
-			circuitNameIn,
-			creatorTimeIn,
-			circuitLapsIn
-		};
-		const params = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(dataCircuit)
-		};
+		const circuitIdTotal = JSON.parse(localStorage.getItem("circuitIdTotal"));
+		const newCircuitId = circuitIdTotal + 1;
+		localStorage.setItem("circuitIdTotal", newCircuitId);
+		localStorage.setItem("circuitId", newCircuitId);
 		
-		let url;
-		isModifying === "true" ? url = API.getURLmodifyCircuitOfPlayerId() : url = API.getURLpostCircuitOfPlayerId();
-
-		fetch(url, params)
-			.then((response) => response.json())
-			.then((dataCircuit) => {
-				
-				if (dataCircuit.success === "true") {
-					console.log("circuit sauvegardé");
-					
-					if (isModifying === "false") {
-						localStorage.setItem("circuitId", ""+ dataCircuit.circuitIdOut);
-						localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
-						localStorage.setItem("modify", "true");
-					}
-					
-					const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
-					popUpSuccess.customAlert();
-				} else {
-					console.error("saved error");
-				}
-			});
+		localStorage.setItem("circuit"+newCircuitId, newCircuit);
+		
+		console.log("circuit sauvegardé");
+		
+		if (isModifying === "false") {
+			localStorage.setItem("matrixModify", localStorage.getItem('matrix'));
+			localStorage.setItem("modify", "true");
+		}
+		
+		const popUpSuccess = new Alert("Votre circuit a bien été sauvegardé", "OK", "", 'info');
+		popUpSuccess.customAlert();
 	}
 }
 

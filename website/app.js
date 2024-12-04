@@ -7,6 +7,7 @@ localStorage.setItem("playerId", 		 "0");
 localStorage.setItem("alreadyRegister", "");
 
 localStorage.setItem("circuitId",       "1");
+localStorage.setItem("circuitIdTotal",  "0");
 localStorage.setItem("matrix",          "");
 
 localStorage.setItem('save', "false");

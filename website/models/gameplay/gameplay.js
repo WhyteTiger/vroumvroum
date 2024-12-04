@@ -36,6 +36,7 @@ function drawCircuit(map) {
 }
 
 window.onload = () => {
+   console.log("LOADING page");
    circuitBackGround = undefined;
    
    const audio = document.createElement("audio");
@@ -148,6 +149,8 @@ window.onload = () => {
          
    } else if (isVerifying === "true") {
       document.getElementById('asideInfos').classList.add('invisible');
+      
+      console.log("LOADING circuit");
       
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
@@ -282,16 +285,6 @@ function updateCar() {
    
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
-      
-   } else if (localStorage.getItem("isConnected") === "false") {
-      let monTemps = timer.getElapsedTime();
-      timer.stop();
-      let popUpSeConnecter = new Alert("Enregistrer mon temps", "Se connecter", "connection.html" ,"type");
-      localStorage.setItem("hasATime", "true");
-      localStorage.setItem("bestTimeNoAccount", monTemps);
-      localStorage.setItem("circuitIdNoAccount", localStorage.circuitId);
-
-      popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
       
    } else if (localStorage.getItem("verifying") === "false") {
 		let monTemps = timer.getElapsedTime();

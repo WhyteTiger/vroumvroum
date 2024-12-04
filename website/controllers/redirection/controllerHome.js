@@ -25,23 +25,11 @@ playButton.addEventListener("click", () => {
 
 const createCircuit = document.getElementById("create");
 createCircuit.addEventListener("click", () => {
-	const playerId = window.localStorage.getItem("playerId");
-	if( playerId === '0'){
-		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter", "connection.html" , 'warning');
-		newAlert.customAlert();
-	} else {
-		localStorage.setItem("personal", "true");
-		document.location.href = "choiceCircuit.html";
-	}
+	localStorage.setItem("personal", "true");
+	document.location.href = "choiceCircuit.html";
 });
 
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
-	const playerId = window.localStorage.getItem("playerId");
-	if ( playerId === '0') {
-		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter","connection.html", 'warning');
-		newAlert.customAlert();
-	} else {
-		document.location.href = "choiceKart.html";
-	}
+	document.location.href = "choiceKart.html";
 });
