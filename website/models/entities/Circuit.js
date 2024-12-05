@@ -12,8 +12,10 @@ export class Circuit {
 	matrix;
 	
 	constructor(circuitName, creatorName, creatorTime, circuitLaps, matrix) {
-		Circuit.circuitIdTotal++;
-		this.circuitId = Circuit.circuitIdTotal;
+		let circuitIdTotal = Number(localStorage.getItem("circuitIdTotal"));
+		circuitIdTotal += 1;
+		this.circuitId = circuitIdTotal;
+		localStorage.setItem("circuitIdTotal", ""+circuitIdTotal);
 		
 		this.circuitName = circuitName;
 		this.creatorName = creatorName;
@@ -45,8 +47,6 @@ export class Circuit {
 			data.circuitLaps,
 			data.matrix
 		);
-		circuit.circuitId = data.circuitId; // Restaurer l'ID unique
-		Circuit.circuitIdTotal = Math.max(Circuit.circuitIdTotal, data.circuitId); // Maintenir l'ID global
 		circuit.circuitScore = data.circuitScore || 0;
 		circuit.leaderBoard  = data.leaderBoard  || [];
 		return circuit;
@@ -72,6 +72,17 @@ export class Circuit {
 		
 		// Sauvegarder la liste des circuits après modification
 		Circuits.saveToStorage();
+	}
+	
+	export() {
+		const content = this.toJSON();
+		const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(content));
+		const downloadAnchorNode = document.createElement('a');
+		downloadAnchorNode.setAttribute("href",     dataStr);
+		downloadAnchorNode.setAttribute("download", this.circuitName + ".json");
+		document.body.appendChild(downloadAnchorNode); // required for firefox
+		downloadAnchorNode.click();
+		downloadAnchorNode.remove();
 	}
 	
 	

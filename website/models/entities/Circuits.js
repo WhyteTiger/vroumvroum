@@ -103,4 +103,37 @@ export class Circuits {
 	static initialize() {
 		Circuits.loadFromStorage();  // Charger les données au démarrage
 	}
+	
+	static importCircuit(file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			
+			reader.onload = (event) => {
+				try {
+					const jsonData = JSON.parse(event.target.result);
+					if (Array.isArray(jsonData)) {
+						// Si le fichier contient une liste de circuits
+						const importedCircuits = jsonData.map((data) => Circuit.fromJSON(data));
+						importedCircuits.forEach((circuit) => Circuits.add(circuit));
+						resolve(importedCircuits);
+					} else {
+						// Si le fichier contient un seul circuit
+						const importedCircuit = Circuit.fromJSON(jsonData);
+						Circuits.add(importedCircuit);
+						localStorage.setItem("circuitId", importedCircuit.getCircuitId());
+						resolve([importedCircuit]);
+					}
+				} catch (error) {
+					reject(new Error("Erreur lors du parsing du fichier JSON : " + error.message));
+				}
+			};
+			
+			reader.onerror = () => {
+				reject(new Error("Erreur lors de la lecture du fichier : " + reader.error.message));
+			};
+			
+			reader.readAsText(file); // Lire le contenu du fichier en tant que texte
+		});
+	}
+	
 }

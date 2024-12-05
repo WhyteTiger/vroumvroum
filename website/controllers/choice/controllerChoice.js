@@ -195,5 +195,43 @@ document.getElementById('deleteButtonPersonal').addEventListener('click', () => 
     localStorage.setItem("modify", "false");
     document.location.href = 'choiceCircuit.html';
 });
+document.getElementById('importButtonPersonal').addEventListener('click', () => {
+    document.getElementById("fileInput").click();
+});
+document.getElementById('importButton').addEventListener('click', () => {
+    document.getElementById("fileInput").click();
+});
+
+document.getElementById("fileInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        Circuits.importCircuit(file)
+           .then((importedCircuits) => {
+               console.log("Circuits importés :", importedCircuits);
+               document.location.href = 'choiceCircuit.html';
+           })
+           .catch((error) => {
+               console.error("Erreur lors de l'importation :", error);
+               alert("Une erreur est survenue lors de l'importation : " + error.message);
+           });
+    } else {
+        console.error("Aucun fichier sélectionné");
+        alert("Veuillez sélectionner un fichier.");
+    }
+});
+
+document.getElementById('exportButtonPersonal').addEventListener('click', () => {
+    exportCircuit();
+});
+document.getElementById('exportButton').addEventListener('click', () => {
+    exportCircuit();
+});
 
 fetchCircuits();
+
+function exportCircuit() {
+    const circuitId = localStorage.getItem("circuitId");
+    const circuit = Circuits.get(circuitId);
+    circuit.export();
+    location.href = 'choiceCircuit.html';
+}

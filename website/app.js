@@ -7,6 +7,7 @@ localStorage.setItem("playerId", 		 "0");
 localStorage.setItem("alreadyRegister", "");
 
 localStorage.setItem("circuitId",       "1");
+localStorage.setItem("circuitIdTotal",  "1");
 localStorage.setItem("matrix",          "");
 
 localStorage.setItem('save', "false");
@@ -19,7 +20,7 @@ localStorage.setItem("LoadingBar",      "0");
 
 
 localStorage.setItem("kartId", "1");
-localStorage.setItem("Coins", "0");
+localStorage.setItem("Coins",  "0");
 
 localStorage.setItem("Circuits", JSON.stringify([]));
 
