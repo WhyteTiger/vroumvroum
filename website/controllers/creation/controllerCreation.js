@@ -20,24 +20,14 @@ window.onload = () => {
 	const circuitId   = localStorage.getItem('circuitId');
 	
 	if (isModifying === 'true') {
-		
-		console.log("CIRCUITID : "+ circuitId);
-		console.log("Etape 1");
 		const circuit = Circuits.get(circuitId);
-		console.log(circuit);
-		console.log("Etape 2");
 		let tab = circuit.getMatrix();
-		console.log(tab);
-		console.log(tab[0]);
-		console.log("Etape 12");
 		
 		let tempMatrix    = [];
 		let tempTiles     = [];
 		let tempRotations = [];
 		
 		for (let i = 0; i < 96; i++) {
-			console.log(i);
-			console.log(tab[0][i]);
 			tempTiles.push(tab[0][i]);
 			tempRotations.push(tab[1][i]);
 		}
@@ -256,10 +246,6 @@ window.onload = () => {
 			newCircuitId = newCircuit.getCircuitId();
 			Circuits.add(newCircuit);
 		}
-		
-		console.log("AYAYA");
-		console.log(Circuits.circuitList);
-		console.log("CIRCUITID : "+ newCircuitId);
 		
 		localStorage.setItem("circuitId", newCircuitId);
 		localStorage.setItem("isChecked", "false");
