@@ -20,33 +20,7 @@ Il est accessible à tous, et est majoritairement destiné aux jeunes personnes 
 
 Un utilisateur peut jouer à des circuits que d'autres utilisateurs ont créé, en créer également, débloquer des skins pour ses karts, et personnaliser ses informations de compte.
 
-## Pré-requis
-
-- Un ordinateur qui tourne
-- Internet
-- Un navigateur web
-- Un serveur web local (Laragon et WAMP Server sont recommandés)
-- Si vous souhaitez modifier les fichiers, Visual Studio Code et WebStorm suffisent.
-
-## Utilisation
-
-Pour utiliser cette application, vous devez au préalable récupérer les fichiers de [ce dépôt Git](https://forge.univ-lyon1.fr/p2208567/sae-s3.01-api) contenant l'API de VroumVroum.
-
-Pour lancer cette API, placez-vous dans le répertoire `sae s3.01-api` et exécutez :
-
-```
-npm run start
-```
-
-**N.B. :** Vous devrez probablement télécharger `tslint`. Pour ce faire, exécutez :
-
-```
-npm i tslint
-```
-
-Vous pouvez, pour accéder à la base de données, utiliser les fichiers SQL fournis dans le dossier `sqlbase` et les importer dans votre PhpMyAdmin.
-
-**N.B. :** Importez `DB_VroumVroum.sql` avant `dataSetTest.sql`.
+Cette solo edition est une version jouable sans base de données.
 
 ## Auteurs et contributeurs
 
