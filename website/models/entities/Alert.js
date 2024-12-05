@@ -380,7 +380,7 @@ export class Alert{
         overlay.style.display     = 'block';
     }
 
-    alertStartCircuit(creator, temps){
+    alertStartCircuit(creator, temps, timer){
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         document.body.appendChild(overlay);
@@ -438,11 +438,10 @@ export class Alert{
         });
 
         actionbutton.addEventListener('click', () => {
-
             alertCustom.style.display = 'none';
             overlay.style.display     = 'none';
+            setInterval(() => {timer.updateCompteur();}, 100);
             this.buttonClick = 1;
-            
         });
 
         alertCustom.appendChild(actionbutton);

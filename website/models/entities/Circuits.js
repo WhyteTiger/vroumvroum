@@ -100,40 +100,42 @@ export class Circuits {
 	}
 	
 	// Initialiser le chargement depuis localStorage dès le début de l'application
-	static initialize() {
-		Circuits.loadFromStorage();  // Charger les données au démarrage
-	}
-	
-	static importCircuit(file) {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			
-			reader.onload = (event) => {
-				try {
-					const jsonData = JSON.parse(event.target.result);
-					if (Array.isArray(jsonData)) {
-						// Si le fichier contient une liste de circuits
-						const importedCircuits = jsonData.map((data) => Circuit.fromJSON(data));
-						importedCircuits.forEach((circuit) => Circuits.add(circuit));
-						resolve(importedCircuits);
-					} else {
-						// Si le fichier contient un seul circuit
-						const importedCircuit = Circuit.fromJSON(jsonData);
-						Circuits.add(importedCircuit);
-						localStorage.setItem("circuitId", importedCircuit.getCircuitId());
-						resolve([importedCircuit]);
-					}
-				} catch (error) {
-					reject(new Error("Erreur lors du parsing du fichier JSON : " + error.message));
+	static async initialize() {
+		try {
+			for (let i = 1; i < 4; i++) {
+				const response = await fetch("../../assets/circuits/Circuit" + i + ".json");
+				if (!response.ok) {
+					throw new Error(`Erreur HTTP : ${response.status}`);
 				}
-			};
-			
-			reader.onerror = () => {
-				reject(new Error("Erreur lors de la lecture du fichier : " + reader.error.message));
-			};
-			
-			reader.readAsText(file); // Lire le contenu du fichier en tant que texte
-		});
+				const jsonData = await response.json();
+				
+				// Utiliser la méthode importCircuit pour traiter les données
+				const importedCircuits = await Circuits.importCircuit(jsonData);
+				console.log(`${importedCircuits.length} circuit(s) importé(s) avec succès.`);
+			}
+		} catch (error) {
+			console.error("Erreur lors de l'importation :", error);
+		}
+		Circuits.saveToStorage();
 	}
 	
+	static async importCircuit(fileData) {
+		try {
+			const jsonData = fileData;
+			if (Array.isArray(jsonData)) {
+				// Si le fichier contient une liste de circuits
+				const importedCircuits = jsonData.map((data) => Circuit.fromJSON(data));
+				importedCircuits.forEach((circuit) => Circuits.add(circuit));
+				return importedCircuits;
+			} else {
+				// Si le fichier contient un seul circuit
+				const importedCircuit = Circuit.fromJSON(jsonData);
+				Circuits.add(importedCircuit);
+				localStorage.setItem("circuitId", importedCircuit.getCircuitId());
+				return [importedCircuit];
+			}
+		} catch (error) {
+			throw new Error("Erreur lors de l'importation du fichier JSON : " + error.message);
+		}
+	}
 }

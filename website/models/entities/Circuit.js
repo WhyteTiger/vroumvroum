@@ -4,7 +4,7 @@ export class Circuit {
 	static circuitIdTotal = 0; // Suivi global des IDs
 	circuitId;
 	circuitName  = "";
-	creatorName    = null;
+	creatorName  = "Vous";
 	circuitScore= 0;
 	creatorTime = 0;
 	leaderBoard   = [];

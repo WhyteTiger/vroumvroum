@@ -5,7 +5,7 @@ import {Circuits} from "../entities/Circuits.js";
 const valBar = window.localStorage.LoadingBar;
 
 document.addEventListener("DOMContentLoaded", function() {
-    Circuits.initialize();
+    if (Circuits.getCircuitsNumber() === 0) Circuits.initialize();
     
     const loaderBar = document.getElementById("loaderBar");
     const carImage = document.getElementById("carImage");

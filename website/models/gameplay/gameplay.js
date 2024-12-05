@@ -140,16 +140,13 @@ window.onload = () => {
       started = 0;
       
       popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
-      popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime));
+      popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime), timer);
       
       setTimeout(() => {
-         timer.start();
-         
-         setInterval(() => {timer.updateCompteur();}, 100);
-         started = 2;
+         started = 1;
          
          updateCar();
-      }, 100);
+      }, 200);
          
    } else if (isVerifying === "true") {
       document.getElementById('asideInfos').classList.add('invisible');
