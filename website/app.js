@@ -17,6 +17,10 @@ localStorage.setItem("isChecked",       "false");
 localStorage.setItem('test',            "false");
 localStorage.setItem("LoadingBar",      "0");
 
+
+localStorage.setItem("kartId", "1");
+localStorage.setItem("Coins", "0");
+
 localStorage.setItem("Circuits", JSON.stringify([]));
 
 

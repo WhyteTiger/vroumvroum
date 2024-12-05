@@ -48,7 +48,7 @@ export class Circuit {
 		circuit.circuitId = data.circuitId; // Restaurer l'ID unique
 		Circuit.circuitIdTotal = Math.max(Circuit.circuitIdTotal, data.circuitId); // Maintenir l'ID global
 		circuit.circuitScore = data.circuitScore || 0;
-		circuit.leaderBoard = data.leaderBoard || [];
+		circuit.leaderBoard  = data.leaderBoard  || [];
 		return circuit;
 	}
 	
