@@ -6,6 +6,9 @@ export class Map {
     rotate  = null;
     
     constructor(tileset, terrain, rotate) {
+        console.log("TERRAIN");
+        console.log(terrain);
+        
         this.tileset = tileset;
         this.terrain = terrain;
         this.rotate  = rotate;
@@ -13,9 +16,6 @@ export class Map {
 
     getHauteur () {
         return this.terrain.length;
-    }
-    getTileset () {
-        return this.tileset;
     }
     getTerrain () {
         return this.terrain;
@@ -32,7 +32,7 @@ export class Map {
         if(value === undefined) value = 160;
         if(size  === undefined) size  = 160;
         
-        for(let j = 0, k = ligne.length; j<k; j++){
+        for (let j = 0, k = ligne.length; j<k; j++){
             const div = document.createElement('div');
             div.setAttribute('name', ligne[j]);
             

@@ -21,32 +21,7 @@ img.id = "logo";
 a.appendChild(img);
 header.appendChild(a);
 
-if (isConnected === "false") {
-	
-	const divButtons 	   = document.createElement("div");
-	const connectionA      = document.createElement("a");
-	const connectionButton = document.createElement("button");
-	
-	const registrationA      = document.createElement("a");
-	const registrationButton = document.createElement("button");
-	
-	connectionButton.id 			= "connection";
-	connectionButton.innerText = "Connexion";
-	connectionA.setAttribute("href", "connection.html");
-	connectionA.appendChild(connectionButton);
-	
-	registrationButton.id 		  = "register";
-	registrationButton.innerText = "Inscription";
-	registrationA.setAttribute("href", "registration.html");
-	registrationA.appendChild(registrationButton);
-	
-	divButtons.id = "headerButtons";
-	divButtons.appendChild(connectionA);
-	divButtons.appendChild(registrationA);
-	
-	header.appendChild(divButtons);
-	
-} else {
+if (isConnected === "true") {
 	const bigdiv = document.createElement('div');
 	bigdiv.id = 'burgerWrapper';
 

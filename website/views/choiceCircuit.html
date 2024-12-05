@@ -59,6 +59,7 @@
 
                     <div>
                         <button id="playButton">JOUER</button>
+                        <button id="exportButton">EXPORTER</button>
                     </div>
                 </section>
             </aside>
@@ -66,6 +67,7 @@
             <aside class="personalPage">
                 <div id="emptyPersonal">
                     <p>Cliquez sur un circuit pour afficher ses informations !</p>
+                    <button id="importButton">IMPORTER</button>
                 </div>
                 <section id="fullPersonal" class="invisible">
                     <h1 id="circuitNamePersonal">Nom de la carte</h1>
@@ -82,9 +84,12 @@
                         <button id="playButtonPersonal"  >JOUER</button>
                         <button id="modifyButtonPersonal">MODIFIER</button>
                         <button id="deleteButtonPersonal">SUPPRIMER</button>
+                        <button id="exportButtonPersonal">EXPORTER</button>
+                        <button id="importButtonPersonal">IMPORTER</button>
                     </div>
                 </section>
             </aside>
+            <input type="file" id="fileInput" accept=".json" style="display: none;">
                 
         </main>
 
