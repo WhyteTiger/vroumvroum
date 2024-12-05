@@ -17,6 +17,8 @@ localStorage.setItem("isChecked",       "false");
 localStorage.setItem('test',            "false");
 localStorage.setItem("LoadingBar",      "0");
 
+localStorage.setItem("Circuits", JSON.stringify([]));
+
 
 
 document.location.href="./website/views/home.html";

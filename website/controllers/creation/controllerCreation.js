@@ -21,7 +21,13 @@ window.onload = () => {
 	
 	if (isModifying === 'true') {
 		
-		let tab = JSON.parse(localStorage.getItem('circuit'+ circuitId));
+		console.log("CIRCUITID : "+ circuitId);
+		console.log("Etape 1");
+		const circuit = Circuits.get(circuitId);
+		console.log(circuit);
+		console.log("Etape 2");
+		let tab = circuit.getMatrix();
+		console.log("Etape 12");
 		
 		let tempMatrix    = [];
 		let tempTiles     = [];
@@ -229,17 +235,31 @@ window.onload = () => {
 	} else if (isChecked === "true") {
 		
 		let matrix;
-		const isModifying = localStorage.getItem('modify');
-		isModifying === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
-		
-		const playerName    = localStorage.getItem("playerName");
-		const circuitId   = localStorage.getItem("circuitId");
+		let newCircuit;
+		let newCircuitId;
 		const circuitName = localStorage.getItem("circuitName");
 		const creatorTime = localStorage.getItem("creatorTime");
 		const circuitLaps = localStorage.getItem("circuitLaps");
+		const isModifying = localStorage.getItem('modify');
 		
-		Circuits.add(new Circuit(circuitName, playerName, creatorTime, circuitLaps, matrix));
+		if (isModifying === 'true') {
+			matrix = JSON.parse(localStorage.getItem('matrixModify'));
+			newCircuitId = localStorage.getItem("circuitId");
+			newCircuit = Circuits.get(circuitId);
+			newCircuit.edit(matrix, creatorTime, circuitLaps, circuitName);
+		} else {
+			matrix = JSON.parse(localStorage.getItem('matrix'));
+			const playerName  = localStorage.getItem("playerName");
+			newCircuit = new Circuit(circuitName, playerName, creatorTime, circuitLaps, matrix);
+			newCircuitId = newCircuit.getCircuitId();
+			Circuits.add(newCircuit);
+		}
 		
+		console.log("AYAYA");
+		console.log(Circuits.circuitList);
+		console.log("CIRCUITID : "+ newCircuitId);
+		
+		localStorage.setItem("circuitId", newCircuitId);
 		localStorage.setItem("isChecked", "false");
 		localStorage.setItem("creatorTime", "");
 		

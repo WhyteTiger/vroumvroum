@@ -1,44 +1,103 @@
 import { Circuit } from "./Circuit.js";
 
 export class Circuits {
-	static circuitList = null;
+	static circuitList = [];
 	
-	static init() {
-		this.circuitList = [];
-		//const circuit1 = Circuit.import("asset/ciruits/circuit1.json");
-		//Circuits.circuitList.push(circuit1);
-	}
-	
-	static isEmpty() {
-		if (this.circuitList === null) {
-			return "true";
+	// Charger la liste des circuits depuis LocalStorage
+	static loadFromStorage() {
+		const savedData = localStorage.getItem("circuits");
+		if (savedData) {
+			Circuits.deserialize(savedData);
 		}
-		return "false";
 	}
 	
+	// Sauvegarder la liste des circuits dans LocalStorage
+	static saveToStorage() {
+		const serializedData = Circuits.serialize();
+		localStorage.setItem("circuits", serializedData);
+	}
+	
+	// Ajouter un circuit et sauvegarder
 	static add(circuit) {
-		this.circuitList.push(circuit);
+		if (!(circuit instanceof Circuit)) {
+			throw new Error("L'objet doit être une instance de Circuit");
+		}
+		Circuits.loadFromStorage();  // Charger les données avant l'ajout
+		Circuits.circuitList.push(circuit);
+		Circuits.saveToStorage();    // Sauvegarder après ajout
 	}
 	
+	// Supprimer un circuit par ID et sauvegarder
 	static remove(circuitId) {
-		let circuitToRemoveIndex = -1
-		for (const circuit in this.circuitList) {
-			if (circuit.getCircuitId() === circuitId) {
-				const circuitToRemoveIndex = this.circuitList.indexOf(circuitId);
-				this.circuitList.splice(circuitToRemoveIndex, 1);
-				return circuitToRemoveIndex;
-			}
-		}
-		return circuitToRemoveIndex;
+		Circuits.loadFromStorage();  // Charger les données avant suppression
+		Circuits.circuitList = Circuits.circuitList.filter(
+			(circuit) => circuit.circuitId !== circuitId
+		);
+		Circuits.saveToStorage();    // Sauvegarder après suppression
 	}
 	
+	// Récupérer un circuit spécifique par ID
 	static get(circuitId) {
-		let result = null;
-		for (const circuit in this.circuitList) {
-			if (circuit.getCircuitId() === circuitId) {
-				return result;
+		Circuits.loadFromStorage();  // Charger les données avant la recherche
+		return Circuits.circuitList.find((circuit) => circuit.circuitId === Number(circuitId)) || null;
+	}
+	
+	// Retourner tous les circuits
+	static getCircuits() {
+		Circuits.loadFromStorage();  // Charger les données avant de les retourner
+		return Circuits.circuitList;
+	}
+	
+	// Compter le nombre de circuits
+	static getCircuitsNumber() {
+		Circuits.loadFromStorage();  // Charger les données avant de compter
+		return Circuits.circuitList.length;
+	}
+	
+	// Filtrer les circuits avec des critères et pagination
+	static getFilteredCircuits(circuitFilter, creatorFilter, page = 0, perPage = 12) {
+		Circuits.loadFromStorage();  // Charger les données avant le filtrage
+		const filteredCircuits = Circuits.circuitList.filter((circuit) => {
+			let matches = true;
+			if (circuitFilter) {
+				matches = matches && circuit.circuitName.includes(circuitFilter);
 			}
-		}
-		return result;
+			if (creatorFilter) {
+				matches = matches && circuit.creatorName === creatorFilter;
+			}
+			return matches;
+		});
+		
+		// Pagination
+		const start = page * perPage;
+		const end = start + perPage;
+		return filteredCircuits.slice(start, end);
+	}
+	
+	// Sérialiser la liste des circuits
+	static serialize() {
+		return JSON.stringify(Circuits.circuitList.map((circuit) => circuit.toJSON()));
+	}
+	
+	// Désérialiser et recréer les instances de Circuit
+	static deserialize(json) {
+		const data = JSON.parse(json);
+		// Convertir chaque élément en instance de Circuit
+		Circuits.circuitList = data.map(item => {
+			const circuit = new Circuit(
+				item.circuitName,
+				item.creatorName,
+				item.creatorTime,
+				item.circuitLaps,
+				item.matrix
+			);
+			circuit.circuitId = item.circuitId;
+			return circuit;
+		});
+	}
+	
+	// Initialiser le chargement depuis localStorage dès le début de l'application
+	static initialize() {
+		Circuits.loadFromStorage();  // Charger les données au démarrage
 	}
 }

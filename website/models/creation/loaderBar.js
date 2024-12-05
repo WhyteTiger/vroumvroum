@@ -1,8 +1,12 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
+import {Circuits} from "../entities/Circuits.js";
+
 const valBar = window.localStorage.LoadingBar;
 
 document.addEventListener("DOMContentLoaded", function() {
+    Circuits.initialize();
+    
     const loaderBar = document.getElementById("loaderBar");
     const carImage = document.getElementById("carImage");
     const loaderContainer = document.getElementById("loaderContainer");
@@ -32,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 nbTour += 1;
                 width += decrement;
-                //width++;
                 loaderBar.style.width = width + "%";
 
                 let carPosition = (width * (loaderContainer.offsetWidth - carImage.offsetWidth) / 100 - carImage.offsetWidth/4);

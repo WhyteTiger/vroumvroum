@@ -1,12 +1,5 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import {Alert} from "../../models/entities/Alert.js";
-import { Circuits } from "../../models/entities/Circuits.js";
-
-if (Circuits.isEmpty() === "true") {
-	Circuits.init();
-}
-
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/homeMusic.mp3";
 audio.volume   = 0.0312;
