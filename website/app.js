@@ -7,7 +7,6 @@ localStorage.setItem("playerId", 		 "0");
 localStorage.setItem("alreadyRegister", "");
 
 localStorage.setItem("circuitId",       "1");
-localStorage.setItem("circuitIdTotal",  "0");
 localStorage.setItem("matrix",          "");
 
 localStorage.setItem('save', "false");
@@ -17,6 +16,8 @@ localStorage.setItem("isChecked",       "false");
 
 localStorage.setItem('test',            "false");
 localStorage.setItem("LoadingBar",      "0");
+
+
 
 document.location.href="./website/views/home.html";
 

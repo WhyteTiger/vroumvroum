@@ -1,9 +1,10 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import { API } 		 	    from "../../models/API.js";
 import { TileChooser }  	 from "../../models/creation/TileChooser.js";
 import { Alert } 		  	    from "../../models/entities/Alert.js";
 import { CircuitCareTaker } from "../../models/creation/CircuitCareTaker.js";
+import { Circuits } 			 from "../../models/entities/Circuits.js";
+import { Circuit } 			 from "../../models/entities/Circuit.js";
 
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/createMusic.mp3";
@@ -237,57 +238,10 @@ window.onload = () => {
 		const creatorTime = localStorage.getItem("creatorTime");
 		const circuitLaps = localStorage.getItem("circuitLaps");
 		
-		let circuit = "[\n";
-		for (let h = 0; h < 2; h++) {
-			if (h === 1) {
-				circuit += "\t";
-			}
-			circuit += "[\n";
-			for (let i = 0; i < matrix[h].length; i++) {
-				if (i%8 === 0) {
-					circuit += "\t\t["
-				}
-				circuit += ""+matrix[h][i];
-				if (i%8 === 7) {
-					circuit += "]";
-					if (i < matrix[h].length-8) {
-						circuit += ",";
-					}
-					circuit += "\n";
-				} else {
-					circuit += ", ";
-				}
-			}
-			circuit += "\t]";
-			if (h === 0) {
-				circuit += ",";
-			}
-			circuit += "\n";
-		}
-		circuit += "\n]";
-		
-		const newCircuit = "{\n" +
-			"\t\"circuitName\": \""+ circuitName +"\",\n"+
-			"\t\"circuitId\":   \""+ circuitId   +"\",\n"+
-			"\t\"creatorName\": \""+ playerName  +"\",\n"+
-			"\t\"creatorTime\": \""+ creatorTime +"\",\n"+
-			"\t\"circuitLaps\": \""+ circuitLaps +"\",\n"+
-			"\t\"circuit\":       "+ circuit     +"\n" +
-		"}";
-		
-		console.log("JSON");
-		console.log(newCircuit);
-		console.log("JSON fin");
+		Circuits.add(new Circuit(circuitName, playerName, creatorTime, circuitLaps, matrix));
 		
 		localStorage.setItem("isChecked", "false");
 		localStorage.setItem("creatorTime", "");
-		
-		const circuitIdTotal = JSON.parse(localStorage.getItem("circuitIdTotal"));
-		const newCircuitId = circuitIdTotal + 1;
-		localStorage.setItem("circuitIdTotal", newCircuitId);
-		localStorage.setItem("circuitId", newCircuitId);
-		
-		localStorage.setItem("circuit"+newCircuitId, newCircuit);
 		
 		console.log("circuit sauvegardé");
 		
