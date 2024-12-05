@@ -11,6 +11,7 @@ import { Point }                from "../entities/Point.js";
 import { ControllerCheckpoint } from "../../controllers/gameplay/controllerCheckpoint.js";
 import { Timer }                from "../entities/Timer.js";
 import { Alert }                from "../entities/Alert.js";
+import { Circuits }             from "../entities/Circuits.js";
 let creatorTime, map, controllerCheckpoint, controller, canvas, ctx, circuitTileset, carTileSize, carTilePixelX, carTilePixelY, engine, timer, popUp, started, circuitBackGround,tickRate, lastFrameTime;
 
 function drawCircuit(map) {
@@ -36,6 +37,7 @@ function drawCircuit(map) {
 }
 
 window.onload = () => {
+   console.log("LOADING page");
    circuitBackGround = undefined;
    
    const audio = document.createElement("audio");
@@ -43,150 +45,118 @@ window.onload = () => {
    audio.autoplay = true;
    audio.loop     = true;
    
+   const circuitId = localStorage.circuitId;
+   
+   const circuit = Circuits.get(circuitId);
+   
+   let matrix;
    const isVerifying = localStorage.getItem("verifying");
+   if (isVerifying === "true") {
+      localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
+   } else {
+      matrix = circuit.getMatrix();
+   }
+   
+   const terrain = [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+   ];
+   const rotate = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+   ];
+   
+   let columnCounter, rowCounter = -1, len = matrix[0].length;
+   
+   for (let matrixCurrentIndex = 0; matrixCurrentIndex < len; matrixCurrentIndex++) {
+      
+      if (matrixCurrentIndex%12 === 0) rowCounter += 1;
+      columnCounter = matrixCurrentIndex - 12*rowCounter;
+      
+      terrain[rowCounter][columnCounter] = matrix[0][matrixCurrentIndex];
+      rotate[rowCounter][columnCounter]  = matrix[1][matrixCurrentIndex];
+   }
+   
    if (isVerifying === "false") {
       
       audio.src = "../../assets/soundtrack/gameplayMusic.mp3";
       audio.play();
       
-      const circuitId = localStorage.circuitId;
+      const circuitName     = circuit.circuitName;
+      const creatorUsername = circuit.creatorName;
+      const circuitScore    = circuit.circuitScore
+      creatorTime           = circuit.creatorTime;
       
-      const url = API.getURLgetCircuitInformation();
-      const dataCircuit = {
-         circuitIdIn: circuitId
-      };
-      const params = {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-         },
-         body: JSON.stringify(dataCircuit)
-      };
+      document.getElementById("circuitName").innerText  =                       circuitName;
+      document.getElementById("score").innerText        = "Score : "+           circuitScore;
+      document.getElementById("creatorName").innerText  = "Créateur : "+        creatorUsername;
+      document.getElementById("creatorScore").innerText = "Médaille auteur : "+ creatorTime;
       
-      fetch(url, params)
-         .then((response) => response.json())
-         .then((dataCircuit) => {
+      // to manage the 5 (or less) best scores
+      const leaderBoard = circuit.leaderBoard;
+      if(leaderBoard[0] === null) {
+         document.querySelector("#leaderboardPlayers").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+      } else {
+         document.querySelector("#leaderboardPlayers").textContent = "";
+         for (let i = 0; i < 5; i++) {
             
-            const circuitName     = dataCircuit.circuitName;
-            const creatorUsername = dataCircuit.creatorUsername;
-            const circuitScore    = dataCircuit.circuitScore
-            creatorTime           = dataCircuit.creatorTime;
-            
-            document.getElementById("circuitName").innerText  =                       circuitName;
-            document.getElementById("score").innerText        = "Score : "+           circuitScore;
-            document.getElementById("creatorName").innerText  = "Créateur : "+        creatorUsername;
-            document.getElementById("creatorScore").innerText = "Médaille auteur : "+ creatorTime;
-            
-            // to manage the 5 (or less) best scores
-            const leaderBoard = dataCircuit.leaderBoard;
-            if(leaderBoard[0] === null) {
-               document.querySelector("#leaderboardPlayers").textContent = "Aucun joueur n'a encore joué à ce circuit. Soyez le premier !";
+            if (leaderBoard[2*i] !== undefined) {
+               const leaderboardPlayer = document.getElementById("leaderboardPlayers");
+               const player = document.createElement("p");
+               timer = new Timer();
+               player.innerText = leaderBoard[2*i] +" : "+ timer.timeToString(leaderBoard[2*i+1]);
+               leaderboardPlayer.appendChild(player);
             } else {
-               document.querySelector("#leaderboardPlayers").textContent = "";
-               for (let i = 0; i < 5; i++) {
-                  
-                  if (leaderBoard[2*i] !== undefined) {
-                     const leaderboardPlayer = document.getElementById("leaderboardPlayers");
-                     const player = document.createElement("p");
-                     timer = new Timer();
-                     player.innerText = leaderBoard[2*i] +" : "+ timer.timeToString(leaderBoard[2*i+1]);
-                     leaderboardPlayer.appendChild(player);
-                  } else {
-                     // to skip end of for loop
-                     i = 12;
-                  }
-               }
+               // to skip end of for loop
+               i = 12;
             }
-            
-            const url = API.getURLgetCircuitTileById();
-            const dataMap = {
-               circuitIdIn: circuitId
-            };
-            const params = {
-               method: "POST",
-               headers: {
-                  "Content-Type": "application/json",
-               },
-               body: JSON.stringify(dataMap)
-            };
-            
-            fetch(url, params)
-               .then((response) => response.json())
-               .then((dataMap) => {
-                  map  = new Map(new Tileset("circuit.png"), dataMap.tileSet.circuit, dataMap.tileSet.rotation);
-						let nbTour       = dataMap.laps;
-                  const playerIdIn = localStorage.playerId;
-                  
-                  const url = API.getURLgetOwnKartByPlayerId();
-                  const dataKart = {
-                     playerIdIn: playerIdIn
-                  };
-                  const params = {
-                     method: "POST",
-                     headers: {
-                        "Content-Type": "application/json",
-                     },
-                     body: JSON.stringify(dataKart)
-                  };
-                  
-                  fetch(url, params)
-                     .then((response) => response.json())
-                     .then((dataKart) => {
-                        init(dataKart.kartId-1, nbTour);
-                        started = 0;
-                        
-                        popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
-                        popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime));
-                        
-                        updateCar(); // Appel initial de la fonction updateCar
-                     });
-               })
-               .catch((err) => {
-                  console.error("Fetch failed "+err);
-               });
-         });
+         }
+      }
+      
+      
+      console.log(terrain);
+      console.log(rotate);
+      console.log(terrain[0]);
+      
+      map  = new Map(new Tileset("circuit.png"), terrain, rotate);
+      let nbTour       = circuit.getCircuitLaps();
+      const playerIdIn = localStorage.playerId;
+      
+      const kartId = Number(localStorage.getItem("kartId"));
+      
+      init(kartId-1, nbTour);
+      started = 0;
+      
+      popUp = new Alert(circuitName, "Start","choiceCircuit.html","type");
+      popUp.alertStartCircuit(creatorUsername, timer.timeToString(creatorTime), timer);
+      
+      setTimeout(() => {
+         started = 1;
+         
+         updateCar();
+      }, 200);
          
    } else if (isVerifying === "true") {
       document.getElementById('asideInfos').classList.add('invisible');
       
+      console.log("LOADING circuit");
+      
       audio.src = "../../assets/soundtrack/checkMusic.mp3";
       audio.play();
       
-      let matrix;
-      localStorage.getItem('modify') === 'true' ? matrix = JSON.parse(localStorage.getItem('matrixModify')) : matrix = JSON.parse(localStorage.getItem('matrix'));
-      
-      const circuitTiles = [
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      ];
-      const orientationTiles = [
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      ];
-      let columnCounter, rowCounter = -1, len = matrix[0].length;
-      
-      for (let matrixCurrentIndex = 0; matrixCurrentIndex < len; matrixCurrentIndex++) {
-         
-         if (matrixCurrentIndex%12 === 0) rowCounter += 1;
-         columnCounter = matrixCurrentIndex - 12*rowCounter;
-         
-         circuitTiles[rowCounter][columnCounter]     = matrix[0][matrixCurrentIndex];
-         orientationTiles[rowCounter][columnCounter] = matrix[1][matrixCurrentIndex];
-      }
-      
-      map = new Map(new Tileset("circuit.png"), circuitTiles, orientationTiles);
+      map = new Map(new Tileset("circuit.png"), terrain, rotate);
       const nbTour = localStorage.getItem("circuitLaps");
       
       timer = new Timer();
@@ -283,16 +253,6 @@ function updateCar() {
    if (controllerCheckpoint.fini === 0) { //Si ce n'est pas fini
       requestAnimationFrame(updateCar); // Appel récursif pour une animation fluide
       
-   } else if (localStorage.getItem("isConnected") === "false") {
-      let monTemps = timer.getElapsedTime();
-      timer.stop();
-      let popUpSeConnecter = new Alert("Enregistrer mon temps", "Se connecter", "connection.html" ,"type");
-      localStorage.setItem("hasATime", "true");
-      localStorage.setItem("bestTimeNoAccount", monTemps);
-      localStorage.setItem("circuitIdNoAccount", localStorage.circuitId);
-
-      popUpSeConnecter.alertEndCircuit(3,timer.timeToString(monTemps));
-      
    } else if (localStorage.getItem("verifying") === "false") {
 		let monTemps = timer.getElapsedTime();
       timer.stop();
@@ -311,61 +271,38 @@ function updateCar() {
 				},
 				body: JSON.stringify(dataPlayer)
 			};
-
-			fetch(url, params)
-				.then((response) => response.json())
-				.then((dataPlayer) => {
-               let playerTime = dataPlayer.playerScore;
-               //Si le joueur a un meilleurs temps ou si il n'a pas de temps
-               if (playerTime > monTemps || playerTime === null) { 
-                  score = 1;
-                  let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
-                  const dataPlayer = {
-                     playerIdIn :    localStorage.playerId,
-                     circuitIdIn :   localStorage.circuitId,
-                     newBestTimeIn : monTemps
-                  };
-                  const params = {
-                     method: "POST",
-                     headers: {
-                        "Content-Type": "application/json",
-                     },
-                     body: JSON.stringify(dataPlayer)
-                  };
-
-                  fetch(url, params)
-                     .then((response) => response.json())
-                     .then((dataPlayer) => {})
-                     .catch((err) => {
-                        console.error(err);
-                     });
-               }
-               if(monTemps < creatorTime){
-                  score = 1;
-                  let url = API.getURLaddVroumCoinToPlayerId();
-                  const dataPlayer = {
-                     playerIdIn: localStorage.playerId
-                  };
-                  const params = {
-                     method: "POST",
-                     headers: {
-                        "Content-Type": "application/json",
-                     },
-                     body: JSON.stringify(dataPlayer)
-                  };
-                  
-                  fetch(url, params)
-                     .then((response) => response.json())
-                     .then((dataPlayer) => {})
-                     .catch((err) => {
-                        console.error(err);
-                     });
-               }
-               popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
-            })
+      
+      let playerTime = dataPlayer.playerScore;
+      //Si le joueur a un meilleurs temps ou si il n'a pas de temps
+      if (playerTime > monTemps || playerTime === null) {
+         score = 1;
+         let url = API.getURLupdateBestTimeOfCircuitByPlayerId();
+         const dataPlayer = {
+            playerIdIn :    localStorage.playerId,
+            circuitIdIn :   localStorage.circuitId,
+            newBestTimeIn : monTemps
+         };
+         const params = {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataPlayer)
+         };
+         
+         fetch(url, params)
+            .then((response) => response.json())
+            .then((dataPlayer) => {})
             .catch((err) => {
                console.error(err);
             });
+      }
+      if(monTemps < creatorTime){
+         let coins = Number(localStorage.getItem("Coins"));
+         coins += 1;
+         localStorage.setItem("Coins", ""+coins);
+      }
+      popUpFin.alertEndCircuit(score, timer.timeToString(monTemps));
 
    } else if (localStorage.getItem("verifying") === "true") { //Si la vérif est finie
       timer.stop();

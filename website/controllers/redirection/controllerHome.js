@@ -1,7 +1,5 @@
 // jshint browser:true, eqeqeq:true, undef:true, devel:true, esversion: 8
 
-import {Alert} from "../../models/entities/Alert.js";
-
 const audio = document.createElement("audio");
 audio.src 		= "../../assets/soundtrack/homeMusic.mp3";
 audio.volume   = 0.0312;
@@ -25,23 +23,11 @@ playButton.addEventListener("click", () => {
 
 const createCircuit = document.getElementById("create");
 createCircuit.addEventListener("click", () => {
-	const playerId = window.localStorage.getItem("playerId");
-	if( playerId === '0'){
-		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter", "connection.html" , 'warning');
-		newAlert.customAlert();
-	} else {
-		localStorage.setItem("personal", "true");
-		document.location.href = "choiceCircuit.html";
-	}
+	localStorage.setItem("personal", "true");
+	document.location.href = "choiceCircuit.html";
 });
 
 const personalizeButton = document.getElementById("personalize");
 personalizeButton.addEventListener("click", () => {
-	const playerId = window.localStorage.getItem("playerId");
-	if ( playerId === '0') {
-		const newAlert = new Alert("Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté !", "Se connecter","connection.html", 'warning');
-		newAlert.customAlert();
-	} else {
-		document.location.href = "choiceKart.html";
-	}
+	document.location.href = "choiceKart.html";
 });
