@@ -27,17 +27,19 @@ window.onload = () => {
 		console.log(circuit);
 		console.log("Etape 2");
 		let tab = circuit.getMatrix();
+		console.log(tab);
+		console.log(tab[0]);
 		console.log("Etape 12");
 		
 		let tempMatrix    = [];
 		let tempTiles     = [];
 		let tempRotations = [];
 		
-		for(let i = 0 ; i < tab.circuit[0].length ; i++) {	// all arrays are the same length
-			for(let j = 0 ; j < tab.circuit[0][i].length ; j++) {
-				tempTiles.push(tab.circuit[0][i][j]);
-				tempRotations.push(tab.circuit[1][i][j]);
-			}
+		for (let i = 0; i < 96; i++) {
+			console.log(i);
+			console.log(tab[0][i]);
+			tempTiles.push(tab[0][i]);
+			tempRotations.push(tab[1][i]);
 		}
 		
 		tempMatrix.push(tempTiles);

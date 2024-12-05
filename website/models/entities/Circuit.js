@@ -1,3 +1,5 @@
+import { Circuits } from "./Circuits.js";
+
 export class Circuit {
 	static circuitIdTotal = 0; // Suivi global des IDs
 	circuitId;
@@ -49,15 +51,29 @@ export class Circuit {
 		circuit.leaderBoard = data.leaderBoard || [];
 		return circuit;
 	}
-
-	edit(matrix, creatorTime, circuitLaps, creatorName) {
+	
+	edit(matrix, creatorTime, circuitLaps, circuitName) {
+		// Mise à jour des propriétés de l'objet Circuit
 		this.matrix = matrix;
 		this.creatorTime = creatorTime;
 		this.circuitLaps = circuitLaps;
-		this.creatorName = creatorName;
+		this.circuitName = circuitName;
 		this.leaderBoard = [];
 		this.circuitScore = 0;
+		
+		// Mettre à jour le circuit dans la liste Circuits
+		Circuits.loadFromStorage(); // Charger les données existantes avant la modification
+		
+		// Trouver et mettre à jour le circuit dans Circuits.circuitList
+		const index = Circuits.circuitList.findIndex(circuit => circuit.circuitId === this.circuitId);
+		if (index !== -1) {
+			Circuits.circuitList[index] = this; // Remplacer le circuit modifié dans la liste
+		}
+		
+		// Sauvegarder la liste des circuits après modification
+		Circuits.saveToStorage();
 	}
+	
 	
 	getCircuitId() {
 		return this.circuitId;

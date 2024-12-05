@@ -33,7 +33,7 @@ function fetchPage(nb, nbPages) {
     while (boxZone.firstChild) boxZone.removeChild(boxZone.firstChild);
     
     // let's create the boxes
-    for (let i = 0; i <= circuits.length; i++) {
+    for (let i = 1; i <= circuits.length; i++) {
         const box = document.createElement('div');
         box.classList.add('circuitBox');
         document.querySelector('#circuits').appendChild(box);
@@ -190,14 +190,10 @@ document.querySelector('#playButtonPersonal').addEventListener('click', () => {
 document.getElementById('deleteButtonPersonal').addEventListener('click', () => {
     
     const circuitId = localStorage.getItem('circuitId');
-    const success = Circuits.remove(circuitId);
+    Circuits.remove(circuitId);
     
-    if (success !== -1) {
-        localStorage.setItem("modify", "false");
-        document.location.href = 'choiceCircuit.html';
-    } else {
-        console.error("deletion error");
-    }
+    localStorage.setItem("modify", "false");
+    document.location.href = 'choiceCircuit.html';
 });
 
 fetchCircuits();

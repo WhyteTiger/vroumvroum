@@ -29,11 +29,14 @@ export class Circuits {
 	
 	// Supprimer un circuit par ID et sauvegarder
 	static remove(circuitId) {
-		Circuits.loadFromStorage();  // Charger les données avant suppression
+		Circuits.loadFromStorage(); // Charger les données avant suppression
+		
+		// Assurer que circuitId est du même type que celui stocké dans la liste (Number)
+		const idToRemove = Number(circuitId);
 		Circuits.circuitList = Circuits.circuitList.filter(
-			(circuit) => circuit.circuitId !== circuitId
+			(circuit) => circuit.circuitId !== idToRemove
 		);
-		Circuits.saveToStorage();    // Sauvegarder après suppression
+		Circuits.saveToStorage(); // Sauvegarder après suppression
 	}
 	
 	// Récupérer un circuit spécifique par ID
