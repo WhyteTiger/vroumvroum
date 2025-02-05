@@ -1,4 +1,4 @@
-# SAE S3.01 - Melvyn BAUVENT, Mehdi BOURBON, Lucas DANIEL, Camille MORFIN - 2023/2024
+# VroumVroum
 
 Ce dépôt Git contient les fichiers constituant VroumVroum, l'application web de circuits de voiture développée dans le cadre de la SAÉ
 de la deuxième année de BUT Informatique.
@@ -20,13 +20,13 @@ Il est accessible à tous, et est majoritairement destiné aux jeunes personnes 
 
 Un utilisateur peut jouer à des circuits que d'autres utilisateurs ont créé, en créer également, débloquer des skins pour ses karts, et personnaliser ses informations de compte.
 
-Cette solo edition est une version jouable sans base de données.
+Cette solo edition est une version jouable sans base de données, via l'url : https://sea-lion-app-a6q2j.ondigitalocean.app
 
 ## Auteurs et contributeurs
 
 ### Auteurs
 
-- Melvyn BAUVENT
+- Melvyn BAUVENT (alias WhyteTiger)
 - Mehdi BOURBON (alias Metro-Lun)
 - Lucas DANIEL
 - Camille MORFIN
